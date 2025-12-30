@@ -6,6 +6,7 @@
   "mixins": [
   ],
   "client": [
+    "RenderUtilMixin"
   ],
   "injectors": {
     "defaultRequire": 1
