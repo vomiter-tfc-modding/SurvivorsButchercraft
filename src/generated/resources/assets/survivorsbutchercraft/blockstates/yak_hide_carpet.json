@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "survivorsbutchercraft:block/yak_hide_carpet",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "survivorsbutchercraft:block/yak_hide_carpet"
+    },
+    "facing=south": {
+      "model": "survivorsbutchercraft:block/yak_hide_carpet",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "survivorsbutchercraft:block/yak_hide_carpet",
+      "y": 270
+    }
+  }
+}
