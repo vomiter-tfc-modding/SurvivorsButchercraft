@@ -1,5 +1,6 @@
 package com.vomiter.survivorsbutchercraft.data;
 
+import com.lance5057.butchercraft.Butchercraft;
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloat;
@@ -67,12 +68,12 @@ public class SBRecipesProvider extends RecipeProvider {
     }
 
     ResourceLocation meatHookId(String path){
-        return new ResourceLocation(SurvivorsButchercraft.MODID, "meathook/" + path);
+        return id("meathook/" + path);
     }
 
 
     ResourceLocation id(String path){
-        return new ResourceLocation(SurvivorsButchercraft.MODID, path);
+        return id(SurvivorsButchercraft.MODID, path);
     }
 
     ResourceLocation id(String namespace, String path){
@@ -82,6 +83,20 @@ public class SBRecipesProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+        MeatHookRecipeBuilder.shapedRecipe(SBItems.HIDES.get(Carcass.YAK).get())
+            .tool(Ingredient.of(ButchercraftItems.SKINNING_KNIFE.get()), 6, true, MeatHookLoottables.SCRAPE_HIDE,
+                hideModel(meatHookId("yak_hide")),
+                standardHookToolModel(ButchercraftItems.SKINNING_KNIFE.get()))
+            .tool(Ingredient.of(Items.SHEARS), 6, true, MeatHookLoottables.COW_LEATHER,
+                hideModel(meatHookId("yak_hide")),
+                standardHookToolModel(Items.SHEARS))
+            .JEIIngredient(Ingredient.of(ButchercraftItems.SINEW.get()))
+            .JEIIngredient(Ingredient.of(ButchercraftItems.FAT.get()))
+            .JEIIngredient(Ingredient.of(ButchercraftItems.LEATHER_SCRAP.get()))
+            .JEIIngredient(Ingredient.of(Items.LEATHER))
+            .save(consumer, meatHookId("yak_hide"));
+
+
         MeatHookRecipeBuilder.shapedRecipe(SBItems.CARCASSES.get(Carcass.YAK).get())
                 .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
                         standardModel(id("")),
@@ -126,5 +141,7 @@ public class SBRecipesProvider extends RecipeProvider {
                 .JEIIngredient(Ingredient.of(ButchercraftItems.CUBED_BEEF.get()))
                 .JEIIngredient(Ingredient.of(Items.BEEF)).JEIIngredient(Ingredient.of(Items.BONE))
                 .save(consumer, meatHookId("yak"));
+
+
     }
 }

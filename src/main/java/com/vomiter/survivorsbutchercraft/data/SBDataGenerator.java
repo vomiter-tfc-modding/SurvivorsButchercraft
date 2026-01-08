@@ -16,5 +16,6 @@ public class SBDataGenerator {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         generator.addProvider(true, new SBRecipesProvider(output));
+        generator.addProvider(true, new SBBlockStatesProvider(output, existingFileHelper));
     }
 }
