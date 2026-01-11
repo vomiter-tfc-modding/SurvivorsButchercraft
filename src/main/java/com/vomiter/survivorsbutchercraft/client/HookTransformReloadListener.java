@@ -52,14 +52,6 @@ public final class HookTransformReloadListener extends SimpleJsonResourceReloadL
         CACHE = Collections.unmodifiableMap(next);
     }
 
-    private static ResourceLocation pathToRl(String path) {
-        int slash = path.indexOf('/');
-        if (slash < 0) return new ResourceLocation("minecraft", path);
-        String ns = path.substring(0, slash);
-        String p  = path.substring(slash + 1);
-        return new ResourceLocation(ns, p);
-    }
-
     public record TransformDef(float tx, float ty, float tz, float sx, float sy, float sz) {
         public static TransformDef fromJson(com.google.gson.JsonObject o) {
             float tx = 0, ty = 0, tz = 0;

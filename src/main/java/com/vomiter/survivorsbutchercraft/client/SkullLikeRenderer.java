@@ -1,0 +1,109 @@
+package com.vomiter.survivorsbutchercraft.client;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import com.vomiter.survivorsbutchercraft.core.blockentity.SkullLikeBlockEntity;
+import com.vomiter.survivorsbutchercraft.core.registry.SBBlockEntityTypes;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.RotationSegment;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import org.jetbrains.annotations.NotNull;
+
+@OnlyIn(Dist.CLIENT)
+public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEntity> {
+
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                SBBlockEntityTypes.SKULL_LIKE.get(),
+                SkullLikeRenderer::new
+        );
+    }
+
+
+    private final BlockRenderDispatcher blockRenderer;
+    public SkullLikeRenderer(BlockEntityRendererProvider.Context ctx) {
+        this.blockRenderer = Minecraft.getInstance().getBlockRenderer();
+    }
+
+    @Override
+    public void render(SkullLikeBlockEntity be, float partialTick, PoseStack pose,
+                       @NotNull MultiBufferSource buffers, int packedLight, int packedOverlay) {
+
+        var level = be.getLevel();
+        if (level == null) return;
+
+        BlockState state = be.getBlockState();
+
+        pose.pushPose();
+
+        // ---- 位置：先處理牆上/地面 skull 的「放置偏移」(可依你方塊外觀微調) ----
+        boolean isWall = state.hasProperty(HorizontalDirectionalBlock.FACING);
+        Direction wallFacing = isWall ? state.getValue(HorizontalDirectionalBlock.FACING) : null;
+
+        if(!isWall) {
+            // 地面：先移到方塊中心作為旋轉樞紐
+            pose.translate(0.5F, 0.0F, 0.5F);
+
+            int rotSeg = state.getValue(SkullBlock.ROTATION); // 0..15
+            float degrees = RotationSegment.convertToDegrees(rotSeg);
+            pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(degrees));
+
+            // 旋轉完移回去，避免「整個模型也被搬到中心」
+            pose.translate(-0.5F, 0.0F, -0.5F);
+        }
+        else {
+            pose.translate(0, 0.25, 0);
+        }
+
+        // ---- 光照：用世界位置重新取 light，避免 packedLight 不可靠時變暗 ----
+        int light = LevelRenderer.getLightColor(level, be.getBlockPos());
+        BakedModel baked = blockRenderer.getBlockModel(state);
+        RandomSource rand = RandomSource.create();
+        rand.setSeed(state.getSeed(be.getBlockPos()));
+
+        var pos = be.getBlockPos();
+        SurvivorsButchercraft.LOGGER.info(
+                "shape={} skylight={} shade={} light={} AO={}",
+                state.getRenderShape(),
+                state.propagatesSkylightDown(level, pos),
+                state.getShadeBrightness(level, pos),
+                LevelRenderer.getLightColor(level, pos),
+                Minecraft.getInstance().options.ambientOcclusion().get()
+        );
+
+
+        var modelRenderer = blockRenderer.getModelRenderer();
+        var modelData = net.minecraftforge.client.model.data.ModelData.EMPTY;
+
+        // 用 BakedModel 自帶的 render types（最不容易 layer 選錯導致發黑/發透明）
+        for (var rt : baked.getRenderTypes(state, rand, modelData)) {
+            var vc = buffers.getBuffer(rt);
+            modelRenderer.renderModel(
+                    pose.last(),
+                    vc,
+                    state,
+                    baked,
+                    1.0F, 1.0F, 1.0F,
+                    light,
+                    packedOverlay,
+                    modelData,
+                    rt
+            );
+        }
+
+        pose.popPose();
+    }
+}

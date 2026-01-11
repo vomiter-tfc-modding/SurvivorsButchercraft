@@ -85,40 +85,38 @@ public class SBRecipesProvider extends RecipeProvider {
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
         MeatHookRecipeBuilder.shapedRecipe(SBItems.HIDES.get(Carcass.YAK).get())
             .tool(Ingredient.of(ButchercraftItems.SKINNING_KNIFE.get()), 6, true, MeatHookLoottables.SCRAPE_HIDE,
-                hideModel(meatHookId("yak_hide")),
+                hideModel(meatHookId("yak/hide")),
                 standardHookToolModel(ButchercraftItems.SKINNING_KNIFE.get()))
             .tool(Ingredient.of(Items.SHEARS), 6, true, MeatHookLoottables.COW_LEATHER,
-                hideModel(meatHookId("yak_hide")),
+                hideModel(meatHookId("yak/hide")),
                 standardHookToolModel(Items.SHEARS))
             .JEIIngredient(Ingredient.of(ButchercraftItems.SINEW.get()))
             .JEIIngredient(Ingredient.of(ButchercraftItems.FAT.get()))
             .JEIIngredient(Ingredient.of(ButchercraftItems.LEATHER_SCRAP.get()))
             .JEIIngredient(Ingredient.of(Items.LEATHER))
-            .save(consumer, meatHookId("yak_hide"));
-
+            .save(consumer, meatHookId("hide/yak"));
 
         MeatHookRecipeBuilder.shapedRecipe(SBItems.CARCASSES.get(Carcass.YAK).get())
                 .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
-                        standardModel(id("")),
-                        standardHookToolModel(Items.BUCKET))
-
-                .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
-                        standardModel(meatHookId("yak")),
+                        standardModel(meatHookId("yak/hooked")),
                         standardHookToolModel(Items.BUCKET))
                 .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
-                        standardModel(meatHookId("yak")),
+                        standardModel(meatHookId("yak/hooked")),
+                        standardHookToolModel(Items.BUCKET))
+                .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
+                        standardModel(meatHookId("yak/hooked")),
                         standardHookToolModel(Items.BUCKET))
                 .tool(Ingredient.of(ButchercraftItems.SKINNING_KNIFE.get()), 12, true, MeatHookLoottables.SKIN_COW,
-                        standardModel(meatHookId("yak")),
+                        standardModel(meatHookId("yak/hooked")),
                         standardHookToolModel(ButchercraftItems.SKINNING_KNIFE.get()))
                 .tool(Ingredient.of(ButchercraftItems.BONE_SAW.get()), 12, true, MeatHookLoottables.BISECT_COW,
-                        standardModel(meatHookId("yak_skinned")),
+                        standardModel(meatHookId("yak/skinned")),
                         standardHookToolModel(ButchercraftItems.BONE_SAW.get()))
                 .tool(Ingredient.of(ButchercraftItems.GUT_KNIFE.get()), 12, true, MeatHookLoottables.DISEMBOWEL_COW,
-                        standardModel(meatHookId("yak_gutted")),
+                        standardModel(meatHookId("yak/gutted")),
                         standardHookToolModel(ButchercraftItems.GUT_KNIFE.get()))
                 .tool(Ingredient.of(ButchercraftItems.BUTCHER_KNIFE.get()), 12, true, MeatHookLoottables.BUTCHER_COW,
-                        standardModel(meatHookId("yak_bisected")),
+                        standardModel(meatHookId("yak/bisected")),
                         standardHookToolModel(ButchercraftItems.BUTCHER_KNIFE.get()))
 
                 .JEIIngredient(Ingredient.of(ButchercraftItems.BLOOD_FLUID_BUCKET.get()))
@@ -141,7 +139,5 @@ public class SBRecipesProvider extends RecipeProvider {
                 .JEIIngredient(Ingredient.of(ButchercraftItems.CUBED_BEEF.get()))
                 .JEIIngredient(Ingredient.of(Items.BEEF)).JEIIngredient(Ingredient.of(Items.BONE))
                 .save(consumer, meatHookId("yak"));
-
-
     }
 }

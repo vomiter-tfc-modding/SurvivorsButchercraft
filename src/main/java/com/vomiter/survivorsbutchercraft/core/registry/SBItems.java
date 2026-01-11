@@ -25,16 +25,16 @@ public class SBItems {
 
     static {
         for (Carcass carcass : Carcass.values()) {
-            CARCASSES.put(carcass, ITEMS.register(carcass.serializedName() + "_carcass",
+            CARCASSES.put(carcass, ITEMS.register("carcass/" + carcass.serializedName(),
                     () -> new CarcassItem(new Item.Properties().stacksTo(1))));
-            HEADS.put(carcass, ITEMS.register(carcass.serializedName() + "_head",
+            HEADS.put(carcass, ITEMS.register("head/" + carcass.serializedName(),
                     () -> new StandingAndWallBlockItem(
                             SBBlocks.HEADS.get(carcass).get(),
                             SBBlocks.WALL_HEADS.get(carcass).get(),
                             new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
 
             if(carcass.hasHide){
-                HIDES.put(carcass, ITEMS.register(carcass.serializedName() + "_hide",
+                HIDES.put(carcass, ITEMS.register("hide/" + carcass.serializedName(),
                         () -> new BlockItem(SBBlocks.HIDE_CARPETS.get(carcass).get(), new Item.Properties())));
             }
         }

@@ -1,7 +1,7 @@
 {
   "type": "butchercraft:meat_hook",
   "carcass": {
-    "item": "survivorsbutchercraft:yak_carcass"
+    "item": "survivorsbutchercraft:carcass/yak"
   },
   "group": "",
   "jei": [
@@ -99,7 +99,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:"
+          "location": "survivorsbutchercraft:meathook/yak/hooked"
         },
         {
           "animation": {
@@ -184,7 +184,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak"
+          "location": "survivorsbutchercraft:meathook/yak/hooked"
         },
         {
           "animation": {
@@ -269,7 +269,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak"
+          "location": "survivorsbutchercraft:meathook/yak/hooked"
         },
         {
           "animation": {
@@ -354,7 +354,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak"
+          "location": "survivorsbutchercraft:meathook/yak/hooked"
         },
         {
           "animation": {
@@ -439,7 +439,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak_skinned"
+          "location": "survivorsbutchercraft:meathook/yak/skinned"
         },
         {
           "animation": {
@@ -524,7 +524,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak_gutted"
+          "location": "survivorsbutchercraft:meathook/yak/gutted"
         },
         {
           "animation": {
@@ -609,7 +609,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak_bisected"
+          "location": "survivorsbutchercraft:meathook/yak/bisected"
         },
         {
           "animation": {

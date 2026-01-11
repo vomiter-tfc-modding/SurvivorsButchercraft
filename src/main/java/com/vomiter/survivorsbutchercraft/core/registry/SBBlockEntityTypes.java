@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 public class SBBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES
             = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SurvivorsButchercraft.MODID);
-    public static final RegistryObject<BlockEntityType<?>> SKULL_LIKE = BLOCK_ENTITIES.register(
+    public static final RegistryObject<BlockEntityType<SkullLikeBlockEntity>> SKULL_LIKE = BLOCK_ENTITIES.register(
             "skull_like",
             () -> BlockEntityType.Builder.of(
-                    SkullBlockEntity::new,
+                    SkullLikeBlockEntity::new,
                     Stream.concat(
                             SBBlocks.HEADS.values().stream(),
                             SBBlocks.WALL_HEADS.values().stream()

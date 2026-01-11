@@ -1,7 +1,7 @@
 {
   "type": "butchercraft:meat_hook",
   "carcass": {
-    "item": "survivorsbutchercraft:yak_hide"
+    "item": "survivorsbutchercraft:hide/yak"
   },
   "group": "",
   "jei": [
@@ -52,7 +52,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak_hide"
+          "location": "survivorsbutchercraft:meathook/yak/hide"
         },
         {
           "animation": {
@@ -138,7 +138,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak_hide"
+          "location": "survivorsbutchercraft:meathook/yak/hide"
         },
         {
           "animation": {

@@ -4,6 +4,7 @@ import com.lance5057.butchercraft.blocks.HideBlock;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.core.Carcass;
 import com.vomiter.survivorsbutchercraft.core.block.SkullLikeBlock;
+import com.vomiter.survivorsbutchercraft.core.block.WallSkullLikeBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -21,28 +22,27 @@ public class SBBlocks {
     public static final Map<Carcass, RegistryObject<Block>> HEADS = new EnumMap<>(Carcass.class);
 
     static {
-        var head_types = Map.of(
-                "head", HEADS,
-                "wall_head", WALL_HEADS
-        );
+        var headProperties = BlockBehaviour.Properties
+                .copy(Blocks.PLAYER_HEAD)
+                .strength(1F);
         for (Carcass carcass : Carcass.values()) {
             var carcass_name = carcass.serializedName();
             if(carcass.hasHide) HIDE_CARPETS.put(carcass, BLOCKS.register(
-                    carcass_name + "_hide_carpet",
+                    "hide_carpet/" + carcass_name,
                     () -> new HideBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(carcass.mapColor))
             ));
-            head_types.forEach((s, m) -> {
-                m.put(carcass,
+            HEADS.put(carcass,
                         BLOCKS.register(
-                                carcass_name + "_" + s,
-                                () -> new SkullLikeBlock(
-                                        BlockBehaviour.Properties
-                                                .copy(Blocks.PLAYER_HEAD)
-                                                .strength(1F))
+                                "head/" + carcass_name,
+                                () -> new SkullLikeBlock(headProperties)
                         )
-                );
-
-            });
+            );
+            WALL_HEADS.put(carcass,
+                        BLOCKS.register(
+                                "wall_head/" + carcass_name,
+                                () -> new WallSkullLikeBlock(headProperties)
+                        )
+            );
         }
     }
 }
