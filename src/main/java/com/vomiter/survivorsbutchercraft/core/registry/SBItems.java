@@ -3,17 +3,16 @@ package com.vomiter.survivorsbutchercraft.core.registry;
 import com.lance5057.butchercraft.items.CarcassItem;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.core.Carcass;
+import com.vomiter.survivorsbutchercraft.core.item.SkullLikeItem;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.EnumMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class SBItems {
@@ -28,12 +27,12 @@ public class SBItems {
             CARCASSES.put(carcass, ITEMS.register("carcass/" + carcass.serializedName(),
                     () -> new CarcassItem(new Item.Properties().stacksTo(1))));
             HEADS.put(carcass, ITEMS.register("head/" + carcass.serializedName(),
-                    () -> new StandingAndWallBlockItem(
+                    () -> new SkullLikeItem(
                             SBBlocks.HEADS.get(carcass).get(),
                             SBBlocks.WALL_HEADS.get(carcass).get(),
                             new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
 
-            if(carcass.hasHide){
+            if (carcass.hasHide) {
                 HIDES.put(carcass, ITEMS.register("hide/" + carcass.serializedName(),
                         () -> new BlockItem(SBBlocks.HIDE_CARPETS.get(carcass).get(), new Item.Properties())));
             }

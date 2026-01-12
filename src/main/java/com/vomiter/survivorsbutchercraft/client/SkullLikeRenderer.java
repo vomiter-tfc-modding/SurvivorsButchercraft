@@ -1,7 +1,6 @@
 package com.vomiter.survivorsbutchercraft.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.core.blockentity.SkullLikeBlockEntity;
 import com.vomiter.survivorsbutchercraft.core.registry.SBBlockEntityTypes;
 import net.minecraft.client.Minecraft;
@@ -66,6 +65,10 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
         }
         else {
             pose.translate(0, 0.25, 0);
+            if(wallFacing.equals(Direction.SOUTH)) pose.translate(0, 0, -0.25);
+            else if(wallFacing.equals(Direction.NORTH)) pose.translate(0, 0, 0.25);
+            else if(wallFacing.equals(Direction.EAST)) pose.translate(-0.25, 0, 0);
+            else if(wallFacing.equals(Direction.WEST)) pose.translate(0.25, 0, 0);
         }
 
         // ---- 光照：用世界位置重新取 light，避免 packedLight 不可靠時變暗 ----
@@ -73,22 +76,10 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
         BakedModel baked = blockRenderer.getBlockModel(state);
         RandomSource rand = RandomSource.create();
         rand.setSeed(state.getSeed(be.getBlockPos()));
-
-        var pos = be.getBlockPos();
-        SurvivorsButchercraft.LOGGER.info(
-                "shape={} skylight={} shade={} light={} AO={}",
-                state.getRenderShape(),
-                state.propagatesSkylightDown(level, pos),
-                state.getShadeBrightness(level, pos),
-                LevelRenderer.getLightColor(level, pos),
-                Minecraft.getInstance().options.ambientOcclusion().get()
-        );
-
-
         var modelRenderer = blockRenderer.getModelRenderer();
         var modelData = net.minecraftforge.client.model.data.ModelData.EMPTY;
 
-        // 用 BakedModel 自帶的 render types（最不容易 layer 選錯導致發黑/發透明）
+        // 用 BakedModel 自帶的 render types
         for (var rt : baked.getRenderTypes(state, rand, modelData)) {
             var vc = buffers.getBuffer(rt);
             modelRenderer.renderModel(
