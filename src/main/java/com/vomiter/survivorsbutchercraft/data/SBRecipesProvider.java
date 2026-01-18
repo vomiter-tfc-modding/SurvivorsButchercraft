@@ -91,6 +91,7 @@ public class SBRecipesProvider extends RecipeProvider {
             .JEIIngredient(Ingredient.of(Items.LEATHER))
             .save(consumer, meatHookId("hide/yak"));
 
+        //TODO: add tool, use time, blood draining time to ICarcass
         for (Carcass carcass : Carcass.values()) {
             MeatHookRecipeBuilder meatHookRecipeBuilder = MeatHookRecipeBuilder.shapedRecipe(SBItems.CARCASSES.get(carcass).get());
             for (MeatHookStage meatHookStage : MeatHookStage.values()) {
