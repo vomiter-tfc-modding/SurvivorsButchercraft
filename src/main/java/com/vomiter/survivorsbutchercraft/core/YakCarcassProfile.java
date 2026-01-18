@@ -1,0 +1,45 @@
+package com.vomiter.survivorsbutchercraft.core;
+
+import com.lance5057.butchercraft.ButchercraftItems;
+import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.MapColor;
+
+import java.util.List;
+
+public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
+
+    @Override
+    public MapColor mapColor() {
+        return MapColor.COLOR_BLACK;
+    }
+
+    @Override
+    public Carcass carcass(){
+        return Carcass.YAK;
+    }
+
+    @Override
+    public List<DropSpec> dropsFor(MeatHookStage stage) {
+        switch (stage){
+        }
+
+        return super.dropsFor(stage);
+    }
+
+    @Override
+    public List<DropSpec> dropsForSupport(MeatHookStage stage) {
+        switch (stage){
+            case DISEMBOWEL -> {
+                return List.of(
+                        DropSpec.of(new ItemStack(ButchercraftItems.STOMACH.get(), 4)),
+                        DropSpec.of(new ItemStack(ButchercraftItems.TRIPE.get(), 8))
+                );
+            }
+        }
+
+        return super.dropsForSupport(stage);
+    }
+
+
+}

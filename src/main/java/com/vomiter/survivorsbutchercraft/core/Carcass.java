@@ -1,25 +1,36 @@
 package com.vomiter.survivorsbutchercraft.core;
 
+import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.level.material.MapColor;
 
+import java.util.List;
 import java.util.Locale;
 
-public enum Carcass {
-    YAK(true, MapColor.COLOR_BLACK);
+public enum Carcass implements ICarcassProfile {
+    YAK(new YakCarcassProfile());
 
-    public final boolean hasHide;
-    public final MapColor mapColor;
-    Carcass(){
-        this.hasHide = false;
-        mapColor = null;
+    private final ICarcassProfile profile;
+
+    Carcass(ICarcassProfile profile) {
+        this.profile = profile;
     }
 
-    Carcass(boolean hasHide, MapColor mapColor){
-        this.hasHide = hasHide;
-        this.mapColor = mapColor;
-    };
-
-    public String serializedName(){
+    public String serializedName() {
         return name().toLowerCase(Locale.ROOT);
     }
+
+    // === delegate ===
+    @Override public boolean hasHide() { return profile.hasHide(); }
+    @Override public MapColor mapColor() { return profile.mapColor(); }
+    @Override public List<DropSpec> dropsFor(MeatHookStage stage) {
+        return profile.dropsFor(stage);
+    }
+    @Override public List<DropSpec> dropsForSupport(MeatHookStage stage) {
+        return profile.dropsForSupport(stage);
+    }
+    @Override public List<DropSpec> dropsForTrivial(MeatHookStage stage) {
+        return profile.dropsForTrivial(stage);
+    }
+
+
 }

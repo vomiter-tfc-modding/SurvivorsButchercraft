@@ -1,9 +1,8 @@
 package com.vomiter.survivorsbutchercraft;
 
 import com.mojang.logging.LogUtils;
-import com.vomiter.survivorsbutchercraft.client.HookTransformReloadListener;
 import com.vomiter.survivorsbutchercraft.client.SBClientModEvents;
-import com.vomiter.survivorsbutchercraft.core.MeatHookStages;
+import com.vomiter.survivorsbutchercraft.core.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.core.registry.SBBlockEntityTypes;
 import com.vomiter.survivorsbutchercraft.core.registry.SBBlocks;
 import com.vomiter.survivorsbutchercraft.core.registry.SBItems;
@@ -27,7 +26,7 @@ public class SurvivorsButchercraft
     public static final Logger LOGGER = LogUtils.getLogger();
     public SurvivorsButchercraft(FMLJavaModLoadingContext context)
     {
-        MeatHookStages.values();
+        MeatHookStage.values();
         IEventBus modBus = context.getModEventBus();
         modBus.addListener(SBDataGenerator::gatherData);
         SBItems.ITEMS.register(modBus);

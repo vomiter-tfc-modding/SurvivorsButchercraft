@@ -4,7 +4,7 @@ import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 
 import java.util.Arrays;
 
-public enum MeatHookStages {
+public enum MeatHookStage {
     HOOK("hooked"),
     SKIN("skinned"),
     DISEMBOWEL("gutted"),
@@ -24,7 +24,7 @@ public enum MeatHookStages {
         pre = previousStep;
         return previousStep;
     };
-    MeatHookStages(String pp){
+    MeatHookStage(String pp){
         this.pp = pp;
     }
 }

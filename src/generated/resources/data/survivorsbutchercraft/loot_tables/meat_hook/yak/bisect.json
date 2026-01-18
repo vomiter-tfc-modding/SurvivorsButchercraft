@@ -1,0 +1,22 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "survivorsbutchercraft:head/yak"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "survivorsbutchercraft:meat_hook/yak/bisect"
+}

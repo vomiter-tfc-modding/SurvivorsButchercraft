@@ -8,9 +8,12 @@ import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloa
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
 import com.lance5057.butchercraft.data.builders.recipes.MeatHookRecipeBuilder;
 import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
+import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.core.Carcass;
+import com.vomiter.survivorsbutchercraft.core.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.core.registry.SBItems;
+import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -18,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -67,17 +71,8 @@ public class SBRecipesProvider extends RecipeProvider {
                         .setScale(new AnimatedFloatVector3().setAll(new AnimatedFloat(0.5f))));
     }
 
-    ResourceLocation meatHookId(String path){
-        return id("meathook/" + path);
-    }
-
-
-    ResourceLocation id(String path){
-        return id(SurvivorsButchercraft.MODID, path);
-    }
-
-    ResourceLocation id(String namespace, String path){
-        return new ResourceLocation(namespace, path);
+    static ResourceLocation meatHookId(String path){
+        return Helpers.id("meathook/" + path);
     }
 
 
@@ -96,6 +91,22 @@ public class SBRecipesProvider extends RecipeProvider {
             .JEIIngredient(Ingredient.of(Items.LEATHER))
             .save(consumer, meatHookId("hide/yak"));
 
+        for (Carcass carcass : Carcass.values()) {
+            MeatHookRecipeBuilder meatHookRecipeBuilder = MeatHookRecipeBuilder.shapedRecipe(SBItems.CARCASSES.get(carcass).get());
+            for (MeatHookStage meatHookStage : MeatHookStage.values()) {
+                meatHookRecipeBuilder.tool(
+                        Ingredient.of(Items.DIAMOND_SWORD),
+                        10,
+                        true,
+                        meatHookStage == MeatHookStage.HOOK? MeatHookLoottables.BLOOD_BUCKET: MeatHookLootHelper.mainTable(carcass, meatHookStage),
+                        standardModel(meatHookId(carcass.serializedName() + "/" + (meatHookStage == MeatHookStage.HOOK? "hooked": meatHookStage.previousStep()))),
+                        standardModel(ForgeRegistries.ITEMS.getKey(Items.DIAMOND_SWORD))
+                );
+            }
+            meatHookRecipeBuilder.save(consumer, meatHookId(carcass.serializedName()));
+        }
+
+        /*
         MeatHookRecipeBuilder.shapedRecipe(SBItems.CARCASSES.get(Carcass.YAK).get())
                 .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
                         standardModel(meatHookId("yak/hooked")),
@@ -139,5 +150,7 @@ public class SBRecipesProvider extends RecipeProvider {
                 .JEIIngredient(Ingredient.of(ButchercraftItems.CUBED_BEEF.get()))
                 .JEIIngredient(Ingredient.of(Items.BEEF)).JEIIngredient(Ingredient.of(Items.BONE))
                 .save(consumer, meatHookId("yak"));
+
+         */
     }
 }

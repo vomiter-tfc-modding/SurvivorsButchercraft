@@ -4,68 +4,7 @@
     "item": "survivorsbutchercraft:carcass/yak"
   },
   "group": "",
-  "jei": [
-    {
-      "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "butchercraft:heart"
-    },
-    {
-      "item": "butchercraft:kidney"
-    },
-    {
-      "item": "butchercraft:liver"
-    },
-    {
-      "item": "butchercraft:stomach"
-    },
-    {
-      "item": "butchercraft:lung"
-    },
-    {
-      "item": "butchercraft:tripe"
-    },
-    {
-      "item": "butchercraft:cow_head_item"
-    },
-    {
-      "item": "butchercraft:beef_scraps"
-    },
-    {
-      "item": "butchercraft:beef_stewmeat"
-    },
-    {
-      "item": "butchercraft:oxtail"
-    },
-    {
-      "item": "butchercraft:cow_hide"
-    },
-    {
-      "item": "butchercraft:leather_scrap"
-    },
-    {
-      "item": "butchercraft:fat"
-    },
-    {
-      "item": "butchercraft:sinew"
-    },
-    {
-      "item": "butchercraft:beef_ribs"
-    },
-    {
-      "item": "butchercraft:beef_roast"
-    },
-    {
-      "item": "butchercraft:cubed_beef"
-    },
-    {
-      "item": "minecraft:beef"
-    },
-    {
-      "item": "minecraft:bone"
-    }
-  ],
+  "jei": [],
   "tools": [
     {
       "count": 1,
@@ -102,60 +41,44 @@
           "location": "survivorsbutchercraft:meathook/yak/hooked"
         },
         {
+          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
+                "speed": 1.0
               }
             },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
+            "rotation": {},
             "scale": {
               "x": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               },
               "y": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               },
               "z": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               }
             }
           },
-          "location": "minecraft:bucket"
+          "location": "minecraft:diamond_sword"
         }
       ],
       "tool": {
-        "item": "minecraft:bucket"
+        "item": "minecraft:diamond_sword"
       },
-      "uses": 1
+      "uses": 10
     },
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "loot_table": "survivorsbutchercraft:meat_hook/yak/skin",
       "models": [
         {
           "IsBlock": true,
@@ -187,62 +110,6 @@
           "location": "survivorsbutchercraft:meathook/yak/hooked"
         },
         {
-          "animation": {
-            "location": {
-              "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
-              }
-            },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
-            "scale": {
-              "x": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "y": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "z": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              }
-            }
-          },
-          "location": "minecraft:bucket"
-        }
-      ],
-      "tool": {
-        "item": "minecraft:bucket"
-      },
-      "uses": 1
-    },
-    {
-      "count": 1,
-      "damage": true,
-      "loot_table": "butchercraft:meat_hook/blood_bucket",
-      "models": [
-        {
           "IsBlock": true,
           "animation": {
             "location": {
@@ -269,148 +136,18 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak/hooked"
-        },
-        {
-          "animation": {
-            "location": {
-              "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
-              }
-            },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
-            "scale": {
-              "x": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "y": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "z": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              }
-            }
-          },
-          "location": "minecraft:bucket"
+          "location": "minecraft:diamond_sword"
         }
       ],
       "tool": {
-        "item": "minecraft:bucket"
+        "item": "minecraft:diamond_sword"
       },
-      "uses": 1
+      "uses": 10
     },
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/skin_cow",
-      "models": [
-        {
-          "IsBlock": true,
-          "animation": {
-            "location": {
-              "x": {
-                "speed": 1.0
-              }
-            },
-            "rotation": {},
-            "scale": {
-              "x": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              },
-              "y": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              },
-              "z": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              }
-            }
-          },
-          "location": "survivorsbutchercraft:meathook/yak/hooked"
-        },
-        {
-          "animation": {
-            "location": {
-              "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
-              }
-            },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
-            "scale": {
-              "x": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "y": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "z": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              }
-            }
-          },
-          "location": "butchercraft:skinning_knife"
-        }
-      ],
-      "tool": {
-        "item": "butchercraft:skinning_knife"
-      },
-      "uses": 12
-    },
-    {
-      "count": 1,
-      "damage": true,
-      "loot_table": "butchercraft:meat_hook/delimb_cow",
+      "loot_table": "survivorsbutchercraft:meat_hook/yak/disembowel",
       "models": [
         {
           "IsBlock": true,
@@ -442,60 +179,44 @@
           "location": "survivorsbutchercraft:meathook/yak/skinned"
         },
         {
+          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
+                "speed": 1.0
               }
             },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
+            "rotation": {},
             "scale": {
               "x": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               },
               "y": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               },
               "z": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               }
             }
           },
-          "location": "butchercraft:bone_saw"
+          "location": "minecraft:diamond_sword"
         }
       ],
       "tool": {
-        "item": "butchercraft:bone_saw"
+        "item": "minecraft:diamond_sword"
       },
-      "uses": 12
+      "uses": 10
     },
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/deoffal_cow",
+      "loot_table": "survivorsbutchercraft:meat_hook/yak/bisect",
       "models": [
         {
           "IsBlock": true,
@@ -527,60 +248,44 @@
           "location": "survivorsbutchercraft:meathook/yak/gutted"
         },
         {
+          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
+                "speed": 1.0
               }
             },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
+            "rotation": {},
             "scale": {
               "x": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               },
               "y": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               },
               "z": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               }
             }
           },
-          "location": "butchercraft:gut_knife"
+          "location": "minecraft:diamond_sword"
         }
       ],
       "tool": {
-        "item": "butchercraft:gut_knife"
+        "item": "minecraft:diamond_sword"
       },
-      "uses": 12
+      "uses": 10
     },
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/butcher_cow",
+      "loot_table": "survivorsbutchercraft:meat_hook/yak/butcher",
       "models": [
         {
           "IsBlock": true,
@@ -612,55 +317,39 @@
           "location": "survivorsbutchercraft:meathook/yak/bisected"
         },
         {
+          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
+                "speed": 1.0
               }
             },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
+            "rotation": {},
             "scale": {
               "x": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               },
               "y": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               },
               "z": {
-                "max": 0.5,
-                "min": -0.5,
+                "max": 1.0,
+                "min": 1.0,
                 "speed": 1.0
               }
             }
           },
-          "location": "butchercraft:butcher_knife"
+          "location": "minecraft:diamond_sword"
         }
       ],
       "tool": {
-        "item": "butchercraft:butcher_knife"
+        "item": "minecraft:diamond_sword"
       },
-      "uses": 12
+      "uses": 10
     }
   ]
 }

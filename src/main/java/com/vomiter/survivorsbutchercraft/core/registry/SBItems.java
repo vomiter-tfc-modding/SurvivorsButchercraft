@@ -32,7 +32,7 @@ public class SBItems {
                             SBBlocks.WALL_HEADS.get(carcass).get(),
                             new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
 
-            if (carcass.hasHide) {
+            if (carcass.hasHide()) {
                 HIDES.put(carcass, ITEMS.register("hide/" + carcass.serializedName(),
                         () -> new BlockItem(SBBlocks.HIDE_CARPETS.get(carcass).get(), new Item.Properties())));
             }

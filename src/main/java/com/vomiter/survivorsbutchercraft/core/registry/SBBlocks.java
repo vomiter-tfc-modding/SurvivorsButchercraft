@@ -27,9 +27,9 @@ public class SBBlocks {
                 .strength(1F);
         for (Carcass carcass : Carcass.values()) {
             var carcass_name = carcass.serializedName();
-            if(carcass.hasHide) HIDE_CARPETS.put(carcass, BLOCKS.register(
+            if(carcass.hasHide()) HIDE_CARPETS.put(carcass, BLOCKS.register(
                     "hide_carpet/" + carcass_name,
-                    () -> new HideBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(carcass.mapColor))
+                    () -> new HideBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).mapColor(carcass.mapColor()))
             ));
             HEADS.put(carcass,
                         BLOCKS.register(
