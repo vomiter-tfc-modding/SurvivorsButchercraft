@@ -1,13 +1,20 @@
 package com.vomiter.survivorsbutchercraft.core;
 
 import com.lance5057.butchercraft.ButchercraftItems;
+import com.vomiter.survivorsbutchercraft.core.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
 
 public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
+
+    @Override
+    public Item carcassItem() {
+        return SBItems.CARCASSES.get(Carcass.YAK).get();
+    }
 
     @Override
     public MapColor mapColor() {

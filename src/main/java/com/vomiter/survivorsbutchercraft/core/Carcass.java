@@ -1,6 +1,7 @@
 package com.vomiter.survivorsbutchercraft.core;
 
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public enum Carcass implements ICarcassProfile {
     @Override public List<DropSpec> dropsForTrivial(MeatHookStage stage) {
         return profile.dropsForTrivial(stage);
     }
-
-
+    @Override
+    public Item carcassItem() {
+        return profile.carcassItem();
+    }
 }

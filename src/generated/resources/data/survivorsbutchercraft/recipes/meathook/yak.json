@@ -41,39 +41,55 @@
           "location": "survivorsbutchercraft:meathook/yak/hooked"
         },
         {
-          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "speed": 1.0
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
               }
             },
-            "rotation": {},
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
             "scale": {
               "x": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "y": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "z": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               }
             }
           },
-          "location": "minecraft:diamond_sword"
+          "location": "minecraft:bucket"
         }
       ],
       "tool": {
-        "item": "minecraft:diamond_sword"
+        "item": "minecraft:bucket"
       },
-      "uses": 10
+      "uses": 1
     },
     {
       "count": 1,
@@ -110,39 +126,55 @@
           "location": "survivorsbutchercraft:meathook/yak/hooked"
         },
         {
-          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "speed": 1.0
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
               }
             },
-            "rotation": {},
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
             "scale": {
               "x": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "y": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "z": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               }
             }
           },
-          "location": "minecraft:diamond_sword"
+          "location": "minecraft:barrier"
         }
       ],
       "tool": {
-        "item": "minecraft:diamond_sword"
+        "item": "minecraft:barrier"
       },
-      "uses": 10
+      "uses": 12
     },
     {
       "count": 1,
@@ -179,39 +211,55 @@
           "location": "survivorsbutchercraft:meathook/yak/skinned"
         },
         {
-          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "speed": 1.0
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
               }
             },
-            "rotation": {},
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
             "scale": {
               "x": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "y": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "z": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               }
             }
           },
-          "location": "minecraft:diamond_sword"
+          "location": "minecraft:barrier"
         }
       ],
       "tool": {
-        "item": "minecraft:diamond_sword"
+        "item": "minecraft:barrier"
       },
-      "uses": 10
+      "uses": 12
     },
     {
       "count": 1,
@@ -248,39 +296,55 @@
           "location": "survivorsbutchercraft:meathook/yak/gutted"
         },
         {
-          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "speed": 1.0
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
               }
             },
-            "rotation": {},
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
             "scale": {
               "x": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "y": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "z": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               }
             }
           },
-          "location": "minecraft:diamond_sword"
+          "location": "minecraft:barrier"
         }
       ],
       "tool": {
-        "item": "minecraft:diamond_sword"
+        "item": "minecraft:barrier"
       },
-      "uses": 10
+      "uses": 12
     },
     {
       "count": 1,
@@ -317,39 +381,55 @@
           "location": "survivorsbutchercraft:meathook/yak/bisected"
         },
         {
-          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "speed": 1.0
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
               }
             },
-            "rotation": {},
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
             "scale": {
               "x": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "y": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               },
               "z": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 0.5,
+                "min": -0.5,
                 "speed": 1.0
               }
             }
           },
-          "location": "minecraft:diamond_sword"
+          "location": "minecraft:barrier"
         }
       ],
       "tool": {
-        "item": "minecraft:diamond_sword"
+        "item": "minecraft:barrier"
       },
-      "uses": 10
+      "uses": 12
     }
   ]
 }

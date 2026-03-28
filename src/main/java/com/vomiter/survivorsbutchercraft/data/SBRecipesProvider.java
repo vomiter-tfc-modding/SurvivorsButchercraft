@@ -93,15 +93,26 @@ public class SBRecipesProvider extends RecipeProvider {
 
         //TODO: add tool, use time, blood draining time to ICarcass
         for (Carcass carcass : Carcass.values()) {
-            MeatHookRecipeBuilder meatHookRecipeBuilder = MeatHookRecipeBuilder.shapedRecipe(SBItems.CARCASSES.get(carcass).get());
-            for (MeatHookStage meatHookStage : MeatHookStage.values()) {
+            MeatHookRecipeBuilder meatHookRecipeBuilder = MeatHookRecipeBuilder.shapedRecipe(carcass.carcassItem());
+            for (int i = 0; i < carcass.bloodBucket(); i++) {
                 meatHookRecipeBuilder.tool(
-                        Ingredient.of(Items.DIAMOND_SWORD),
-                        10,
+                        Ingredient.of(Items.BUCKET),
+                        1,
                         true,
-                        meatHookStage == MeatHookStage.HOOK? MeatHookLoottables.BLOOD_BUCKET: MeatHookLootHelper.mainTable(carcass, meatHookStage),
-                        standardModel(meatHookId(carcass.serializedName() + "/" + (meatHookStage == MeatHookStage.HOOK? "hooked": meatHookStage.previousStep()))),
-                        standardModel(ForgeRegistries.ITEMS.getKey(Items.DIAMOND_SWORD))
+                        MeatHookLoottables.BLOOD_BUCKET,
+                        standardModel(meatHookId(carcass.serializedName() + "/" + MeatHookStage.HOOK.pp)),
+                        standardHookToolModel(Items.BUCKET)
+                        );
+            }
+            for (MeatHookStage meatHookStage : MeatHookStage.values()) {
+                if(meatHookStage == MeatHookStage.HOOK) continue;
+                meatHookRecipeBuilder.tool(
+                        carcass.toolFor(meatHookStage),
+                        carcass.workCountFor(meatHookStage),
+                        true,
+                        MeatHookLootHelper.mainTable(carcass, meatHookStage),
+                        standardModel(meatHookId(carcass.serializedName() + "/" + meatHookStage.previousStep())),
+                        standardHookToolModel(carcass.iconicToolFor(meatHookStage))
                 );
             }
             meatHookRecipeBuilder.save(consumer, meatHookId(carcass.serializedName()));

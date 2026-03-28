@@ -1,6 +1,10 @@
 package com.vomiter.survivorsbutchercraft.core;
 
+import com.lance5057.butchercraft.data.builders.recipes.ButchercraftRecipeProvider;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
@@ -8,6 +12,27 @@ import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import java.util.List;
 
 public interface ICarcassProfile {
+
+    Item carcassItem();
+
+    default int bloodBucket(){
+        return 1;
+    }
+
+    default int workCountFor(MeatHookStage stage){
+        return switch (stage){
+            case SKIN, BUTCHER, BISECT, DISEMBOWEL -> 12;
+            default -> 1;
+        };
+    }
+
+    default Ingredient toolFor(MeatHookStage stage){
+        return Ingredient.of(iconicToolFor(stage));
+    }
+
+    default Item iconicToolFor(MeatHookStage stage){
+        return Items.BARRIER;
+    }
 
     default boolean hasHide() {
         return false;

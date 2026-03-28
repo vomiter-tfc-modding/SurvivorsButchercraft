@@ -3,16 +3,28 @@ package com.vomiter.survivorsbutchercraft.core;
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.core.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import java.util.List;
 
-public class DefaultMammalCarcassProfile implements ICarcassProfile {
+public abstract class DefaultMammalCarcassProfile implements ICarcassProfile {
 
     public Carcass carcass(){
         return null;
     }
+
+    public Item iconicToolFor(MeatHookStage stage){
+        return switch (stage){
+            case SKIN -> ButchercraftItems.SKINNING_KNIFE.get();
+            case DISEMBOWEL -> ButchercraftItems.GUT_KNIFE.get();
+            case BISECT -> ButchercraftItems.BONE_SAW.get();
+            case BUTCHER -> ButchercraftItems.BUTCHER_KNIFE.get();
+            default -> Items.BARRIER;
+        };
+    }
+
 
     @Override
     public boolean hasHide() {
