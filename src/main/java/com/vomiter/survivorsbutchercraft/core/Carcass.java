@@ -2,6 +2,7 @@ package com.vomiter.survivorsbutchercraft.core;
 
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
@@ -20,20 +21,15 @@ public enum Carcass implements ICarcassProfile {
         return name().toLowerCase(Locale.ROOT);
     }
 
-    // === delegate ===
+    @Override public Item carcassItem() { return profile.carcassItem(); }
+    @Override public int bloodBucket() { return profile.bloodBucket(); }
+    @Override public int workCountFor(MeatHookStage stage) { return profile.workCountFor(stage); }
+    @Override public Ingredient toolFor(MeatHookStage stage) { return profile.toolFor(stage); }
+    @Override public Item iconicToolFor(MeatHookStage stage) { return profile.iconicToolFor(stage); }
+
     @Override public boolean hasHide() { return profile.hasHide(); }
     @Override public MapColor mapColor() { return profile.mapColor(); }
-    @Override public List<DropSpec> dropsFor(MeatHookStage stage) {
-        return profile.dropsFor(stage);
-    }
-    @Override public List<DropSpec> dropsForSupport(MeatHookStage stage) {
-        return profile.dropsForSupport(stage);
-    }
-    @Override public List<DropSpec> dropsForTrivial(MeatHookStage stage) {
-        return profile.dropsForTrivial(stage);
-    }
-    @Override
-    public Item carcassItem() {
-        return profile.carcassItem();
-    }
+    @Override public List<DropSpec> dropsFor(MeatHookStage stage) { return profile.dropsFor(stage); }
+    @Override public List<DropSpec> dropsForSupport(MeatHookStage stage) { return profile.dropsForSupport(stage); }
+    @Override public List<DropSpec> dropsForTrivial(MeatHookStage stage) { return profile.dropsForTrivial(stage); }
 }

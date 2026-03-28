@@ -168,11 +168,11 @@
               }
             }
           },
-          "location": "minecraft:barrier"
+          "location": "butchercraft:skinning_knife"
         }
       ],
       "tool": {
-        "item": "minecraft:barrier"
+        "item": "butchercraft:skinning_knife"
       },
       "uses": 12
     },
@@ -253,11 +253,11 @@
               }
             }
           },
-          "location": "minecraft:barrier"
+          "location": "butchercraft:gut_knife"
         }
       ],
       "tool": {
-        "item": "minecraft:barrier"
+        "item": "butchercraft:gut_knife"
       },
       "uses": 12
     },
@@ -338,11 +338,11 @@
               }
             }
           },
-          "location": "minecraft:barrier"
+          "location": "butchercraft:bone_saw"
         }
       ],
       "tool": {
-        "item": "minecraft:barrier"
+        "item": "butchercraft:bone_saw"
       },
       "uses": 12
     },
@@ -423,11 +423,11 @@
               }
             }
           },
-          "location": "minecraft:barrier"
+          "location": "butchercraft:butcher_knife"
         }
       ],
       "tool": {
-        "item": "minecraft:barrier"
+        "item": "butchercraft:butcher_knife"
       },
       "uses": 12
     }

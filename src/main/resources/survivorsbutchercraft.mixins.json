@@ -4,6 +4,7 @@
   "package": "com.vomiter.survivorsbutchercraft.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MeatHookRendererMixin"
   ],
   "client": [
     "RenderUtilMixin"
