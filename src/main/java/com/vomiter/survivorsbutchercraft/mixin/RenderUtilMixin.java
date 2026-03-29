@@ -5,6 +5,7 @@ import com.lance5057.butchercraft.client.rendering.RenderUtil;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.client.HookTransformReloadListener;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -54,6 +55,14 @@ public class RenderUtilMixin {
             @Local(argsOnly = true, name = "arg5") float loadModelTimer
     ) {
         HookTransformReloadListener.TransformDef def = HookTransformReloadListener.get(model.rc);
+        if (def == null) {
+            if(model.rc.getPath().endsWith("_female_parts")) def = HookTransformReloadListener.get(
+                    Helpers.id(model.rc.getNamespace(), model.rc.getPath().replace("_female_parts", ""))
+            );
+            if(model.rc.getPath().endsWith("_male_parts")) def = HookTransformReloadListener.get(
+                    Helpers.id(model.rc.getNamespace(), model.rc.getPath().replace("_male_parts", ""))
+            );
+        }
         if (def != null) {
             poseStack.pushPose();
             sb$applyCenteredScale(poseStack, def);
