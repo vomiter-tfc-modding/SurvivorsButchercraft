@@ -80,7 +80,6 @@ public final class UvRotationInferer {
     }
 
     private static boolean approx(float a, float b) {
-        // 你原本 1e-4 有時太緊；bbmodel 這裡放寬一點通常更穩
         return Math.abs(a - b) <= 1e-3f;
     }
 

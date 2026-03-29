@@ -26,12 +26,11 @@ public record DropSpec(
         return new DropSpec(LootItem.lootTableItem(item), new ArrayList<>());
     }
 
-    /** 等價於你原本的 createPoolWithItem(item, min, max) 的核心效果（只是先回 DropSpec 讓你可再加其他 fn） */
     public static DropSpec of(Item item, int min, int max) {
         return of(item).withCount(min, max);
     }
 
-    /** 讓你可以「塞 ItemStack」：count + (optional) NBT */
+    /** 可以「塞 ItemStack」：count + (optional) NBT */
     public static DropSpec of(ItemStack stack) {
         DropSpec spec = of(stack.getItem()).withCount(stack.getCount());
 
@@ -78,7 +77,6 @@ public record DropSpec(
         return pool;
     }
 
-    /** 有時你會想把 functions 直接 apply 到 entry（例如你在外面要 add(entry) 由別處控制 pool） */
     public LootItem.@NotNull Builder<?> toEntry() {
         LootItem.Builder<?> e = entry;
         for (LootItemFunction.Builder fn : functions) {

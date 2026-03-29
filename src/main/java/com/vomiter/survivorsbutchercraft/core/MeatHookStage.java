@@ -7,8 +7,8 @@ import java.util.Arrays;
 public enum MeatHookStage {
     HOOK("hooked"),
     SKIN("skinned"),
-    DISEMBOWEL("gutted"),
     BISECT("bisected"),
+    DISEMBOWEL("gutted"),
     BUTCHER("butchered");
 
     public final String pp;

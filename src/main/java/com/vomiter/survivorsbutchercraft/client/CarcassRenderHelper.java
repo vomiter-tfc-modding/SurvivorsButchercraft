@@ -21,6 +21,24 @@ public final class CarcassRenderHelper {
     private CarcassRenderHelper() {
     }
 
+    public static List<BlacklistedModel> buildModels(List<BlacklistedModel> baseModels, ItemStack carcass) {
+        List<BlacklistedModel> out = new ArrayList<>();
+
+        if (baseModels == null || baseModels.isEmpty()) {
+            return out;
+        }
+
+        for (BlacklistedModel baseModel : baseModels) {
+            out.add(resolveVariant(baseModel, carcass));
+        }
+
+        if (!carcass.isEmpty() && CarcassDataHelper.hasData(carcass)) {
+            appendConditionalParts(out, baseModels, carcass);
+        }
+
+        return out;
+    }
+
     public static BlacklistedModel resolveVariant(BlacklistedModel base, ItemStack carcass) {
         if (base == null || carcass.isEmpty() || !CarcassDataHelper.hasData(carcass)) {
             return base;
@@ -41,29 +59,89 @@ public final class CarcassRenderHelper {
         return new BlacklistedModel(resolvedLocation, resolvedBlacklist, base.isBlock, base.transform);
     }
 
-    private static ResourceLocation resolveLocation(ResourceLocation base, ItemStack carcass) {
-        if (base == null) {
-            return null;
+    private static void appendConditionalParts(List<BlacklistedModel> out, List<BlacklistedModel> baseModels, ItemStack carcass) {
+        if (baseModels.isEmpty()) {
+            return;
+        }
+
+        BlacklistedModel anchor = baseModels.get(0);
+        if (anchor == null || anchor.rc == null) {
+            return;
         }
 
         boolean male = CarcassDataHelper.isMale(carcass);
         boolean old = CarcassDataHelper.isOld(carcass);
 
-        String path = base.getPath();
+        // base = survivorsbutchercraft:block/meathook/yak/hooked
+        // male part = survivorsbutchercraft:block/meathook/yak/hooked_male_parts
+        if (male) {
+            tryAddConditionalModel(
+                    out,
+                    derivePartLocation(anchor.rc, "male_parts"),
+                    anchor
+            );
+        }
+        else {
+            tryAddConditionalModel(
+                    out,
+                    derivePartLocation(anchor.rc, "female_parts"),
+                    anchor
+            );
+        }
+    }
 
-        // 例： hooked -> hooked_female_old
+    private static void tryAddConditionalModel(List<BlacklistedModel> out, ResourceLocation location, BlacklistedModel anchor) {
+        if (location == null) {
+            return;
+        }
+
+        if (!modelExists(location)) {
+            warnMissingOnce(location, anchor.rc);
+            return;
+        }
+
+        out.add(new BlacklistedModel(
+                location,
+                new ArrayList<>(),
+                anchor.isBlock,
+                anchor.transform
+        ));
+    }
+
+    private static ResourceLocation derivePartLocation(ResourceLocation base, String suffix) {
+        if (base == null || suffix == null || suffix.isBlank()) {
+            return null;
+        }
+        return Helpers.id(base.getNamespace(), base.getPath() + "_" + suffix);
+    }
+
+    private static ResourceLocation resolveLocation(ResourceLocation base, ItemStack carcass) {
+        if (base == null) {
+            return null;
+        }
+
+        String path = base.getPath();
+        boolean old = CarcassDataHelper.isOld(carcass);
+        if (old) {
+            path += "_old";
+        }
+
+        /*
+        boolean male = CarcassDataHelper.isMale(carcass);
+        boolean old = CarcassDataHelper.isOld(carcass);
+
         if (!male) {
             path += "_female";
         }
         if (old) {
             path += "_old";
         }
+         */
 
         return Helpers.id(base.getNamespace(), path);
     }
 
     private static boolean modelExists(ResourceLocation modelLocation) {
-        // models/<path>.json
         ResourceLocation fileLocation = Helpers.id(
                 modelLocation.getNamespace(),
                 "models/" + modelLocation.getPath() + ".json"
@@ -79,7 +157,7 @@ public final class CarcassRenderHelper {
     private static void warnMissingOnce(ResourceLocation missingVariant, ResourceLocation fallbackBase) {
         if (MISSING_MODEL_WARNED.add(missingVariant)) {
             SurvivorsButchercraft.LOGGER.warn(
-                    "Missing carcass variant model: {} ; fallback to base model: {}",
+                    "Missing carcass model/part: {} ; fallback/skip from base: {}",
                     missingVariant,
                     fallbackBase
             );
@@ -91,7 +169,6 @@ public final class CarcassRenderHelper {
         if (baseBlacklist != null) {
             out.addAll(baseBlacklist);
         }
-
         return out;
     }
 }

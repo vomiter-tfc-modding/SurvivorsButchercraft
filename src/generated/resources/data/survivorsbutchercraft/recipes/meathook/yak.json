@@ -179,7 +179,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/yak/disembowel",
+      "loot_table": "survivorsbutchercraft:meat_hook/yak/bisect",
       "models": [
         {
           "IsBlock": true,
@@ -253,18 +253,18 @@
               }
             }
           },
-          "location": "butchercraft:gut_knife"
+          "location": "butchercraft:bone_saw"
         }
       ],
       "tool": {
-        "item": "butchercraft:gut_knife"
+        "item": "butchercraft:bone_saw"
       },
       "uses": 12
     },
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/yak/bisect",
+      "loot_table": "survivorsbutchercraft:meat_hook/yak/disembowel",
       "models": [
         {
           "IsBlock": true,
@@ -293,7 +293,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak/gutted"
+          "location": "survivorsbutchercraft:meathook/yak/bisected"
         },
         {
           "animation": {
@@ -338,11 +338,11 @@
               }
             }
           },
-          "location": "butchercraft:bone_saw"
+          "location": "butchercraft:gut_knife"
         }
       ],
       "tool": {
-        "item": "butchercraft:bone_saw"
+        "item": "butchercraft:gut_knife"
       },
       "uses": 12
     },
@@ -378,7 +378,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak/bisected"
+          "location": "survivorsbutchercraft:meathook/yak/gutted"
         },
         {
           "animation": {

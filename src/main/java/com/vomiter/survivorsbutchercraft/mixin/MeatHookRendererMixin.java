@@ -16,7 +16,7 @@ import java.util.Optional;
 public class MeatHookRendererMixin {
 
     @ModifyExpressionValue(
-            method = "render",
+            method = "render(Lcom/lance5057/butchercraft/workstations/hook/MeatHookBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
             at = @At(
                     value = "INVOKE",
                     target = "Lcom/lance5057/butchercraft/workstations/hook/MeatHookBlockEntity;getCurrentTool()Ljava/util/Optional;"
@@ -34,11 +34,10 @@ public class MeatHookRendererMixin {
 
         AnimatedRecipeItemUse base = original.get();
 
-        BlacklistedModel[] resolvedModels = base.model.stream()
-                .map(model -> CarcassRenderHelper.resolveVariant(model, carcass))
-                .toArray(BlacklistedModel[]::new);
-
-        AnimatedRecipeItemUse wrapped = new AnimatedRecipeItemUse(base, resolvedModels);
+        AnimatedRecipeItemUse wrapped = new AnimatedRecipeItemUse(
+                base,
+                CarcassRenderHelper.buildModels(base.model, carcass).toArray(BlacklistedModel[]::new)
+        );
         return Optional.of(wrapped);
     }
 }

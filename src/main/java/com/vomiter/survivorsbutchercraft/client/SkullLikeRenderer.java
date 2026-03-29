@@ -48,7 +48,7 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
 
         pose.pushPose();
 
-        // ---- 位置：先處理牆上/地面 skull 的「放置偏移」(可依你方塊外觀微調) ----
+        // ---- 位置：先處理牆上/地面 skull 的「放置偏移」(可依方塊外觀微調) ----
         boolean isWall = state.hasProperty(HorizontalDirectionalBlock.FACING);
         Direction wallFacing = isWall ? state.getValue(HorizontalDirectionalBlock.FACING) : null;
 
