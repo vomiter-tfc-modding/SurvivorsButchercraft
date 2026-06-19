@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/PathUtil.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 public final class PathUtil {

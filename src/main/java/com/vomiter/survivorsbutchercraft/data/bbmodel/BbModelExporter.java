@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/BbModelExporter.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 import com.google.gson.Gson;

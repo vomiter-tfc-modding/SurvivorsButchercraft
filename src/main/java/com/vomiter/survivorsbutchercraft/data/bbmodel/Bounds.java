@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/Bounds.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 public final class Bounds {

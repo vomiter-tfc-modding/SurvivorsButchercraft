@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/ExportConfig.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 public record ExportConfig(

@@ -70,7 +70,7 @@ public class WallSkullLikeBlock extends AbstractSkullBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        // 牆上頭顱面向玩家：通常是「點到的面」的反方向
+        // 牆上頭顱面向玩家：「點到的面」的反方向
         return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection());
     }
 

@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/ElementCube.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 import net.minecraft.core.Direction;

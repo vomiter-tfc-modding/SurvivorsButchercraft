@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/Vec3.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 public final class Vec3 {

@@ -1,4 +1,3 @@
-// File: .../CubeUvExtractor.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,13 +11,13 @@ import java.util.Map;
 public final class CubeUvExtractor {
     private final UvRotationInferer rotationInferer = new UvRotationInferer();
 
-    // 取一個「公開可取得」的 identity Pose（不需要 new PoseStack.Pose）
+    // 取一個「公開可取得」的 identity Pose
     private static final PoseStack.Pose IDENTITY_POSE = new PoseStack().last();
 
     public Map<Direction, FaceUv> captureFaces(ModelPart.Cube cube, PoseStack.Pose ignoredPose, int texW, int texH) {
         CapturingVertexConsumer cap = new CapturingVertexConsumer();
 
-        // 用 identity pose compile，避免骨架旋轉讓 normal 不再軸對齊
+        // 用 identity pose compile
         cube.compile(IDENTITY_POSE, cap, 0, 0, 1, 1, 1, 1);
 
         Map<Direction, List<CapturingVertexConsumer.Vtx>> byDir = cap.groupByDirection();

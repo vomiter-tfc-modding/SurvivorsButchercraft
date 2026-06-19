@@ -18,10 +18,6 @@ import org.slf4j.Logger;
 @Mod(SurvivorsButchercraft.MODID)
 public class SurvivorsButchercraft
 {
-    //TODO: make skull-like block item wearable
-    //TODO: make skull-like block render correctly
-    //TODO: make skull-like block has correct shape/hitbox
-
     public static final String MODID = "survivorsbutchercraft";
     public static final Logger LOGGER = LogUtils.getLogger();
     public SurvivorsButchercraft(FMLJavaModLoadingContext context)

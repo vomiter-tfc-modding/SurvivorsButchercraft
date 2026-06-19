@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/CapturingVertexConsumer.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;

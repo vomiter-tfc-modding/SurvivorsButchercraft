@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/CubeBounds.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 import net.minecraft.client.model.geom.ModelPart;

@@ -51,7 +51,7 @@ public final class BbmodelExportProvider implements DataProvider {
         // 這裡回傳 future，讓 datagen 等寫入完成
         return DataProvider.saveStable(cache, json, target)
                 .thenRun(() -> {
-                    // 只在寫完後做檢查（可留著或之後拿掉）
+                    // 只在寫完後做檢查
                     if (!Files.exists(target)) {
                         throw new IllegalStateException("[BBMODEL] write completed but file not found: " + target);
                     }

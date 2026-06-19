@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/UuidProvider.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 import java.util.UUID;

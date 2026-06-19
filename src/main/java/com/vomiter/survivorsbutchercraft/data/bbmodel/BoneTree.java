@@ -1,4 +1,3 @@
-// File: com/vomiter/survivorsbutchercraft/data/bbmodel/BoneTree.java
 package com.vomiter.survivorsbutchercraft.data.bbmodel;
 
 import com.google.gson.JsonArray;
