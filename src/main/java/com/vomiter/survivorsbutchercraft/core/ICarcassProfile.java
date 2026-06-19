@@ -1,6 +1,5 @@
 package com.vomiter.survivorsbutchercraft.core;
 
-import com.lance5057.butchercraft.data.builders.recipes.ButchercraftRecipeProvider;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -27,11 +26,7 @@ public interface ICarcassProfile {
     }
 
     default Ingredient toolFor(MeatHookStage stage){
-        return Ingredient.of(iconicToolFor(stage));
-    }
-
-    default Item iconicToolFor(MeatHookStage stage){
-        return Items.BARRIER;
+        return Ingredient.of(stage.iconicTool());
     }
 
     default boolean hasHide() {

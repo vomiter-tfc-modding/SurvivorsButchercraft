@@ -1,14 +1,17 @@
 package com.vomiter.survivorsbutchercraft.core;
 
+import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 
 public enum MeatHookStage {
     HOOK("hooked"),
     SKIN("skinned"),
-    BISECT("bisected"),
     DISEMBOWEL("gutted"),
+    BISECT("bisected"),
     BUTCHER("butchered");
 
     public final String pp;
@@ -24,6 +27,17 @@ public enum MeatHookStage {
         pre = previousStep;
         return previousStep;
     };
+
+    public Item iconicTool(){
+        return switch (this){
+            case SKIN -> ButchercraftItems.SKINNING_KNIFE.get();
+            case DISEMBOWEL -> ButchercraftItems.BONE_SAW.get();
+            case BISECT -> ButchercraftItems.GUT_KNIFE.get();
+            case BUTCHER -> ButchercraftItems.BUTCHER_KNIFE.get();
+            default -> Items.BARRIER;
+        };
+    }
+
     MeatHookStage(String pp){
         this.pp = pp;
     }

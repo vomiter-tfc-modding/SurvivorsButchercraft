@@ -94,6 +94,176 @@
     {
       "count": 1,
       "damage": true,
+      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "models": [
+        {
+          "IsBlock": true,
+          "animation": {
+            "location": {
+              "x": {
+                "speed": 1.0
+              }
+            },
+            "rotation": {},
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "survivorsbutchercraft:meathook/yak/hooked"
+        },
+        {
+          "animation": {
+            "location": {
+              "x": {
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
+              }
+            },
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "minecraft:bucket"
+        }
+      ],
+      "tool": {
+        "item": "minecraft:bucket"
+      },
+      "uses": 1
+    },
+    {
+      "count": 1,
+      "damage": true,
+      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "models": [
+        {
+          "IsBlock": true,
+          "animation": {
+            "location": {
+              "x": {
+                "speed": 1.0
+              }
+            },
+            "rotation": {},
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "survivorsbutchercraft:meathook/yak/hooked"
+        },
+        {
+          "animation": {
+            "location": {
+              "x": {
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
+              }
+            },
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "minecraft:bucket"
+        }
+      ],
+      "tool": {
+        "item": "minecraft:bucket"
+      },
+      "uses": 1
+    },
+    {
+      "count": 1,
+      "damage": true,
       "loot_table": "survivorsbutchercraft:meat_hook/yak/skin",
       "models": [
         {
@@ -179,7 +349,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/yak/bisect",
+      "loot_table": "survivorsbutchercraft:meat_hook/yak/disembowel",
       "models": [
         {
           "IsBlock": true,
@@ -264,7 +434,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/yak/disembowel",
+      "loot_table": "survivorsbutchercraft:meat_hook/yak/bisect",
       "models": [
         {
           "IsBlock": true,
@@ -293,7 +463,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak/bisected"
+          "location": "survivorsbutchercraft:meathook/yak/gutted"
         },
         {
           "animation": {
@@ -378,7 +548,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/yak/gutted"
+          "location": "survivorsbutchercraft:meathook/yak/bisected"
         },
         {
           "animation": {

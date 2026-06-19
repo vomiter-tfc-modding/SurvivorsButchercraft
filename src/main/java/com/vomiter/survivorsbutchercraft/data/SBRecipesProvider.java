@@ -1,6 +1,5 @@
 package com.vomiter.survivorsbutchercraft.data;
 
-import com.lance5057.butchercraft.Butchercraft;
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloat;
@@ -9,7 +8,6 @@ import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFlo
 import com.lance5057.butchercraft.data.builders.recipes.MeatHookRecipeBuilder;
 import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
 import com.vomiter.survivorsbutchercraft.Helpers;
-import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.core.Carcass;
 import com.vomiter.survivorsbutchercraft.core.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.core.registry.SBItems;
@@ -21,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -112,7 +109,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         true,
                         MeatHookLootHelper.mainTable(carcass, meatHookStage),
                         standardModel(meatHookId(carcass.serializedName() + "/" + meatHookStage.previousStep())),
-                        standardHookToolModel(carcass.iconicToolFor(meatHookStage))
+                        standardHookToolModel(meatHookStage.iconicTool())
                 );
             }
             meatHookRecipeBuilder.save(consumer, meatHookId(carcass.serializedName()));

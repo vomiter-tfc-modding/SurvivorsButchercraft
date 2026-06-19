@@ -18,8 +18,8 @@ public abstract class DefaultMammalCarcassProfile implements ICarcassProfile {
     public Item iconicToolFor(MeatHookStage stage){
         return switch (stage){
             case SKIN -> ButchercraftItems.SKINNING_KNIFE.get();
-            case BISECT -> ButchercraftItems.BONE_SAW.get();
-            case DISEMBOWEL -> ButchercraftItems.GUT_KNIFE.get();
+            case DISEMBOWEL -> ButchercraftItems.BONE_SAW.get();
+            case BISECT -> ButchercraftItems.GUT_KNIFE.get();
             case BUTCHER -> ButchercraftItems.BUTCHER_KNIFE.get();
             default -> Items.BARRIER;
         };
@@ -37,12 +37,12 @@ public abstract class DefaultMammalCarcassProfile implements ICarcassProfile {
         return switch (stage) {
             case SKIN -> List.of(DropSpec.of(new ItemStack(SBItems.HIDES.get(carcass()).get())));
             case DISEMBOWEL -> List.of(
+                    DropSpec.of(new ItemStack(SBItems.HEADS.get(carcass()).get()))
+            );
+            case BISECT -> List.of(
                     DropSpec.of(new ItemStack(ButchercraftItems.HEART.get())),
                     DropSpec.of(new ItemStack(ButchercraftItems.LIVER.get())),
                     DropSpec.of(new ItemStack(ButchercraftItems.KIDNEY.get(), 2))
-            );
-            case BISECT -> List.of(
-                    DropSpec.of(new ItemStack(SBItems.HEADS.get(carcass()).get()))
             );
             default ->
                     List.of();

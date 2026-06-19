@@ -36,13 +36,6 @@ public class SBMeatHookLootTables implements LootTableSubProvider {
                 if (!trivialDrops.isEmpty()) {
                     main.withPool(MeatHookLootHelper.includeTrivial(stage, carcass));
                 }
-                if (carcass == Carcass.YAK && stage == MeatHookStage.BISECT) {
-                    SurvivorsButchercraft.LOGGER.warn(
-                            "[DATAGEN] YAK/BISECT main={}, support={}, trivial={}",
-                            mainDrops.size(), supportDrops.size(), trivialDrops.size()
-                    );
-                }
-
 
                 out.accept(MeatHookLootHelper.mainTable(carcass, stage), main);
 

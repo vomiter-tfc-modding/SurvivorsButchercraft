@@ -12,7 +12,29 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "survivorsbutchercraft:head/yak"
+          "name": "butchercraft:heart"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "butchercraft:liver"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "butchercraft:kidney"
         }
       ],
       "rolls": 1.0

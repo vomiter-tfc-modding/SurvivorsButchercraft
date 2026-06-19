@@ -8,8 +8,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
+import org.jetbrains.annotations.NotNull;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
@@ -21,13 +21,16 @@ public final class BbmodelExportProvider implements DataProvider {
     }
 
     @Override
-    public CompletableFuture<?> run(CachedOutput cache) {
-        return exportMuskOx(cache);
+    public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
+        exportAnimal(cache, MuskOxModel.createBodyLayer(), "musk_ox", "muskOx");
+        return DataProvider.saveStable(cache, new JsonObject(), output.getOutputFolder()
+                .resolve("bbmodels/" + "some" + ".bbmodel")
+                .toAbsolutePath()
+                .normalize());
     }
 
-    private CompletableFuture<?> exportMuskOx(CachedOutput cache) {
+    private void exportAnimal(CachedOutput cache, LayerDefinition layer, String serializedName, String fileName) {
         // 1) 取得 LayerDefinition 與貼圖大小
-        LayerDefinition layer = MuskOxModel.createBodyLayer();
         int texW = getTextureWidth(layer, 64);
         int texH = getTextureHeight(layer, 64);
 
@@ -36,27 +39,17 @@ public final class BbmodelExportProvider implements DataProvider {
 
         // 3) 匯出 bbmodel JSON（一次完成 elements + outliner）
         BbModelExporter exporter = new BbModelExporter();
-        ExportConfig cfg = new ExportConfig("musk_ox", texW, texH, "musk_ox.png", true);
+        ExportConfig cfg = new ExportConfig(serializedName, texW, texH, serializedName + ".png", true);
         JsonObject json = exporter.export(root, cfg);
 
         // 4) 寫檔
         Path target = output.getOutputFolder()
-                .resolve("bbmodels/muskOx/muskOx.bbmodel")
+                .resolve("bbmodels/" + fileName + ".bbmodel")
                 .toAbsolutePath()
                 .normalize();
 
         SurvivorsButchercraft.LOGGER.info("[BBMODEL] outputFolder=" + output.getOutputFolder().toAbsolutePath().normalize());
         SurvivorsButchercraft.LOGGER.info("[BBMODEL] target=" + target);
-
-        // 這裡回傳 future，讓 datagen 等寫入完成
-        return DataProvider.saveStable(cache, json, target)
-                .thenRun(() -> {
-                    // 只在寫完後做檢查
-                    if (!Files.exists(target)) {
-                        throw new IllegalStateException("[BBMODEL] write completed but file not found: " + target);
-                    }
-                    SurvivorsButchercraft.LOGGER.info("[BBMODEL] wrote: " + target);
-                });
     }
 
     @Override

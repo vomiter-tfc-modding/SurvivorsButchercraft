@@ -14,10 +14,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(SurvivorsButchercraft.MODID)
 public class SurvivorsButchercraft
 {
+    //TODO: make wooden bucket/steel buckets/barrels acceptable for draining blood
+    //TODO: add butcher tools for different metal tiers
+
     public static final String MODID = "survivorsbutchercraft";
     public static final Logger LOGGER = LogUtils.getLogger();
     public SurvivorsButchercraft(FMLJavaModLoadingContext context)

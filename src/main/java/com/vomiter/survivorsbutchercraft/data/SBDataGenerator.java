@@ -19,6 +19,6 @@ public class SBDataGenerator {
         generator.addProvider(true, new SBRecipesProvider(output));
         generator.addProvider(true, new SBBlockStatesProvider(output, existingFileHelper));
         generator.addProvider(true, new SBLootTableProvider(output));
-        generator.addProvider(true, new BbmodelExportProvider(output));
+        //generator.addProvider(true, new BbmodelExportProvider(output));
     }
 }

@@ -25,7 +25,6 @@ public enum Carcass implements ICarcassProfile {
     @Override public int bloodBucket() { return profile.bloodBucket(); }
     @Override public int workCountFor(MeatHookStage stage) { return profile.workCountFor(stage); }
     @Override public Ingredient toolFor(MeatHookStage stage) { return profile.toolFor(stage); }
-    @Override public Item iconicToolFor(MeatHookStage stage) { return profile.iconicToolFor(stage); }
 
     @Override public boolean hasHide() { return profile.hasHide(); }
     @Override public MapColor mapColor() { return profile.mapColor(); }

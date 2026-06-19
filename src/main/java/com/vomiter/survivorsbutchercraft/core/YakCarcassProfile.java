@@ -26,6 +26,9 @@ public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
         return Carcass.YAK;
     }
 
+    @Override public int bloodBucket() { return 3; }
+
+
     @Override
     public List<DropSpec> dropsFor(MeatHookStage stage) {
         switch (stage){
