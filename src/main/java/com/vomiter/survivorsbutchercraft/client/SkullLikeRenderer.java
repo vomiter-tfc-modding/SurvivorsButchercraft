@@ -48,7 +48,7 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
 
         pose.pushPose();
 
-        // ---- 位置：先處理牆上/地面 skull 的「放置偏移」(可依方塊外觀微調) ----
+        // ---- 位置：先處理牆上/地面 skull 的放置偏移 ----
         boolean isWall = state.hasProperty(HorizontalDirectionalBlock.FACING);
         Direction wallFacing = isWall ? state.getValue(HorizontalDirectionalBlock.FACING) : null;
 
@@ -60,7 +60,7 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
             float degrees = RotationSegment.convertToDegrees(rotSeg);
             pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(degrees));
 
-            // 旋轉完移回去，避免「整個模型也被搬到中心」
+            // 旋轉完移回去，避免整個模型也被搬到中心
             pose.translate(-0.5F, 0.0F, -0.5F);
         }
         else {
@@ -71,7 +71,7 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
             else if(wallFacing.equals(Direction.WEST)) pose.translate(0.25, 0, 0);
         }
 
-        // ---- 光照：用世界位置重新取 light，避免 packedLight 不可靠時變暗 ----
+        // ---- 光照：用世界位置重新取 light
         int light = LevelRenderer.getLightColor(level, be.getBlockPos());
         BakedModel baked = blockRenderer.getBlockModel(state);
         RandomSource rand = RandomSource.create();
