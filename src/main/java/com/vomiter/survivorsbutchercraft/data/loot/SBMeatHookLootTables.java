@@ -1,8 +1,8 @@
 package com.vomiter.survivorsbutchercraft.data.loot;
 
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.core.Carcass;
-import com.vomiter.survivorsbutchercraft.core.MeatHookStage;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;

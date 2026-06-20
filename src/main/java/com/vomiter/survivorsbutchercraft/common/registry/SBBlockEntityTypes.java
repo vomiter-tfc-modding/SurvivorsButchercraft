@@ -1,10 +1,9 @@
-package com.vomiter.survivorsbutchercraft.core.registry;
+package com.vomiter.survivorsbutchercraft.common.registry;
 
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.core.blockentity.SkullLikeBlockEntity;
+import com.vomiter.survivorsbutchercraft.common.blockentity.SkullLikeBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;

@@ -1,8 +1,7 @@
-package com.vomiter.survivorsbutchercraft.core;
+package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;

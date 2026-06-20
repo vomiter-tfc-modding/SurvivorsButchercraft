@@ -1,23 +1,29 @@
 package com.vomiter.survivorsbutchercraft.common;
 
 import com.lance5057.butchercraft.items.ButcherKnifeItem;
-import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.core.Carcass;
-import com.vomiter.survivorsbutchercraft.core.CarcassDataHelper;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.butchery.convert.ConvertResultManager;
+import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = SurvivorsButchercraft.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SBForgeEvents {
-    private SBForgeEvents() {
+
+    public static void init(){
+        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onAddReloadListeners);
+        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onLivingDrops);
+
     }
 
-    @SubscribeEvent
+    public static void onAddReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(ConvertResultManager.INSTANCE);
+    }
+
     public static void onLivingDrops(LivingDropsEvent event) {
         if (!(event.getEntity() instanceof TFCAnimalProperties props)) {
             return;

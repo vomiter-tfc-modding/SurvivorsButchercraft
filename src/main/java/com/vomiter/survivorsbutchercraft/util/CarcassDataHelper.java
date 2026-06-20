@@ -1,4 +1,4 @@
-package com.vomiter.survivorsbutchercraft.core;
+package com.vomiter.survivorsbutchercraft.util;
 
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.minecraft.nbt.CompoundTag;

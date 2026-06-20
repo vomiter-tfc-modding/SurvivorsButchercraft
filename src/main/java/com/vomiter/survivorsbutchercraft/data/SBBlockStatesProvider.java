@@ -1,10 +1,10 @@
 package com.vomiter.survivorsbutchercraft.data;
 
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.core.Carcass;
-import com.vomiter.survivorsbutchercraft.core.block.SkullLikeBlock;
-import com.vomiter.survivorsbutchercraft.core.block.WallSkullLikeBlock;
-import com.vomiter.survivorsbutchercraft.core.registry.SBBlocks;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.common.block.SkullLikeBlock;
+import com.vomiter.survivorsbutchercraft.common.block.WallSkullLikeBlock;
+import com.vomiter.survivorsbutchercraft.common.registry.SBBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -13,7 +13,6 @@ import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 public class SBBlockStatesProvider extends BlockStateProvider {
     public SBBlockStatesProvider(PackOutput output, ExistingFileHelper exFileHelper) {

@@ -3,7 +3,7 @@ package com.vomiter.survivorsbutchercraft.client;
 import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.core.CarcassDataHelper;
+import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;

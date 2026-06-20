@@ -1,10 +1,10 @@
-package com.vomiter.survivorsbutchercraft.core.registry;
+package com.vomiter.survivorsbutchercraft.common.registry;
 
 import com.lance5057.butchercraft.blocks.HideBlock;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.core.Carcass;
-import com.vomiter.survivorsbutchercraft.core.block.SkullLikeBlock;
-import com.vomiter.survivorsbutchercraft.core.block.WallSkullLikeBlock;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.common.block.SkullLikeBlock;
+import com.vomiter.survivorsbutchercraft.common.block.WallSkullLikeBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;

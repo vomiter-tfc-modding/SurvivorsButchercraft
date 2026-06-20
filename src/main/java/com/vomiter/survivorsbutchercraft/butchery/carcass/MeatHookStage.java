@@ -1,4 +1,4 @@
-package com.vomiter.survivorsbutchercraft.core;
+package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;

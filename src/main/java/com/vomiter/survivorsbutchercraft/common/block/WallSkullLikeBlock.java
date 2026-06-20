@@ -1,6 +1,6 @@
-package com.vomiter.survivorsbutchercraft.core.block;
+package com.vomiter.survivorsbutchercraft.common.block;
 
-import com.vomiter.survivorsbutchercraft.core.blockentity.SkullLikeBlockEntity;
+import com.vomiter.survivorsbutchercraft.common.blockentity.SkullLikeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

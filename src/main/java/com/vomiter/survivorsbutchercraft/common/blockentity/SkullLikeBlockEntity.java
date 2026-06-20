@@ -1,6 +1,6 @@
-package com.vomiter.survivorsbutchercraft.core.blockentity;
+package com.vomiter.survivorsbutchercraft.common.blockentity;
 
-import com.vomiter.survivorsbutchercraft.core.registry.SBBlockEntityTypes;
+import com.vomiter.survivorsbutchercraft.common.registry.SBBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

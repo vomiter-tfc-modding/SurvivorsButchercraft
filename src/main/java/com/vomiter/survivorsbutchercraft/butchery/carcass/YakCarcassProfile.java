@@ -1,7 +1,7 @@
-package com.vomiter.survivorsbutchercraft.core;
+package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.lance5057.butchercraft.ButchercraftItems;
-import com.vomiter.survivorsbutchercraft.core.registry.SBItems;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

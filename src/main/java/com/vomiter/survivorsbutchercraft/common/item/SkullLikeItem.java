@@ -1,4 +1,4 @@
-package com.vomiter.survivorsbutchercraft.core.item;
+package com.vomiter.survivorsbutchercraft.common.item;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EquipmentSlot;

@@ -8,9 +8,9 @@ import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFlo
 import com.lance5057.butchercraft.data.builders.recipes.MeatHookRecipeBuilder;
 import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
 import com.vomiter.survivorsbutchercraft.Helpers;
-import com.vomiter.survivorsbutchercraft.core.Carcass;
-import com.vomiter.survivorsbutchercraft.core.MeatHookStage;
-import com.vomiter.survivorsbutchercraft.core.registry.SBItems;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;

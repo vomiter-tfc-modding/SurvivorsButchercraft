@@ -1,8 +1,8 @@
 package com.vomiter.survivorsbutchercraft.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.vomiter.survivorsbutchercraft.core.blockentity.SkullLikeBlockEntity;
-import com.vomiter.survivorsbutchercraft.core.registry.SBBlockEntityTypes;
+import com.vomiter.survivorsbutchercraft.common.blockentity.SkullLikeBlockEntity;
+import com.vomiter.survivorsbutchercraft.common.registry.SBBlockEntityTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;

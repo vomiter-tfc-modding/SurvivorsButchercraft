@@ -1,9 +1,9 @@
-package com.vomiter.survivorsbutchercraft.core.registry;
+package com.vomiter.survivorsbutchercraft.common.registry;
 
 import com.lance5057.butchercraft.items.CarcassItem;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.core.Carcass;
-import com.vomiter.survivorsbutchercraft.core.item.SkullLikeItem;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.common.item.SkullLikeItem;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

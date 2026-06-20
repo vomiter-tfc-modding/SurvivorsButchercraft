@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.Optional;
 
-@Mixin(MeatHookBlockEntity.class)
+@Mixin(value = MeatHookBlockEntity.class, remap = false)
 public interface MeatHookBlockEntityAccessor {
     @Invoker("isFinalStage")
     boolean sbtfc$isFinalStage(HookRecipe r);

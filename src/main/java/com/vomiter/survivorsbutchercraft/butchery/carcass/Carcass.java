@@ -1,4 +1,4 @@
-package com.vomiter.survivorsbutchercraft.core;
+package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.item.Item;
