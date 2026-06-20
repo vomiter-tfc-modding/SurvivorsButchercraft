@@ -9,6 +9,7 @@ import com.vomiter.survivorsbutchercraft.butchery.convert.ConvertResultManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,16 +24,34 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @Mixin(value = MeatHookBlockEntity.class, remap = false)
 public abstract class MeatHookBlockEntityMixin extends BlockEntity {
     public MeatHookBlockEntityMixin(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
+
     @Inject(method = "butcher", at = @At("HEAD"), cancellable = true)
     private void sbtfc$acceptFluidHandler(Player p, ItemStack butcheringTool, CallbackInfoReturnable<InteractionResult> cir) {
         var adapter = new MeatHookBucketAdapter((MeatHookBlockEntity) (Object) this);
         adapter.acceptFluidHandler(p, butcheringTool, cir);
+    }
+
+    @WrapOperation(
+            method = "butcher",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;" +
+                            "hurtAndBreak(" +
+                            "ILnet/minecraft/world/entity/LivingEntity;" +
+                            "Ljava/util/function/Consumer;" +
+                            ")V",
+                    remap = true)
+    )
+    private void sbtfc$addExtraDamage(ItemStack instance, int amount, LivingEntity living, Consumer<LivingEntity> consumer, Operation<Void> original){
+        int extra = ConvertResultManager.INSTANCE.getExtraDamage(instance);
+        original.call(instance, extra + amount, living, consumer);
     }
 
     @WrapOperation(

@@ -93,6 +93,18 @@ public class ConvertResultManager extends SimpleJsonResourceReloadListener {
         return Optional.ofNullable(entries.get(id));
     }
 
+    public int getExtraDamage(ItemStack tool){
+        int damage = 0;
+        for (ConvertEntry entry : entries.values()) {
+            if (!entry.toolPredicate().test(tool)) {
+                continue;
+            }
+            //get the maximum value
+            damage = Math.max(damage, entry.extraToolDamage().damage());
+        }
+        return damage;
+    }
+
     public List<ResultConvert> findMatchingResults(ItemStack tool, ItemStack from) {
         List<ResultConvert> matchedResults = new ArrayList<>();
 
