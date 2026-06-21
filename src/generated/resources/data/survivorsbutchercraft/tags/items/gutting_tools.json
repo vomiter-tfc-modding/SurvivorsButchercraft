@@ -1,0 +1,9 @@
+{
+  "values": [
+    "butchercraft:gut_knife",
+    {
+      "id": "#tfc:knives",
+      "required": false
+    }
+  ]
+}

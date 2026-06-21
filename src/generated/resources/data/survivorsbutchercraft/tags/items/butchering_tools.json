@@ -1,0 +1,13 @@
+{
+  "values": [
+    "butchercraft:butcher_knife",
+    {
+      "id": "#tfc:knives",
+      "required": false
+    },
+    {
+      "id": "#tfc:axes",
+      "required": false
+    }
+  ]
+}

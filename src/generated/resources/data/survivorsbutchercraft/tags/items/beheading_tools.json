@@ -1,0 +1,13 @@
+{
+  "values": [
+    "butchercraft:bone_saw",
+    {
+      "id": "#tfc:saws",
+      "required": false
+    },
+    {
+      "id": "#tfc:axes",
+      "required": false
+    }
+  ]
+}

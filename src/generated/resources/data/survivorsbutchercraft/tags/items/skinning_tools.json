@@ -1,0 +1,13 @@
+{
+  "values": [
+    "butchercraft:skinning_knife",
+    {
+      "id": "#tfc:knives",
+      "required": false
+    },
+    {
+      "id": "#tfc:shears",
+      "required": false
+    }
+  ]
+}
