@@ -40,7 +40,7 @@ public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
     @Override
     public List<DropSpec> dropsForSupport(MeatHookStage stage) {
         switch (stage){
-            case DISEMBOWEL -> {
+            case BISECT -> {
                 return List.of(
                         DropSpec.of(new ItemStack(ButchercraftItems.STOMACH.get(), 4)),
                         DropSpec.of(new ItemStack(ButchercraftItems.TRIPE.get(), 8))

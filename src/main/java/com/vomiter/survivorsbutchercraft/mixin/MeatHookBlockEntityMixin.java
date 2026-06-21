@@ -1,11 +1,13 @@
 package com.vomiter.survivorsbutchercraft.mixin;
 
+import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.adapter.MeatHookBucketAdapter;
 import com.vomiter.survivorsbutchercraft.butchery.convert.ConvertResultManager;
+import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -28,6 +31,9 @@ import java.util.function.Consumer;
 
 @Mixin(value = MeatHookBlockEntity.class, remap = false)
 public abstract class MeatHookBlockEntityMixin extends BlockEntity {
+    @Shadow
+    public abstract ItemStack getInsertedItem();
+
     public MeatHookBlockEntityMixin(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
@@ -36,6 +42,15 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity {
     private void sbtfc$acceptFluidHandler(Player p, ItemStack butcheringTool, CallbackInfoReturnable<InteractionResult> cir) {
         var adapter = new MeatHookBucketAdapter((MeatHookBlockEntity) (Object) this);
         adapter.acceptFluidHandler(p, butcheringTool, cir);
+    }
+
+    @WrapOperation(method = "butcher", at = @At(value = "INVOKE", target = "Lcom/lance5057/butchercraft/workstations/hook/MeatHookBlockEntity;dropLoot(Lcom/lance5057/butchercraft/workstations/bases/recipes/AnimatedRecipeItemUse;Lnet/minecraft/world/entity/player/Player;)V"))
+    private void sbtfc$threadLocalFlagging(MeatHookBlockEntity instance, AnimatedRecipeItemUse recipeToolsIn, Player player, Operation<Void> original){
+        ThreadLocalFlags.dropLootForButchering.set(true);
+        ThreadLocalFlags.carcass.set(getInsertedItem());
+        original.call(instance, recipeToolsIn, player);
+        ThreadLocalFlags.dropLootForButchering.set(false);
+        ThreadLocalFlags.carcass.set(ItemStack.EMPTY);
     }
 
     @WrapOperation(

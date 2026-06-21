@@ -10,15 +10,13 @@ import java.util.List;
 public final class LootPools {
     private LootPools() {}
 
-    public static LootPool.Builder poolOnce(List<DropSpec> specs) {
+    public static LootPool.Builder poolOnce(DropSpec spec) {
         LootPool.Builder pool = LootPool.lootPool().setRolls(ConstantValue.exactly(1));
-        for (DropSpec spec : specs) {
-            var e = spec.entry();
-            for (LootItemFunction.Builder function : spec.functions()) {
-                e.apply(function);
-            }
-            pool.add(e);
+        var e = spec.entry();
+        for (LootItemFunction.Builder function : spec.functions()) {
+            e.apply(function);
         }
+        pool.add(e);
         return pool;
     }
 }

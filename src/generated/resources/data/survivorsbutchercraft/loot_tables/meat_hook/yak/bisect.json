@@ -13,7 +13,13 @@
             }
           ],
           "name": "butchercraft:heart"
-        },
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "functions": [
@@ -24,7 +30,13 @@
             }
           ],
           "name": "butchercraft:liver"
-        },
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "functions": [
@@ -35,6 +47,16 @@
             }
           ],
           "name": "butchercraft:kidney"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "survivorsbutchercraft:meat_hook/yak/support/bisect"
         }
       ],
       "rolls": 1.0

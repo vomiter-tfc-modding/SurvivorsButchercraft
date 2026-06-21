@@ -15,17 +15,6 @@ public abstract class DefaultMammalCarcassProfile implements ICarcassProfile {
         return null;
     }
 
-    public Item iconicToolFor(MeatHookStage stage){
-        return switch (stage){
-            case SKIN -> ButchercraftItems.SKINNING_KNIFE.get();
-            case DISEMBOWEL -> ButchercraftItems.BONE_SAW.get();
-            case BISECT -> ButchercraftItems.GUT_KNIFE.get();
-            case BUTCHER -> ButchercraftItems.BUTCHER_KNIFE.get();
-            default -> Items.BARRIER;
-        };
-    }
-
-
     @Override
     public boolean hasHide() {
         return true;

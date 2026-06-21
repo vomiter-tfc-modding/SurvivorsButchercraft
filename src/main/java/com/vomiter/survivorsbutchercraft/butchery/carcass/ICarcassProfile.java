@@ -1,7 +1,10 @@
 package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
+import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
+import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -25,7 +28,13 @@ public interface ICarcassProfile {
     }
 
     default Ingredient toolFor(MeatHookStage stage){
-        return Ingredient.of(stage.iconicTool());
+        return switch (stage){
+            case SKIN -> Ingredient.of(SBTags.Items.SKINNING_TOOLS);
+            case DISEMBOWEL -> Ingredient.of(SBTags.Items.BEHEADING_TOOLS);
+            case BISECT -> Ingredient.of(SBTags.Items.GUTTING_TOOLS);
+            case BUTCHER -> Ingredient.of(SBTags.Items.BUTCHERING_TOOLS);
+            default -> Ingredient.EMPTY;
+        };
     }
 
     default boolean hasHide() {

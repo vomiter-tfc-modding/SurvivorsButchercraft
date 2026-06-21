@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public final class SBForgeEvents {
 
@@ -28,6 +29,8 @@ public final class SBForgeEvents {
         if (!(event.getEntity() instanceof TFCAnimalProperties props)) {
             return;
         }
+        var id = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
+        if(id == null) return;
 
         if (!(event.getSource().getEntity() instanceof Player player)) {
             return;
@@ -41,7 +44,7 @@ public final class SBForgeEvents {
         for (ItemEntity itemEntity : event.getDrops()) {
             ItemStack drop = itemEntity.getItem();
             if (isSBCarcass(drop)) {
-                CarcassDataHelper.writeFromTFCAnimal(drop, props);
+                CarcassDataHelper.writeFromTFCAnimal(drop, props, id);
             }
         }
     }

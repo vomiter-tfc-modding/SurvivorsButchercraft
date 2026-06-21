@@ -342,7 +342,7 @@
         }
       ],
       "tool": {
-        "item": "butchercraft:skinning_knife"
+        "tag": "survivorsbutchercraft:skinning_tools"
       },
       "uses": 12
     },
@@ -427,7 +427,7 @@
         }
       ],
       "tool": {
-        "item": "butchercraft:bone_saw"
+        "tag": "survivorsbutchercraft:beheading_tools"
       },
       "uses": 12
     },
@@ -512,7 +512,7 @@
         }
       ],
       "tool": {
-        "item": "butchercraft:gut_knife"
+        "tag": "survivorsbutchercraft:gutting_tools"
       },
       "uses": 12
     },
@@ -597,7 +597,7 @@
         }
       ],
       "tool": {
-        "item": "butchercraft:butcher_knife"
+        "tag": "survivorsbutchercraft:butchering_tools"
       },
       "uses": 12
     }

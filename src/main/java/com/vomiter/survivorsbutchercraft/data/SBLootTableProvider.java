@@ -4,10 +4,14 @@ import com.vomiter.survivorsbutchercraft.data.loot.SBMeatHookLootTables;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class SBLootTableProvider extends LootTableProvider {
@@ -17,5 +21,7 @@ public class SBLootTableProvider extends LootTableProvider {
                     new SubProviderEntry(SBMeatHookLootTables::new, LootContextParamSets.ALL_PARAMS)
                 )
         );
+    }
+    protected void validate(@NotNull Map<ResourceLocation, LootTable> map, @NotNull ValidationContext validationcontext) {
     }
 }
