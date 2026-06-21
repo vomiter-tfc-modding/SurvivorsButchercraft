@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "butchercraft:cooked_cubed_goat"
+  },
+  "hunger": 2,
+  "saturation": 0.5,
+  "water": 0.0,
+  "decay_modifier": 2.3,
+  "protein": 1.0
+}

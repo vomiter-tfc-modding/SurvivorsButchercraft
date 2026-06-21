@@ -1,6 +1,7 @@
 package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.lance5057.butchercraft.ButchercraftItems;
+import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.minecraft.world.item.Item;
@@ -15,6 +16,7 @@ import java.util.List;
 public interface ICarcassProfile {
 
     Item carcassItem();
+    MeatType getMeatType();
 
     default int bloodBucket(){
         return 1;

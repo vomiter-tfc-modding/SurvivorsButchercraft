@@ -1,5 +1,6 @@
 package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
+import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -22,6 +23,12 @@ public enum Carcass implements ICarcassProfile {
     }
 
     @Override public Item carcassItem() { return profile.carcassItem(); }
+
+    @Override
+    public MeatType getMeatType() {
+        return profile.getMeatType();
+    }
+
     @Override public int bloodBucket() { return profile.bloodBucket(); }
     @Override public int workCountFor(MeatHookStage stage) { return profile.workCountFor(stage); }
     @Override public Ingredient toolFor(MeatHookStage stage) { return profile.toolFor(stage); }

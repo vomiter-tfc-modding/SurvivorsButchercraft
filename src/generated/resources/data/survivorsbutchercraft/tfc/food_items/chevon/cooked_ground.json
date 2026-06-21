@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "butchercraft:cooked_ground_goat"
+  },
+  "hunger": 1,
+  "saturation": 0.2,
+  "water": 0.0,
+  "decay_modifier": 2.3,
+  "protein": 0.3
+}

@@ -1,6 +1,7 @@
 package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.lance5057.butchercraft.ButchercraftItems;
+import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.item.Item;
@@ -14,6 +15,11 @@ public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
     @Override
     public Item carcassItem() {
         return SBItems.CARCASSES.get(Carcass.YAK).get();
+    }
+
+    @Override
+    public MeatType getMeatType() {
+        return MeatType.CHEVON;
     }
 
     @Override
