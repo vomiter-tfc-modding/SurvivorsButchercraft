@@ -29,13 +29,13 @@ public class SBBlockStatesProvider extends BlockStateProvider {
 
             skullRotationStates(
                     SBBlocks.HEADS.get(carcass).get(),
-                    modLoc("block/head/" + carcass.serializedName())           // model: models/block/skull/yak.json
+                    modLoc("block/head/" + carcass.serializedName())           // model: models/block/head/yak.json
             );
 
             // === skull-like: 牆上頭 yak_wall_head ===
             wallSkullFacingStates(
                     SBBlocks.WALL_HEADS.get(carcass).get(),
-                    modLoc("block/head/" + carcass.serializedName())      // model: models/block/skull/yak_wall_head.json
+                    modLoc("block/head/" + carcass.serializedName())      // model: models/block/head/yak.json
             );
 
         }

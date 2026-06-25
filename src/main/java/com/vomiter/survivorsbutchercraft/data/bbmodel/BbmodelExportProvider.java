@@ -3,6 +3,7 @@ package com.vomiter.survivorsbutchercraft.data.bbmodel;
 import com.google.gson.JsonObject;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import net.dries007.tfc.client.model.entity.MuskOxModel;
+import net.dries007.tfc.client.model.entity.YakModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.data.CachedOutput;
@@ -22,14 +23,13 @@ public final class BbmodelExportProvider implements DataProvider {
 
     @Override
     public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
-        exportAnimal(cache, MuskOxModel.createBodyLayer(), "musk_ox", "muskOx");
-        return DataProvider.saveStable(cache, new JsonObject(), output.getOutputFolder()
-                .resolve("bbmodels/" + "some" + ".bbmodel")
-                .toAbsolutePath()
-                .normalize());
+        return CompletableFuture.allOf(
+                exportAnimal(cache, MuskOxModel.createBodyLayer(), "musk_ox", "muskOx"),
+                exportAnimal(cache, YakModel.createBodyLayer(), "yak", "yak")
+        );
     }
 
-    private void exportAnimal(CachedOutput cache, LayerDefinition layer, String serializedName, String fileName) {
+    private CompletableFuture<?> exportAnimal(CachedOutput cache, LayerDefinition layer, String serializedName, String fileName) {
         // 1) 取得 LayerDefinition 與貼圖大小
         int texW = getTextureWidth(layer, 64);
         int texH = getTextureHeight(layer, 64);
@@ -50,6 +50,8 @@ public final class BbmodelExportProvider implements DataProvider {
 
         SurvivorsButchercraft.LOGGER.info("[BBMODEL] outputFolder=" + output.getOutputFolder().toAbsolutePath().normalize());
         SurvivorsButchercraft.LOGGER.info("[BBMODEL] target=" + target);
+        return DataProvider.saveStable(cache, json, target);
+
     }
 
     @Override

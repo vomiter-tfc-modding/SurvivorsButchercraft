@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "tfc:yak"
+    "tfc:yak",
+    "tfc:musk_ox"
   ]
 }

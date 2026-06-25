@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Locale;
 
 public enum Carcass implements ICarcassProfile {
-    YAK(new YakCarcassProfile());
+    YAK(new YakCarcassProfile()),
+    MUSK_OX(new MuskOxProfile())
+    ;
 
     private final ICarcassProfile profile;
 

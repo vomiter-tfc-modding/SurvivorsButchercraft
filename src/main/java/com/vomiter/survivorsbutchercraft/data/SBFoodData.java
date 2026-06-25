@@ -1,12 +1,10 @@
 package com.vomiter.survivorsbutchercraft.data;
 
-import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.butchery.meat.Raw2CookedMap;
 import net.dries007.tfc.common.items.Food;
-import net.minecraft.data.PackOutput;
 
 import java.util.Locale;
 
@@ -27,7 +25,7 @@ public class SBFoodData {
                         builder.multipliedFrom(ordinary, 2);
                         cookedBuilder.multipliedFrom(cookedOrdinary, 2);
                     }
-                    case RIB -> {
+                    case RIB, TAIL -> {
                         builder.from(ordinary);
                         cookedBuilder.from(cookedOrdinary);
                     }
@@ -47,7 +45,7 @@ public class SBFoodData {
                         builder.slicedFrom(ordinary, 6);
                         cookedBuilder.slicedFrom(cookedOrdinary, 6);
                     }
-                    default -> builder.save();
+                    default -> {}
                 }
                 builder.save();
                 cookedBuilder.save();

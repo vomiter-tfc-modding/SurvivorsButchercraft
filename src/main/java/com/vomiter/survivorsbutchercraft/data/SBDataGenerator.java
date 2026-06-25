@@ -1,6 +1,7 @@
 package com.vomiter.survivorsbutchercraft.data;
 
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import com.vomiter.survivorsbutchercraft.data.bbmodel.BbmodelExportProvider;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTagProviders;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -24,6 +25,6 @@ public class SBDataGenerator {
         var foodProvider = new SDFoodDataProvider(output, SurvivorsButchercraft.MODID);
         SBFoodData.saveFoodData(foodProvider);
         generator.addProvider(true, foodProvider);
-        //generator.addProvider(true, new BbmodelExportProvider(output));
+        generator.addProvider(true, new BbmodelExportProvider(output));
     }
 }

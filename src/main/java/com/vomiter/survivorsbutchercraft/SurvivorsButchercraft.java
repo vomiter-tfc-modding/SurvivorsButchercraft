@@ -19,12 +19,7 @@ import org.slf4j.Logger;
 public class SurvivorsButchercraft
 {
     //TODO: add butcher tools for different metal tiers
-    /*
-    *TODO: add butcher modifier data manager
-    * 0. ingredient (tool predicate)
-    * 1. result convert: {from, to, weight}
-    * 2. tool action: extra durability damage
-     */
+    //TODO: add a tag to exluce lether/skin from butcher result
 
     public static final String MODID = "survivorsbutchercraft";
     public static final Logger LOGGER = LogUtils.getLogger();

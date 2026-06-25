@@ -1,0 +1,22 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "tfc:food/chevon"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "survivorsbutchercraft:butcherblock/chevon/roast_to_ordinary"
+}

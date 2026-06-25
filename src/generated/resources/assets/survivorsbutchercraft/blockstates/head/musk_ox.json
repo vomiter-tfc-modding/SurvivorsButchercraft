@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "rotation=0": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=1": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=10": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=11": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=12": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=13": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=14": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=15": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=2": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=3": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=4": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=5": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=6": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=7": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=8": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    },
+    "rotation=9": {
+      "model": "survivorsbutchercraft:block/head/musk_ox"
+    }
+  }
+}

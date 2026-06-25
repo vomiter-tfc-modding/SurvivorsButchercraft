@@ -5,13 +5,19 @@ import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloat;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloatVector3;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
+import com.lance5057.butchercraft.data.builders.recipes.ButcherBlockRecipeBuilder;
 import com.lance5057.butchercraft.data.builders.recipes.MeatHookRecipeBuilder;
 import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
+import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
+import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
+import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
+import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
+import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -21,6 +27,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
 import java.util.function.Consumer;
 
 public class SBRecipesProvider extends RecipeProvider {
@@ -75,6 +82,30 @@ public class SBRecipesProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+        for (MeatType meatType : MeatType.values()) {
+            ButcherBlockRecipeBuilder.shapedRecipe(MeatMap.get(meatType, MeatProduct.ORDINARY))
+                    .tool(
+                            Ingredient.of(SBTags.Items.BUTCHERING_TOOLS),
+                            1,
+                            true,
+                            SBButcherBlockLootTables.ORDINARY2CUBED.get(meatType),
+                            this.layFlatModel(MeatMap.get(meatType, MeatProduct.ORDINARY)),
+                            standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
+                    )
+                    .save(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/ordinary_to_cubed"));
+            ButcherBlockRecipeBuilder.shapedRecipe(MeatMap.get(meatType, MeatProduct.ROAST))
+                    .tool(
+                            Ingredient.of(SBTags.Items.BUTCHERING_TOOLS),
+                            1,
+                            true,
+                            SBButcherBlockLootTables.ROAST2ORDINARY.get(meatType),
+                            this.layFlatModel(MeatMap.get(meatType, MeatProduct.ROAST)),
+                            standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
+                    )
+                    .save(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/roast_to_ordinary"));
+
+        }
+
         MeatHookRecipeBuilder.shapedRecipe(SBItems.HIDES.get(Carcass.YAK).get())
             .tool(Ingredient.of(ButchercraftItems.SKINNING_KNIFE.get()), 6, true, MeatHookLoottables.SCRAPE_HIDE,
                 hideModel(meatHookId("yak/hide")),
@@ -88,7 +119,6 @@ public class SBRecipesProvider extends RecipeProvider {
             .JEIIngredient(Ingredient.of(Items.LEATHER))
             .save(consumer, meatHookId("hide/yak"));
 
-        //TODO: add tool, use time, blood draining time to ICarcass
         for (Carcass carcass : Carcass.values()) {
             MeatHookRecipeBuilder meatHookRecipeBuilder = MeatHookRecipeBuilder.shapedRecipe(carcass.carcassItem());
             for (int i = 0; i < carcass.bloodBucket(); i++) {

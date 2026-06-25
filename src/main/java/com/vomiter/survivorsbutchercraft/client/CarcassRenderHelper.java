@@ -3,6 +3,8 @@ package com.vomiter.survivorsbutchercraft.client;
 import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +23,10 @@ public final class CarcassRenderHelper {
     private CarcassRenderHelper() {
     }
 
+    private static boolean isCarcass(ItemStack stack){
+        return SBItems.CARCASSES.values().stream().anyMatch(o -> stack.is(o.get()));
+    }
+
     public static List<BlacklistedModel> buildModels(List<BlacklistedModel> baseModels, ItemStack carcass) {
         List<BlacklistedModel> out = new ArrayList<>();
 
@@ -35,6 +41,15 @@ public final class CarcassRenderHelper {
         if (!carcass.isEmpty() && CarcassDataHelper.hasData(carcass)) {
             appendConditionalParts(out, baseModels, carcass);
         }
+
+        if (isCarcass(carcass) && !carcass.is(SBItems.CARCASSES.get(Carcass.YAK).get())){
+            tryAddConditionalModel(
+                    out,
+                    Helpers.id("meathook/hook"),
+                    baseModels.get(0)
+            );
+        }
+
 
         return out;
     }
@@ -72,8 +87,8 @@ public final class CarcassRenderHelper {
         boolean male = CarcassDataHelper.isMale(carcass);
         boolean old = CarcassDataHelper.isOld(carcass);
 
-        // base = survivorsbutchercraft:block/meathook/yak/hooked
-        // male part = survivorsbutchercraft:block/meathook/yak/hooked_male_parts
+        // base = survivorsbutchercraft:meathook/yak/hooked
+        // male part = survivorsbutchercraft:meathook/yak/hooked_male_parts
         if (male) {
             tryAddConditionalModel(
                     out,
