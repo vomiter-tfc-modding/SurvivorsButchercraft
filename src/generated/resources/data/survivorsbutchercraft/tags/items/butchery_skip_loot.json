@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#tfc:raw_hides",
+      "required": false
+    },
+    {
+      "id": "#tfc:sheepskin_hides",
+      "required": false
+    }
+  ]
+}

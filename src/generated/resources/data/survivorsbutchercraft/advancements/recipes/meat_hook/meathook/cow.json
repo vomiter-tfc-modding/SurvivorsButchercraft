@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "survivorsbutchercraft:meathook/hide/yak"
+        "recipe": "survivorsbutchercraft:meathook/cow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "survivorsbutchercraft:meathook/hide/yak"
+      "survivorsbutchercraft:meathook/cow"
     ]
   },
   "sends_telemetry_event": true

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "survivorsbutchercraft:block/hide_carpet/sheep",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "survivorsbutchercraft:block/hide_carpet/sheep"
+    },
+    "facing=south": {
+      "model": "survivorsbutchercraft:block/hide_carpet/sheep",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "survivorsbutchercraft:block/hide_carpet/sheep",
+      "y": 270
+    }
+  }
+}

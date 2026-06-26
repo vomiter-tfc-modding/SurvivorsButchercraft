@@ -4,8 +4,8 @@
 	"texture_size": [32, 32],
     "render_type": "cutout",
     "textures": {
-		"0": "survivorsbutchercraft:block/hide/yak",
-		"particle": "survivorsbutchercraft:block/hide/yak"
+		"0": "survivorsbutchercraft:block/hide/musk_ox",
+		"particle": "survivorsbutchercraft:block/hide/musk_ox"
 	},
 	"elements": [
 		{

@@ -3,16 +3,23 @@ package com.vomiter.survivorsbutchercraft.butchery.carcass;
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
+import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public abstract class DefaultMammalCarcassProfile implements ICarcassProfile {
 
-    public Carcass carcass(){
-        return null;
+    public abstract Carcass carcass();
+
+    public abstract MeatType getMeatType();
+
+    @Override
+    public Item carcassItem(){
+        return SBItems.CARCASSES.get(carcass()).get();
     }
 
     @Override

@@ -13,11 +13,6 @@ import java.util.List;
 public final class MuskOxProfile extends DefaultMammalCarcassProfile {
 
     @Override
-    public Item carcassItem() {
-        return SBItems.CARCASSES.get(Carcass.MUSK_OX).get();
-    }
-
-    @Override
     public MeatType getMeatType() {
         return MeatType.MUTTON;
     }

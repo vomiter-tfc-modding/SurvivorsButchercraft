@@ -1,6 +1,7 @@
 package com.vomiter.survivorsbutchercraft.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.vomiter.survivorsbutchercraft.common.blockentity.SkullLikeBlockEntity;
 import com.vomiter.survivorsbutchercraft.common.registry.SBBlockEntityTypes;
 import net.minecraft.client.Minecraft;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.RotationSegment;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
@@ -58,7 +60,7 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
 
             int rotSeg = state.getValue(SkullBlock.ROTATION); // 0..15
             float degrees = RotationSegment.convertToDegrees(rotSeg);
-            pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(degrees));
+            pose.mulPose(Axis.YP.rotationDegrees(- degrees));
 
             // 旋轉完移回去，避免整個模型也被搬到中心
             pose.translate(-0.5F, 0.0F, -0.5F);
@@ -77,7 +79,7 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
         RandomSource rand = RandomSource.create();
         rand.setSeed(state.getSeed(be.getBlockPos()));
         var modelRenderer = blockRenderer.getModelRenderer();
-        var modelData = net.minecraftforge.client.model.data.ModelData.EMPTY;
+        var modelData = ModelData.EMPTY;
 
         // 用 BakedModel 自帶的 render types
         for (var rt : baked.getRenderTypes(state, rand, modelData)) {

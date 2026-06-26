@@ -13,11 +13,6 @@ import java.util.List;
 public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
 
     @Override
-    public Item carcassItem() {
-        return SBItems.CARCASSES.get(Carcass.YAK).get();
-    }
-
-    @Override
     public MeatType getMeatType() {
         return MeatType.CHEVON;
     }

@@ -28,7 +28,7 @@ public class AnimalYieldProviderMixin {
                             "(Lnet/minecraft/world/level/storage/loot/parameters/LootContextParam;)" +
                             "Ljava/lang/Object;",
                     ordinal = 0))
-    private Object sbtfc$getParam(LootContext instance, LootContextParam<Object> param, Operation<Object> original){
+    private Object sbtfc$getAnimal(LootContext instance, LootContextParam<Object> param, Operation<Object> original){
         if(ThreadLocalFlags.dropLootForButchering.get() && !ThreadLocalFlags.carcass.get().isEmpty()){
             var carcass = ThreadLocalFlags.carcass.get();
             AtomicReference<LivingEntity> result = new AtomicReference<>();

@@ -11,8 +11,11 @@ import java.util.Locale;
 
 public enum Carcass implements ICarcassProfile {
     YAK(new YakCarcassProfile()),
-    MUSK_OX(new MuskOxProfile())
-    ;
+    MUSK_OX(new MuskOxProfile()),
+    PIG(new PigCarcassProfile()),
+    GOAT(new GoatCarcassProfile()),
+    SHEEP(new SheepCarcassProfile()),
+    COW(new CowCarcassProfile());
 
     private final ICarcassProfile profile;
 
@@ -25,11 +28,6 @@ public enum Carcass implements ICarcassProfile {
     }
 
     @Override public Item carcassItem() { return profile.carcassItem(); }
-
-    @Override
-    public MeatType getMeatType() {
-        return profile.getMeatType();
-    }
 
     @Override public int bloodBucket() { return profile.bloodBucket(); }
     @Override public int workCountFor(MeatHookStage stage) { return profile.workCountFor(stage); }

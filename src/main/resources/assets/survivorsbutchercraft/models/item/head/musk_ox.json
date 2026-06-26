@@ -119,119 +119,45 @@
 			}
 		}
 	],
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [0, 90, 0],
-			"translation": [-7, 0.75, 0]
-		},
-		"thirdperson_lefthand": {
-			"rotation": [0, 90, 0],
-			"translation": [-7, 0.75, 0]
-		},
-		"firstperson_righthand": {
-			"rotation": [0, 90, 0],
-			"translation": [-5, -8.5, 0],
-			"scale": [0.8, 0.8, 0.8]
-		},
-		"firstperson_lefthand": {
-			"rotation": [0, 90, 0],
-			"translation": [-5, -8.5, 0],
-			"scale": [0.8, 0.8, 0.8]
-		},
-		"gui": {
-			"rotation": [0, 156, 0],
-			"translation": [0, -2.25, 0],
-			"scale": [0.5, 0.5, 0.5]
-		},
-		"fixed": {
-			"translation": [0, -7.25, 0]
-		},
-		"on_shelf": {
-			"rotation": [0, -180, 0]
-		}
-	},
-	"groups": [
-		{
-			"name": "body",
-			"origin": [8, 0, 8],
-			"scope": 0,
-			"color": 0,
-			"children": [
-				{
-					"name": "neck",
-					"origin": [8, 0, 5],
-					"scope": 0,
-					"color": 0,
-					"children": [
-						{
-							"name": "head",
-							"origin": [8, -2, 5],
-							"scope": 0,
-							"color": 0,
-							"children": [
-								{
-									"name": "hornL1",
-									"origin": [8, -2, 5],
-									"scope": 0,
-									"color": 0,
-									"children": [
-										{
-											"name": "hornL2",
-											"origin": [8, -2, 5],
-											"scope": 0,
-											"color": 0,
-											"children": [
-												{
-													"name": "hornLCube3_r1",
-													"origin": [8, -2, 5],
-													"scope": 0,
-													"color": 0,
-													"children": [0]
-												},
-												1
-											]
-										},
-										2
-									]
-								},
-								{
-									"name": "hornR1",
-									"origin": [8, -2, 5],
-									"scope": 0,
-									"color": 0,
-									"children": [
-										{
-											"name": "hornR2",
-											"origin": [8, -2, 5],
-											"scope": 0,
-											"color": 0,
-											"children": [
-												{
-													"name": "hornRCube3_r1",
-													"origin": [8, -2, 5],
-													"scope": 0,
-													"color": 0,
-													"children": [3]
-												},
-												4
-											]
-										},
-										5
-									]
-								},
-								{
-									"name": "snout",
-									"origin": [8, -2, 5],
-									"scope": 0,
-									"color": 0,
-									"children": [6]
-								},
-								7
-							]
-						}
-					]
-				}
-			]
-		}
-	]
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [70, 0, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [70, 0, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 120, 0],
+      "translation": [0, 8, 0],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 120, 0],
+      "translation": [0, 8, 0],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "ground": {
+      "rotation": [0, 180, 0]
+    },
+    "gui": {
+      "rotation": [0, 135, 0],
+      "translation": [0, 6.25, 0],
+      "scale": [1.5, 1.5, 1.5]
+    },
+    "head": {
+      "translation": [0, 9.75, -4],
+      "scale": [2, 2, 2]
+    },
+    "fixed": {
+      "translation": [0, 7.5, -6.75],
+      "scale": [2, 2, 2]
+    },
+    "on_shelf": {
+      "rotation": [0, 180, 0]
+    }
+  }
 }

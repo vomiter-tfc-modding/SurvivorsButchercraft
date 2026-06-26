@@ -106,19 +106,6 @@ public class SBRecipesProvider extends RecipeProvider {
 
         }
 
-        MeatHookRecipeBuilder.shapedRecipe(SBItems.HIDES.get(Carcass.YAK).get())
-            .tool(Ingredient.of(ButchercraftItems.SKINNING_KNIFE.get()), 6, true, MeatHookLoottables.SCRAPE_HIDE,
-                hideModel(meatHookId("yak/hide")),
-                standardHookToolModel(ButchercraftItems.SKINNING_KNIFE.get()))
-            .tool(Ingredient.of(Items.SHEARS), 6, true, MeatHookLoottables.COW_LEATHER,
-                hideModel(meatHookId("yak/hide")),
-                standardHookToolModel(Items.SHEARS))
-            .JEIIngredient(Ingredient.of(ButchercraftItems.SINEW.get()))
-            .JEIIngredient(Ingredient.of(ButchercraftItems.FAT.get()))
-            .JEIIngredient(Ingredient.of(ButchercraftItems.LEATHER_SCRAP.get()))
-            .JEIIngredient(Ingredient.of(Items.LEATHER))
-            .save(consumer, meatHookId("hide/yak"));
-
         for (Carcass carcass : Carcass.values()) {
             MeatHookRecipeBuilder meatHookRecipeBuilder = MeatHookRecipeBuilder.shapedRecipe(carcass.carcassItem());
             for (int i = 0; i < carcass.bloodBucket(); i++) {

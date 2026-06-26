@@ -80,7 +80,7 @@
         27.0,
         14.0
       ],
-      "uuid": "55a10885-4ca0-4ae9-a6af-b4b42380124f"
+      "uuid": "f13df83a-cf39-4dd4-b9e6-6d12111a6633"
     },
     {
       "type": "cube",
@@ -162,7 +162,7 @@
         25.0,
         15.0
       ],
-      "uuid": "7997add4-c715-4927-afa0-e393bc1e97c3"
+      "uuid": "1d10cd03-ee2b-4dc0-bb3e-56b1c1378f79"
     },
     {
       "type": "cube",
@@ -244,7 +244,7 @@
         26.0,
         -4.0
       ],
-      "uuid": "fa4c4878-2dd9-4f30-a478-4e9feacfd584"
+      "uuid": "cb64f15a-3391-4e1c-9bea-9cbc5856a74b"
     },
     {
       "type": "cube",
@@ -326,7 +326,7 @@
         15.0,
         -5.0
       ],
-      "uuid": "887e1e14-ca0a-4943-8020-ad849401acbf"
+      "uuid": "39c8b1da-f2b8-42b0-b8fd-28d5a8cbf6da"
     },
     {
       "type": "cube",
@@ -408,7 +408,7 @@
         13.0,
         12.0
       ],
-      "uuid": "e8d9e111-9cfd-49ce-9241-ad94b984c2a8"
+      "uuid": "00bf955f-db9d-4f5f-b0db-009c5ca3de1f"
     },
     {
       "type": "cube",
@@ -490,7 +490,7 @@
         15.0,
         -5.0
       ],
-      "uuid": "51ead9d7-f7a5-4aba-84b0-899c12bf7eff"
+      "uuid": "245fe0b5-828e-40e6-aedc-725dcc1735ac"
     },
     {
       "type": "cube",
@@ -572,7 +572,7 @@
         23.0,
         -8.0
       ],
-      "uuid": "d74fb95c-cf45-491e-864f-72f569ff1d92"
+      "uuid": "5c2e47c2-d85e-4312-9d49-fe3fac6a4e4e"
     },
     {
       "type": "cube",
@@ -654,7 +654,7 @@
         23.0,
         -15.0
       ],
-      "uuid": "9228ff55-5b31-4fac-a7af-538da0130acc"
+      "uuid": "c92ae1f9-58f2-46d6-b50c-2379350373b5"
     },
     {
       "type": "cube",
@@ -736,7 +736,7 @@
         22.218943,
         -19.031668
       ],
-      "uuid": "fa1373be-913e-4fb9-b176-53cbfc2ebaf4"
+      "uuid": "c2641e7a-789a-4b50-ad57-6a0c9da8b74b"
     },
     {
       "type": "cube",
@@ -818,7 +818,7 @@
         20.685343,
         -17.718447
       ],
-      "uuid": "50c2018e-6358-47dd-8a8d-38407d37d7af"
+      "uuid": "2688e018-e4fa-407f-8190-6f5be72bccf9"
     },
     {
       "type": "cube",
@@ -900,7 +900,7 @@
         20.33121,
         -16.326262
       ],
-      "uuid": "82fed50c-ba2d-487f-9a50-caa8169e5d16"
+      "uuid": "f8e37d67-886b-4a78-9910-93a1ccd7a02c"
     },
     {
       "type": "cube",
@@ -982,7 +982,7 @@
         16.044338,
         -14.894203
       ],
-      "uuid": "b16dc5b8-3310-4c83-ab7c-2e0fa557d2b5"
+      "uuid": "22dc8396-17ca-43d9-9dae-e5be60d4e55f"
     },
     {
       "type": "cube",
@@ -1064,7 +1064,7 @@
         22.218943,
         -19.031668
       ],
-      "uuid": "429f56d8-6984-4639-93f2-5ff5f8a3aa38"
+      "uuid": "e004a710-9a62-40d7-b63e-633b9d9787de"
     },
     {
       "type": "cube",
@@ -1146,7 +1146,7 @@
         20.63717,
         -16.551577
       ],
-      "uuid": "e9380de5-ac1d-4fd2-9d48-6b82d2e2e209"
+      "uuid": "ed2d7fcb-76ea-4e44-829f-8d8e71915bd8"
     },
     {
       "type": "cube",
@@ -1228,7 +1228,7 @@
         20.32107,
         -17.064177
       ],
-      "uuid": "e919a13c-3c12-4edc-9ac5-484b95c84056"
+      "uuid": "e7714f2a-9930-4a08-9a9e-37fa08c046c9"
     },
     {
       "type": "cube",
@@ -1310,7 +1310,7 @@
         18.504868,
         -13.297484
       ],
-      "uuid": "a2d24e0c-581a-46d7-8a43-ec163c88e1f4"
+      "uuid": "73bd81f0-15e7-4ff3-b199-6e87b22f7dd1"
     },
     {
       "type": "cube",
@@ -1392,7 +1392,7 @@
         7.5,
         8.0
       ],
-      "uuid": "95ac856d-c34f-46ba-82fe-faeb51748075"
+      "uuid": "362f7091-7c85-4e4d-9514-7018b59b4ae0"
     },
     {
       "type": "cube",
@@ -1474,7 +1474,7 @@
         13.0,
         12.0
       ],
-      "uuid": "c676e35a-f2a3-438c-af07-260224ac7480"
+      "uuid": "dd983f2f-035e-4e43-a065-237de94ebb7e"
     }
   ],
   "meta": {
@@ -1488,7 +1488,7 @@
       "children": [
         {
           "children": [
-            "887e1e14-ca0a-4943-8020-ad849401acbf"
+            "39c8b1da-f2b8-42b0-b8fd-28d5a8cbf6da"
           ],
           "name": "legFL",
           "origin": [
@@ -1501,11 +1501,11 @@
             0,
             0
           ],
-          "uuid": "676de06d-c2b0-403f-bc30-110f54a63526"
+          "uuid": "64c6520a-fb78-40b3-9a4c-3df08697ba1f"
         },
         {
           "children": [
-            "e8d9e111-9cfd-49ce-9241-ad94b984c2a8"
+            "00bf955f-db9d-4f5f-b0db-009c5ca3de1f"
           ],
           "name": "legBL",
           "origin": [
@@ -1518,11 +1518,11 @@
             0,
             0
           ],
-          "uuid": "cf92e0ba-d0d7-4740-b499-2c493fee02c2"
+          "uuid": "54731cc6-ef12-48d9-ba02-f96bcf0c91bd"
         },
         {
           "children": [
-            "51ead9d7-f7a5-4aba-84b0-899c12bf7eff"
+            "245fe0b5-828e-40e6-aedc-725dcc1735ac"
           ],
           "name": "legFR",
           "origin": [
@@ -1535,7 +1535,7 @@
             0,
             0
           ],
-          "uuid": "f3c0fa06-2a0f-4e1c-91ea-96b1bf9585f2"
+          "uuid": "dae80b9d-c0c3-4c24-b30a-434482a64698"
         },
         {
           "children": [
@@ -1547,7 +1547,7 @@
                       "children": [
                         {
                           "children": [
-                            "82fed50c-ba2d-487f-9a50-caa8169e5d16"
+                            "f8e37d67-886b-4a78-9910-93a1ccd7a02c"
                           ],
                           "name": "hornLCube3_r1",
                           "origin": [
@@ -1560,9 +1560,9 @@
                             0,
                             0
                           ],
-                          "uuid": "588165b0-4a72-4bde-92cd-09253b86b9ce"
+                          "uuid": "2e2dfcc6-a6b3-4101-b902-596bcd6ca142"
                         },
-                        "50c2018e-6358-47dd-8a8d-38407d37d7af"
+                        "2688e018-e4fa-407f-8190-6f5be72bccf9"
                       ],
                       "name": "hornL2",
                       "origin": [
@@ -1575,9 +1575,9 @@
                         0,
                         0
                       ],
-                      "uuid": "dc573826-7dd2-41f5-80cb-acc83c41e199"
+                      "uuid": "9b9fe02b-a6fc-44dd-ae51-2999d3b24481"
                     },
-                    "fa1373be-913e-4fb9-b176-53cbfc2ebaf4"
+                    "c2641e7a-789a-4b50-ad57-6a0c9da8b74b"
                   ],
                   "name": "hornL1",
                   "origin": [
@@ -1590,11 +1590,11 @@
                     0,
                     0
                   ],
-                  "uuid": "625694f8-3eb2-45d4-926f-cf94f4578e8c"
+                  "uuid": "96892a38-f094-4ce5-bcd9-7f23bd87965d"
                 },
                 {
                   "children": [
-                    "b16dc5b8-3310-4c83-ab7c-2e0fa557d2b5"
+                    "22dc8396-17ca-43d9-9dae-e5be60d4e55f"
                   ],
                   "name": "beard",
                   "origin": [
@@ -1607,7 +1607,7 @@
                     0,
                     0
                   ],
-                  "uuid": "8e2771a4-b101-4efc-9de2-fc38e1d6dd35"
+                  "uuid": "51d12678-6b7f-4833-a5c9-1e16a011e6d4"
                 },
                 {
                   "children": [
@@ -1615,7 +1615,7 @@
                       "children": [
                         {
                           "children": [
-                            "e919a13c-3c12-4edc-9ac5-484b95c84056"
+                            "e7714f2a-9930-4a08-9a9e-37fa08c046c9"
                           ],
                           "name": "hornRCube3_r1",
                           "origin": [
@@ -1628,9 +1628,9 @@
                             0,
                             0
                           ],
-                          "uuid": "7625f244-5aef-46d7-acaa-001f174445dc"
+                          "uuid": "16dccdc5-15a1-4fc0-8f5e-d3144ba8f720"
                         },
-                        "e9380de5-ac1d-4fd2-9d48-6b82d2e2e209"
+                        "ed2d7fcb-76ea-4e44-829f-8d8e71915bd8"
                       ],
                       "name": "hornR2",
                       "origin": [
@@ -1643,9 +1643,9 @@
                         0,
                         0
                       ],
-                      "uuid": "ca2147bc-84e7-4bb2-a894-5da80b46f688"
+                      "uuid": "ee3e0402-ddd9-4abb-a907-d5fa66d27fa4"
                     },
-                    "429f56d8-6984-4639-93f2-5ff5f8a3aa38"
+                    "e004a710-9a62-40d7-b63e-633b9d9787de"
                   ],
                   "name": "hornR1",
                   "origin": [
@@ -1658,11 +1658,11 @@
                     0,
                     0
                   ],
-                  "uuid": "3e075c18-c551-4902-be24-92abb7be0e23"
+                  "uuid": "e080b2de-1661-44d0-a4bc-9889f48453d8"
                 },
                 {
                   "children": [
-                    "a2d24e0c-581a-46d7-8a43-ec163c88e1f4"
+                    "73bd81f0-15e7-4ff3-b199-6e87b22f7dd1"
                   ],
                   "name": "snout",
                   "origin": [
@@ -1675,9 +1675,9 @@
                     0,
                     0
                   ],
-                  "uuid": "ff5af8b4-6863-40a9-838a-6f8887a69dd4"
+                  "uuid": "94e8da55-b42f-408e-8e75-c1477915194f"
                 },
-                "9228ff55-5b31-4fac-a7af-538da0130acc"
+                "c92ae1f9-58f2-46d6-b50c-2379350373b5"
               ],
               "name": "head",
               "origin": [
@@ -1690,9 +1690,9 @@
                 0,
                 0
               ],
-              "uuid": "e1ef4d81-cc37-4e18-84b7-9035ea8d96b1"
+              "uuid": "627c0fdb-742d-4550-bcbe-7bdf4c944f44"
             },
-            "d74fb95c-cf45-491e-864f-72f569ff1d92"
+            "5c2e47c2-d85e-4312-9d49-fe3fac6a4e4e"
           ],
           "name": "neck",
           "origin": [
@@ -1705,11 +1705,11 @@
             0,
             0
           ],
-          "uuid": "ee673f6a-4f9a-45c5-98a7-b58dc47f0b3d"
+          "uuid": "d12a39a7-569f-4eec-bad8-ad32c6c96d5d"
         },
         {
           "children": [
-            "95ac856d-c34f-46ba-82fe-faeb51748075"
+            "362f7091-7c85-4e4d-9514-7018b59b4ae0"
           ],
           "name": "udder",
           "origin": [
@@ -1722,11 +1722,11 @@
             0,
             0
           ],
-          "uuid": "c60c8b59-558b-4e5e-acd7-b45bed9815da"
+          "uuid": "bbf42817-67e2-4b9c-9016-1868659fdcd5"
         },
         {
           "children": [
-            "c676e35a-f2a3-438c-af07-260224ac7480"
+            "dd983f2f-035e-4e43-a065-237de94ebb7e"
           ],
           "name": "legBR",
           "origin": [
@@ -1739,11 +1739,11 @@
             0,
             0
           ],
-          "uuid": "540e1aa5-bc37-49d0-863c-cda486fc2a3c"
+          "uuid": "9b44ca47-683f-4ead-bcdf-d375c388a03a"
         },
-        "55a10885-4ca0-4ae9-a6af-b4b42380124f",
-        "7997add4-c715-4927-afa0-e393bc1e97c3",
-        "fa4c4878-2dd9-4f30-a478-4e9feacfd584"
+        "f13df83a-cf39-4dd4-b9e6-6d12111a6633",
+        "1d10cd03-ee2b-4dc0-bb3e-56b1c1378f79",
+        "cb64f15a-3391-4e1c-9bea-9cbc5856a74b"
       ],
       "name": "body",
       "origin": [
@@ -1756,7 +1756,7 @@
         0,
         0
       ],
-      "uuid": "9821323d-5b32-4abf-ba23-f7bc8cbbc79b"
+      "uuid": "9b8e8097-08a1-4d37-b1e0-3b98664e939d"
     }
   ],
   "resolution": {
@@ -1769,7 +1769,7 @@
       "id": "0",
       "name": "yak.png",
       "relative_path": "yak.png",
-      "uuid": "b37a5a19-cc17-4d14-bf46-0659ca02f657",
+      "uuid": "4444684f-1e1c-47ac-a6cc-8ca7ec0b73f2",
       "uv_height": 64,
       "uv_width": 64,
       "width": 64

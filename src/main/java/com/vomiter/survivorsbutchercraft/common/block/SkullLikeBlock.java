@@ -54,7 +54,6 @@ public class SkullLikeBlock extends AbstractSkullBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        // 0~15，跟原版頭顱一樣把玩家水平角映射到 16 段
         int rot = (int) Math.floor((ctx.getRotation() * 16.0F / 360.0F) + 0.5D) & 15;
         return this.defaultBlockState().setValue(ROTATION, rot);
     }

@@ -7,6 +7,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.adapter.MeatHookBucketAdapter;
 import com.vomiter.survivorsbutchercraft.butchery.convert.ConvertResultManager;
+import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
@@ -84,6 +85,7 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity {
         var tool = Optional.ofNullable(params.getParamOrNull(LootContextParams.TOOL)).orElse(ItemStack.EMPTY);
         var random = getLevel().random;
         var originalList = original.call(instance, params);
+        originalList.removeIf(stack -> stack.is(SBTags.Items.BUTCHERY_SKIP_LOOT));
         ObjectArrayList<ItemStack> newList = ObjectArrayList.of();
         originalList.forEach(originalItemStack -> {
             var singleInput = originalItemStack.copyWithCount(1);

@@ -58,7 +58,7 @@ public class WallSkullLikeBlock extends AbstractSkullBlock {
     }
 
     private static VoxelShape shapeByFacing(BlockState state) {
-        Direction dir = state.getValue(WallSkullLikeBlock.FACING); // 下面第2部分會加這個 property
+        Direction dir = state.getValue(WallSkullLikeBlock.FACING);
         return switch (dir) {
             case NORTH -> NORTH;
             case SOUTH -> SOUTH;
@@ -71,7 +71,7 @@ public class WallSkullLikeBlock extends AbstractSkullBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         // 牆上頭顱面向玩家：「點到的面」的反方向
-        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection());
+        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
 

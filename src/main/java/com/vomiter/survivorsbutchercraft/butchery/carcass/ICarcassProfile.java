@@ -16,7 +16,6 @@ import java.util.List;
 public interface ICarcassProfile {
 
     Item carcassItem();
-    MeatType getMeatType();
 
     default int bloodBucket(){
         return 1;

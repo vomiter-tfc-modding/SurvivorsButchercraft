@@ -1,0 +1,435 @@
+{
+  "type": "butchercraft:meat_hook",
+  "carcass": {
+    "item": "survivorsbutchercraft:carcass/sheep"
+  },
+  "group": "",
+  "jei": [],
+  "tools": [
+    {
+      "count": 1,
+      "damage": true,
+      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "models": [
+        {
+          "IsBlock": true,
+          "animation": {
+            "location": {
+              "x": {
+                "speed": 1.0
+              }
+            },
+            "rotation": {},
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "survivorsbutchercraft:meathook/sheep/hooked"
+        },
+        {
+          "animation": {
+            "location": {
+              "x": {
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
+              }
+            },
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "minecraft:bucket"
+        }
+      ],
+      "tool": {
+        "item": "minecraft:bucket"
+      },
+      "uses": 1
+    },
+    {
+      "count": 1,
+      "damage": true,
+      "loot_table": "survivorsbutchercraft:meat_hook/sheep/skin",
+      "models": [
+        {
+          "IsBlock": true,
+          "animation": {
+            "location": {
+              "x": {
+                "speed": 1.0
+              }
+            },
+            "rotation": {},
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "survivorsbutchercraft:meathook/sheep/hooked"
+        },
+        {
+          "animation": {
+            "location": {
+              "x": {
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
+              }
+            },
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "butchercraft:skinning_knife"
+        }
+      ],
+      "tool": {
+        "tag": "survivorsbutchercraft:skinning_tools"
+      },
+      "uses": 12
+    },
+    {
+      "count": 1,
+      "damage": true,
+      "loot_table": "survivorsbutchercraft:meat_hook/sheep/disembowel",
+      "models": [
+        {
+          "IsBlock": true,
+          "animation": {
+            "location": {
+              "x": {
+                "speed": 1.0
+              }
+            },
+            "rotation": {},
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "survivorsbutchercraft:meathook/sheep/skinned"
+        },
+        {
+          "animation": {
+            "location": {
+              "x": {
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
+              }
+            },
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "butchercraft:bone_saw"
+        }
+      ],
+      "tool": {
+        "tag": "survivorsbutchercraft:beheading_tools"
+      },
+      "uses": 12
+    },
+    {
+      "count": 1,
+      "damage": true,
+      "loot_table": "survivorsbutchercraft:meat_hook/sheep/bisect",
+      "models": [
+        {
+          "IsBlock": true,
+          "animation": {
+            "location": {
+              "x": {
+                "speed": 1.0
+              }
+            },
+            "rotation": {},
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "survivorsbutchercraft:meathook/sheep/gutted"
+        },
+        {
+          "animation": {
+            "location": {
+              "x": {
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
+              }
+            },
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "butchercraft:gut_knife"
+        }
+      ],
+      "tool": {
+        "tag": "survivorsbutchercraft:gutting_tools"
+      },
+      "uses": 12
+    },
+    {
+      "count": 1,
+      "damage": true,
+      "loot_table": "survivorsbutchercraft:meat_hook/sheep/butcher",
+      "models": [
+        {
+          "IsBlock": true,
+          "animation": {
+            "location": {
+              "x": {
+                "speed": 1.0
+              }
+            },
+            "rotation": {},
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "survivorsbutchercraft:meathook/sheep/bisected"
+        },
+        {
+          "animation": {
+            "location": {
+              "x": {
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 24.0,
+                "min": -24.0
+              },
+              "z": {
+                "max": 12.0,
+                "min": -12.0
+              }
+            },
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "butchercraft:butcher_knife"
+        }
+      ],
+      "tool": {
+        "tag": "survivorsbutchercraft:butchering_tools"
+      },
+      "uses": 12
+    }
+  ]
+}

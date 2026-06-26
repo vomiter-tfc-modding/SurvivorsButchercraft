@@ -18,5 +18,6 @@ public class SBTags {
         public static TagKey<Item> BEHEADING_TOOLS = create("beheading_tools");
         public static TagKey<Item> GUTTING_TOOLS = create("gutting_tools");
         public static TagKey<Item> BUTCHERING_TOOLS = create("butchering_tools");
+        public static TagKey<Item> BUTCHERY_SKIP_LOOT = create("butchery_skip_loot");
     }
 }

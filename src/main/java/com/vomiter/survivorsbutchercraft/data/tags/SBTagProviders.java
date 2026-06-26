@@ -62,6 +62,10 @@ public class SBTagProviders {
         @SuppressWarnings("unchecked")
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
+            tag(SBTags.Items.BUTCHERY_SKIP_LOOT)
+                    .addOptionalTag(SBTags.Items.createTFC("raw_hides"))
+                    .addOptionalTag(SBTags.Items.createTFC("sheepskin_hides"));
+
             tag(SBTags.Items.BEHEADING_TOOLS)
                     .add(ButchercraftItems.BONE_SAW.get())
                     .addOptionalTags(
