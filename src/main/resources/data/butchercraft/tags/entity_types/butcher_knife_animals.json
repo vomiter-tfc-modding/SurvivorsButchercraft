@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "tfc:yak",
-    "tfc:musk_ox"
+    "tfc:musk_ox",
+    "tfc:pig",
+    "tfc:goat",
+    "tfc:sheep",
+    "tfc:cow"
   ]
 }

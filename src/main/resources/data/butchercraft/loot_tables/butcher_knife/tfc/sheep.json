@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "survivorsbutchercraft:carcass/sheep"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "butchercraft:butcher_knife/sheep"
+}

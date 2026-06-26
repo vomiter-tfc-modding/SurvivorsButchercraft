@@ -1,0 +1,33 @@
+{
+  "values": [
+    "tfc:food/beef",
+    "butchercraft:beef_scraps",
+    "butchercraft:ground_beef",
+    "butchercraft:cubed_beef",
+    "butchercraft:beef_roast",
+    "butchercraft:beef_ribs",
+    "butchercraft:beef_stewmeat",
+    "butchercraft:oxtail",
+    "tfc:food/pork",
+    "butchercraft:pork_scraps",
+    "butchercraft:ground_pork",
+    "butchercraft:cubed_pork",
+    "butchercraft:pork_roast",
+    "butchercraft:pork_ribs",
+    "butchercraft:pork_stewmeat",
+    "tfc:food/mutton",
+    "butchercraft:lamb_scraps",
+    "butchercraft:ground_lamb",
+    "butchercraft:cubed_lamb",
+    "butchercraft:lamb_roast",
+    "butchercraft:lamb_ribs",
+    "butchercraft:lamb_stewmeat",
+    "tfc:food/chevon",
+    "butchercraft:goat_scraps",
+    "butchercraft:ground_goat",
+    "butchercraft:cubed_goat",
+    "butchercraft:goat_roast",
+    "butchercraft:goat_ribs",
+    "butchercraft:goat_stewmeat"
+  ]
+}

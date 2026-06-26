@@ -1,0 +1,7 @@
+{
+  "__comment__": "Mirrors TFC raw_meat heat_capacity; generated for SurvivorsButchercraft data TODO.",
+  "ingredient": {
+    "tag": "survivorsbutchercraft:foods/butchercraft_raw_meats"
+  },
+  "heat_capacity": 1.0
+}

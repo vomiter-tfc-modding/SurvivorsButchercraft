@@ -1,0 +1,19 @@
+{
+  "__comment__": "Generated for SurvivorsButchercraft; verified against Butchercraft registry paths, not Java field names.",
+  "type": "tfc:heating",
+  "ingredient": {
+    "type": "tfc:not_rotten",
+    "ingredient": {
+      "item": "butchercraft:cubed_beef"
+    }
+  },
+  "result_item": {
+    "stack": {
+      "item": "butchercraft:cooked_cubed_beef"
+    },
+    "modifiers": [
+      "tfc:copy_food"
+    ]
+  },
+  "temperature": 200
+}

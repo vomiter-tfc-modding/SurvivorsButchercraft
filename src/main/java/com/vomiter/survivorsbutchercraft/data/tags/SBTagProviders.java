@@ -2,6 +2,7 @@ package com.vomiter.survivorsbutchercraft.data.tags;
 
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -62,6 +63,10 @@ public class SBTagProviders {
         @SuppressWarnings("unchecked")
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
+            MeatMap.entries.values().forEach(m -> m.values().forEach(
+                    item -> tag(SBTags.Items.BUTCHER_RAW_MEATS).add(item)
+            ));
+
             tag(SBTags.Items.BUTCHERY_SKIP_LOOT)
                     .addOptionalTag(SBTags.Items.createTFC("raw_hides"))
                     .addOptionalTag(SBTags.Items.createTFC("sheepskin_hides"));
