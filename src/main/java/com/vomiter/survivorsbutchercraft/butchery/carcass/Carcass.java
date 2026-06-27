@@ -23,6 +23,10 @@ public enum Carcass implements ICarcassProfile {
         this.profile = profile;
     }
 
+    public boolean hasMaleHead(){
+        return List.of(MUSK_OX, PIG, SHEEP).contains(this);
+    }
+
     public String serializedName() {
         return name().toLowerCase(Locale.ROOT);
     }

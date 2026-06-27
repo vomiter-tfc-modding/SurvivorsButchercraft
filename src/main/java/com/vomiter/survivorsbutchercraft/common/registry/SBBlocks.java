@@ -20,6 +20,9 @@ public class SBBlocks {
     public static final Map<Carcass, RegistryObject<Block>> HIDE_CARPETS = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Block>> WALL_HEADS = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Block>> HEADS = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Block>> WALL_HEADS_MALE = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Block>> HEADS_MALE = new EnumMap<>(Carcass.class);
+
 
     static {
         var headProperties = BlockBehaviour.Properties
@@ -43,6 +46,20 @@ public class SBBlocks {
                                 () -> new WallSkullLikeBlock(headProperties)
                         )
             );
+            if (carcass.hasMaleHead()){
+                HEADS_MALE.put(carcass,
+                        BLOCKS.register(
+                                "head_male/" + carcass_name,
+                                () -> new SkullLikeBlock(headProperties)
+                        )
+                );
+                WALL_HEADS_MALE.put(carcass,
+                        BLOCKS.register(
+                                "wall_head_male/" + carcass_name,
+                                () -> new WallSkullLikeBlock(headProperties)
+                        )
+                );
+            }
         }
     }
 }

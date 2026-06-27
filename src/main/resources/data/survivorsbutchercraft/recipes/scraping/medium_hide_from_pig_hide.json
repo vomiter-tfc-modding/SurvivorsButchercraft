@@ -1,0 +1,8 @@
+{
+  "type":"tfc:scraping",
+  "ingredient":
+  {"item":"survivorsbutchercraft:hide/pig"},
+  "result":{"item":"tfc:medium_raw_hide","count":1},
+  "input_texture":"survivorsbutchercraft:block/hide/pig",
+  "output_texture":"tfc:item/hide/medium/raw"
+}

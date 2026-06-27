@@ -1,0 +1,8 @@
+{
+  "type":"tfc:scraping",
+  "ingredient":
+  {"item":"survivorsbutchercraft:hide/cow"},
+  "result":{"item":"tfc:large_raw_hide","count":1},
+  "input_texture":"survivorsbutchercraft:block/hide/cow",
+  "output_texture":"tfc:item/hide/large/raw"
+}

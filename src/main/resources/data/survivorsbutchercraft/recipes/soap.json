@@ -1,0 +1,17 @@
+{
+  "type":"tfc:pot",
+  "ingredients":
+  [
+    {"item":"butchercraft:fat"},
+    {"item": "tfc:powder/wood_ash"},
+    {"item": "tfc:powder/wood_ash"}
+  ],
+  "fluid_ingredient":
+  {
+    "ingredient":"minecraft:water","amount":100},
+  "duration":1000,
+  "temperature":300,
+  "item_output":[
+    {"item":"butchercraft:soap"}
+  ]
+}

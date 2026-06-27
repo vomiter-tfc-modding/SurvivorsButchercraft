@@ -19,13 +19,10 @@ import org.slf4j.Logger;
 public class SurvivorsButchercraft
 {
     //TODO: add butcher tools for different metal tiers
-    //TODO: make hide -> raw hide scrap recipe
     //TODO: make unsheared wool animals drop wool when killed with butcher knife (mixin)
-    //TODO: add meat hook recipe (RR, CC) R:iron rod, C:iron chain
-    //TODO: add butcherknife loot table and entity tag to pig, sheep, cow and goat
     //TODO: test butcher process of all animals
     //TODO: make male/female drop different head if needed
-    //TODO: TFC heating recipes and heat definition for butchercraft meats
+    //TODO: fix male head block rendering
 
     public static final String MODID = "survivorsbutchercraft";
     public static final Logger LOGGER = LogUtils.getLogger();

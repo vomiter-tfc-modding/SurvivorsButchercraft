@@ -21,6 +21,7 @@ public class SBItems {
     public static final Map<Carcass, RegistryObject<Item>> CARCASSES = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Item>> HIDES = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Item>> HEADS = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Item>> HEADS_MALE = new EnumMap<>(Carcass.class);
 
     static {
         for (Carcass carcass : Carcass.values()) {
@@ -35,6 +36,14 @@ public class SBItems {
             if (carcass.hasHide()) {
                 HIDES.put(carcass, ITEMS.register("hide/" + carcass.serializedName(),
                         () -> new BlockItem(SBBlocks.HIDE_CARPETS.get(carcass).get(), new Item.Properties())));
+            }
+
+            if(carcass.hasMaleHead()) {
+                HEADS_MALE.put(carcass, ITEMS.register("head_male/" + carcass.serializedName(),
+                        () -> new SkullLikeItem(
+                                SBBlocks.HEADS_MALE.get(carcass).get(),
+                                SBBlocks.WALL_HEADS_MALE.get(carcass).get(),
+                                new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
             }
         }
     }

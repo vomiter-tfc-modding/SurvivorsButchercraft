@@ -32,11 +32,23 @@ public class SBBlockStatesProvider extends BlockStateProvider {
                     modLoc("block/head/" + carcass.serializedName())           // model: models/block/head/yak.json
             );
 
-            // === skull-like: 牆上頭 yak_wall_head ===
             wallSkullFacingStates(
                     SBBlocks.WALL_HEADS.get(carcass).get(),
                     modLoc("block/head/" + carcass.serializedName())      // model: models/block/head/yak.json
             );
+
+            if(carcass.hasMaleHead()){
+                skullRotationStates(
+                        SBBlocks.HEADS_MALE.get(carcass).get(),
+                        modLoc("block/head_male/" + carcass.serializedName())           // model: models/block/head/yak.json
+                );
+
+                wallSkullFacingStates(
+                        SBBlocks.WALL_HEADS_MALE.get(carcass).get(),
+                        modLoc("block/head_male/" + carcass.serializedName())      // model: models/block/head/yak.json
+                );
+
+            }
 
         }
     }

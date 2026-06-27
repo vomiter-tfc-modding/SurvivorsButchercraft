@@ -1,0 +1,12 @@
+{
+  "type":"tfc:anvil",
+  "input":{
+    "tag":"forge:ingots/wrought_iron"
+  },
+  "result":{
+    "item": "butchercraft:butcher_knife"},
+  "tier":3,
+  "rules":
+  ["hit_last","bend_second_last","bend_third_last"],
+  "apply_forging_bonus":true
+}

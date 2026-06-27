@@ -7,6 +7,7 @@
     "AnimalYieldProviderMixin",
     "ButchercraftForgeEventsMixin",
     "ButcherKnifeItemMixin",
+    "InteractionManagerMixin",
     "MeatHookBlockEntityAccessor",
     "MeatHookBlockEntityMixin",
     "MeatHookRendererMixin",

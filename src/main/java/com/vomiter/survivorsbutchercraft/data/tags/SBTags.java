@@ -20,5 +20,6 @@ public class SBTags {
         public static TagKey<Item> BUTCHERING_TOOLS = create("butchering_tools");
         public static TagKey<Item> BUTCHERY_SKIP_LOOT = create("butchery_skip_loot");
         public static TagKey<Item> BUTCHER_RAW_MEATS = create("foods/butchercraft_raw_meats");
+        public static TagKey<Item> BUTCHER_SCRAPABLE = create("butcher_scrapable");
     }
 }
