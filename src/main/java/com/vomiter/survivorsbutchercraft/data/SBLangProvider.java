@@ -21,7 +21,7 @@ public class SBLangProvider extends LanguageProvider {
     protected void addTranslations() {
         addBlocks();
         addItems();
-        add("itemGroup." + SurvivorsButchercraft.MODID, "Survivor's Butchery");
+        add("itemGroup." + SurvivorsButchercraft.MODID + ".main", "Survivor's Butchery");
     }
 
     private void addBlocks() {
@@ -48,16 +48,17 @@ public class SBLangProvider extends LanguageProvider {
 
     private static String toDisplayNameTFCLike(String path){
         String[] parts = path.split("/");
-        if(parts.length == 2){
+        if(parts.length >= 2){
+            int length = parts.length;
             String part0;
-            if(parts[0].endsWith("head")) part0 = "head";
-            else if (parts[0].endsWith("head_male")) {
-                return "Male " + toDisplayName(parts[1]) + " " + toDisplayName("head");
-            } else if (parts[0].endsWith("hide")) {
+            if(parts[length-2].equals("head") || parts[length-2].equals("wall_head")) part0 = "head";
+            else if (parts[length-2].endsWith("head_male")) {
+                return "Male " + toDisplayName(parts[length-1]) + " " + toDisplayName("head");
+            } else if (parts[length-2].endsWith("hide")) {
                 part0 = "hide_carpet";
             }
-            else part0 = parts[0];
-            return toDisplayName(parts[1]) + " " + toDisplayName(part0);
+            else part0 = parts[length-2];
+            return toDisplayName(parts[length-1]) + " " + toDisplayName(part0);
         }
         return toDisplayName(path);
     }

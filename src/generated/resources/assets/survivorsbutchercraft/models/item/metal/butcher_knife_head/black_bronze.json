@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "survivorsbutchercraft:item/metal/butcher_knife_head/black_bronze"
+  }
+}

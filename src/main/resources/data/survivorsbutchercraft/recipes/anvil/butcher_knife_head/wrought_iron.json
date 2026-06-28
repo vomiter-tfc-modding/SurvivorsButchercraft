@@ -1,0 +1,8 @@
+{
+  "type":"tfc:anvil",
+  "input": {"tag":"forge:ingots/wrought_iron"},
+  "result":{"item":"survivorsbutchercraft:metal/butcher_knife_head/wrought_iron"},
+  "tier":3,
+  "rules":["punch_last","hit_second_last","upset_third_last"],
+  "apply_forging_bonus":true
+}

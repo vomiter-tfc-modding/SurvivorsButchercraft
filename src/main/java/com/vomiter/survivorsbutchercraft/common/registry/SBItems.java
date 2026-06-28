@@ -1,9 +1,11 @@
 package com.vomiter.survivorsbutchercraft.common.registry;
 
+import com.lance5057.butchercraft.items.ButcherKnifeItem;
 import com.lance5057.butchercraft.items.CarcassItem;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.common.item.SkullLikeItem;
+import net.dries007.tfc.util.Metal;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -22,8 +24,23 @@ public class SBItems {
     public static final Map<Carcass, RegistryObject<Item>> HIDES = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Item>> HEADS = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Item>> HEADS_MALE = new EnumMap<>(Carcass.class);
+    public static final Map<Metal.Default, RegistryObject<Item>> BUTCHER_KNIVES = new EnumMap<>(Metal.Default.class);
+    public static final Map<Metal.Default, RegistryObject<Item>> BUTCHER_KNIFE_HEADS = new EnumMap<>(Metal.Default.class);
+
 
     static {
+        for (Metal.Default metal : Metal.Default.values()) {
+            if(!metal.hasTools()) continue;
+            BUTCHER_KNIFE_HEADS.put(metal, ITEMS.register("metal/butcher_knife_head/" + metal.getSerializedName(),
+                    () -> new Item(new Item.Properties())));
+            BUTCHER_KNIVES.put(metal, ITEMS.register("metal/butcher_knife/" + metal.getSerializedName(),
+                    () -> new ButcherKnifeItem(
+                            new Item.Properties()
+                                    .rarity(metal.getRarity())
+                                    .durability(metal.toolTier().getUses())
+                    )));
+        }
+
         for (Carcass carcass : Carcass.values()) {
             CARCASSES.put(carcass, ITEMS.register("carcass/" + carcass.serializedName(),
                     () -> new CarcassItem(new Item.Properties().stacksTo(1))));

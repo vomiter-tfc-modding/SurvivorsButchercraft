@@ -27,5 +27,6 @@ public class SBDataGenerator {
         generator.addProvider(true, foodProvider);
         generator.addProvider(true, new BbmodelExportProvider(output));
         generator.addProvider(true, new SBLangProvider(output));
+        generator.addProvider(true, new SBItemModelProvider(output, existingFileHelper));
     }
 }
