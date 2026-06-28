@@ -6,8 +6,11 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.adapter.MeatHookBucketAdapter;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.convert.ConvertResultManager;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
+import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
@@ -86,6 +89,12 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity {
         var random = getLevel().random;
         var originalList = original.call(instance, params);
         originalList.removeIf(stack -> stack.is(SBTags.Items.BUTCHERY_SKIP_LOOT));
+        var carcass = Carcass.getCarcassFromItem(getInsertedItem().getItem());
+        if(carcass != null && carcass.hasMaleHead() && CarcassDataHelper.isMale(getInsertedItem())){
+            if(originalList.removeIf(item -> item.is(SBItems.HEADS.get(carcass).get()))){
+                originalList.add(SBItems.HEADS_MALE.get(carcass).get().getDefaultInstance());
+            }
+        }
         ObjectArrayList<ItemStack> newList = ObjectArrayList.of();
         originalList.forEach(originalItemStack -> {
             var singleInput = originalItemStack.copyWithCount(1);

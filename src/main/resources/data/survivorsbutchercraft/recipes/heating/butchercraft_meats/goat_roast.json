@@ -1,5 +1,5 @@
 {
-  "__comment__": "Generated for SurvivorsButchercraft; verified against Butchercraft registry paths, not Java field names.",
+  "__comment__": "Generated for SurvivorsButchercraft",
   "type": "tfc:heating",
   "ingredient": {
     "type": "tfc:not_rotten",

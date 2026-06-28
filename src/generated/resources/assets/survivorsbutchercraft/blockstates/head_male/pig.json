@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "rotation=0": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=1": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=10": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=11": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=12": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=13": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=14": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=15": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=2": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=3": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=4": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=5": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=6": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=7": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=8": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    },
+    "rotation=9": {
+      "model": "survivorsbutchercraft:block/head_male/pig"
+    }
+  }
+}

@@ -22,7 +22,7 @@ public class SurvivorsButchercraft
     //TODO: make unsheared wool animals drop wool when killed with butcher knife (mixin)
     //TODO: test butcher process of all animals
     //TODO: make male/female drop different head if needed
-    //TODO: fix male head block rendering
+    //TODO: fix head models
 
     public static final String MODID = "survivorsbutchercraft";
     public static final Logger LOGGER = LogUtils.getLogger();

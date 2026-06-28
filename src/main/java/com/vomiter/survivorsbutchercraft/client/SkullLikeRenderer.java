@@ -7,6 +7,7 @@ import com.vomiter.survivorsbutchercraft.common.registry.SBBlockEntityTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -83,19 +84,20 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
 
         // 用 BakedModel 自帶的 render types
         for (var rt : baked.getRenderTypes(state, rand, modelData)) {
-            var vc = buffers.getBuffer(rt);
-            modelRenderer.renderModel(
-                    pose.last(),
-                    vc,
-                    state,
-                    baked,
-                    1.0F, 1.0F, 1.0F,
-                    light,
-                    packedOverlay,
-                    modelData,
-                    rt
-            );
         }
+
+        var vc = buffers.getBuffer(RenderType.translucent());
+        modelRenderer.renderModel(
+                pose.last(),
+                vc,
+                state,
+                baked,
+                1.0F, 1.0F, 1.0F,
+                light,
+                packedOverlay,
+                modelData,
+                RenderType.translucent()
+        );
 
         pose.popPose();
     }

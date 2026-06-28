@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "survivorsbutchercraft:block/head_male/musk_ox",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "survivorsbutchercraft:block/head_male/musk_ox"
+    },
+    "facing=south": {
+      "model": "survivorsbutchercraft:block/head_male/musk_ox",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "survivorsbutchercraft:block/head_male/musk_ox",
+      "y": 270
+    }
+  }
+}

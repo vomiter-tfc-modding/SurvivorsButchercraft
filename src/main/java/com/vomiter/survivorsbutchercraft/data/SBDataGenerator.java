@@ -26,5 +26,6 @@ public class SBDataGenerator {
         SBFoodData.saveFoodData(foodProvider);
         generator.addProvider(true, foodProvider);
         generator.addProvider(true, new BbmodelExportProvider(output));
+        generator.addProvider(true, new SBLangProvider(output));
     }
 }

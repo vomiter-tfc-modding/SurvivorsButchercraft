@@ -1,11 +1,8 @@
 package com.vomiter.survivorsbutchercraft.data.loot;
 
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-
-import java.util.List;
 
 public final class LootPools {
     private LootPools() {}

@@ -1,0 +1,12 @@
+{
+  "type": "tfc:heating",
+  "ingredient": {
+    "item": "butchercraft:fat"
+  },
+  "result_item": {
+    "stack": {
+      "item": "butchercraft:lard"
+    }
+  },
+  "temperature": 200
+}

@@ -13,16 +13,21 @@ import java.util.stream.Stream;
 public class SBBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES
             = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SurvivorsButchercraft.MODID);
-    public static final RegistryObject<BlockEntityType<SkullLikeBlockEntity>> SKULL_LIKE = BLOCK_ENTITIES.register(
-            "skull_like",
-            () -> BlockEntityType.Builder.of(
-                    SkullLikeBlockEntity::new,
-                    Stream.concat(
-                            SBBlocks.HEADS.values().stream(),
-                            SBBlocks.WALL_HEADS.values().stream()
-                            )
-                            .map(RegistryObject::get)
-                            .toArray(Block[]::new)
-            ).build(null)
-    );
+
+    public static final RegistryObject<BlockEntityType<SkullLikeBlockEntity>> SKULL_LIKE =
+            BLOCK_ENTITIES.register(
+                    "skull_like",
+                    () -> BlockEntityType.Builder.of(
+                            SkullLikeBlockEntity::new,
+                            Stream.of(
+                                            SBBlocks.HEADS.values().stream(),
+                                            SBBlocks.WALL_HEADS.values().stream(),
+                                            SBBlocks.HEADS_MALE.values().stream(),
+                                            SBBlocks.WALL_HEADS_MALE.values().stream()
+                                    )
+                                    .flatMap(s -> s)
+                                    .map(RegistryObject::get)
+                                    .toArray(Block[]::new)
+                    ).build(null)
+            );
 }

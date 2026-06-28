@@ -2,9 +2,11 @@
   "type":"tfc:pot",
   "ingredients":
   [
-    {"item":"butchercraft:fat"},
+    {"item":"butchercraft:lard"},
+    {"item":"butchercraft:lard"},
     {"item": "tfc:powder/wood_ash"},
-    {"item": "tfc:powder/wood_ash"}
+    {"item": "tfc:powder/wood_ash"},
+    {"tag":  "minecraft:flowers"}
   ],
   "fluid_ingredient":
   {
