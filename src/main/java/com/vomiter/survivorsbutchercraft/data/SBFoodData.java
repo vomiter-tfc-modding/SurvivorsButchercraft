@@ -1,5 +1,6 @@
 package com.vomiter.survivorsbutchercraft.data;
 
+import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
@@ -10,6 +11,89 @@ import java.util.Locale;
 
 public class SBFoodData {
     public static void saveFoodData(SDFoodDataProvider provider){
+        provider.newBuilder("cooked_blood_sausage")
+                .item(ButchercraftItems.COOKED_BLOOD_SAUSAGE.get())
+                .setHunger(3)
+                .setProtein(0.7)
+                .setSaturation(1)
+                .setDecay(1.5)
+                .save();
+
+        provider.newBuilder("cooked_sausage")
+                .item(ButchercraftItems.COOKED_SAUSAGE.get())
+                .setHunger(3)
+                .setProtein(0.5)
+                .setSaturation(1)
+                .setDecay(1.5)
+                .save();
+
+        provider.newBuilder("offal/lung")
+                .item(ButchercraftItems.LUNG.get())
+                .setHunger(1)
+                .setProtein(0.8)
+                .setDecay(3.0)
+                .save();
+        provider.newBuilder("offal/cooked_lung")
+                .item(ButchercraftItems.COOKED_LUNG.get())
+                .setHunger(3)
+                .setProtein(1.2)
+                .setSaturation(3)
+                .setDecay(2.3)
+                .save();
+        provider.newBuilder("offal/heart")
+                .item(ButchercraftItems.HEART.get())
+                .setHunger(2)
+                .setProtein(1)
+                .setDecay(3.0)
+                .save();
+        provider.newBuilder("offal/cooked_heart")
+                .item(ButchercraftItems.COOKED_HEART.get())
+                .setHunger(4)
+                .setProtein(1.4)
+                .setSaturation(5)
+                .setDecay(2.3)
+                .save();
+        provider.newBuilder("offal/stomach")
+                .item(ButchercraftItems.STOMACH.get())
+                .setHunger(2)
+                .setProtein(1)
+                .setDecay(3.0)
+                .save();
+        provider.newBuilder("offal/cooked_stomach")
+                .item(ButchercraftItems.COOKED_STOMACH.get())
+                .setHunger(4)
+                .setProtein(1.4)
+                .setSaturation(5)
+                .setDecay(2.3)
+                .save();
+        provider.newBuilder("offal/tripe")
+                .item(ButchercraftItems.TRIPE.get())
+                .setHunger(2)
+                .setProtein(1)
+                .setDecay(2.3)
+                .save();
+        provider.newBuilder("offal/cooked_tripe")
+                .item(ButchercraftItems.COOKED_TRIPE.get())
+                .setHunger(4)
+                .setProtein(1.4)
+                .setSaturation(5)
+                .setDecay(3.0)
+                .save();
+        provider.newBuilder("offal/kidney")
+                .item(ButchercraftItems.KIDNEY.get())
+                .setHunger(2)
+                .setProtein(1)
+                .setDecay(3.0)
+                .save();
+        provider.newBuilder("offal/cooked_kidney")
+                .item(ButchercraftItems.COOKED_KIDNEY.get())
+                .setHunger(3)
+                .setProtein(1.1)
+                .setSaturation(1)
+                .setDecay(2.3)
+                .save();
+
+
         for (MeatProduct meatProduct : MeatProduct.values()) {
             if(meatProduct.equals(MeatProduct.ORDINARY)) continue;
             for (MeatType type : MeatType.values()) {

@@ -14,10 +14,14 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
-import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
 import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
+import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.items.Powder;
+import net.dries007.tfc.common.items.TFCItems;
+import net.dries007.tfc.common.recipes.ingredients.FluidIngredient;
+import net.dries007.tfc.common.recipes.ingredients.FluidStackIngredient;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -29,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class SBRecipesProvider extends RecipeProvider {
     public SBRecipesProvider(PackOutput p_248933_) {
@@ -82,6 +87,33 @@ public class SBRecipesProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+        ButcherBlockRecipeBuilder.shapedRecipe(ButchercraftItems.TRIPE.get())
+                .tool(
+                        Ingredient.of(Items.WATER_BUCKET),
+                        1,
+                        true,
+                        SBButcherBlockLootTables.EMPTY,
+                        this.layFlatModel(ButchercraftItems.TRIPE.get()),
+                        standardButcherBlockToolModel(Items.WATER_BUCKET)
+                )
+                .tool(
+                        Ingredient.of(SBTags.Items.SKINNING_TOOLS),
+                        4,
+                        true,
+                        SBButcherBlockLootTables.EMPTY,
+                        this.layFlatModel(ButchercraftItems.TRIPE.get()),
+                        standardButcherBlockToolModel(ButchercraftItems.SKINNING_KNIFE.get())
+                )
+                .tool(
+                        Ingredient.of(TFCItems.POWDERS.get(Powder.SALT).get()),
+                        4,
+                        true,
+                        SBButcherBlockLootTables.CASING,
+                        this.layFlatModel(ButchercraftItems.TRIPE.get()),
+                        standardButcherBlockToolModel(TFCItems.POWDERS.get(Powder.SALT).get())
+                )
+                .save(consumer, Helpers.id("butcherblock/casing"));
+
         for (MeatType meatType : MeatType.values()) {
             ButcherBlockRecipeBuilder.shapedRecipe(MeatMap.get(meatType, MeatProduct.ORDINARY))
                     .tool(
@@ -113,7 +145,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         Ingredient.of(Items.BUCKET),
                         1,
                         true,
-                        MeatHookLoottables.BLOOD_BUCKET,
+                        SBButcherBlockLootTables.EMPTY,
                         standardModel(meatHookId(carcass.serializedName() + "/" + MeatHookStage.HOOK.pp)),
                         standardHookToolModel(Items.BUCKET)
                         );

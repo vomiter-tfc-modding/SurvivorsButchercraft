@@ -22,8 +22,6 @@ public class SurvivorsButchercraft
     //TODO: make unsheared wool animals drop wool when killed with butcher knife (mixin)
     //TODO: test butcher process of all animals
     /** TODO
-     * - offal food data
-     * - sausage making
      * - better recipe for butcher's suit (armor)
      * - TFC metal/plank meat hook variants
      * - Bone saw, skinning knife, gutting knife variants

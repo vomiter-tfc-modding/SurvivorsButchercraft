@@ -75,6 +75,15 @@ public class SBTagProviders {
                         tag(SBTags.Items.BUTCHER_RAW_MEATS).add(item);
                     }
             ));
+            tag(SBTags.Items.BUTCHER_RAW_MEATS).add(
+                    ButchercraftItems.LUNG.get(),
+                    ButchercraftItems.HEART.get(),
+                    ButchercraftItems.STOMACH.get(),
+                    ButchercraftItems.TRIPE.get(),
+                    ButchercraftItems.KIDNEY.get(),
+                    ButchercraftItems.BLOOD_SAUSAGE.get(),
+                    ButchercraftItems.SAUSAGE.get()
+            );
 
             tag(SBTags.Items.BUTCHERY_SKIP_LOOT)
                     .addOptionalTag(SBTags.Items.createTFC("raw_hides"))

@@ -1,6 +1,8 @@
 package com.vomiter.survivorsbutchercraft.mixin;
 
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
+import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlockEntity;
+import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockRecipe;
 import com.lance5057.butchercraft.workstations.hook.HookRecipe;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import net.minecraft.world.entity.player.Player;
@@ -9,18 +11,17 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.Optional;
 
-@Mixin(value = MeatHookBlockEntity.class, remap = false)
-public interface MeatHookBlockEntityAccessor {
+@Mixin(value = ButcherBlockBlockEntity.class, remap = false)
+public interface ButcherBlockEntityAccessor {
     @Invoker("isFinalStage")
-    boolean sbtfc$isFinalStage(HookRecipe r);
+    boolean sbtfc$isFinalStage(ButcherBlockRecipe r);
 
     @Invoker("matchRecipe")
-    Optional<HookRecipe> sbtfc$matchRecipe();
+    Optional<ButcherBlockRecipe> sbtfc$matchRecipe();
 
     @Invoker("setupStage")
-    void sbtfc$setupStage(HookRecipe recipe, int stage);
+    void sbtfc$setupStage(ButcherBlockRecipe recipe, int stage);
 
     @Invoker("dropLoot")
     void sbtfc$dropLoot(AnimatedRecipeItemUse tool, Player player);
-
 }

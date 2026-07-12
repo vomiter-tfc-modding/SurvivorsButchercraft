@@ -9,7 +9,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -94,7 +94,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -179,7 +179,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,

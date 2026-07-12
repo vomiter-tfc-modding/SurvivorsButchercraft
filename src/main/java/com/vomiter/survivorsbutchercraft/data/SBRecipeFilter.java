@@ -2,6 +2,7 @@ package com.vomiter.survivorsbutchercraft.data;
 
 import com.lance5057.butchercraft.Butchercraft;
 import com.lance5057.butchercraft.ButchercraftBlocks;
+import com.lance5057.butchercraft.ButchercraftItems;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -10,9 +11,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class SBRecipeFilter {
-    private static List<Item> RESULT_ITEM_TO_BLOCK = new ArrayList<>();
+    private static final List<Item> RESULT_ITEM_TO_BLOCK = new ArrayList<>();
     static {
         RESULT_ITEM_TO_BLOCK.add(ButchercraftBlocks.BLOOD_SAUSAGE_BLOCK.get().asItem());
         RESULT_ITEM_TO_BLOCK.add(ButchercraftBlocks.COOKED_BLOOD_SAUSAGE_BLOCK.get().asItem());
@@ -36,9 +38,12 @@ public class SBRecipeFilter {
         if(id.getPath().endsWith("roast")) return true;
         var result = recipe.getResultItem(access);
         if(RESULT_ITEM_TO_BLOCK.contains(result.getItem())) return true;
-        var resultId = ForgeRegistries.ITEMS.getKey(result.getItem());
-
-        return false;
+        if(id.getPath().equals("casing")) return true;
+        return Stream.of(
+                ButchercraftItems.EXTRUDER_TIP.get(),
+                ButchercraftItems.GRINDER_TIP.get(),
+                ButchercraftItems.GRINDER_BLOCK_ITEM.get(),
+                ButchercraftItems.BLOOD_SAUSAGE_MIX.get()
+        ).anyMatch(result::is);
     }
-
 }

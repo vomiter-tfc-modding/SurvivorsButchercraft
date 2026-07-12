@@ -34,12 +34,24 @@ public class ButcherHelpers {
 
     }
 
-    public static void transferFluid(Player p, ItemStack butcheringTool, IFluidHandlerItem itemFluid, FluidTank blood, BiConsumer<ItemStack, ItemStack> handlerAfter){
+    public static void drainBlood(Player p, ItemStack butcheringTool, IFluidHandlerItem itemFluid, FluidTank blood, BiConsumer<ItemStack, ItemStack> handlerAfter){
         FluidHelpers.transferBetweenItemAndOther(
                 butcheringTool,
                 itemFluid,
                 blood,
                 itemFluid,
+                FluidHelpers.Transfer.FILL,
+                p.level(),
+                p.blockPosition(),
+                handlerAfter::accept);
+    }
+
+    public static void applyFluid(Player p, ItemStack butcheringTool, IFluidHandlerItem itemFluid, FluidTank blood, BiConsumer<ItemStack, ItemStack> handlerAfter){
+        FluidHelpers.transferBetweenItemAndOther(
+                butcheringTool,
+                itemFluid,
+                itemFluid,
+                blood,
                 FluidHelpers.Transfer.FILL,
                 p.level(),
                 p.blockPosition(),

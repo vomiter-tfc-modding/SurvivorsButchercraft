@@ -1,18 +1,22 @@
 package com.vomiter.survivorsbutchercraft.adapter;
 
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
+import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlockEntity;
+import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockRecipe;
 import com.lance5057.butchercraft.workstations.hook.HookRecipe;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
+import com.vomiter.survivorsbutchercraft.mixin.ButcherBlockEntityAccessor;
 import com.vomiter.survivorsbutchercraft.mixin.MeatHookBlockEntityAccessor;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Optional;
 
-public class MeatHookBucketAdapter extends AbstractButcherBucketAdapter<HookRecipe>{
+public class ButcherBlockBucketAdapter extends AbstractButcherBucketAdapter<ButcherBlockRecipe>{
 
-    private final MeatHookBlockEntity meatHook;
+    private final ButcherBlockBlockEntity meatHook;
 
-    public MeatHookBucketAdapter(MeatHookBlockEntity meatHook) {
+    public ButcherBlockBucketAdapter(ButcherBlockBlockEntity meatHook) {
         super(meatHook);
         this.meatHook = meatHook;
     }
@@ -39,33 +43,33 @@ public class MeatHookBucketAdapter extends AbstractButcherBucketAdapter<HookReci
 
     @Override
     void dropLoot(AnimatedRecipeItemUse tool, Player player) {
-        if(meatHook instanceof MeatHookBlockEntityAccessor acc){
+        if (meatHook instanceof ButcherBlockEntityAccessor acc){
             acc.sbtfc$dropLoot(tool, player);
         }
     }
 
-    void setupStage(HookRecipe recipe, int stage){
-        if(meatHook instanceof MeatHookBlockEntityAccessor acc){
+    void setupStage(ButcherBlockRecipe recipe, int stage){
+        if(meatHook instanceof ButcherBlockEntityAccessor acc){
             acc.sbtfc$setupStage(recipe, stage);
         }
     }
 
-    boolean isFinalStage(HookRecipe recipe){
-        if(meatHook instanceof MeatHookBlockEntityAccessor acc){
+    boolean isFinalStage(ButcherBlockRecipe recipe){
+        if(meatHook instanceof ButcherBlockEntityAccessor acc){
             return acc.sbtfc$isFinalStage(recipe);
         }
         return false;
     }
 
-    Optional<HookRecipe> matchRecipe(){
-        if(meatHook instanceof MeatHookBlockEntityAccessor acc){
+    Optional<ButcherBlockRecipe> matchRecipe(){
+        if(meatHook instanceof ButcherBlockEntityAccessor acc){
             return acc.sbtfc$matchRecipe();
         }
         return Optional.empty();
     }
 
     @Override
-    AnimatedRecipeItemUse getTool(HookRecipe recipe, int stage) {
+    AnimatedRecipeItemUse getTool(ButcherBlockRecipe recipe, int stage) {
         return recipe.getRecipeToolsIn().get(stage);
     }
 }

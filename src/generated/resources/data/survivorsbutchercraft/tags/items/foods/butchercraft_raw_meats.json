@@ -28,6 +28,13 @@
     "butchercraft:cubed_goat",
     "butchercraft:goat_roast",
     "butchercraft:goat_ribs",
-    "butchercraft:goat_stewmeat"
+    "butchercraft:goat_stewmeat",
+    "butchercraft:lung",
+    "butchercraft:heart",
+    "butchercraft:stomach",
+    "butchercraft:tripe",
+    "butchercraft:kidney",
+    "butchercraft:blood_sausage",
+    "butchercraft:sausage"
   ]
 }

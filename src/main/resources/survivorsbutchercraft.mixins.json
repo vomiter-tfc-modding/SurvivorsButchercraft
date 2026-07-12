@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AnimalYieldProviderMixin",
+    "ButcherBlockBlockEntityMixin",
+    "ButcherBlockEntityAccessor",
     "ButchercraftForgeEventsMixin",
     "ButcherKnifeItemMixin",
     "InteractionManagerMixin",

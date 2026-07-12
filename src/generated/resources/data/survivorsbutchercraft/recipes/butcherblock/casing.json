@@ -1,7 +1,7 @@
 {
-  "type": "butchercraft:meat_hook",
+  "type": "butchercraft:butcher_block",
   "carcass": {
-    "item": "survivorsbutchercraft:carcass/goat"
+    "item": "butchercraft:tripe"
   },
   "group": "",
   "jei": [],
@@ -12,33 +12,50 @@
       "loot_table": "butchercraft:empty",
       "models": [
         {
-          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "speed": 1.0
-              }
-            },
-            "rotation": {},
-            "scale": {
-              "x": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 8.0,
+                "min": -8.0,
                 "speed": 1.0
               },
               "y": {
                 "max": 1.0,
-                "min": 1.0,
+                "min": -1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 8.0,
+                "min": -8.0,
+                "speed": 1.0
+              }
+            },
+            "rotation": {
+              "x": {
+                "max": -90.0,
+                "min": 90.0,
+                "speed": 1.0
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": -1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": -1.0,
                 "speed": 1.0
               },
               "z": {
                 "max": 1.0,
-                "min": 1.0,
+                "min": -1.0,
                 "speed": 1.0
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/goat/hooked"
+          "location": "butchercraft:tripe"
         },
         {
           "animation": {
@@ -48,12 +65,12 @@
                 "min": -8.0
               },
               "y": {
-                "max": 24.0,
-                "min": -24.0
+                "max": 8.0,
+                "min": -8.0
               },
               "z": {
-                "max": 12.0,
-                "min": -12.0
+                "max": 8.0,
+                "min": -8.0
               }
             },
             "rotation": {
@@ -83,47 +100,64 @@
               }
             }
           },
-          "location": "minecraft:bucket"
+          "location": "minecraft:water_bucket"
         }
       ],
       "tool": {
-        "item": "minecraft:bucket"
+        "item": "minecraft:water_bucket"
       },
       "uses": 1
     },
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/goat/skin",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
-          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "speed": 1.0
-              }
-            },
-            "rotation": {},
-            "scale": {
-              "x": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 8.0,
+                "min": -8.0,
                 "speed": 1.0
               },
               "y": {
                 "max": 1.0,
-                "min": 1.0,
+                "min": -1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 8.0,
+                "min": -8.0,
+                "speed": 1.0
+              }
+            },
+            "rotation": {
+              "x": {
+                "max": -90.0,
+                "min": 90.0,
+                "speed": 1.0
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": -1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": -1.0,
                 "speed": 1.0
               },
               "z": {
                 "max": 1.0,
-                "min": 1.0,
+                "min": -1.0,
                 "speed": 1.0
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/goat/hooked"
+          "location": "butchercraft:tripe"
         },
         {
           "animation": {
@@ -133,12 +167,12 @@
                 "min": -8.0
               },
               "y": {
-                "max": 24.0,
-                "min": -24.0
+                "max": 8.0,
+                "min": -8.0
               },
               "z": {
-                "max": 12.0,
-                "min": -12.0
+                "max": 8.0,
+                "min": -8.0
               }
             },
             "rotation": {
@@ -174,41 +208,58 @@
       "tool": {
         "tag": "survivorsbutchercraft:skinning_tools"
       },
-      "uses": 12
+      "uses": 4
     },
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/goat/disembowel",
+      "loot_table": "survivorsbutchercraft:butcherblock/casing",
       "models": [
         {
-          "IsBlock": true,
           "animation": {
             "location": {
               "x": {
-                "speed": 1.0
-              }
-            },
-            "rotation": {},
-            "scale": {
-              "x": {
-                "max": 1.0,
-                "min": 1.0,
+                "max": 8.0,
+                "min": -8.0,
                 "speed": 1.0
               },
               "y": {
                 "max": 1.0,
-                "min": 1.0,
+                "min": -1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 8.0,
+                "min": -8.0,
+                "speed": 1.0
+              }
+            },
+            "rotation": {
+              "x": {
+                "max": -90.0,
+                "min": 90.0,
+                "speed": 1.0
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": -1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": -1.0,
                 "speed": 1.0
               },
               "z": {
                 "max": 1.0,
-                "min": 1.0,
+                "min": -1.0,
                 "speed": 1.0
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/goat/skinned"
+          "location": "butchercraft:tripe"
         },
         {
           "animation": {
@@ -218,12 +269,12 @@
                 "min": -8.0
               },
               "y": {
-                "max": 24.0,
-                "min": -24.0
+                "max": 8.0,
+                "min": -8.0
               },
               "z": {
-                "max": 12.0,
-                "min": -12.0
+                "max": 8.0,
+                "min": -8.0
               }
             },
             "rotation": {
@@ -253,183 +304,13 @@
               }
             }
           },
-          "location": "butchercraft:bone_saw"
+          "location": "tfc:powder/salt"
         }
       ],
       "tool": {
-        "tag": "survivorsbutchercraft:beheading_tools"
+        "item": "tfc:powder/salt"
       },
-      "uses": 12
-    },
-    {
-      "count": 1,
-      "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/goat/bisect",
-      "models": [
-        {
-          "IsBlock": true,
-          "animation": {
-            "location": {
-              "x": {
-                "speed": 1.0
-              }
-            },
-            "rotation": {},
-            "scale": {
-              "x": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              },
-              "y": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              },
-              "z": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              }
-            }
-          },
-          "location": "survivorsbutchercraft:meathook/goat/gutted"
-        },
-        {
-          "animation": {
-            "location": {
-              "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
-              }
-            },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
-            "scale": {
-              "x": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "y": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "z": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              }
-            }
-          },
-          "location": "butchercraft:gut_knife"
-        }
-      ],
-      "tool": {
-        "tag": "survivorsbutchercraft:gutting_tools"
-      },
-      "uses": 12
-    },
-    {
-      "count": 1,
-      "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/goat/butcher",
-      "models": [
-        {
-          "IsBlock": true,
-          "animation": {
-            "location": {
-              "x": {
-                "speed": 1.0
-              }
-            },
-            "rotation": {},
-            "scale": {
-              "x": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              },
-              "y": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              },
-              "z": {
-                "max": 1.0,
-                "min": 1.0,
-                "speed": 1.0
-              }
-            }
-          },
-          "location": "survivorsbutchercraft:meathook/goat/bisected"
-        },
-        {
-          "animation": {
-            "location": {
-              "x": {
-                "max": 8.0,
-                "min": -8.0
-              },
-              "y": {
-                "max": 24.0,
-                "min": -24.0
-              },
-              "z": {
-                "max": 12.0,
-                "min": -12.0
-              }
-            },
-            "rotation": {
-              "z": {
-                "loop": true,
-                "max": 45.0,
-                "min": -45.0,
-                "pingpong": true,
-                "speed": 0.05
-              }
-            },
-            "scale": {
-              "x": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "y": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              },
-              "z": {
-                "max": 0.5,
-                "min": -0.5,
-                "speed": 1.0
-              }
-            }
-          },
-          "location": "butchercraft:butcher_knife"
-        }
-      ],
-      "tool": {
-        "tag": "survivorsbutchercraft:butchering_tools"
-      },
-      "uses": 12
+      "uses": 4
     }
   ]
 }

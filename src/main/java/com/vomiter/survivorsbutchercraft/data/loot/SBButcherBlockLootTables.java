@@ -1,5 +1,6 @@
 package com.vomiter.survivorsbutchercraft.data.loot;
 
+import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
@@ -17,6 +18,9 @@ import java.util.function.BiConsumer;
 public class SBButcherBlockLootTables  implements LootTableSubProvider {
     public static EnumMap<MeatType, ResourceLocation> ORDINARY2CUBED = new EnumMap<>(MeatType.class);
     public static EnumMap<MeatType, ResourceLocation> ROAST2ORDINARY = new EnumMap<>(MeatType.class);
+    public static ResourceLocation CASING = Helpers.id("butcherblock/casing");
+    public static ResourceLocation EMPTY =  Helpers.id("butchercraft", "empty");
+
     static {
         for (MeatType type : MeatType.values()) {
             ORDINARY2CUBED.put(type, Helpers.id("butcherblock/" + type.name().toLowerCase(Locale.ROOT) + "/ordinary_to_cubed"));
@@ -34,5 +38,10 @@ public class SBButcherBlockLootTables  implements LootTableSubProvider {
             biConsumer.accept(ORDINARY2CUBED.get(type), o2c);
             biConsumer.accept(ROAST2ORDINARY.get(type), r2o);
         }
+        var casing = LootTable.lootTable()
+                .withPool(LootPools.poolOnce(DropSpec.of(ButchercraftItems.CASING.get())))
+                .withPool(LootPools.poolOnce(DropSpec.of(ButchercraftItems.FAT.get()).withCount(0,2)))
+                .withPool(LootPools.poolOnce(DropSpec.of(ButchercraftItems.SINEW.get()).withCount(0,2)));
+        biConsumer.accept(CASING, casing);
     }
 }
