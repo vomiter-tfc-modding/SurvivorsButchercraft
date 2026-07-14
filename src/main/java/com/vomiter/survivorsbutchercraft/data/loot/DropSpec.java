@@ -18,12 +18,13 @@ import java.util.List;
 
 public record DropSpec(
         LootItem.Builder<?> entry,
-        List<LootItemFunction.Builder> functions
+        List<LootItemFunction.Builder> functions,
+        Item item
 ) {
     // ---- factories ----
 
     public static DropSpec of(Item item) {
-        return new DropSpec(LootItem.lootTableItem(item), new ArrayList<>());
+        return new DropSpec(LootItem.lootTableItem(item), new ArrayList<>(), item);
     }
 
     public static DropSpec of(Item item, int min, int max) {
@@ -49,13 +50,13 @@ public record DropSpec(
     public DropSpec with(LootItemFunction.Builder fn) {
         ArrayList<LootItemFunction.Builder> list = new ArrayList<>(this.functions);
         list.add(fn);
-        return new DropSpec(this.entry, list);
+        return new DropSpec(this.entry, list, this.item);
     }
 
     public DropSpec withAll(LootItemFunction.Builder... fns) {
         ArrayList<LootItemFunction.Builder> list = new ArrayList<>(this.functions);
         list.addAll(Arrays.asList(fns));
-        return new DropSpec(this.entry, list);
+        return new DropSpec(this.entry, list, this.item);
     }
 
     public DropSpec withCount(int count) {

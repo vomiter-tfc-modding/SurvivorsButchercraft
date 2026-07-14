@@ -2,8 +2,10 @@ package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Arrays;
 
@@ -37,6 +39,17 @@ public enum MeatHookStage {
             default -> Items.BARRIER;
         };
     }
+
+    public Ingredient acceptableTools(){
+        return switch (this){
+            case SKIN -> Ingredient.of(SBTags.Items.SKINNING_TOOLS);
+            case DISEMBOWEL -> Ingredient.of(SBTags.Items.BEHEADING_TOOLS);
+            case BISECT -> Ingredient.of(SBTags.Items.GUTTING_TOOLS);
+            case BUTCHER -> Ingredient.of(SBTags.Items.BUTCHERING_TOOLS);
+            default -> Ingredient.EMPTY;
+        };
+    }
+
 
     MeatHookStage(String pp){
         this.pp = pp;

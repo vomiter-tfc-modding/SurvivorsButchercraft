@@ -4,7 +4,62 @@
     "item": "survivorsbutchercraft:carcass/musk_ox"
   },
   "group": "",
-  "jei": [],
+  "jei": [
+    {
+      "item": "butchercraft:heart"
+    },
+    {
+      "item": "butchercraft:lamb_ribs"
+    },
+    {
+      "item": "butchercraft:liver"
+    },
+    {
+      "item": "butchercraft:sinew"
+    },
+    {
+      "item": "butchercraft:leather_scrap"
+    },
+    {
+      "item": "butchercraft:stomach"
+    },
+    {
+      "item": "butchercraft:kidney"
+    },
+    {
+      "item": "butchercraft:lung"
+    },
+    {
+      "item": "butchercraft:lamb_scraps"
+    },
+    {
+      "item": "survivorsbutchercraft:head/musk_ox"
+    },
+    {
+      "item": "butchercraft:oxtail"
+    },
+    {
+      "item": "butchercraft:tripe"
+    },
+    {
+      "item": "survivorsbutchercraft:hide/musk_ox"
+    },
+    {
+      "item": "tfc:food/mutton"
+    },
+    {
+      "item": "butchercraft:blood_fluid_bucket"
+    },
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "butchercraft:fat"
+    },
+    {
+      "item": "butchercraft:lamb_roast"
+    }
+  ],
   "tools": [
     {
       "count": 1,

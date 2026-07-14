@@ -38,7 +38,19 @@ public class SBRecipeFilter {
         if(id.getPath().endsWith("roast")) return true;
         var result = recipe.getResultItem(access);
         if(RESULT_ITEM_TO_BLOCK.contains(result.getItem())) return true;
-        if(id.getPath().equals("casing")) return true;
+        if(
+                List.of(
+                        "casing",
+                        "cow",
+                        "pig",
+                        "goat",
+                        "sheep",
+                        "apron",
+                        "gloves",
+                        "boots",
+                        "mask"
+                ).contains(id.getPath())
+        ) return true;
         return Stream.of(
                 ButchercraftItems.EXTRUDER_TIP.get(),
                 ButchercraftItems.GRINDER_TIP.get(),

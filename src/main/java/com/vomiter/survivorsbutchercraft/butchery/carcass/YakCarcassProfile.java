@@ -47,6 +47,11 @@ public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
                         DropSpec.of(new ItemStack(ButchercraftItems.TRIPE.get(), 8))
                 );
             }
+            case DISEMBOWEL -> {
+                return List.of(
+                        DropSpec.of(ButchercraftItems.OXTAIL.get())
+                );
+            }
         }
 
         return super.dropsForSupport(stage);

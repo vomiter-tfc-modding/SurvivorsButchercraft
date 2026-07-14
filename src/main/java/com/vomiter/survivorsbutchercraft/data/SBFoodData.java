@@ -5,18 +5,44 @@ import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.butchery.meat.Raw2CookedMap;
+import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.dries007.tfc.common.items.Food;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Locale;
 
 public class SBFoodData {
     public static void saveFoodData(SDFoodDataProvider provider){
+        provider.newBuilder("large_carcass")
+                .ingredient(Ingredient.of(SBTags.Items.LARGE_CARCASS).toJson())
+                .setDecay(8)
+                .save();
+
+        provider.newBuilder("linked_sausage")
+                .ingredient(Ingredient.of(SBTags.Items.LINKED_SAUSAGE).toJson())
+                .setDecay(0.7)
+                .save();
+
+        provider.newBuilder("raw_blood_sausage")
+                .item(ButchercraftItems.BLOOD_SAUSAGE.get())
+                .setHunger(2)
+                .setProtein(0.3)
+                .setDecay(0.7)
+                .save();
+
+        provider.newBuilder("raw_sausage")
+                .item(ButchercraftItems.SAUSAGE.get())
+                .setHunger(2)
+                .setProtein(0.2)
+                .setDecay(0.7)
+                .save();
+
         provider.newBuilder("cooked_blood_sausage")
                 .item(ButchercraftItems.COOKED_BLOOD_SAUSAGE.get())
                 .setHunger(3)
                 .setProtein(0.7)
                 .setSaturation(1)
-                .setDecay(1.5)
+                .setDecay(0.7)
                 .save();
 
         provider.newBuilder("cooked_sausage")
@@ -24,7 +50,7 @@ public class SBFoodData {
                 .setHunger(3)
                 .setProtein(0.5)
                 .setSaturation(1)
-                .setDecay(1.5)
+                .setDecay(0.7)
                 .save();
 
         provider.newBuilder("offal/lung")

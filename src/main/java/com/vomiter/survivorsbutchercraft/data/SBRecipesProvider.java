@@ -6,16 +6,19 @@ import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloa
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloatVector3;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
 import com.lance5057.butchercraft.data.builders.recipes.ButcherBlockRecipeBuilder;
-import com.lance5057.butchercraft.data.builders.recipes.MeatHookRecipeBuilder;
 import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.DefaultMammalCarcassProfile;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.ICarcassProfile;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
+import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
 import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
+import com.vomiter.survivorsbutchercraft.data.recipe_builder.MeatHookRecipeBuilderAlt;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.items.Powder;
@@ -31,6 +34,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -139,7 +144,12 @@ public class SBRecipesProvider extends RecipeProvider {
         }
 
         for (Carcass carcass : Carcass.values()) {
-            MeatHookRecipeBuilder meatHookRecipeBuilder = MeatHookRecipeBuilder.shapedRecipe(carcass.carcassItem());
+            List<DropSpec> dropSpecs = new ArrayList<>();
+
+            MeatHookRecipeBuilderAlt meatHookRecipeBuilder = MeatHookRecipeBuilderAlt.shapedRecipe(
+                    Ingredient.of(carcass.carcassItem())
+                    //TFCIngredientHelper.getNotRotten(Ingredient.of(carcass.carcassItem()))
+            );
             for (int i = 0; i < carcass.bloodBucket(); i++) {
                 meatHookRecipeBuilder.tool(
                         Ingredient.of(Items.BUCKET),
@@ -160,12 +170,29 @@ public class SBRecipesProvider extends RecipeProvider {
                         standardModel(meatHookId(carcass.serializedName() + "/" + meatHookStage.previousStep())),
                         standardHookToolModel(meatHookStage.iconicTool())
                 );
+                var mainDrops = carcass.dropsFor(meatHookStage);
+                var supportDrops = carcass.dropsForSupport(meatHookStage);
+                var trivialDrops = carcass.dropsForTrivial(meatHookStage);
+                dropSpecs.addAll(mainDrops);
+                dropSpecs.addAll(supportDrops);
+                dropSpecs.addAll(trivialDrops);
             }
+
+            var resultSet = dropSpecs.stream().map(DropSpec::item).collect(Collectors.toSet());
+            if (carcass.getProfile() instanceof DefaultMammalCarcassProfile defaultMammalCarcassProfile){
+                resultSet.add(MeatMap.get(defaultMammalCarcassProfile.getMeatType(), MeatProduct.ORDINARY));
+            }
+            if(carcass.bloodBucket() > 0) resultSet.add(ButchercraftItems.BLOOD_FLUID_BUCKET.get());
+            resultSet.add(Items.BONE);
+            resultSet.forEach(item -> {
+                meatHookRecipeBuilder.JEIIngredient(Ingredient.of(item));
+            });
+
             meatHookRecipeBuilder.save(consumer, meatHookId(carcass.serializedName()));
         }
 
         /*
-        MeatHookRecipeBuilder.shapedRecipe(SBItems.CARCASSES.get(Carcass.YAK).get())
+        MeatHookRecipeBuilderAltAlt.shapedRecipe(SBItems.CARCASSES.get(Carcass.YAK).get())
                 .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
                         standardModel(meatHookId("yak/hooked")),
                         standardHookToolModel(Items.BUCKET))

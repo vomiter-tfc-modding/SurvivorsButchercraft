@@ -2,7 +2,6 @@ package com.vomiter.survivorsbutchercraft.common;
 
 import com.lance5057.butchercraft.items.ButcherKnifeItem;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
-import com.vomiter.survivorsbutchercraft.butchery.convert.ConvertResultManager;
 import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -22,7 +21,6 @@ public final class SBForgeEvents {
     }
 
     public static void onAddReloadListeners(AddReloadListenerEvent event) {
-        event.addListener(ConvertResultManager.INSTANCE);
     }
 
     public static void onLivingDrops(LivingDropsEvent event) {

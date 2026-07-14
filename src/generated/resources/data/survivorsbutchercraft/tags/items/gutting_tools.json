@@ -1,6 +1,15 @@
 {
   "values": [
     "butchercraft:gut_knife",
+    "survivorsbutchercraft:metal/gut_knife/bismuth_bronze",
+    "survivorsbutchercraft:metal/gut_knife/black_bronze",
+    "survivorsbutchercraft:metal/gut_knife/bronze",
+    "survivorsbutchercraft:metal/gut_knife/copper",
+    "survivorsbutchercraft:metal/gut_knife/wrought_iron",
+    "survivorsbutchercraft:metal/gut_knife/steel",
+    "survivorsbutchercraft:metal/gut_knife/black_steel",
+    "survivorsbutchercraft:metal/gut_knife/blue_steel",
+    "survivorsbutchercraft:metal/gut_knife/red_steel",
     {
       "id": "#tfc:knives",
       "required": false

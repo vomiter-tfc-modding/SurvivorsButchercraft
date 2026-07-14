@@ -1,0 +1,25 @@
+{
+  "type": "tfc:advanced_shaped_crafting",
+  "pattern": [
+    "X",
+    "Y"
+  ],
+  "key": {
+    "X": {
+      "item": "survivorsbutchercraft:metal/skinning_knife_head/steel"
+    },
+    "Y": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "stack": {
+      "item": "survivorsbutchercraft:metal/skinning_knife/steel"
+    },
+    "modifiers": [
+      "tfc:copy_forging_bonus"
+    ]
+  },
+  "input_row": 0,
+  "input_column": 0
+}

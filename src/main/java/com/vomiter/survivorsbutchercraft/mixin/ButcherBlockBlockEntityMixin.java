@@ -1,25 +1,23 @@
 package com.vomiter.survivorsbutchercraft.mixin;
 
-import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
 import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlockEntity;
-import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.adapter.ButcherBlockBucketAdapter;
-import com.vomiter.survivorsbutchercraft.adapter.MeatHookBucketAdapter;
+import com.vomiter.survivorsbutchercraft.adapter.TFCFoodAdapter;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
-import com.vomiter.survivorsbutchercraft.butchery.convert.ConvertResultManager;
+import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
-import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,6 +37,12 @@ import java.util.function.Consumer;
 public abstract class ButcherBlockBlockEntityMixin extends BlockEntity {
     @Shadow
     public abstract ItemStack getInsertedItem();
+
+    @Shadow
+    public int stage;
+
+    @Shadow
+    private Ingredient curTool;
 
     public ButcherBlockBlockEntityMixin(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
@@ -62,8 +66,7 @@ public abstract class ButcherBlockBlockEntityMixin extends BlockEntity {
                     remap = true)
     )
     private void sbtfc$addExtraDamage(ItemStack instance, int amount, LivingEntity living, Consumer<LivingEntity> consumer, Operation<Void> original){
-        int extra = ConvertResultManager.INSTANCE.getExtraDamage(instance);
-        original.call(instance, extra + amount, living, consumer);
+        original.call(instance, amount, living, consumer);
     }
 
     @WrapOperation(
@@ -88,25 +91,25 @@ public abstract class ButcherBlockBlockEntityMixin extends BlockEntity {
                 originalList.add(SBItems.HEADS_MALE.get(carcass).get().getDefaultInstance());
             }
         }
+        var ideal = Optional.ofNullable(ToolAlternative.getIdealTool(curTool)).orElse(Items.AIR);
+        boolean isIdeal = ToolAlternative.getIdealTool(ideal).test(tool);
         ObjectArrayList<ItemStack> newList = ObjectArrayList.of();
         originalList.forEach(originalItemStack -> {
-            var singleInput = originalItemStack.copyWithCount(1);
-            var matched = ConvertResultManager.INSTANCE.findMatchingResults(tool, singleInput);
-            if(matched.isEmpty()){
-                newList.add(originalItemStack.copy());
-                return;
-            }
-            for (int i = 0; i < originalItemStack.getCount(); i++) {
-                ConvertResultManager.INSTANCE.rollFrom(matched, random).ifPresent(convert -> {
-                    if(convert.keep()){
-                        Helpers.addOrMerge(newList, singleInput.copy());
-                    } else {
-                        Helpers.addOrMerge(newList, convert.to().copy());
+            if(isIdeal){
+                newList.add(originalItemStack);
+            } else {
+                var singleInput = originalItemStack.copyWithCount(1);
+                for (int i = 0; i < originalItemStack.getCount(); i++) {
+                    if(level.random.nextFloat() < 3/4f){
+                        newList.add(singleInput);
                     }
-                });
+                }
             }
         });
-        return newList;
+        return ObjectArrayList.wrap(
+                newList.stream().map(item -> TFCFoodAdapter.copyRotten(getInsertedItem(), item))
+                        .toArray(ItemStack[]::new)
+        );
     }
 
 }

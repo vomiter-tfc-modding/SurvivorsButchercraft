@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:leather_boots"
+    },
+    "F": {
+      "item": "butchercraft:lard"
+    },
+    "W": {
+      "item": "tfc:burlap_cloth"
+    }
+  },
+  "pattern": [
+    " F ",
+    "WBW"
+  ],
+  "result": {
+    "item": "butchercraft:boots"
+  },
+  "show_notification": true
+}

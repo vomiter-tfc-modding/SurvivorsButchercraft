@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "survivorsbutchercraft:item/metal/skinning_knife_head/bismuth_bronze"
+  }
+}

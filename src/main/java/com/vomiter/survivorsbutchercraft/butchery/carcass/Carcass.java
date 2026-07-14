@@ -18,6 +18,9 @@ public enum Carcass implements ICarcassProfile {
     COW(new CowCarcassProfile());
 
     private final ICarcassProfile profile;
+    public ICarcassProfile getProfile(){
+        return profile;
+    }
 
     Carcass(ICarcassProfile profile) {
         this.profile = profile;

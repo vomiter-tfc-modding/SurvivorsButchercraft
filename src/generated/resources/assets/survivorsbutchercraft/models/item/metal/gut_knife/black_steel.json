@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "survivorsbutchercraft:item/metal/gut_knife/black_steel"
+  }
+}

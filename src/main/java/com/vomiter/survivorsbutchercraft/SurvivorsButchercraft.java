@@ -1,6 +1,8 @@
 package com.vomiter.survivorsbutchercraft;
 
 import com.mojang.logging.LogUtils;
+import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
+import com.vomiter.survivorsbutchercraft.client.SBClientForgeEvents;
 import com.vomiter.survivorsbutchercraft.client.SBClientModEvents;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.common.SBForgeEvents;
@@ -37,10 +39,14 @@ public class SurvivorsButchercraft
         SBBlocks.BLOCKS.register(modBus);
         SBBlockEntityTypes.BLOCK_ENTITIES.register(modBus);
         SBCreativeTab.TABS.register(modBus);
+        modBus.addListener(ToolAlternative::setUp);
         SBForgeEvents.init();
 
         if(FMLEnvironment.dist == Dist.CLIENT){
             SBClientModEvents.init(modBus);
+            SBClientForgeEvents.init(modBus);
         }
     }
+
+
 }

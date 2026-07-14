@@ -1,0 +1,16 @@
+{
+  "type": "tfc:anvil",
+  "input": {
+    "tag": "forge:ingots/black_steel"
+  },
+  "result": {
+    "item": "survivorsbutchercraft:metal/skinning_knife_head/black_steel"
+  },
+  "tier": 5,
+  "rules": [
+    "punch_last",
+    "hit_second_last",
+    "upset_third_last"
+  ],
+  "apply_forging_bonus": true
+}

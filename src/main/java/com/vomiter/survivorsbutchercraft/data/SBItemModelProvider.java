@@ -7,6 +7,8 @@ import net.minecraft.server.packs.PackType;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.List;
+
 public class SBItemModelProvider extends ItemModelProvider {
     public SBItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, SurvivorsButchercraft.MODID, existingFileHelper);
@@ -16,10 +18,17 @@ public class SBItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         for (Metal.Default metal : Metal.Default.values()) {
             if (!metal.hasTools()) continue;
+            List.of(
+                    "butcher_knife",
+                    "skinning_knife",
+                    "bonesaw",
+                    "gut_knife"
+            ).forEach(s -> {
+                generatedItem("metal/" + s + "_head/" + metal.getSerializedName());
+                if(metal.equals(Metal.Default.WROUGHT_IRON)) return;
+                handheldItem("metal/" + s + "/" + metal.getSerializedName());
+            });
 
-            generatedItem("metal/butcher_knife_head/" + metal.getSerializedName());
-            if(metal.equals(Metal.Default.WROUGHT_IRON)) continue;
-            handheldItem("metal/butcher_knife/" + metal.getSerializedName());
         }
     }
 

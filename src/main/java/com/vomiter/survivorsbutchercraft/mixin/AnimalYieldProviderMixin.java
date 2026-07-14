@@ -6,8 +6,9 @@ import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.dries007.tfc.util.loot.AnimalYieldProvider;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,6 +20,19 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @Mixin(AnimalYieldProvider.class)
 public class AnimalYieldProviderMixin {
+    @WrapOperation(
+            method = "getFloat",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/player/Player;getAttributeValue(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D")
+    )
+    private double sbtfc$getAttack(Player instance, Attribute attribute, Operation<Double> original){
+        if(ThreadLocalFlags.dropLootForButchering.get() && !ThreadLocalFlags.carcass.get().isEmpty()) {
+            return 100;
+        }
+        return original.call(instance, attribute);
+    }
+
     @WrapOperation(
             method = "getFloat",
             at = @At(
@@ -42,7 +56,7 @@ public class AnimalYieldProviderMixin {
                             result.set(props.getEntity());
                         }
             });
-            if(result.get() != null) return (Entity)result.get();
+            if(result.get() != null) return result.get();
         }
         return original.call(instance, param);
     }

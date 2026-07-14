@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -26,20 +27,91 @@ public class SBItems {
     public static final Map<Carcass, RegistryObject<Item>> HEADS_MALE = new EnumMap<>(Carcass.class);
     public static final Map<Metal.Default, RegistryObject<Item>> BUTCHER_KNIVES = new EnumMap<>(Metal.Default.class);
     public static final Map<Metal.Default, RegistryObject<Item>> BUTCHER_KNIFE_HEADS = new EnumMap<>(Metal.Default.class);
+    public static final Map<Metal.Default, RegistryObject<Item>> SKINNING_KNIVES = new EnumMap<>(Metal.Default.class);
+    public static final Map<Metal.Default, RegistryObject<Item>> SKINNING_KNIFE_HEADS = new EnumMap<>(Metal.Default.class);
+    public static final Map<Metal.Default, RegistryObject<Item>> BONESAWS = new EnumMap<>(Metal.Default.class);
+    public static final Map<Metal.Default, RegistryObject<Item>> BONESAW_HEADS = new EnumMap<>(Metal.Default.class);
+    public static final Map<Metal.Default, RegistryObject<Item>> GUT_KNIVES = new EnumMap<>(Metal.Default.class);
+    public static final Map<Metal.Default, RegistryObject<Item>> GUT_KNIFE_HEADS = new EnumMap<>(Metal.Default.class);
 
 
     static {
         for (Metal.Default metal : Metal.Default.values()) {
             if(!metal.hasTools()) continue;
             BUTCHER_KNIFE_HEADS.put(metal, ITEMS.register("metal/butcher_knife_head/" + metal.getSerializedName(),
-                    () -> new Item(new Item.Properties())));
+                    () -> new Item(new Item.Properties().rarity(metal.getRarity()))));
             BUTCHER_KNIVES.put(metal, ITEMS.register("metal/butcher_knife/" + metal.getSerializedName(),
                     () -> new ButcherKnifeItem(
                             new Item.Properties()
                                     .rarity(metal.getRarity())
                                     .durability(metal.toolTier().getUses())
                     )));
+
+            SKINNING_KNIFE_HEADS.put(metal, ITEMS.register("metal/skinning_knife_head/" + metal.getSerializedName(),
+                    () -> new Item(new Item.Properties().rarity(metal.getRarity()))));
+            SKINNING_KNIVES.put(metal, ITEMS.register("metal/skinning_knife/" + metal.getSerializedName(),
+                    () -> new SwordItem(
+                            metal.toolTier(),
+                            0,0,
+                            new Item.Properties()
+                                    .rarity(metal.getRarity())
+                                    .durability(metal.toolTier().getUses())
+                    )));
+
+            BONESAW_HEADS.put(
+                    metal,
+                    ITEMS.register(
+                            "metal/bonesaw_head/" + metal.getSerializedName(),
+                            () -> new Item(
+                                    new Item.Properties()
+                                            .rarity(metal.getRarity())
+                            )
+                    )
+            );
+
+            BONESAWS.put(
+                    metal,
+                    ITEMS.register(
+                            "metal/bonesaw/" + metal.getSerializedName(),
+                            () -> new SwordItem(
+                                    metal.toolTier(),
+                                    0,
+                                    0,
+                                    new Item.Properties()
+                                            .rarity(metal.getRarity())
+                                            .durability(metal.toolTier().getUses())
+                            )
+                    )
+            );
+
+            GUT_KNIFE_HEADS.put(
+                    metal,
+                    ITEMS.register(
+                            "metal/gut_knife_head/" + metal.getSerializedName(),
+                            () -> new Item(
+                                    new Item.Properties()
+                                            .rarity(metal.getRarity())
+                            )
+                    )
+            );
+
+            GUT_KNIVES.put(
+                    metal,
+                    ITEMS.register(
+                            "metal/gut_knife/" + metal.getSerializedName(),
+                            () -> new SwordItem(
+                                    metal.toolTier(),
+                                    0,
+                                    0,
+                                    new Item.Properties()
+                                            .rarity(metal.getRarity())
+                                            .durability(metal.toolTier().getUses())
+                            )
+                    )
+            );
         }
+
+
 
         for (Carcass carcass : Carcass.values()) {
             CARCASSES.put(carcass, ITEMS.register("carcass/" + carcass.serializedName(),

@@ -1,6 +1,15 @@
 {
   "values": [
     "butchercraft:skinning_knife",
+    "survivorsbutchercraft:metal/skinning_knife/bismuth_bronze",
+    "survivorsbutchercraft:metal/skinning_knife/black_bronze",
+    "survivorsbutchercraft:metal/skinning_knife/bronze",
+    "survivorsbutchercraft:metal/skinning_knife/copper",
+    "survivorsbutchercraft:metal/skinning_knife/wrought_iron",
+    "survivorsbutchercraft:metal/skinning_knife/steel",
+    "survivorsbutchercraft:metal/skinning_knife/black_steel",
+    "survivorsbutchercraft:metal/skinning_knife/blue_steel",
+    "survivorsbutchercraft:metal/skinning_knife/red_steel",
     {
       "id": "#tfc:knives",
       "required": false

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "survivorsbutchercraft:item/metal/skinning_knife/bismuth_bronze"
+  }
+}

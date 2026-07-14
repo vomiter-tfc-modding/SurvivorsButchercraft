@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "survivorsbutchercraft:item/metal/bonesaw_head/black_steel"
+  }
+}

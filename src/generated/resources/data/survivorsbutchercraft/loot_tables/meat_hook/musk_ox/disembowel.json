@@ -22,6 +22,16 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
+          "name": "survivorsbutchercraft:meat_hook/musk_ox/support/disembowel"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
           "name": "survivorsbutchercraft:meat_hook/musk_ox/trivial/disembowel"
         }
       ],

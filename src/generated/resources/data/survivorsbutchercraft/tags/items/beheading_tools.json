@@ -1,6 +1,15 @@
 {
   "values": [
     "butchercraft:bone_saw",
+    "survivorsbutchercraft:metal/bonesaw/bismuth_bronze",
+    "survivorsbutchercraft:metal/bonesaw/black_bronze",
+    "survivorsbutchercraft:metal/bonesaw/bronze",
+    "survivorsbutchercraft:metal/bonesaw/copper",
+    "survivorsbutchercraft:metal/bonesaw/wrought_iron",
+    "survivorsbutchercraft:metal/bonesaw/steel",
+    "survivorsbutchercraft:metal/bonesaw/black_steel",
+    "survivorsbutchercraft:metal/bonesaw/blue_steel",
+    "survivorsbutchercraft:metal/bonesaw/red_steel",
     {
       "id": "#tfc:saws",
       "required": false

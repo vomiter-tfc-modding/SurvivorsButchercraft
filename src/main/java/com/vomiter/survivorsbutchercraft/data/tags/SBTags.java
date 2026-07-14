@@ -21,5 +21,7 @@ public class SBTags {
         public static TagKey<Item> BUTCHERY_SKIP_LOOT = create("butchery_skip_loot");
         public static TagKey<Item> BUTCHER_RAW_MEATS = create("foods/butchercraft_raw_meats");
         public static TagKey<Item> BUTCHER_SCRAPABLE = create("butcher_scrapable");
+        public static TagKey<Item> LINKED_SAUSAGE = create("linked_sausages");
+        public static TagKey<Item> LARGE_CARCASS = create("large_carcasses");
     }
 }
