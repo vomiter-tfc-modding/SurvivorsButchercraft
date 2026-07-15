@@ -5,6 +5,7 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
 import net.dries007.tfc.client.ClientHelpers;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
@@ -65,8 +66,11 @@ public class SBClientForgeEvents {
                     "tooltip.survivorsbutchercraft.ideal_tool",
                     idealItem.getDefaultInstance().getHoverName()
             );
-            Component text2 = Component.translatable("tooltip.survivorsbutchercraft.alt_note1");
-            Component text3 = Component.translatable("tooltip.survivorsbutchercraft.alt_note2");
+            Component text2 = Component.translatable("tooltip.survivorsbutchercraft.alt_note1")
+                    .withStyle(style -> style.withColor(ChatFormatting.GOLD));
+            Component text3 = Component.translatable("tooltip.survivorsbutchercraft.alt_note2")
+                    .withStyle(style -> style.withColor(ChatFormatting.GOLD));
+
             int textWidth = Math.max(
                     Math.max(
                             minecraft.font.width(text),

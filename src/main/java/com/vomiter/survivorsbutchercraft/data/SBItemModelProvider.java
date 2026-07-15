@@ -18,6 +18,7 @@ public class SBItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         for (Metal.Default metal : Metal.Default.values()) {
             if (!metal.hasTools()) continue;
+
             List.of(
                     "butcher_knife",
                     "skinning_knife",

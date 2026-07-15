@@ -7,7 +7,7 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.Raw2CookedMap;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
-import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.items.TFCItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -134,6 +134,9 @@ public class SBTagProviders {
                             SBTags.Items.createTFC("knives"),
                             SBTags.Items.createTFC("axes")
                     );
+            tag(SBTags.Items.TALLOW_INGREDIENT)
+                    .add(TFCItems.BLUBBER.get())
+                    .add(ButchercraftItems.LARD.get());
         }
     }
 

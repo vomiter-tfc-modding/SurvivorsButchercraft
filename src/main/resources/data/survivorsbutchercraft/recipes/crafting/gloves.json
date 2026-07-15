@@ -6,7 +6,7 @@
       "item": "minecraft:leather"
     },
     "F": {
-      "item": "butchercraft:lard"
+      "tag":"survivorsbutchercraft:tallow_ingredients"
     },
     "W": {
       "item": "tfc:burlap_cloth"

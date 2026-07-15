@@ -6,43 +6,22 @@
   "group": "",
   "jei": [
     {
-      "item": "butchercraft:heart"
+      "item": "butchercraft:leather_scrap"
     },
     {
-      "item": "butchercraft:lamb_ribs"
-    },
-    {
-      "item": "butchercraft:liver"
-    },
-    {
-      "item": "butchercraft:sinew"
+      "item": "butchercraft:fat"
     },
     {
       "item": "survivorsbutchercraft:hide/sheep"
     },
     {
-      "item": "butchercraft:leather_scrap"
+      "item": "butchercraft:heart"
     },
     {
-      "item": "butchercraft:stomach"
-    },
-    {
-      "item": "butchercraft:kidney"
-    },
-    {
-      "item": "survivorsbutchercraft:head/sheep"
-    },
-    {
-      "item": "butchercraft:lung"
-    },
-    {
-      "item": "butchercraft:lamb_scraps"
+      "item": "butchercraft:sinew"
     },
     {
       "item": "butchercraft:tripe"
-    },
-    {
-      "item": "tfc:food/mutton"
     },
     {
       "item": "butchercraft:blood_fluid_bucket"
@@ -51,7 +30,31 @@
       "item": "minecraft:bone"
     },
     {
-      "item": "butchercraft:fat"
+      "item": "butchercraft:liver"
+    },
+    {
+      "item": "butchercraft:lamb_ribs"
+    },
+    {
+      "item": "butchercraft:kidney"
+    },
+    {
+      "item": "survivorsbutchercraft:head_male/sheep"
+    },
+    {
+      "item": "butchercraft:stomach"
+    },
+    {
+      "item": "butchercraft:lung"
+    },
+    {
+      "item": "tfc:food/mutton"
+    },
+    {
+      "item": "butchercraft:lamb_scraps"
+    },
+    {
+      "item": "survivorsbutchercraft:head/sheep"
     },
     {
       "item": "butchercraft:lamb_roast"

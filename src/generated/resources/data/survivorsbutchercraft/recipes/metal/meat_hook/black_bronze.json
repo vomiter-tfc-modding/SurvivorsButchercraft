@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfc:metal/chain/black_bronze"
+    },
+    "R": {
+      "item": "tfc:metal/rod/black_bronze"
+    }
+  },
+  "pattern": [
+    "RR",
+    "CC"
+  ],
+  "result": {
+    "item": "survivorsbutchercraft:metal/meat_hook/black_bronze"
+  },
+  "show_notification": true
+}

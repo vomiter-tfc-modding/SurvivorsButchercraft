@@ -37,6 +37,7 @@ public class SurvivorsButchercraft
         modBus.addListener(SBDataGenerator::gatherData);
         SBItems.ITEMS.register(modBus);
         SBBlocks.BLOCKS.register(modBus);
+        modBus.addListener(SBBlocks::onCommonSetup);
         SBBlockEntityTypes.BLOCK_ENTITIES.register(modBus);
         SBCreativeTab.TABS.register(modBus);
         modBus.addListener(ToolAlternative::setUp);

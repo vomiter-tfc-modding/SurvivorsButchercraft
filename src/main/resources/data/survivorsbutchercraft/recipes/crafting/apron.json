@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "F": {
-      "item": "butchercraft:lard"
+      "tag":"survivorsbutchercraft:tallow_ingredients"
     },
     "S": {
-      "item": "minecraft:string"
+      "tag": "forge:string"
     },
     "W": {
       "item": "tfc:burlap_cloth"

@@ -7,6 +7,7 @@ import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloa
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
 import com.lance5057.butchercraft.data.builders.recipes.ButcherBlockRecipeBuilder;
 import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
+import com.lance5057.butchercraft.items.ButcherKnifeItem;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.DefaultMammalCarcassProfile;
@@ -15,19 +16,27 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
 import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
 import com.vomiter.survivorsbutchercraft.data.recipe_builder.MeatHookRecipeBuilderAlt;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.common.recipes.ingredients.FluidIngredient;
 import net.dries007.tfc.common.recipes.ingredients.FluidStackIngredient;
+import net.dries007.tfc.util.Metal;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -38,6 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class SBRecipesProvider extends RecipeProvider {
@@ -92,6 +102,20 @@ public class SBRecipesProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+        for (Metal.Default metal : Metal.Default.values()) {
+            if(!metal.hasTools()) continue;
+            ShapedRecipeBuilder
+                    .shaped(RecipeCategory.MISC, SBItems.MEAT_HOOKS.get(metal).get())
+                    .pattern("RR")
+                    .pattern("CC")
+                    .define('R', TFCItems.METAL_ITEMS.get(metal).get(Metal.ItemType.ROD).get())
+                    .define('C', TFCBlocks.METALS.get(metal).get(Metal.BlockType.CHAIN).get())
+                    .unlockedBy("have_butcher_knife", InventoryChangeTrigger.TriggerInstance.hasItems(
+                            SBItems.BUTCHER_KNIVES.values().stream().map(Supplier::get).toArray(Item[]::new)
+                    ))
+                    .save(consumer);
+        }
+
         ButcherBlockRecipeBuilder.shapedRecipe(ButchercraftItems.TRIPE.get())
                 .tool(
                         Ingredient.of(Items.WATER_BUCKET),
@@ -184,6 +208,7 @@ public class SBRecipesProvider extends RecipeProvider {
             }
             if(carcass.bloodBucket() > 0) resultSet.add(ButchercraftItems.BLOOD_FLUID_BUCKET.get());
             resultSet.add(Items.BONE);
+            if (carcass.hasMaleHead()) resultSet.add(SBItems.HEADS_MALE.get(carcass).get());
             resultSet.forEach(item -> {
                 meatHookRecipeBuilder.JEIIngredient(Ingredient.of(item));
             });

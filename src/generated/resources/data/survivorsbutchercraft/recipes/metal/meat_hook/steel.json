@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfc:metal/chain/steel"
+    },
+    "R": {
+      "item": "tfc:metal/rod/steel"
+    }
+  },
+  "pattern": [
+    "RR",
+    "CC"
+  ],
+  "result": {
+    "item": "survivorsbutchercraft:metal/meat_hook/steel"
+  },
+  "show_notification": true
+}

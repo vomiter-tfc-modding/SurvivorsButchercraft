@@ -6,7 +6,13 @@
   "group": "",
   "jei": [
     {
-      "item": "survivorsbutchercraft:hide/pig"
+      "item": "butchercraft:leather_scrap"
+    },
+    {
+      "item": "butchercraft:fat"
+    },
+    {
+      "item": "butchercraft:pork_roast"
     },
     {
       "item": "butchercraft:pork_scraps"
@@ -15,46 +21,43 @@
       "item": "butchercraft:heart"
     },
     {
-      "item": "butchercraft:liver"
-    },
-    {
       "item": "butchercraft:sinew"
-    },
-    {
-      "item": "butchercraft:leather_scrap"
-    },
-    {
-      "item": "butchercraft:stomach"
-    },
-    {
-      "item": "butchercraft:kidney"
-    },
-    {
-      "item": "butchercraft:lung"
-    },
-    {
-      "item": "butchercraft:pork_roast"
-    },
-    {
-      "item": "tfc:food/pork"
     },
     {
       "item": "butchercraft:tripe"
     },
     {
-      "item": "butchercraft:pork_ribs"
-    },
-    {
       "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "survivorsbutchercraft:head/pig"
     },
     {
       "item": "minecraft:bone"
     },
     {
-      "item": "butchercraft:fat"
+      "item": "butchercraft:liver"
+    },
+    {
+      "item": "butchercraft:kidney"
+    },
+    {
+      "item": "butchercraft:stomach"
+    },
+    {
+      "item": "butchercraft:lung"
+    },
+    {
+      "item": "tfc:food/pork"
+    },
+    {
+      "item": "survivorsbutchercraft:head_male/pig"
+    },
+    {
+      "item": "survivorsbutchercraft:hide/pig"
+    },
+    {
+      "item": "butchercraft:pork_ribs"
+    },
+    {
+      "item": "survivorsbutchercraft:head/pig"
     }
   ],
   "tools": [

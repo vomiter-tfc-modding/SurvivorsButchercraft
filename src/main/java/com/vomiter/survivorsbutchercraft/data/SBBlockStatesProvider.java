@@ -1,26 +1,49 @@
 package com.vomiter.survivorsbutchercraft.data;
 
+import com.lance5057.butchercraft.workstations.hook.MeatHookBlock;
+import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.common.block.SkullLikeBlock;
 import com.vomiter.survivorsbutchercraft.common.block.WallSkullLikeBlock;
 import com.vomiter.survivorsbutchercraft.common.registry.SBBlocks;
+import net.dries007.tfc.util.Metal;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Arrays;
 
 public class SBBlockStatesProvider extends BlockStateProvider {
+    ExistingFileHelper existingFileHelper;
     public SBBlockStatesProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, SurvivorsButchercraft.MODID, exFileHelper);
+        this.existingFileHelper = exFileHelper;
+
     }
 
     @Override
     protected void registerStatesAndModels() {
+        SBBlocks.MEAT_HOOKS.forEach((metal, meatHook) -> {
+            meatHookStates(
+                    meatHook.get(),
+                    "block/" + meatHook.getId().getPath(),
+                    Helpers.id("tfc", "block/metal/smooth/" + metal.getSerializedName()),
+                    MeatHookBlock.CARCASS_HOOKED,
+                    MeatHookBlock.FACING,
+                    MeatHookBlock.WATERLOGGED
+            );
+        });
+
         for (Carcass carcass : Carcass.values()) {
             horizontalBlock(
                     SBBlocks.HIDE_CARPETS.get(carcass).get(),
@@ -83,6 +106,71 @@ public class SBBlockStatesProvider extends BlockStateProvider {
                     .rotationY((y + 180) % 360)
                     .addModel();
         }
+    }
+
+    private void meatHookStates(
+            Block block,
+            String modelName,
+            ResourceLocation modelTexture,
+            BooleanProperty carcassHookedProperty,
+            DirectionProperty facingProperty,
+            BooleanProperty waterloggedProperty
+    ) {
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+        trackTexture(modelTexture);
+        var modelFile = models()
+                .getBuilder(modelName)
+                .parent(new ModelFile.UncheckedModelFile(
+                        new ResourceLocation("butchercraft", "block/meat_hook")
+                ))
+                .texture("0", modelTexture)
+                .texture("particle", modelTexture);
+
+        for (boolean carcassHooked : new boolean[]{false, true}) {
+            for (Direction facing : Direction.Plane.HORIZONTAL) {
+                for (boolean waterlogged : new boolean[]{false, true}) {
+                    builder.partialState()
+                            .with(carcassHookedProperty, carcassHooked)
+                            .with(facingProperty, facing)
+                            .with(waterloggedProperty, waterlogged)
+                            .modelForState()
+                            .modelFile(modelFile)
+                            .rotationY(getHorizontalRotation(facing))
+                            .addModel();
+                }
+            }
+        }
+    }
+
+    private int getHorizontalRotation(Direction direction) {
+        return switch (direction) {
+            case NORTH -> 0;
+            case EAST -> 90;
+            case SOUTH -> 180;
+            case WEST -> 270;
+            default -> throw new IllegalArgumentException(
+                    "Direction must be horizontal: " + direction
+            );
+        };
+    }
+
+    private void trackTexture(ResourceLocation pathNoExt) {
+        existingFileHelper.trackGenerated(
+                pathNoExt,
+                PackType.CLIENT_RESOURCES,
+                ".png",
+                "textures"
+        );
+    }
+
+
+    private void trackTexture(String pathNoExt) {
+        existingFileHelper.trackGenerated(
+                modLoc("block/" + pathNoExt),
+                PackType.CLIENT_RESOURCES,
+                ".png",
+                "textures"
+        );
     }
 
 }

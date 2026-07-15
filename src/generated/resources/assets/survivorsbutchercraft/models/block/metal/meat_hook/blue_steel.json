@@ -1,0 +1,7 @@
+{
+  "parent": "butchercraft:block/meat_hook",
+  "textures": {
+    "0": "tfc:block/metal/smooth/blue_steel",
+    "particle": "tfc:block/metal/smooth/blue_steel"
+  }
+}

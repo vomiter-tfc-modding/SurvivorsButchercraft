@@ -19,6 +19,7 @@ public class ToolAlternative {
     Not safe and ugly, but I guess it's efficient enough.
      */
     public static Item getIdealTool(Ingredient curTool){
+        if(curTool == null) return null;
         for (Item item : TOOL_MAP.keySet()) {
             if(curTool.test(item.getDefaultInstance())) return item;
         }

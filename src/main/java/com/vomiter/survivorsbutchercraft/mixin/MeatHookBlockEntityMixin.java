@@ -78,7 +78,9 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity {
                             "ILnet/minecraft/world/entity/LivingEntity;" +
                             "Ljava/util/function/Consumer;" +
                             ")V",
-                    remap = true)
+                    remap = true,
+                    ordinal = 0
+            )
     )
     private void sbtfc$addExtraDamage(ItemStack instance, int amount, LivingEntity living, Consumer<LivingEntity> consumer, Operation<Void> original){
         var ideal = ToolAlternative.getIdealTool(curTool);

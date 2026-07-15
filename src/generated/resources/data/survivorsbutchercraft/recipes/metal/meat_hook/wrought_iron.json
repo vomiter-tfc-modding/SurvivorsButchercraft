@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfc:metal/chain/wrought_iron"
+    },
+    "R": {
+      "item": "tfc:metal/rod/wrought_iron"
+    }
+  },
+  "pattern": [
+    "RR",
+    "CC"
+  ],
+  "result": {
+    "item": "survivorsbutchercraft:metal/meat_hook/wrought_iron"
+  },
+  "show_notification": true
+}

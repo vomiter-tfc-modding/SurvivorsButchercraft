@@ -5,14 +5,18 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AnimalYieldProviderMixin",
+    "BCMaterialMixin",
+    "BlockEntityTypeAccessor",
     "ButcherBlockBlockEntityMixin",
     "ButcherBlockEntityAccessor",
     "ButchercraftForgeEventsMixin",
     "ButcherKnifeItemMixin",
     "InteractionManagerMixin",
+    "KnifeItemMixin",
     "MeatHookBlockEntityAccessor",
     "MeatHookBlockEntityMixin",
     "MeatHookRendererMixin",
+    "MobEffectInstanceAccessor",
     "RecipeManagerMixin"
   ],
   "client": [
