@@ -3,11 +3,16 @@ package com.vomiter.survivorsbutchercraft.common;
 import com.lance5057.butchercraft.ButchercraftMobEffects;
 import com.lance5057.butchercraft.effects.SoapableMobEffect;
 import com.lance5057.butchercraft.items.ButcherKnifeItem;
+import com.vomiter.survivorsabilities.core.SAEffects;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.mixin.MobEffectInstanceAccessor;
 import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
+import net.dries007.tfc.common.entities.predator.Predator;
 import net.dries007.tfc.common.fluids.TFCFluids;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +20,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -26,7 +32,7 @@ public final class SBForgeEvents {
         MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onAddReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onLivingDrops);
         MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onPlayerTick);
-
+        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::agitatePredators);
     }
 
     public static void onAddReloadListeners(AddReloadListenerEvent event) {
@@ -86,4 +92,16 @@ public final class SBForgeEvents {
         }
         return false;
     }
+
+    public static void agitatePredators(LivingHurtEvent event) {
+        Entity var2 = event.getSource().getDirectEntity();
+        if (var2 instanceof Predator z) {
+            if (event.getEntity().hasEffect(ButchercraftMobEffects.BLOODY.get())) {
+                z.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 300, 0));
+                z.addEffect(new MobEffectInstance(SAEffects.AGITATION.get(), 20 * 60 * 20, 0));
+            }
+        }
+
+    }
+
 }

@@ -54,7 +54,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:terrafirmacraft-302973:6835820")
     implementation fg.deobf("curse.maven:patchouli-306770:4636277")
-    implementation fg.deobf("curse.maven:survivors-abilities-1354890:7159384")
+    implementation fg.deobf("curse.maven:survivors-abilities-1354890:8478410")
     implementation fg.deobf("curse.maven:butchercraft-265715:6058842")
 }
 

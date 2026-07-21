@@ -43,7 +43,7 @@ public class ButcherKnifeItemMixin {
                     target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;" +
                             "getLootTable(Lnet/minecraft/resources/ResourceLocation;)" +
                             "Lnet/minecraft/world/level/storage/loot/LootTable;",
-                    remap = false
+                    remap = true
             ))
     private LootTable sbtfc$redirectLoottable(
             LootDataManager instance,
