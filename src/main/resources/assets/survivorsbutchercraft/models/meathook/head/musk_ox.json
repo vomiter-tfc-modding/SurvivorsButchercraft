@@ -1,0 +1,74 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "survivorsbutchercraft:models/meathook/musk_ox/musk_ox_young"
+	},
+	"elements": [
+		{
+			"name": "body_neck_head_snout_cube0",
+			"from": [5, -0.19513, 0.92442],
+			"to": [11, 4.80487, 6.92442],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 3, 3]},
+			"faces": {
+				"north": {"uv": [1.5, 15.375, 0.75, 16], "texture": "#0"},
+				"east": {"uv": [2.25, 15.375, 1.5, 16], "texture": "#0"},
+				"south": {"uv": [3, 15.375, 2.25, 16], "texture": "#0"},
+				"west": {"uv": [0.75, 15.375, 0, 16], "texture": "#0"},
+				"up": {"uv": [1.5, 14.625, 0.75, 15.375], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [2.25, 15.375, 1.5, 14.625], "texture": "#0"}
+			}
+		},
+		{
+			"name": "body_neck_head_cube0",
+			"from": [4, 0, 6],
+			"to": [12, 7, 13],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 6, 11]},
+			"faces": {
+				"north": {"uv": [8.875, 0.875, 7.875, 1.75], "texture": "#0"},
+				"east": {"uv": [9.75, 0.875, 8.875, 1.75], "texture": "#0"},
+				"south": {"uv": [10.75, 0.875, 9.75, 1.75], "texture": "#0"},
+				"west": {"uv": [7.875, 0.875, 7, 1.75], "texture": "#0"},
+				"up": {"uv": [8.875, 0, 7.875, 0.875], "texture": "#0"},
+				"down": {"uv": [9.875, 0.875, 8.875, 0], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [70, 0, 0],
+			"translation": [0, 4, 4.5],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [70, 0, 0],
+			"translation": [0, 4, 4.5],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 120, 0],
+			"translation": [0, 8, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 120, 0],
+			"translation": [0, 8, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"ground": {
+			"translation": [0, 5, 0]
+		},
+		"gui": {
+			"rotation": [21, 145, 0],
+			"translation": [0, 3.75, 0]
+		},
+		"head": {
+			"translation": [0, 9, 0],
+			"scale": [2, 2, 2]
+		},
+		"fixed": {
+			"translation": [0, 4, 0]
+		}
+	}
+}

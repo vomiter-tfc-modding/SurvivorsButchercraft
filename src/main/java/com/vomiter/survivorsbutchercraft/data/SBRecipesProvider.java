@@ -120,7 +120,7 @@ public class SBRecipesProvider extends RecipeProvider {
                                         16,
                                         true,
                                         SBButcherBlockLootTables.GOAT_HEAD,
-                                        layFlatModel(head.get()),
+                                        standardModel(ResourceLocation.fromNamespaceAndPath(head.getId().getNamespace(), "meathook/" + head.getId().getPath())),
                                         standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
                                 )
                                 .JEIIngredient(Ingredient.of(ButchercraftItems.BRAIN.get()))
@@ -136,7 +136,7 @@ public class SBRecipesProvider extends RecipeProvider {
                             16,
                             true,
                             SBButcherBlockLootTables.BRAIN,
-                            layFlatModel(head.get()),
+                            standardModel(ResourceLocation.fromNamespaceAndPath(head.getId().getNamespace(), "meathook/" + head.getId().getPath())),
                             standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
                     )
                     .JEIIngredient(Ingredient.of(ButchercraftItems.BRAIN.get()))

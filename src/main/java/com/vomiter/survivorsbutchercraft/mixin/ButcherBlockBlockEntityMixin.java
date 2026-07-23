@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.vomiter.survivorsbutchercraft.adapter.ButcherBlockBucketAdapter;
 import com.vomiter.survivorsbutchercraft.adapter.TFCFoodAdapter;
+import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -31,7 +32,21 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 @Mixin(value = ButcherBlockBlockEntity.class, remap = false)
-public abstract class ButcherBlockBlockEntityMixin extends BlockEntity {
+public abstract class ButcherBlockBlockEntityMixin extends BlockEntity implements IButcherBlock {
+
+    public int sbtfcInterface$getStage(){
+        return stage;
+    }
+
+    public Ingredient sbtfcInterface$getCurTool(){
+        return curTool;
+    }
+
+    public ItemStack sbtfcInterface$getInserted(){
+        return getInsertedItem();
+    }
+
+
     @Shadow
     public abstract ItemStack getInsertedItem();
 

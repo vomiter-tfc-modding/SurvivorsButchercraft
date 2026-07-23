@@ -4,7 +4,9 @@ import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemU
 import com.lance5057.butchercraft.workstations.hook.HookRecipe;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.Optional;
@@ -23,4 +25,6 @@ public interface MeatHookBlockEntityAccessor {
     @Invoker("dropLoot")
     void sbtfc$dropLoot(AnimatedRecipeItemUse tool, Player player);
 
+    @Accessor("curTool")
+    Ingredient sbtfc$getCurTool();
 }

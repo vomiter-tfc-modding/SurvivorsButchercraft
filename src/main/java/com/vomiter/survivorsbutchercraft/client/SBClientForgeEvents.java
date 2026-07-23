@@ -1,8 +1,7 @@
 package com.vomiter.survivorsbutchercraft.client;
 
-import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
-import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
+import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
 import net.dries007.tfc.client.ClientHelpers;
 import net.minecraft.ChatFormatting;
@@ -14,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
@@ -21,7 +21,7 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 
-import java.util.Arrays;
+import java.util.Optional;
 
 public class SBClientForgeEvents {
     public static void init(IEventBus bus){
@@ -128,16 +128,9 @@ public class SBClientForgeEvents {
     }
 
 
-    private static void renderMeatHookToolTip(Player player, MeatHookBlockEntity meatHookBlockEntity, RenderGuiOverlayEvent.Post event){
-        var stage = meatHookBlockEntity.stage;
-        var carcass = Arrays.stream(Carcass.values())
-                .filter(carcass1 -> meatHookBlockEntity.getInsertedItem().is(carcass1.carcassItem()))
-                .findFirst()
-                .orElse(null);
-        if(carcass == null) return;
-        var parsedStage = Math.max(0, stage - carcass.bloodBucket() + 1);
-        if(parsedStage == 0) return;
-        var idealItem = MeatHookStage.values()[parsedStage].iconicTool();
+    private static void renderMeatHookToolTip(Player player, IButcherBlock meatHookBlockEntity, RenderGuiOverlayEvent.Post event){
+        var idealItem = Optional.ofNullable(ToolAlternative.getIdealTool(meatHookBlockEntity.sbtfcInterface$getCurTool())).orElse(Items.AIR);
+        if (idealItem.getDefaultInstance().isEmpty()) return;
         if(idealItem instanceof BucketItem) return;
         var mainHandItem = player.getMainHandItem();
         var idealItems = ToolAlternative.getIdealTool(idealItem);
@@ -162,7 +155,7 @@ public class SBClientForgeEvents {
                 if(minecraft.level == null) return;
                 if(targetedPos == null) return;
                 final BlockEntity targetedBlockEntity = minecraft.level.getBlockEntity(targetedPos);
-                if(targetedBlockEntity instanceof MeatHookBlockEntity meatHookBlockEntity){
+                if(targetedBlockEntity instanceof IButcherBlock meatHookBlockEntity){
                     renderMeatHookToolTip(player, meatHookBlockEntity, event);
                 }
             }
