@@ -5,11 +5,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.vomiter.survivorsbutchercraft.adapter.ButcherBlockBucketAdapter;
 import com.vomiter.survivorsbutchercraft.adapter.TFCFoodAdapter;
-import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
-import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
-import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -85,12 +82,6 @@ public abstract class ButcherBlockBlockEntityMixin extends BlockEntity {
         var random = getLevel().random;
         var originalList = original.call(instance, params);
         originalList.removeIf(stack -> stack.is(SBTags.Items.BUTCHERY_SKIP_LOOT));
-        var carcass = Carcass.getCarcassFromItem(getInsertedItem().getItem());
-        if(carcass != null && carcass.hasMaleHead() && CarcassDataHelper.isMale(getInsertedItem())){
-            if(originalList.removeIf(item -> item.is(SBItems.HEADS.get(carcass).get()))){
-                originalList.add(SBItems.HEADS_MALE.get(carcass).get().getDefaultInstance());
-            }
-        }
         var ideal = Optional.ofNullable(ToolAlternative.getIdealTool(curTool)).orElse(Items.AIR);
         boolean isIdeal = ToolAlternative.getIdealTool(ideal).test(tool);
         ObjectArrayList<ItemStack> newList = ObjectArrayList.of();
@@ -100,7 +91,7 @@ public abstract class ButcherBlockBlockEntityMixin extends BlockEntity {
             } else {
                 var singleInput = originalItemStack.copyWithCount(1);
                 for (int i = 0; i < originalItemStack.getCount(); i++) {
-                    if(level.random.nextFloat() < 3/4f){
+                    if(random.nextFloat() < 3/4f){
                         newList.add(singleInput);
                     }
                 }

@@ -14,9 +14,9 @@ public class SBBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES
             = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SurvivorsButchercraft.MODID);
 
-    public static final RegistryObject<BlockEntityType<SkullLikeBlockEntity>> SKULL_LIKE =
+    public static final RegistryObject<BlockEntityType<SkullLikeBlockEntity>> DECAY_SKULL_LIKE =
             BLOCK_ENTITIES.register(
-                    "skull_like",
+                    "decay_skull_like",
                     () -> BlockEntityType.Builder.of(
                             SkullLikeBlockEntity::new,
                             Stream.of(
@@ -28,6 +28,15 @@ public class SBBlockEntityTypes {
                                     .flatMap(s -> s)
                                     .map(RegistryObject::get)
                                     .toArray(Block[]::new)
+                    ).build(null)
+            );
+
+
+    public static final RegistryObject<BlockEntityType<SkullLikeBlockEntity>> SKULL_LIKE =
+            BLOCK_ENTITIES.register(
+                    "skull_like",
+                    () -> BlockEntityType.Builder.of(
+                            SkullLikeBlockEntity::new
                     ).build(null)
             );
 }

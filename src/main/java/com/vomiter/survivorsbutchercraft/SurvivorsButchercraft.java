@@ -6,14 +6,14 @@ import com.vomiter.survivorsbutchercraft.client.SBClientForgeEvents;
 import com.vomiter.survivorsbutchercraft.client.SBClientModEvents;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.common.SBForgeEvents;
-import com.vomiter.survivorsbutchercraft.common.registry.SBBlockEntityTypes;
-import com.vomiter.survivorsbutchercraft.common.registry.SBBlocks;
-import com.vomiter.survivorsbutchercraft.common.registry.SBCreativeTab;
-import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
+import com.vomiter.survivorsbutchercraft.common.ingredient.NotPreserved;
+import com.vomiter.survivorsbutchercraft.common.registry.*;
 import com.vomiter.survivorsbutchercraft.data.SBDataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
@@ -41,6 +41,7 @@ public class SurvivorsButchercraft
         SBBlockEntityTypes.BLOCK_ENTITIES.register(modBus);
         SBCreativeTab.TABS.register(modBus);
         modBus.addListener(ToolAlternative::setUp);
+        modBus.addListener(this::onCommonSetup);
         SBForgeEvents.init();
 
         if(FMLEnvironment.dist == Dist.CLIENT){
@@ -49,5 +50,11 @@ public class SurvivorsButchercraft
         }
     }
 
+    public void onCommonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            SBFoodTraits.bootstrap();
+            CraftingHelper.register(Helpers.id("not_preserved"), NotPreserved.SERIALIZER);
+        });
+    }
 
 }

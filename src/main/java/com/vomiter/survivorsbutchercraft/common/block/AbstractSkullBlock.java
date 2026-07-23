@@ -1,15 +1,18 @@
 package com.vomiter.survivorsbutchercraft.common.block;
 
+import net.dries007.tfc.common.items.TFCItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractSkullBlock  extends BaseEntityBlock {
+public abstract class AbstractSkullBlock extends BaseEntityBlock {
     protected AbstractSkullBlock(Properties p_49224_) {
         super(p_49224_);
     }
@@ -19,6 +22,11 @@ public abstract class AbstractSkullBlock  extends BaseEntityBlock {
         return false;
     }
 
+    public static boolean isPreservative(ItemStack stack){
+        if(stack.is(TFCItems.GLUE.get())) return true;
+
+        return false;
+    }
 
     @Override
     public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {

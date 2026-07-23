@@ -4,6 +4,7 @@ import com.lance5057.butchercraft.items.ButcherKnifeItem;
 import com.lance5057.butchercraft.items.CarcassItem;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.common.item.DecaySkullLikeItem;
 import com.vomiter.survivorsbutchercraft.common.item.SkullLikeItem;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import net.dries007.tfc.common.TFCTags;
@@ -138,14 +139,14 @@ public class SBItems {
             CARCASSES.put(carcass, ITEMS.register("carcass/" + carcass.serializedName(),
                     () -> new CarcassItem(new Item.Properties().stacksTo(1))));
             HEADS.put(carcass, ITEMS.register("head/" + carcass.serializedName(),
-                    () -> new SkullLikeItem(
+                    () -> new DecaySkullLikeItem(
                             SBBlocks.HEADS.get(carcass).get(),
                             SBBlocks.WALL_HEADS.get(carcass).get(),
                             new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
 
             if(carcass.hasMaleHead()) {
                 HEADS_MALE.put(carcass, ITEMS.register("head_male/" + carcass.serializedName(),
-                        () -> new SkullLikeItem(
+                        () -> new DecaySkullLikeItem(
                                 SBBlocks.HEADS_MALE.get(carcass).get(),
                                 SBBlocks.WALL_HEADS_MALE.get(carcass).get(),
                                 new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));

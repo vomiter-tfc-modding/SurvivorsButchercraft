@@ -16,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RotationSegment;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,11 +26,15 @@ import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEntity> {
+public class SkullLikeRenderer implements BlockEntityRenderer<BlockEntity> {
 
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(
                 SBBlockEntityTypes.SKULL_LIKE.get(),
+                SkullLikeRenderer::new
+        );
+        event.registerBlockEntityRenderer(
+                SBBlockEntityTypes.DECAY_SKULL_LIKE.get(),
                 SkullLikeRenderer::new
         );
     }
@@ -41,7 +46,7 @@ public class SkullLikeRenderer implements BlockEntityRenderer<SkullLikeBlockEnti
     }
 
     @Override
-    public void render(SkullLikeBlockEntity be, float partialTick, PoseStack pose,
+    public void render(BlockEntity be, float partialTick, PoseStack pose,
                        @NotNull MultiBufferSource buffers, int packedLight, int packedOverlay) {
 
         var level = be.getLevel();

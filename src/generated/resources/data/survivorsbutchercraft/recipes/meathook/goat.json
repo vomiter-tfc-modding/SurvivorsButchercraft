@@ -6,22 +6,40 @@
   "group": "",
   "jei": [
     {
+      "item": "survivorsbutchercraft:head/goat"
+    },
+    {
       "item": "butchercraft:goat_scraps"
     },
     {
-      "item": "survivorsbutchercraft:hide/goat"
+      "item": "butchercraft:blood_fluid_bucket"
     },
     {
-      "item": "butchercraft:liver"
+      "item": "butchercraft:heart"
     },
     {
-      "item": "butchercraft:stomach"
+      "item": "butchercraft:leather_scrap"
+    },
+    {
+      "item": "butchercraft:kidney"
     },
     {
       "item": "minecraft:bone"
     },
     {
-      "item": "butchercraft:leather_scrap"
+      "item": "survivorsbutchercraft:hide/goat"
+    },
+    {
+      "item": "tfc:food/chevon"
+    },
+    {
+      "item": "butchercraft:liver"
+    },
+    {
+      "item": "butchercraft:fat"
+    },
+    {
+      "item": "butchercraft:sinew"
     },
     {
       "item": "butchercraft:tripe"
@@ -30,31 +48,13 @@
       "item": "butchercraft:goat_ribs"
     },
     {
-      "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "butchercraft:kidney"
-    },
-    {
-      "item": "butchercraft:heart"
-    },
-    {
-      "item": "butchercraft:fat"
-    },
-    {
       "item": "butchercraft:lung"
     },
     {
+      "item": "butchercraft:stomach"
+    },
+    {
       "item": "butchercraft:goat_roast"
-    },
-    {
-      "item": "butchercraft:sinew"
-    },
-    {
-      "item": "survivorsbutchercraft:head/goat"
-    },
-    {
-      "item": "tfc:food/chevon"
     }
   ],
   "tools": [

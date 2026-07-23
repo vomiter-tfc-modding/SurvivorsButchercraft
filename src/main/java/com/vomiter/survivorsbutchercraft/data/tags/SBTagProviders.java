@@ -1,5 +1,6 @@
 package com.vomiter.survivorsbutchercraft.data.tags;
 
+import com.eerussianguy.firmalife.common.items.FLItems;
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
@@ -7,6 +8,7 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.Raw2CookedMap;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
+import com.vomiter.survivorsdelight.data.tags.SDTags;
 import net.dries007.tfc.common.items.TFCItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -69,6 +71,11 @@ public class SBTagProviders {
         @SuppressWarnings("unchecked")
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
+
+            tag(SBTags.Items.PRESERVATIVE)
+                    .add(TFCItems.GLUE.get())
+                    .addOptional(FLItems.BEESWAX.getId())
+                    .addOptionalTag(SDTags.ItemTags.FOOD_MODEL_COATING);
 
             SBItems.HIDES.values().forEach(h ->
                     tag(SBTags.Items.BUTCHER_SCRAPABLE).add(h.get())

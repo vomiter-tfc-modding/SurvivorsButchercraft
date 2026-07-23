@@ -1,7 +1,10 @@
 {
   "type": "butchercraft:butcher_block",
   "carcass": {
-    "item": "survivorsbutchercraft:head_male/sheep"
+    "type": "survivorsbutchercraft:not_preserved",
+    "ingredient": {
+      "item": "survivorsbutchercraft:head_male/sheep"
+    }
   },
   "group": "",
   "jei": [

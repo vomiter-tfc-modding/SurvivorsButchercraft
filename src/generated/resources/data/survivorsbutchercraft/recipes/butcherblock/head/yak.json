@@ -1,7 +1,10 @@
 {
   "type": "butchercraft:butcher_block",
   "carcass": {
-    "item": "survivorsbutchercraft:head/yak"
+    "type": "survivorsbutchercraft:not_preserved",
+    "ingredient": {
+      "item": "survivorsbutchercraft:head/yak"
+    }
   },
   "group": "",
   "jei": [

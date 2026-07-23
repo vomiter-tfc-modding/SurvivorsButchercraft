@@ -13,10 +13,12 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
+import com.vomiter.survivorsbutchercraft.common.ingredient.NotPreserved;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
 import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
+import com.vomiter.survivorsbutchercraft.data.recipe_builder.ButcherBlockRecipeBuilderAlt;
 import com.vomiter.survivorsbutchercraft.data.recipe_builder.MeatHookRecipeBuilderAlt;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.dries007.tfc.common.blocks.TFCBlocks;
@@ -112,7 +114,7 @@ public class SBRecipesProvider extends RecipeProvider {
         Stream.concat(SBItems.HEADS.values().stream(), SBItems.HEADS_MALE.values().stream())
                 .forEach(head -> {
                     if(head.equals(SBItems.HEADS.get(Carcass.GOAT))){
-                        ButcherBlockRecipeBuilder.shapedRecipe(head.get())
+                        ButcherBlockRecipeBuilderAlt.shapedRecipe(new NotPreserved(Ingredient.of(head.get())))
                                 .tool(
                                         Ingredient.of(SBTags.Items.GUTTING_TOOLS),
                                         16,
@@ -128,7 +130,7 @@ public class SBRecipesProvider extends RecipeProvider {
                                 .save(consumer, Helpers.id("butcherblock/" + head.getId().getPath()));
                         return;
                     }
-            ButcherBlockRecipeBuilder.shapedRecipe(head.get())
+            ButcherBlockRecipeBuilderAlt.shapedRecipe(new NotPreserved(Ingredient.of(head.get())))
                     .tool(
                             Ingredient.of(SBTags.Items.GUTTING_TOOLS),
                             16,

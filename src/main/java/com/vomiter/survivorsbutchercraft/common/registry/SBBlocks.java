@@ -6,6 +6,8 @@ import com.lance5057.butchercraft.workstations.hook.MeatHookBlock;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.common.block.DecaySkullBlock;
+import com.vomiter.survivorsbutchercraft.common.block.DecayWallSkullBlock;
 import com.vomiter.survivorsbutchercraft.common.block.SkullLikeBlock;
 import com.vomiter.survivorsbutchercraft.common.block.WallSkullLikeBlock;
 import com.vomiter.survivorsbutchercraft.mixin.BlockEntityTypeAccessor;
@@ -60,26 +62,26 @@ public class SBBlocks {
             HEADS.put(carcass,
                         BLOCKS.register(
                                 "head/" + carcass_name,
-                                () -> new SkullLikeBlock(headProperties)
+                                () -> new DecaySkullBlock(headProperties)
                         )
             );
             WALL_HEADS.put(carcass,
                         BLOCKS.register(
                                 "wall_head/" + carcass_name,
-                                () -> new WallSkullLikeBlock(headProperties)
+                                () -> new DecayWallSkullBlock(headProperties)
                         )
             );
             if (carcass.hasMaleHead()){
                 HEADS_MALE.put(carcass,
                         BLOCKS.register(
                                 "head_male/" + carcass_name,
-                                () -> new SkullLikeBlock(headProperties)
+                                () -> new DecaySkullBlock(headProperties)
                         )
                 );
                 WALL_HEADS_MALE.put(carcass,
                         BLOCKS.register(
                                 "wall_head_male/" + carcass_name,
-                                () -> new WallSkullLikeBlock(headProperties)
+                                () -> new DecayWallSkullBlock(headProperties)
                         )
                 );
             }

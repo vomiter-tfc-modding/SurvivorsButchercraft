@@ -5,14 +5,29 @@ import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.butchery.meat.Raw2CookedMap;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.dries007.tfc.common.items.Food;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Locale;
+import java.util.stream.Stream;
 
 public class SBFoodData {
     public static void saveFoodData(SDFoodDataProvider provider){
+
+        provider.newBuilder("head")
+                .ingredient(Ingredient.of(Stream.concat(
+                        SBItems.HEADS.values().stream().map(RegistryObject::get),
+                        SBItems.HEADS_MALE.values().stream().map(RegistryObject::get)
+                        ).map(Item::getDefaultInstance)
+                ).toJson())
+                .setDecay(1)
+                .save();
+
+
         provider.newBuilder("large_carcass")
                 .ingredient(Ingredient.of(SBTags.Items.LARGE_CARCASS).toJson())
                 .setDecay(8)

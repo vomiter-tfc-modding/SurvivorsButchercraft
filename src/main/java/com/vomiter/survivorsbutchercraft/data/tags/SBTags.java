@@ -24,5 +24,6 @@ public class SBTags {
         public static TagKey<Item> LINKED_SAUSAGE = create("linked_sausages");
         public static TagKey<Item> LARGE_CARCASS = create("large_carcasses");
         public static TagKey<Item> TALLOW_INGREDIENT = create("tallow_ingredients");
+        public static TagKey<Item> PRESERVATIVE = create("preservatives");
     }
 }

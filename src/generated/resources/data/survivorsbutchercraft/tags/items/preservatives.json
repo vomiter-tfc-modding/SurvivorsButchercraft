@@ -1,0 +1,13 @@
+{
+  "values": [
+    "tfc:glue",
+    {
+      "id": "firmalife:beeswax",
+      "required": false
+    },
+    {
+      "id": "#survivorsdelight:food_model_coating",
+      "required": false
+    }
+  ]
+}
