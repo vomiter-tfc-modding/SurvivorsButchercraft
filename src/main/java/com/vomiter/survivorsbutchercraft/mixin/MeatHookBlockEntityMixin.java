@@ -1,6 +1,7 @@
 package com.vomiter.survivorsbutchercraft.mixin;
 
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
+import com.lance5057.butchercraft.workstations.hook.HookRecipe;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -9,6 +10,8 @@ import com.vomiter.survivorsbutchercraft.adapter.TFCFoodAdapter;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
+import com.vomiter.survivorsbutchercraft.compat.FarmersDelightCompat;
+import com.vomiter.survivorsbutchercraft.compat.WaterFlaskCompat;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
@@ -26,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraftforge.fml.ModList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,6 +49,12 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity {
 
     @Shadow
     private Ingredient curTool;
+
+    @Shadow
+    abstract boolean isFinalStage(HookRecipe r);
+
+    @Shadow
+    protected abstract Optional<HookRecipe> matchRecipe();
 
     public MeatHookBlockEntityMixin(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
@@ -115,6 +125,13 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity {
                 originalList.add(SBItems.HEADS_MALE.get(carcass).get().getDefaultInstance());
             }
         }
+        if (ModList.get().isLoaded("waterflasks")) WaterFlaskCompat.addBladder(originalList);
+        if (ModList.get().isLoaded("farmersdelight")){
+            if (matchRecipe().isPresent() && isFinalStage(matchRecipe().get())){
+                FarmersDelightCompat.addHam(originalList);
+            }
+        }
+
         var ideal = Optional.ofNullable(ToolAlternative.getIdealTool(curTool)).orElse(Items.AIR);
         boolean isIdeal = ToolAlternative.getIdealTool(ideal).test(tool);
         ObjectArrayList<ItemStack> newList = ObjectArrayList.of();
@@ -124,7 +141,7 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity {
             } else {
                 var singleInput = originalItemStack.copyWithCount(1);
                 for (int i = 0; i < originalItemStack.getCount(); i++) {
-                    if(level.random.nextFloat() < 3/4f){
+                    if(random.nextFloat() < 3/4f){
                         newList.add(singleInput);
                     }
                 }

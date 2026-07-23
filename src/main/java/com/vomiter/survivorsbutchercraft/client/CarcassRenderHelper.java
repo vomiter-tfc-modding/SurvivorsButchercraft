@@ -42,7 +42,10 @@ public final class CarcassRenderHelper {
             appendConditionalParts(out, baseModels, carcass);
         }
 
-        if (isCarcass(carcass)){
+        if (
+                carcass.is(SBItems.CARCASSES.get(Carcass.YAK).get())
+                || carcass.is(SBItems.CARCASSES.get(Carcass.MUSK_OX).get())
+        ){
             tryAddConditionalModel(
                     out,
                     Helpers.id("meathook/hook"),

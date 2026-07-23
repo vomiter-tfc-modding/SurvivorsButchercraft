@@ -6,12 +6,9 @@ import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloa
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloatVector3;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
 import com.lance5057.butchercraft.data.builders.recipes.ButcherBlockRecipeBuilder;
-import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
-import com.lance5057.butchercraft.items.ButcherKnifeItem;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.DefaultMammalCarcassProfile;
-import com.vomiter.survivorsbutchercraft.butchery.carcass.ICarcassProfile;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
@@ -22,16 +19,11 @@ import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
 import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
 import com.vomiter.survivorsbutchercraft.data.recipe_builder.MeatHookRecipeBuilderAlt;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
-import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
-import net.dries007.tfc.common.recipes.ingredients.FluidIngredient;
-import net.dries007.tfc.common.recipes.ingredients.FluidStackIngredient;
 import net.dries007.tfc.util.Metal;
-import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -49,6 +41,7 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SBRecipesProvider extends RecipeProvider {
     public SBRecipesProvider(PackOutput p_248933_) {
@@ -116,6 +109,40 @@ public class SBRecipesProvider extends RecipeProvider {
                     .save(consumer);
         }
 
+        Stream.concat(SBItems.HEADS.values().stream(), SBItems.HEADS_MALE.values().stream())
+                .forEach(head -> {
+                    if(head.equals(SBItems.HEADS.get(Carcass.GOAT))){
+                        ButcherBlockRecipeBuilder.shapedRecipe(head.get())
+                                .tool(
+                                        Ingredient.of(SBTags.Items.GUTTING_TOOLS),
+                                        16,
+                                        true,
+                                        SBButcherBlockLootTables.GOAT_HEAD,
+                                        layFlatModel(head.get()),
+                                        standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
+                                )
+                                .JEIIngredient(Ingredient.of(ButchercraftItems.BRAIN.get()))
+                                .JEIIngredient(Ingredient.of(ButchercraftItems.EYEBALL.get()))
+                                .JEIIngredient(Ingredient.of(Items.BONE))
+                                .JEIIngredient(Ingredient.of(TFCItems.GOAT_HORN.get()))
+                                .save(consumer, Helpers.id("butcherblock/" + head.getId().getPath()));
+                        return;
+                    }
+            ButcherBlockRecipeBuilder.shapedRecipe(head.get())
+                    .tool(
+                            Ingredient.of(SBTags.Items.GUTTING_TOOLS),
+                            16,
+                            true,
+                            SBButcherBlockLootTables.BRAIN,
+                            layFlatModel(head.get()),
+                            standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
+                    )
+                    .JEIIngredient(Ingredient.of(ButchercraftItems.BRAIN.get()))
+                    .JEIIngredient(Ingredient.of(ButchercraftItems.EYEBALL.get()))
+                    .JEIIngredient(Ingredient.of(Items.BONE))
+                    .save(consumer, Helpers.id("butcherblock/" + head.getId().getPath()));
+        });
+
         ButcherBlockRecipeBuilder.shapedRecipe(ButchercraftItems.TRIPE.get())
                 .tool(
                         Ingredient.of(Items.WATER_BUCKET),
@@ -141,6 +168,9 @@ public class SBRecipesProvider extends RecipeProvider {
                         this.layFlatModel(ButchercraftItems.TRIPE.get()),
                         standardButcherBlockToolModel(TFCItems.POWDERS.get(Powder.SALT).get())
                 )
+                .JEIIngredient(Ingredient.of(ButchercraftItems.CASING.get()))
+                .JEIIngredient(Ingredient.of(ButchercraftItems.FAT.get()))
+                .JEIIngredient(Ingredient.of(ButchercraftItems.SINEW.get()))
                 .save(consumer, Helpers.id("butcherblock/casing"));
 
         for (MeatType meatType : MeatType.values()) {

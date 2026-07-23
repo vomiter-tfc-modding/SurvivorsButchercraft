@@ -6,61 +6,61 @@
   "group": "",
   "jei": [
     {
-      "item": "butchercraft:leather_scrap"
-    },
-    {
-      "item": "butchercraft:fat"
-    },
-    {
-      "item": "survivorsbutchercraft:head_male/musk_ox"
-    },
-    {
-      "item": "survivorsbutchercraft:head/musk_ox"
-    },
-    {
-      "item": "butchercraft:oxtail"
-    },
-    {
-      "item": "butchercraft:heart"
-    },
-    {
-      "item": "butchercraft:sinew"
-    },
-    {
-      "item": "butchercraft:tripe"
-    },
-    {
-      "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "minecraft:bone"
+      "item": "tfc:food/mutton"
     },
     {
       "item": "butchercraft:liver"
     },
     {
-      "item": "butchercraft:lamb_ribs"
-    },
-    {
-      "item": "butchercraft:kidney"
-    },
-    {
       "item": "butchercraft:stomach"
     },
     {
-      "item": "butchercraft:lung"
+      "item": "minecraft:bone"
     },
     {
-      "item": "tfc:food/mutton"
+      "item": "butchercraft:leather_scrap"
+    },
+    {
+      "item": "butchercraft:tripe"
     },
     {
       "item": "butchercraft:lamb_scraps"
     },
     {
-      "item": "survivorsbutchercraft:hide/musk_ox"
+      "item": "butchercraft:blood_fluid_bucket"
     },
     {
       "item": "butchercraft:lamb_roast"
+    },
+    {
+      "item": "survivorsbutchercraft:head_male/musk_ox"
+    },
+    {
+      "item": "butchercraft:kidney"
+    },
+    {
+      "item": "butchercraft:heart"
+    },
+    {
+      "item": "butchercraft:lamb_ribs"
+    },
+    {
+      "item": "butchercraft:fat"
+    },
+    {
+      "item": "butchercraft:lung"
+    },
+    {
+      "item": "butchercraft:sinew"
+    },
+    {
+      "item": "survivorsbutchercraft:head/musk_ox"
+    },
+    {
+      "item": "survivorsbutchercraft:hide/musk_ox"
+    },
+    {
+      "item": "butchercraft:oxtail"
     }
   ],
   "tools": [

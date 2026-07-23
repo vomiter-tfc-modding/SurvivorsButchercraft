@@ -13,6 +13,7 @@
     "ButcherKnifeItemMixin",
     "InteractionManagerMixin",
     "KnifeItemMixin",
+    "MeatGrinderMixin",
     "MeatHookBlockEntityAccessor",
     "MeatHookBlockEntityMixin",
     "MeatHookRendererMixin",

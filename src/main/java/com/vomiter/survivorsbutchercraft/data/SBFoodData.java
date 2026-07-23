@@ -53,6 +53,34 @@ public class SBFoodData {
                 .setDecay(0.7)
                 .save();
 
+        provider.newBuilder("eyeball")
+                .item(ButchercraftItems.EYEBALL.get())
+                .setHunger(0)
+                .setProtein(0)
+                .setDecay(5)
+                .save();
+        provider.newBuilder("offal/cooked_eyeball")
+                .item(ButchercraftItems.COOKED_EYEBALL.get())
+                .setHunger(1)
+                .setProtein(0.1)
+                .setDecay(3.0)
+                .save();
+
+        provider.newBuilder("offal/brain")
+                .item(ButchercraftItems.BRAIN.get())
+                .setHunger(3)
+                .setProtein(1)
+                .setDecay(6)
+                .save();
+        provider.newBuilder("offal/cooked_brain")
+                .item(ButchercraftItems.COOKED_BRAIN.get())
+                .setHunger(4)
+                .setProtein(1.4)
+                .setDairy(0.5)
+                .setSaturation(9)
+                .setDecay(4.0)
+                .save();
+
         provider.newBuilder("offal/lung")
                 .item(ButchercraftItems.LUNG.get())
                 .setHunger(1)
@@ -100,6 +128,19 @@ public class SBFoodData {
                 .save();
         provider.newBuilder("offal/cooked_tripe")
                 .item(ButchercraftItems.COOKED_TRIPE.get())
+                .setHunger(4)
+                .setProtein(1.4)
+                .setSaturation(5)
+                .setDecay(3.0)
+                .save();
+        provider.newBuilder("offal/liver")
+                .item(ButchercraftItems.LIVER.get())
+                .setHunger(2)
+                .setProtein(1)
+                .setDecay(2.3)
+                .save();
+        provider.newBuilder("offal/cooked_liver")
+                .item(ButchercraftItems.COOKED_LIVER.get())
                 .setHunger(4)
                 .setProtein(1.4)
                 .setSaturation(5)

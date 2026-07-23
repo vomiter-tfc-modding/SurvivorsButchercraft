@@ -14,7 +14,7 @@ public class Helpers {
     }
 
     public static ResourceLocation id(String namespace, String path){
-        return new ResourceLocation(namespace, path);
+        return ResourceLocation.fromNamespaceAndPath(namespace, path);
     }
 
     public static void addOrMerge(ObjectArrayList<ItemStack> list, ItemStack stack) {

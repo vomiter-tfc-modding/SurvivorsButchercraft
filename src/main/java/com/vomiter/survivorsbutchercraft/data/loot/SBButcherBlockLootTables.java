@@ -5,9 +5,11 @@ import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
+import net.dries007.tfc.common.items.TFCItems;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,6 +21,8 @@ public class SBButcherBlockLootTables  implements LootTableSubProvider {
     public static EnumMap<MeatType, ResourceLocation> ORDINARY2CUBED = new EnumMap<>(MeatType.class);
     public static EnumMap<MeatType, ResourceLocation> ROAST2ORDINARY = new EnumMap<>(MeatType.class);
     public static ResourceLocation CASING = Helpers.id("butcherblock/casing");
+    public static ResourceLocation BRAIN = Helpers.id("butcherblock/brain");
+    public static ResourceLocation GOAT_HEAD = Helpers.id("butcherblock/goat_head");
     public static ResourceLocation EMPTY =  Helpers.id("butchercraft", "empty");
 
     static {
@@ -43,5 +47,12 @@ public class SBButcherBlockLootTables  implements LootTableSubProvider {
                 .withPool(LootPools.poolOnce(DropSpec.of(ButchercraftItems.FAT.get()).withCount(0,2)))
                 .withPool(LootPools.poolOnce(DropSpec.of(ButchercraftItems.SINEW.get()).withCount(0,2)));
         biConsumer.accept(CASING, casing);
+        var brain = LootTable.lootTable()
+                .withPool(LootPools.poolOnce(DropSpec.of(ButchercraftItems.BRAIN.get())))
+                .withPool(LootPools.poolOnce(DropSpec.of(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2))))
+                .withPool(LootPools.poolOnce(DropSpec.of(Items.BONE).withCount(1,3)));
+        biConsumer.accept(BRAIN, brain);
+        brain.withPool(LootPools.poolOnce(DropSpec.of(TFCItems.GOAT_HORN.get().getDefaultInstance().copyWithCount(2))));
+        biConsumer.accept(GOAT_HEAD, brain);
     }
 }

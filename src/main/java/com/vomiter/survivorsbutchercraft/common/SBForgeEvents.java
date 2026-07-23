@@ -101,7 +101,6 @@ public final class SBForgeEvents {
                 z.addEffect(new MobEffectInstance(SAEffects.AGITATION.get(), 20 * 60 * 20, 0));
             }
         }
-
     }
 
 }
