@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -56,7 +57,7 @@ public class SkullLikeRenderer implements BlockEntityRenderer<BlockEntity> {
 
         pose.pushPose();
 
-        // ---- 位置：先處理牆上/地面 skull 的放置偏移 ----
+        // 位置：先處理牆上/地面 skull 的放置偏移
         boolean isWall = state.hasProperty(HorizontalDirectionalBlock.FACING);
         Direction wallFacing = isWall ? state.getValue(HorizontalDirectionalBlock.FACING) : null;
 
@@ -87,21 +88,22 @@ public class SkullLikeRenderer implements BlockEntityRenderer<BlockEntity> {
         var modelRenderer = blockRenderer.getModelRenderer();
         var modelData = ModelData.EMPTY;
 
-        // 用 BakedModel 自帶的 render types
-        for (var rt : baked.getRenderTypes(state, rand, modelData)) {
-        }
+        RenderType renderType = RenderType.entityTranslucent(InventoryMenu.BLOCK_ATLAS);
 
-        var vc = buffers.getBuffer(RenderType.translucent());
+        var vc = buffers.getBuffer(renderType);
+
         modelRenderer.renderModel(
                 pose.last(),
                 vc,
                 state,
                 baked,
-                1.0F, 1.0F, 1.0F,
+                1.0F,
+                1.0F,
+                1.0F,
                 light,
                 packedOverlay,
                 modelData,
-                RenderType.translucent()
+                renderType
         );
 
         pose.popPose();
