@@ -54,7 +54,11 @@ public class SBLangProvider extends LanguageProvider {
             if(parts[length-2].equals("head") || parts[length-2].equals("wall_head")) part0 = "head";
             else if (parts[length-2].endsWith("head_male")) {
                 return "Male " + toDisplayName(parts[length-1]) + " " + toDisplayName("head");
-            } else if (parts[length-2].endsWith("hide")) {
+            }
+            else if (parts[length-2].endsWith("skull_male")) {
+                return "Male " + toDisplayName(parts[length-1]) + " " + toDisplayName("skull");
+            }
+            else if (parts[length-2].endsWith("hide")) {
                 part0 = "hide_carpet";
             }
             else part0 = parts[length-2];

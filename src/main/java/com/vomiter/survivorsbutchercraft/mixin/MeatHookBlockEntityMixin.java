@@ -1,15 +1,19 @@
 package com.vomiter.survivorsbutchercraft.mixin;
 
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
+import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockRecipe;
 import com.lance5057.butchercraft.workstations.hook.HookRecipe;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.vomiter.survivorsbutchercraft.adapter.ButcherBlockLootConverter;
 import com.vomiter.survivorsbutchercraft.adapter.MeatHookBucketAdapter;
 import com.vomiter.survivorsbutchercraft.adapter.TFCFoodAdapter;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
+import com.vomiter.survivorsbutchercraft.common.recipe.CustomButcherBlockRecipe;
+import com.vomiter.survivorsbutchercraft.common.recipe.CustomMeatHookRecipe;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.compat.FarmersDelightCompat;
 import com.vomiter.survivorsbutchercraft.compat.WaterFlaskCompat;
@@ -24,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,6 +47,10 @@ import java.util.function.Consumer;
 
 @Mixin(value = MeatHookBlockEntity.class, remap = false)
 public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IButcherBlock {
+
+    public Optional<HookRecipe> sbtfcInterface$matchRecipe(){
+        return matchRecipe();
+    }
 
     public int sbtfcInterface$getStage(){
         return stage;
@@ -129,43 +138,7 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
             )
     )
     private ObjectArrayList<ItemStack> sbtfc$convertLoot(LootTable instance, LootParams params, Operation<ObjectArrayList<ItemStack>> original){
-        if(getLevel() == null) return original.call(instance, params);
-        var tool = Optional.ofNullable(params.getParamOrNull(LootContextParams.TOOL)).orElse(ItemStack.EMPTY);
-        var random = getLevel().random;
-        var originalList = original.call(instance, params);
-        originalList.removeIf(stack -> stack.is(SBTags.Items.BUTCHERY_SKIP_LOOT));
-        var carcass = Carcass.getCarcassFromItem(getInsertedItem().getItem());
-        if(carcass != null && carcass.hasMaleHead() && CarcassDataHelper.isMale(getInsertedItem())){
-            if(originalList.removeIf(item -> item.is(SBItems.HEADS.get(carcass).get()))){
-                originalList.add(SBItems.HEADS_MALE.get(carcass).get().getDefaultInstance());
-            }
-        }
-        if (ModList.get().isLoaded("waterflasks")) WaterFlaskCompat.addBladder(originalList);
-        if (ModList.get().isLoaded("farmersdelight")){
-            if (matchRecipe().isPresent() && isFinalStage(matchRecipe().get())){
-                FarmersDelightCompat.addHam(originalList);
-            }
-        }
-
-        var ideal = Optional.ofNullable(ToolAlternative.getIdealTool(curTool)).orElse(Items.AIR);
-        boolean isIdeal = ToolAlternative.getIdealTool(ideal).test(tool);
-        ObjectArrayList<ItemStack> newList = ObjectArrayList.of();
-        originalList.forEach(originalItemStack -> {
-            if(isIdeal){
-                newList.add(originalItemStack);
-            } else {
-                var singleInput = originalItemStack.copyWithCount(1);
-                for (int i = 0; i < originalItemStack.getCount(); i++) {
-                    if(random.nextFloat() < 3/4f){
-                        newList.add(singleInput);
-                    }
-                }
-            }
-        });
-        return ObjectArrayList.wrap(
-                newList.stream().map(item -> TFCFoodAdapter.copyRotten(getInsertedItem(), item))
-                        .toArray(ItemStack[]::new)
-        );
+        var self = (IButcherBlock)this;
+        return ButcherBlockLootConverter.sbtfc$convertLoot(self, instance, params, original);
     }
-
 }

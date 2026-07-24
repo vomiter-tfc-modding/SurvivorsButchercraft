@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "survivorsbutchercraft:block/skull/pig",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "survivorsbutchercraft:block/skull/pig"
+    },
+    "facing=south": {
+      "model": "survivorsbutchercraft:block/skull/pig",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "survivorsbutchercraft:block/skull/pig",
+      "y": 270
+    }
+  }
+}

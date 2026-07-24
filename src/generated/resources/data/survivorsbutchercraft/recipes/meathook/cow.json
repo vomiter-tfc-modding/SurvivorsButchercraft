@@ -6,58 +6,58 @@
   "group": "",
   "jei": [
     {
-      "item": "butchercraft:beef_roast"
-    },
-    {
-      "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "butchercraft:liver"
-    },
-    {
-      "item": "survivorsbutchercraft:head/cow"
-    },
-    {
-      "item": "butchercraft:beef_scraps"
-    },
-    {
-      "item": "butchercraft:leather_scrap"
+      "item": "butchercraft:kidney"
     },
     {
       "item": "butchercraft:tripe"
     },
     {
-      "item": "minecraft:bone"
-    },
-    {
-      "item": "butchercraft:kidney"
-    },
-    {
-      "item": "butchercraft:stomach"
+      "item": "butchercraft:heart"
     },
     {
       "item": "butchercraft:beef_ribs"
     },
     {
-      "item": "butchercraft:oxtail"
+      "item": "butchercraft:lung"
+    },
+    {
+      "item": "butchercraft:blood_fluid_bucket"
+    },
+    {
+      "item": "survivorsbutchercraft:head/cow"
     },
     {
       "item": "survivorsbutchercraft:hide/cow"
     },
     {
-      "item": "butchercraft:fat"
+      "item": "minecraft:bone"
     },
     {
       "item": "butchercraft:sinew"
     },
     {
+      "item": "butchercraft:fat"
+    },
+    {
+      "item": "butchercraft:beef_scraps"
+    },
+    {
       "item": "tfc:food/beef"
     },
     {
-      "item": "butchercraft:heart"
+      "item": "butchercraft:oxtail"
     },
     {
-      "item": "butchercraft:lung"
+      "item": "butchercraft:beef_roast"
+    },
+    {
+      "item": "butchercraft:leather_scrap"
+    },
+    {
+      "item": "butchercraft:liver"
+    },
+    {
+      "item": "butchercraft:stomach"
     }
   ],
   "tools": [

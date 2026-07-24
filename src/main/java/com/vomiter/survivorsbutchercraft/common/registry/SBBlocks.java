@@ -34,6 +34,11 @@ public class SBBlocks {
     public static final Map<Carcass, RegistryObject<Block>> HEADS = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Block>> WALL_HEADS_MALE = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Block>> HEADS_MALE = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Block>> WALL_SKULLS = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Block>> SKULLS = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Block>> WALL_SKULLS_MALE = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Block>> SKULLS_MALE = new EnumMap<>(Carcass.class);
+
     public static final Map<Metal.Default, RegistryObject<Block>> MEAT_HOOKS = new EnumMap<>(Metal.Default.class);
 
 
@@ -71,6 +76,19 @@ public class SBBlocks {
                                 () -> new DecayWallSkullBlock(headProperties)
                         )
             );
+            SKULLS.put(carcass,
+                    BLOCKS.register(
+                            "skull/" + carcass_name,
+                            () -> new SkullLikeBlock(headProperties)
+                    )
+            );
+            WALL_SKULLS.put(carcass,
+                    BLOCKS.register(
+                            "wall_skull/" + carcass_name,
+                            () -> new WallSkullLikeBlock(headProperties)
+                    )
+            );
+
             if (carcass.hasMaleHead()){
                 HEADS_MALE.put(carcass,
                         BLOCKS.register(
@@ -84,6 +102,19 @@ public class SBBlocks {
                                 () -> new DecayWallSkullBlock(headProperties)
                         )
                 );
+                SKULLS_MALE.put(carcass,
+                        BLOCKS.register(
+                                "skull_male/" + carcass_name,
+                                () -> new SkullLikeBlock(headProperties)
+                        )
+                );
+                WALL_SKULLS_MALE.put(carcass,
+                        BLOCKS.register(
+                                "wall_skull_male/" + carcass_name,
+                                () -> new WallSkullLikeBlock(headProperties)
+                        )
+                );
+
             }
         }
     }

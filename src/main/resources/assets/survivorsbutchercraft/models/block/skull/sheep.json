@@ -1,0 +1,7 @@
+{
+  "parent": "butchercraft:item/sheep_head",
+  "textures": {
+    "1": "butchercraft:block/entity/sheep",
+    "particle": "minecraft:block/bone_block_side"
+  }
+}

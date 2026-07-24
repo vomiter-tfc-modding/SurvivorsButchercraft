@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "rotation=0": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=1": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=10": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=11": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=12": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=13": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=14": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=15": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=2": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=3": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=4": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=5": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=6": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=7": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=8": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    },
+    "rotation=9": {
+      "model": "survivorsbutchercraft:block/skull/cow"
+    }
+  }
+}

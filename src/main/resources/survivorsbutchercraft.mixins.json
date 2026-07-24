@@ -23,7 +23,8 @@
     "effect.StinkyMixin"
   ],
   "client": [
-    "RenderUtilMixin"
+    "RenderUtilMixin",
+    "BakedModelRenderableMixin"
   ],
   "injectors": {
     "defaultRequire": 1

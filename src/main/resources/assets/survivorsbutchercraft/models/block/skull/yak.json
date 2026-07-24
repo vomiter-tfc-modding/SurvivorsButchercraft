@@ -1,0 +1,7 @@
+{
+  "parent": "survivorsbutchercraft:block/head/yak",
+  "textures": {
+    "0": "survivorsbutchercraft:models/meathook/yak/yak_skull",
+    "particle": "minecraft:block/bone_block_side"
+  }
+}

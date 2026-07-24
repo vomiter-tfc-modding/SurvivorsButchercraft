@@ -1,6 +1,8 @@
 package com.vomiter.survivorsbutchercraft.common.registry;
 
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import com.vomiter.survivorsbutchercraft.common.recipe.CustomButcherBlockRecipe;
+import com.vomiter.survivorsbutchercraft.common.recipe.CustomMeatHookRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -21,4 +23,14 @@ public class SBRecipes {
             }
         });
     }
+
+    public static RegistryObject<RecipeType<CustomButcherBlockRecipe>> CUSTOM_BUTCHER_BLOCK
+            = register("custom_butcher_block");
+    public static RegistryObject<RecipeSerializer<CustomButcherBlockRecipe>> CUSTOM_BUTCHER_BLOCK_SERIALIZER
+            = RECIPE_SERIALIZERS.register("custom_butcher_block", () -> CustomButcherBlockRecipe.Serializer.INSTANCE);
+    public static RegistryObject<RecipeType<CustomButcherBlockRecipe>> CUSTOM_MEAT_HOOK
+            = register("custom_meat_hook");
+    public static RegistryObject<RecipeSerializer<CustomMeatHookRecipe>> CUSTOM_MEAT_HOOK_SERIALIZER
+            = RECIPE_SERIALIZERS.register("custom_meat_hook", () -> CustomMeatHookRecipe.Serializer.INSTANCE);
+
 }

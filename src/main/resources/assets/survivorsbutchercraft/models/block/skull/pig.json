@@ -1,0 +1,7 @@
+{
+  "parent": "survivorsbutchercraft:block/head/pig",
+  "textures": {
+    "0": "butchercraft:block/entity/pig",
+    "particle": "minecraft:block/bone_block_side"
+  }
+}

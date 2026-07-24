@@ -1,28 +1,28 @@
 {
-  "type": "butchercraft:butcher_block",
+  "type": "survivorsbutchercraft:custom_butcher_block",
   "carcass": {
-    "type": "survivorsbutchercraft:not_preserved",
-    "ingredient": {
-      "item": "survivorsbutchercraft:head/sheep"
-    }
+    "item": "survivorsbutchercraft:head/sheep"
   },
-  "group": "",
-  "jei": [
-    {
-      "item": "butchercraft:brain"
-    },
-    {
-      "item": "butchercraft:eyeball"
-    },
-    {
-      "item": "minecraft:bone"
-    }
+  "jei": [],
+  "results": [
+    [
+      {
+        "item": "survivorsbutchercraft:skull/sheep"
+      },
+      {
+        "item": "butchercraft:brain"
+      },
+      {
+        "count": 2,
+        "item": "butchercraft:eyeball"
+      }
+    ]
   ],
   "tools": [
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:butcherblock/brain",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,

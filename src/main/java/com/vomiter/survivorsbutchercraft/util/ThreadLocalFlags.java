@@ -7,5 +7,6 @@ import net.minecraft.world.item.Tier;
 public class ThreadLocalFlags {
     public static ThreadLocal<Boolean> dropLootForButchering = ThreadLocal.withInitial(() -> false);
     public static ThreadLocal<ItemStack> carcass = ThreadLocal.withInitial(() -> ItemStack.EMPTY);
+    public static ThreadLocal<ItemStack> carcassRendering = ThreadLocal.withInitial(() -> ItemStack.EMPTY);
     public static ThreadLocal<Tier> tierThreadLocal = ThreadLocal.withInitial(() -> TFCTiers.METAMORPHIC);
 }

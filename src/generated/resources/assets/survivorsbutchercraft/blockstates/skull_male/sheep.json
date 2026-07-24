@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "rotation=0": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=1": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=10": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=11": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=12": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=13": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=14": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=15": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=2": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=3": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=4": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=5": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=6": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=7": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=8": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    },
+    "rotation=9": {
+      "model": "survivorsbutchercraft:block/skull_male/sheep"
+    }
+  }
+}

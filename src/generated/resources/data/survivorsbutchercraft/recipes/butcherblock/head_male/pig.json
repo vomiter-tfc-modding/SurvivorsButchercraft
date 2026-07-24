@@ -1,28 +1,28 @@
 {
-  "type": "butchercraft:butcher_block",
+  "type": "survivorsbutchercraft:custom_butcher_block",
   "carcass": {
-    "type": "survivorsbutchercraft:not_preserved",
-    "ingredient": {
-      "item": "survivorsbutchercraft:head_male/pig"
-    }
+    "item": "survivorsbutchercraft:head/pig"
   },
-  "group": "",
-  "jei": [
-    {
-      "item": "butchercraft:brain"
-    },
-    {
-      "item": "butchercraft:eyeball"
-    },
-    {
-      "item": "minecraft:bone"
-    }
+  "jei": [],
+  "results": [
+    [
+      {
+        "item": "survivorsbutchercraft:skull_male/pig"
+      },
+      {
+        "item": "butchercraft:brain"
+      },
+      {
+        "count": 2,
+        "item": "butchercraft:eyeball"
+      }
+    ]
   ],
   "tools": [
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:butcherblock/brain",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -51,7 +51,7 @@
               }
             }
           },
-          "location": "survivorsbutchercraft:meathook/head_male/pig"
+          "location": "survivorsbutchercraft:meathook/head/pig"
         },
         {
           "animation": {

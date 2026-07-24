@@ -60,6 +60,17 @@ public class SBBlockStatesProvider extends BlockStateProvider {
                     modLoc("block/head/" + carcass.serializedName())      // model: models/block/head/yak.json
             );
 
+            skullRotationStates(
+                    SBBlocks.SKULLS.get(carcass).get(),
+                    modLoc("block/skull/" + carcass.serializedName())           // model: models/block/head/yak.json
+            );
+
+            wallSkullFacingStates(
+                    SBBlocks.WALL_SKULLS.get(carcass).get(),
+                    modLoc("block/skull/" + carcass.serializedName())      // model: models/block/head/yak.json
+            );
+
+
             if(carcass.hasMaleHead()){
                 skullRotationStates(
                         SBBlocks.HEADS_MALE.get(carcass).get(),
@@ -69,6 +80,16 @@ public class SBBlockStatesProvider extends BlockStateProvider {
                 wallSkullFacingStates(
                         SBBlocks.WALL_HEADS_MALE.get(carcass).get(),
                         modLoc("block/head_male/" + carcass.serializedName())      // model: models/block/head/yak.json
+                );
+
+                skullRotationStates(
+                        SBBlocks.SKULLS_MALE.get(carcass).get(),
+                        modLoc("block/skull_male/" + carcass.serializedName())           // model: models/block/head/yak.json
+                );
+
+                wallSkullFacingStates(
+                        SBBlocks.WALL_SKULLS_MALE.get(carcass).get(),
+                        modLoc("block/skull_male/" + carcass.serializedName())      // model: models/block/head/yak.json
                 );
 
             }
@@ -121,7 +142,7 @@ public class SBBlockStatesProvider extends BlockStateProvider {
         var modelFile = models()
                 .getBuilder(modelName)
                 .parent(new ModelFile.UncheckedModelFile(
-                        new ResourceLocation("butchercraft", "block/meat_hook")
+                        ResourceLocation.fromNamespaceAndPath("butchercraft", "block/meat_hook")
                 ))
                 .texture("0", modelTexture)
                 .texture("particle", modelTexture);

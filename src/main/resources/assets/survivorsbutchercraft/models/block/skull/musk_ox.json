@@ -1,0 +1,7 @@
+{
+  "parent": "survivorsbutchercraft:block/head/musk_ox",
+  "textures": {
+    "0": "survivorsbutchercraft:models/meathook/musk_ox/musk_ox_skull",
+    "particle": "minecraft:block/bone_block_side"
+  }
+}

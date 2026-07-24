@@ -28,6 +28,8 @@ public class SBItems {
     public static final Map<Carcass, RegistryObject<Item>> HIDES = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Item>> HEADS = new EnumMap<>(Carcass.class);
     public static final Map<Carcass, RegistryObject<Item>> HEADS_MALE = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Item>> SKULLS = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, RegistryObject<Item>> SKULLS_MALE = new EnumMap<>(Carcass.class);
     public static final Map<Metal.Default, RegistryObject<Item>> BUTCHER_KNIVES = new EnumMap<>(Metal.Default.class);
     public static final Map<Metal.Default, RegistryObject<Item>> BUTCHER_KNIFE_HEADS = new EnumMap<>(Metal.Default.class);
     public static final Map<Metal.Default, RegistryObject<Item>> SKINNING_KNIVES = new EnumMap<>(Metal.Default.class);
@@ -144,12 +146,24 @@ public class SBItems {
                             SBBlocks.WALL_HEADS.get(carcass).get(),
                             new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
 
+            SKULLS.put(carcass, ITEMS.register("skull/" + carcass.serializedName(),
+                    () -> new SkullLikeItem(
+                            SBBlocks.SKULLS.get(carcass).get(),
+                            SBBlocks.WALL_SKULLS.get(carcass).get(),
+                            new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
+
             if(carcass.hasMaleHead()) {
                 HEADS_MALE.put(carcass, ITEMS.register("head_male/" + carcass.serializedName(),
-                        () -> new DecaySkullLikeItem(
+                        () -> new SkullLikeItem(
                                 SBBlocks.HEADS_MALE.get(carcass).get(),
                                 SBBlocks.WALL_HEADS_MALE.get(carcass).get(),
                                 new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
+                SKULLS_MALE.put(carcass, ITEMS.register("skull_male/" + carcass.serializedName(),
+                        () -> new SkullLikeItem(
+                                SBBlocks.SKULLS_MALE.get(carcass).get(),
+                                SBBlocks.WALL_SKULLS_MALE.get(carcass).get(),
+                                new Item.Properties().rarity(Rarity.UNCOMMON), Direction.DOWN)));
+
             }
 
             if (carcass.hasHide()) {

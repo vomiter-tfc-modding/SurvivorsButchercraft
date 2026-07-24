@@ -36,7 +36,17 @@ public class SBBlockEntityTypes {
             BLOCK_ENTITIES.register(
                     "skull_like",
                     () -> BlockEntityType.Builder.of(
-                            SkullLikeBlockEntity::new
+                            SkullLikeBlockEntity::new,
+                            Stream.of(
+                                            SBBlocks.SKULLS.values().stream(),
+                                            SBBlocks.WALL_SKULLS.values().stream(),
+                                            SBBlocks.SKULLS_MALE.values().stream(),
+                                            SBBlocks.WALL_SKULLS_MALE.values().stream()
+                                    )
+                                    .flatMap(s -> s)
+                                    .map(RegistryObject::get)
+                                    .toArray(Block[]::new)
+
                     ).build(null)
             );
 }

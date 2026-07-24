@@ -1,19 +1,27 @@
 {
-  "type": "butchercraft:butcher_block",
+  "type": "survivorsbutchercraft:custom_butcher_block",
   "carcass": {
     "item": "butchercraft:tripe"
   },
-  "group": "",
-  "jei": [
-    {
-      "item": "butchercraft:casing"
-    },
-    {
-      "item": "butchercraft:fat"
-    },
-    {
-      "item": "butchercraft:sinew"
-    }
+  "jei": [],
+  "results": [
+    [
+      {
+        "count": 0,
+        "item": "minecraft:air"
+      }
+    ],
+    [
+      {
+        "count": 0,
+        "item": "minecraft:air"
+      }
+    ],
+    [
+      {
+        "item": "butchercraft:casing"
+      }
+    ]
   ],
   "tools": [
     {
@@ -223,7 +231,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:butcherblock/casing",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "animation": {
