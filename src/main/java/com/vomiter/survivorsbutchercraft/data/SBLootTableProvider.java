@@ -1,8 +1,6 @@
 package com.vomiter.survivorsbutchercraft.data;
 
 import com.vomiter.survivorsbutchercraft.data.loot.ButcherHeadAndHideBlockLootTables;
-import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
-import com.vomiter.survivorsbutchercraft.data.loot.SBMeatHookLootTables;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -19,8 +17,6 @@ public class SBLootTableProvider extends LootTableProvider {
     public SBLootTableProvider(PackOutput output) {
         super(output, Set.of(),
                 List.of(
-                    new SubProviderEntry(SBMeatHookLootTables::new, LootContextParamSets.ALL_PARAMS),
-                    new SubProviderEntry(SBButcherBlockLootTables::new, LootContextParamSets.ALL_PARAMS),
                     new SubProviderEntry(ButcherHeadAndHideBlockLootTables::new, LootContextParamSets.BLOCK)
                 )
         );

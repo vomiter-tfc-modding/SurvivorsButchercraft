@@ -1,15 +1,22 @@
 {
-  "type": "butchercraft:butcher_block",
+  "type": "survivorsbutchercraft:custom_butcher_block",
   "carcass": {
     "item": "butchercraft:pork_roast"
   },
-  "group": "",
   "jei": [],
+  "results": [
+    [
+      {
+        "count": 2,
+        "item": "tfc:food/pork"
+      }
+    ]
+  ],
   "tools": [
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:butcherblock/pork/roast_to_ordinary",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "animation": {

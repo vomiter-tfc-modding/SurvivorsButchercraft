@@ -2,10 +2,7 @@ package com.vomiter.survivorsbutchercraft;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
 
 public class Helpers {
 

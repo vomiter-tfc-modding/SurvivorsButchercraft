@@ -5,10 +5,8 @@ import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloat;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloatVector3;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
-import com.lance5057.butchercraft.data.builders.recipes.ButcherBlockRecipeBuilder;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
-import com.vomiter.survivorsbutchercraft.butchery.carcass.DefaultMammalCarcassProfile;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
@@ -16,12 +14,7 @@ import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
 import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
 import com.vomiter.survivorsbutchercraft.common.recipe.CustomButcherRecipeBuilder;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
-import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
-import com.vomiter.survivorsbutchercraft.data.loot.MeatHookLootHelper;
-import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
-import com.vomiter.survivorsbutchercraft.data.recipe_builder.MeatHookRecipeBuilderAlt;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
-import com.vomiter.survivorsdelight.data.tags.SDTags;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
@@ -40,12 +33,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SBRecipesProvider extends RecipeProvider {
     public SBRecipesProvider(PackOutput p_248933_) {
@@ -96,9 +87,96 @@ public class SBRecipesProvider extends RecipeProvider {
         return Helpers.id("meathook/" + path);
     }
 
+    private void buildHeadRecipes(Carcass carcass, Consumer<FinishedRecipe> consumer){
+        var head = SBItems.HEADS.get(carcass);
+        var skull = SBItems.SKULLS.get(carcass);
+        if (carcass.equals(Carcass.GOAT)){
+            CuttingBoardRecipeBuilder.cuttingRecipe(
+                            Ingredient.of(skull.get()),
+                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
+                            Items.BONE, 2
+                    ).addResultWithChance(Items.BONE_MEAL,  0.25f, 4)
+                    .addResult(TFCItems.GOAT_HORN.get(), 2)
+                    .save(consumer, Helpers.id("cutting/" + skull.getId().getPath()));
+
+        } else {
+            CuttingBoardRecipeBuilder.cuttingRecipe(
+                            Ingredient.of(skull.get()),
+                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
+                            Items.BONE, 2
+                    ).addResultWithChance(Items.BONE_MEAL,  0.25f, 4)
+                    .save(consumer, Helpers.id("cutting/" + skull.getId().getPath()));
+        }
+        new CustomButcherRecipeBuilder()
+                .carcass(head.get())
+                .tool(
+                        Ingredient.of(SBTags.Items.GUTTING_TOOLS),
+                        16,
+                        true,
+                        standardModel(ResourceLocation.fromNamespaceAndPath(head.getId().getNamespace(), "meathook/" + head.getId().getPath())),
+                        standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
+                )
+                .resultStage(
+                        new ChanceResult(skull.get().getDefaultInstance(), 1),
+                        new ChanceResult(ButchercraftItems.BRAIN.get().getDefaultInstance(), 1),
+                        new ChanceResult(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2), 1),
+                        new ChanceResult(ButchercraftItems.SINEW.get(), 4, 0.5f)
+                ).saveButcherBlock(consumer, Helpers.id("butcherblock/" + head.getId().getPath()));
+
+        if (carcass.hasMaleHead()){
+            var headMale = SBItems.HEADS_MALE.get(carcass);
+            var skullMale = SBItems.SKULLS_MALE.get(carcass);
+            CuttingBoardRecipeBuilder.cuttingRecipe(
+                            Ingredient.of(skullMale.get()),
+                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
+                            Items.BONE, 2
+                    ).addResultWithChance(Items.BONE_MEAL, 0.25f, 4)
+                    .save(consumer, Helpers.id("cutting/" + skullMale.getId().getPath()));
+
+            new CustomButcherRecipeBuilder()
+                    .carcass(head.get())
+                    .tool(
+                            Ingredient.of(SBTags.Items.GUTTING_TOOLS),
+                            16,
+                            true,
+                            standardModel(ResourceLocation.fromNamespaceAndPath(headMale.getId().getNamespace(), "meathook/" + head.getId().getPath())),
+                            standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
+                    )
+                    .resultStage(
+                            new ChanceResult(skullMale.get().getDefaultInstance(), 1),
+                            new ChanceResult(ButchercraftItems.BRAIN.get().getDefaultInstance(), 1),
+                            new ChanceResult(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2), 1),
+                            new ChanceResult(ButchercraftItems.SINEW.get(), 4, 0.5f)
+                    ).saveButcherBlock(consumer, Helpers.id("butcherblock/" + headMale.getId().getPath()));
+        }
+    }
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+
+        CustomButcherRecipeBuilder.builder()
+                .carcass(ButchercraftItems.BLOOD_SAUSAGE_LINKED.get())
+                .tool(
+                        Ingredient.of(SBTags.Items.BUTCHERING_TOOLS),
+                        8,
+                        true,
+                        standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
+                )
+                .resultStage(new ChanceResult(ButchercraftItems.BLOOD_SAUSAGE.get(), 8, 1))
+                .saveButcherBlock(consumer, Helpers.id("butcherblock/blood_sausage"));
+
+        CustomButcherRecipeBuilder.builder()
+                .carcass(ButchercraftItems.SAUSAGE_LINKED.get())
+                .tool(
+                        Ingredient.of(SBTags.Items.BUTCHERING_TOOLS),
+                        8,
+                        true,
+                        standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
+                )
+                .resultStage(new ChanceResult(ButchercraftItems.SAUSAGE.get(), 8, 1))
+                .saveButcherBlock(consumer, Helpers.id("butcherblock/sausage"));
+
+
         for (Metal.Default metal : Metal.Default.values()) {
             if(!metal.hasTools()) continue;
             ShapedRecipeBuilder
@@ -141,116 +219,44 @@ public class SBRecipesProvider extends RecipeProvider {
                 .saveButcherBlock(consumer, Helpers.id("butcherblock/casing"));
 
         for (MeatType meatType : MeatType.values()) {
-            ButcherBlockRecipeBuilder.shapedRecipe(MeatMap.get(meatType, MeatProduct.ORDINARY))
+            CustomButcherRecipeBuilder.builder().carcass(MeatMap.get(meatType, MeatProduct.ORDINARY))
                     .tool(
                             Ingredient.of(SBTags.Items.BUTCHERING_TOOLS),
                             1,
                             true,
-                            SBButcherBlockLootTables.ORDINARY2CUBED.get(meatType),
                             this.layFlatModel(MeatMap.get(meatType, MeatProduct.ORDINARY)),
                             standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
                     )
-                    .save(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/ordinary_to_cubed"));
-            ButcherBlockRecipeBuilder.shapedRecipe(MeatMap.get(meatType, MeatProduct.ROAST))
+                    .resultStage(new ChanceResult(MeatMap.get(meatType, MeatProduct.CUBED), 2, 1))
+                    .saveButcherBlock(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/ordinary_to_cubed"));
+            CustomButcherRecipeBuilder.builder().carcass(MeatMap.get(meatType, MeatProduct.ROAST))
                     .tool(
                             Ingredient.of(SBTags.Items.BUTCHERING_TOOLS),
                             1,
                             true,
-                            SBButcherBlockLootTables.ROAST2ORDINARY.get(meatType),
                             this.layFlatModel(MeatMap.get(meatType, MeatProduct.ROAST)),
                             standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
                     )
-                    .save(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/roast_to_ordinary"));
+                    .resultStage(new ChanceResult(MeatMap.get(meatType, MeatProduct.ORDINARY), 2, 1))
+                    .saveButcherBlock(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/roast_to_ordinary"));
 
         }
 
         for (Carcass carcass : Carcass.values()) {
-            var head = SBItems.HEADS.get(carcass);
-            var skull = SBItems.SKULLS.get(carcass);
-            if (carcass.equals(Carcass.GOAT)){
-                CuttingBoardRecipeBuilder.cuttingRecipe(
-                                Ingredient.of(skull.get()),
-                                Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
-                                Items.BONE, 2
-                        ).addResultWithChance(Items.BONE_MEAL,  0.25f, 4)
-                        .addResult(TFCItems.GOAT_HORN.get(), 2)
-                        .save(consumer, Helpers.id("cutting/" + skull.getId().getPath()));
+            buildHeadRecipes(carcass, consumer);
 
-            } else {
-                CuttingBoardRecipeBuilder.cuttingRecipe(
-                                Ingredient.of(skull.get()),
-                                Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
-                                Items.BONE, 2
-                        ).addResultWithChance(Items.BONE_MEAL,  0.25f, 4)
-                        .save(consumer, Helpers.id("cutting/" + skull.getId().getPath()));
-            }
-            new CustomButcherRecipeBuilder()
-                    .carcass(head.get())
-                    .tool(
-                            Ingredient.of(SBTags.Items.GUTTING_TOOLS),
-                            16,
-                            true,
-                            standardModel(ResourceLocation.fromNamespaceAndPath(head.getId().getNamespace(), "meathook/" + head.getId().getPath())),
-                            standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
-                    )
-                    .resultStage(
-                            new ChanceResult(skull.get().getDefaultInstance(), 1),
-                            new ChanceResult(ButchercraftItems.BRAIN.get().getDefaultInstance(), 1),
-                            new ChanceResult(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2), 1)
-                    ).saveButcherBlock(consumer, Helpers.id("butcherblock/" + head.getId().getPath()));
-
-            if (carcass.hasMaleHead()){
-                var headMale = SBItems.HEADS_MALE.get(carcass);
-                var skullMale = SBItems.SKULLS_MALE.get(carcass);
-                if (carcass.equals(Carcass.GOAT)){
-                    CuttingBoardRecipeBuilder.cuttingRecipe(
-                                    Ingredient.of(skullMale.get()),
-                                    Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
-                                    Items.BONE, 2
-                            ).addResultWithChance(Items.BONE_MEAL,  0.25f, 4)
-                            .addResult(TFCItems.GOAT_HORN.get(), 2)
-                            .save(consumer, Helpers.id("cutting/" + skullMale.getId().getPath()));
-
-                } else {
-                    CuttingBoardRecipeBuilder.cuttingRecipe(
-                                    Ingredient.of(skullMale.get()),
-                                    Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
-                                    Items.BONE, 2
-                            ).addResultWithChance(Items.BONE_MEAL,  0.25f, 4)
-                            .save(consumer, Helpers.id("cutting/" + skullMale.getId().getPath()));
-                }
-
-                new CustomButcherRecipeBuilder()
-                        .carcass(head.get())
-                        .tool(
-                                Ingredient.of(SBTags.Items.GUTTING_TOOLS),
-                                16,
-                                true,
-                                standardModel(ResourceLocation.fromNamespaceAndPath(headMale.getId().getNamespace(), "meathook/" + head.getId().getPath())),
-                                standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
-                        )
-                        .resultStage(
-                                new ChanceResult(skullMale.get().getDefaultInstance(), 1),
-                                new ChanceResult(ButchercraftItems.BRAIN.get().getDefaultInstance(), 1),
-                                new ChanceResult(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2), 1)
-                        ).saveButcherBlock(consumer, Helpers.id("butcherblock/" + headMale.getId().getPath()));
-            }
-
-            List<DropSpec> dropSpecs = new ArrayList<>();
-
-            MeatHookRecipeBuilderAlt meatHookRecipeBuilder = MeatHookRecipeBuilderAlt.shapedRecipe(
+            CustomButcherRecipeBuilder meatHookRecipeBuilder = new CustomButcherRecipeBuilder().carcass(
                     Ingredient.of(carcass.carcassItem())
-                    //TFCIngredientHelper.getNotRotten(Ingredient.of(carcass.carcassItem()))
             );
+
             for (int i = 0; i < carcass.bloodBucket(); i++) {
                 meatHookRecipeBuilder.tool(
                         Ingredient.of(Items.BUCKET),
                         1,
                         true,
-                        SBButcherBlockLootTables.EMPTY,
                         standardModel(meatHookId(carcass.serializedName() + "/" + MeatHookStage.HOOK.pp)),
                         standardHookToolModel(Items.BUCKET)
-                        );
+                ).resultStage(new ChanceResult(ButchercraftItems.BLOOD_FLUID_BUCKET.get()));
             }
             for (MeatHookStage meatHookStage : MeatHookStage.values()) {
                 if(meatHookStage == MeatHookStage.HOOK) continue;
@@ -258,77 +264,20 @@ public class SBRecipesProvider extends RecipeProvider {
                         carcass.toolFor(meatHookStage),
                         carcass.workCountFor(meatHookStage),
                         true,
-                        MeatHookLootHelper.mainTable(carcass, meatHookStage),
                         standardModel(meatHookId(carcass.serializedName() + "/" + meatHookStage.previousStep())),
                         standardHookToolModel(meatHookStage.iconicTool())
+                ).resultStage(
+                        Stream.concat(
+                                Stream.concat(
+                                        carcass.dropsFor(meatHookStage).stream(),
+                                        carcass.dropsForSupport(meatHookStage).stream()
+                                        ),
+                                carcass.dropsForTrivial(meatHookStage).stream()
+                        ).toList()
                 );
-                var mainDrops = carcass.dropsFor(meatHookStage);
-                var supportDrops = carcass.dropsForSupport(meatHookStage);
-                var trivialDrops = carcass.dropsForTrivial(meatHookStage);
-                dropSpecs.addAll(mainDrops);
-                dropSpecs.addAll(supportDrops);
-                dropSpecs.addAll(trivialDrops);
             }
 
-            var resultSet = dropSpecs.stream().map(DropSpec::item).collect(Collectors.toSet());
-            if (carcass.getProfile() instanceof DefaultMammalCarcassProfile defaultMammalCarcassProfile){
-                resultSet.add(MeatMap.get(defaultMammalCarcassProfile.getMeatType(), MeatProduct.ORDINARY));
-            }
-            if(carcass.bloodBucket() > 0) resultSet.add(ButchercraftItems.BLOOD_FLUID_BUCKET.get());
-            resultSet.add(Items.BONE);
-            if (carcass.hasMaleHead()) resultSet.add(SBItems.HEADS_MALE.get(carcass).get());
-            resultSet.forEach(item -> {
-                meatHookRecipeBuilder.JEIIngredient(Ingredient.of(item));
-            });
-
-            meatHookRecipeBuilder.save(consumer, meatHookId(carcass.serializedName()));
+            meatHookRecipeBuilder.saveHook(consumer, meatHookId(carcass.serializedName()));
         }
-
-        /*
-        MeatHookRecipeBuilderAltAlt.shapedRecipe(SBItems.CARCASSES.get(Carcass.YAK).get())
-                .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
-                        standardModel(meatHookId("yak/hooked")),
-                        standardHookToolModel(Items.BUCKET))
-                .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
-                        standardModel(meatHookId("yak/hooked")),
-                        standardHookToolModel(Items.BUCKET))
-                .tool(Ingredient.of(Items.BUCKET), 1, true, MeatHookLoottables.BLOOD_BUCKET,
-                        standardModel(meatHookId("yak/hooked")),
-                        standardHookToolModel(Items.BUCKET))
-                .tool(Ingredient.of(ButchercraftItems.SKINNING_KNIFE.get()), 12, true, MeatHookLoottables.SKIN_COW,
-                        standardModel(meatHookId("yak/hooked")),
-                        standardHookToolModel(ButchercraftItems.SKINNING_KNIFE.get()))
-                .tool(Ingredient.of(ButchercraftItems.BONE_SAW.get()), 12, true, MeatHookLoottables.BISECT_COW,
-                        standardModel(meatHookId("yak/skinned")),
-                        standardHookToolModel(ButchercraftItems.BONE_SAW.get()))
-                .tool(Ingredient.of(ButchercraftItems.GUT_KNIFE.get()), 12, true, MeatHookLoottables.DISEMBOWEL_COW,
-                        standardModel(meatHookId("yak/gutted")),
-                        standardHookToolModel(ButchercraftItems.GUT_KNIFE.get()))
-                .tool(Ingredient.of(ButchercraftItems.BUTCHER_KNIFE.get()), 12, true, MeatHookLoottables.BUTCHER_COW,
-                        standardModel(meatHookId("yak/bisected")),
-                        standardHookToolModel(ButchercraftItems.BUTCHER_KNIFE.get()))
-
-                .JEIIngredient(Ingredient.of(ButchercraftItems.BLOOD_FLUID_BUCKET.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.HEART.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.KIDNEY.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.LIVER.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.STOMACH.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.LUNG.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.TRIPE.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.COW_HEAD_ITEM.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.BEEF_SCRAPS.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.BEEF_STEW_MEAT.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.OXTAIL.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.COW_HIDE.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.LEATHER_SCRAP.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.FAT.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.SINEW.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.BEEF_RIBS.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.BEEF_ROAST.get()))
-                .JEIIngredient(Ingredient.of(ButchercraftItems.CUBED_BEEF.get()))
-                .JEIIngredient(Ingredient.of(Items.BEEF)).JEIIngredient(Ingredient.of(Items.BONE))
-                .save(consumer, meatHookId("yak"));
-
-         */
     }
 }

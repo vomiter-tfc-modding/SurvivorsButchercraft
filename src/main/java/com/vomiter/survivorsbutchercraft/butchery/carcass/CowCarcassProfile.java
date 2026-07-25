@@ -2,9 +2,7 @@ package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
-import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
-import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
-import net.minecraft.world.item.Item;
+import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.MapColor;
 
@@ -29,17 +27,17 @@ public final class CowCarcassProfile extends DefaultMammalCarcassProfile {
 
     @Override public int bloodBucket() { return 3; }
     @Override
-    public List<DropSpec> dropsForSupport(MeatHookStage stage) {
+    public List<ChanceResult> dropsForSupport(MeatHookStage stage) {
         switch (stage){
             case BISECT -> {
                 return List.of(
-                        DropSpec.of(new ItemStack(ButchercraftItems.STOMACH.get(), 4)),
-                        DropSpec.of(new ItemStack(ButchercraftItems.TRIPE.get(), 8))
+                        new ChanceResult(new ItemStack(ButchercraftItems.STOMACH.get(), 4)),
+                        new ChanceResult(new ItemStack(ButchercraftItems.TRIPE.get(), 8))
                 );
             }
             case DISEMBOWEL -> {
                 return List.of(
-                        DropSpec.of(ButchercraftItems.OXTAIL.get())
+                        new ChanceResult(ButchercraftItems.OXTAIL.get())
                 );
             }
         }

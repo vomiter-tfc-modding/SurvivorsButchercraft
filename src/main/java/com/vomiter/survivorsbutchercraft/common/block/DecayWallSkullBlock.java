@@ -2,7 +2,6 @@ package com.vomiter.survivorsbutchercraft.common.block;
 
 import com.vomiter.survivorsbutchercraft.common.blockentity.DecaySkullLikeBlockEntity;
 import net.dries007.tfc.common.capabilities.food.FoodCapability;
-import net.dries007.tfc.common.items.TFCItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

@@ -1,11 +1,8 @@
 package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
-import com.lance5057.butchercraft.ButchercraftItems;
-import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
-import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
+import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -47,15 +44,15 @@ public interface ICarcassProfile {
     }
 
     /** 每個 cut group 的掉落定義 */
-    default List<DropSpec> dropsFor(MeatHookStage stage) {
+    default List<ChanceResult> dropsFor(MeatHookStage stage) {
         return List.of();
     }
 
-    default List<DropSpec> dropsForSupport(MeatHookStage stage) {
+    default List<ChanceResult> dropsForSupport(MeatHookStage stage) {
         return List.of();
     }
 
-    default List<DropSpec> dropsForTrivial(MeatHookStage stage) {
+    default List<ChanceResult> dropsForTrivial(MeatHookStage stage) {
         return List.of();
     }
 

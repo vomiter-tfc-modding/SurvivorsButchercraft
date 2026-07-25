@@ -2,16 +2,13 @@ package com.vomiter.survivorsbutchercraft.data;
 
 import com.lance5057.butchercraft.Butchercraft;
 import com.lance5057.butchercraft.ButchercraftBlocks;
-import com.lance5057.butchercraft.ButchercraftItems;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class SBRecipeFilter {
     private static final List<Item> RESULT_ITEM_TO_BLOCK = new ArrayList<>();
@@ -34,7 +31,9 @@ public class SBRecipeFilter {
     }
 
     public static boolean shouldBlock(ResourceLocation id, Recipe<?> recipe, RegistryAccess access){
-        if(!id.getNamespace().equals(Butchercraft.MOD_ID)) return false;
+        if(id.getNamespace().equals(Butchercraft.MOD_ID)) return true;
+        return false;
+        /*
         if(id.getPath().endsWith("roast")) return true;
         var result = recipe.getResultItem(access);
         if(RESULT_ITEM_TO_BLOCK.contains(result.getItem())) return true;
@@ -57,5 +56,7 @@ public class SBRecipeFilter {
                 ButchercraftItems.GRINDER_BLOCK_ITEM.get(),
                 ButchercraftItems.BLOOD_SAUSAGE_MIX.get()
         ).anyMatch(result::is);
+
+         */
     }
 }

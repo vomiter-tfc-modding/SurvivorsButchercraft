@@ -3,7 +3,10 @@ package com.vomiter.survivorsbutchercraft.data.bbmodel;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.core.Direction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 public final class CapturingVertexConsumer implements VertexConsumer {
 

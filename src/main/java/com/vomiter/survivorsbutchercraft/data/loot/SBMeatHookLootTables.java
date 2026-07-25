@@ -1,20 +1,9 @@
 package com.vomiter.survivorsbutchercraft.data.loot;
 
-import com.vomiter.survivorsbutchercraft.Helpers;
-import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
-import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import net.minecraft.data.loot.LootTableSubProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootTableReference;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BiConsumer;
-
-public class SBMeatHookLootTables implements LootTableSubProvider {
+public abstract class SBMeatHookLootTables implements LootTableSubProvider {
+    /*
     @Override
     public void generate(@NotNull BiConsumer<ResourceLocation, LootTable.Builder> out) {
         for (Carcass carcass : Carcass.values()) {
@@ -73,5 +62,7 @@ public class SBMeatHookLootTables implements LootTableSubProvider {
             }
         }
     }
+
+     */
 }
 

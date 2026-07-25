@@ -3,7 +3,6 @@ package com.vomiter.survivorsbutchercraft.compat;
 import com.lance5057.butchercraft.ButchercraftItems;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
-import org.labellum.mc.waterflasks.setup.Registration;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class FarmersDelightCompat {

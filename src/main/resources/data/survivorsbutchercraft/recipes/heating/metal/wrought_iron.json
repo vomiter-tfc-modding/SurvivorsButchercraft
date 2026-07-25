@@ -1,0 +1,12 @@
+{
+  "type":"tfc:heating",
+  "ingredient":
+    {"tag": "survivorsbutchercraft:metal_item/wrought_iron"},
+  "result_fluid":
+    {
+      "fluid":"tfc:metal/cast_iron",
+      "amount":100
+    },
+  "temperature":1535,
+  "use_durability":true
+}

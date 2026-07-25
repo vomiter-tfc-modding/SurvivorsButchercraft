@@ -1,12 +1,5 @@
 {
-  "format_version": "1.21.11",
-  "credit": "Made with Blockbench",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "1": "butchercraft:block/sheep",
-    "2": "survivorsbutchercraft:item/sheep_head_male_parts",
-    "particle": "survivorsbutchercraft:item/sheep_head_male_parts"
-  },
+  "parent": "survivorsbutchercraft:block/head_male/sheep",
   "elements": [
     {
       "name": "head",

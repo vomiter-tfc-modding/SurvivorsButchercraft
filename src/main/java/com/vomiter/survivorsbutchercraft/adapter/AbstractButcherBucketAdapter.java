@@ -4,16 +4,13 @@ import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemU
 import com.vomiter.survivorsbutchercraft.butchery.ButcherHelpers;
 import net.dries007.tfc.common.capabilities.Capabilities;
 import net.dries007.tfc.common.items.FluidContainerItem;
-import net.dries007.tfc.common.recipes.ingredients.FluidStackIngredient;
 import net.dries007.tfc.util.Helpers;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -21,7 +18,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {

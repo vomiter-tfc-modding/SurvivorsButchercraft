@@ -7,7 +7,6 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.common.block.SkullLikeBlock;
 import com.vomiter.survivorsbutchercraft.common.block.WallSkullLikeBlock;
 import com.vomiter.survivorsbutchercraft.common.registry.SBBlocks;
-import net.dries007.tfc.util.Metal;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +18,6 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Arrays;
 

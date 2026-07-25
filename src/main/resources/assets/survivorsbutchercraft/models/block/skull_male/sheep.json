@@ -1,5 +1,5 @@
 {
-  "parent": "survivorsbutchercraft:item/head_male/sheep",
+  "parent": "survivorsbutchercraft:block/head_male/sheep",
   "textures": {
     "1": "butchercraft:block/entity/sheep",
     "particle": "minecraft:block/bone_block_side"

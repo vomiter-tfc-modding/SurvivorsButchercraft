@@ -1,15 +1,22 @@
 {
-  "type": "butchercraft:butcher_block",
+  "type": "survivorsbutchercraft:custom_butcher_block",
   "carcass": {
     "item": "tfc:food/pork"
   },
-  "group": "",
   "jei": [],
+  "results": [
+    [
+      {
+        "count": 2,
+        "item": "butchercraft:cubed_pork"
+      }
+    ]
+  ],
   "tools": [
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:butcherblock/pork/ordinary_to_cubed",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "animation": {

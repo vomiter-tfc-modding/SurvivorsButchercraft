@@ -15,6 +15,11 @@
       {
         "count": 2,
         "item": "butchercraft:eyeball"
+      },
+      {
+        "chance": 0.5,
+        "count": 4,
+        "item": "butchercraft:sinew"
       }
     ]
   ],

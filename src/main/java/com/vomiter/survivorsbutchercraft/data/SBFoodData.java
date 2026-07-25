@@ -18,6 +18,11 @@ import java.util.stream.Stream;
 public class SBFoodData {
     public static void saveFoodData(SDFoodDataProvider provider){
 
+        provider.newBuilder("blood_mixture")
+                .item(ButchercraftItems.BLOOD_SAUSAGE_MIX.get())
+                .slicedFrom(Food.BEEF, 6)
+                .save();
+
         provider.newBuilder("head")
                 .ingredient(Ingredient.of(Stream.concat(
                         SBItems.HEADS.values().stream().map(RegistryObject::get),

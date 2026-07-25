@@ -10,6 +10,7 @@ import com.vomiter.survivorsbutchercraft.butchery.meat.Raw2CookedMap;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsdelight.data.tags.SDTags;
 import net.dries007.tfc.common.items.TFCItems;
+import net.dries007.tfc.util.Metal;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -23,6 +24,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
+import org.labellum.mc.waterflasks.setup.Registration;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -71,6 +73,36 @@ public class SBTagProviders {
         @SuppressWarnings("unchecked")
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
+
+            for (Metal.Default metal : Metal.Default.values()) {
+                if(!metal.hasTools()) continue;
+                var metalTag = SBTags.Items.createTFC("metal_item/" + metal.getSerializedName());
+                var butcherMetalTag = SBTags.Items.create("metal_item/" + metal.getSerializedName());
+
+                tag(metalTag).add(
+                        SBItems.BUTCHER_KNIVES.get(metal).get(),
+                        SBItems.BUTCHER_KNIFE_HEADS.get(metal).get(),
+                        SBItems.SKINNING_KNIVES.get(metal).get(),
+                        SBItems.SKINNING_KNIFE_HEADS.get(metal).get(),
+                        SBItems.BONESAWS.get(metal).get(),
+                        SBItems.BONESAW_HEADS.get(metal).get(),
+                        SBItems.GUT_KNIVES.get(metal).get(),
+                        SBItems.GUT_KNIFE_HEADS.get(metal).get(),
+                        SBItems.MEAT_HOOKS.get(metal).get()
+                );
+
+                tag(butcherMetalTag).add(
+                        SBItems.BUTCHER_KNIVES.get(metal).get(),
+                        SBItems.BUTCHER_KNIFE_HEADS.get(metal).get(),
+                        SBItems.SKINNING_KNIVES.get(metal).get(),
+                        SBItems.SKINNING_KNIFE_HEADS.get(metal).get(),
+                        SBItems.BONESAWS.get(metal).get(),
+                        SBItems.BONESAW_HEADS.get(metal).get(),
+                        SBItems.GUT_KNIVES.get(metal).get(),
+                        SBItems.GUT_KNIFE_HEADS.get(metal).get()
+                );
+
+            }
 
             tag(SBTags.Items.PRESERVATIVE)
                     .add(TFCItems.GLUE.get())
@@ -144,6 +176,14 @@ public class SBTagProviders {
             tag(SBTags.Items.TALLOW_INGREDIENT)
                     .add(TFCItems.BLUBBER.get())
                     .add(ButchercraftItems.LARD.get());
+
+            assert FLItems.RENNET.getId() != null;
+            assert Registration.BLADDER.getId() != null;
+            tag(SBTags.Items.BUTCHERY_SKIP_CARCASS)
+                    .addOptional(FLItems.RENNET.getId())
+                    .addOptional(Registration.BLADDER.getId());
+            
+            
         }
     }
 

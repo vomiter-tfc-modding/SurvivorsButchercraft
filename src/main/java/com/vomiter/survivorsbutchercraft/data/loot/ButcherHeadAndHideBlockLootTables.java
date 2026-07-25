@@ -26,26 +26,23 @@ public class ButcherHeadAndHideBlockLootTables extends BlockLootSubProvider {
 
             RegistryObject<Block> head = SBBlocks.HEADS.get(carcass);
             RegistryObject<Block> wallHead = SBBlocks.WALL_HEADS.get(carcass);
+            RegistryObject<Block> skull = SBBlocks.SKULLS.get(carcass);
+            RegistryObject<Block> wallSkull = SBBlocks.WALL_SKULLS.get(carcass);
+            dropSelf(head.get());
+            dropOther(wallHead.get(), head.get());
+            dropSelf(skull.get());
+            dropOther(wallSkull.get(), skull.get());
 
-            if (head != null) {
-                dropSelf(head.get());
-            }
-
-            if (wallHead != null && head != null) {
-                dropOther(wallHead.get(), head.get());
-            }
 
             if (carcass.hasMaleHead()) {
                 RegistryObject<Block> maleHead = SBBlocks.HEADS_MALE.get(carcass);
                 RegistryObject<Block> maleWallHead = SBBlocks.WALL_HEADS_MALE.get(carcass);
-
-                if (maleHead != null) {
-                    dropSelf(maleHead.get());
-                }
-
-                if (maleWallHead != null && maleHead != null) {
-                    dropOther(maleWallHead.get(), maleHead.get());
-                }
+                RegistryObject<Block> maleSkull = SBBlocks.SKULLS_MALE.get(carcass);
+                RegistryObject<Block> maleWallSkull = SBBlocks.WALL_SKULLS_MALE.get(carcass);
+                dropSelf(maleHead.get());
+                dropOther(maleWallHead.get(), maleHead.get());
+                dropSelf(maleSkull.get());
+                dropOther(maleWallSkull.get(), maleSkull.get());
             }
         }
     }
@@ -77,6 +74,23 @@ public class ButcherHeadAndHideBlockLootTables extends BlockLootSubProvider {
         SBBlocks.WALL_HEADS_MALE.values().stream()
                 .map(RegistryObject::get)
                 .forEach(blocks::add);
+
+        SBBlocks.SKULLS.values().stream()
+                .map(RegistryObject::get)
+                .forEach(blocks::add);
+
+        SBBlocks.WALL_SKULLS.values().stream()
+                .map(RegistryObject::get)
+                .forEach(blocks::add);
+
+        SBBlocks.SKULLS_MALE.values().stream()
+                .map(RegistryObject::get)
+                .forEach(blocks::add);
+
+        SBBlocks.WALL_SKULLS_MALE.values().stream()
+                .map(RegistryObject::get)
+                .forEach(blocks::add);
+
 
         return blocks;
     }

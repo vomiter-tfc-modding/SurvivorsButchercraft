@@ -5,8 +5,10 @@ import com.lance5057.butchercraft.effects.SoapableMobEffect;
 import com.lance5057.butchercraft.items.ButcherKnifeItem;
 import com.vomiter.survivorsabilities.core.SAEffects;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
+import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import com.vomiter.survivorsbutchercraft.mixin.MobEffectInstanceAccessor;
 import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
+import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.dries007.tfc.common.entities.predator.Predator;
 import net.dries007.tfc.common.fluids.TFCFluids;
@@ -19,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -33,11 +36,22 @@ public final class SBForgeEvents {
         MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onLivingDrops);
         MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onPlayerTick);
         MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::agitatePredators);
+        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onEntitySpawn);
+
     }
 
     public static void onAddReloadListeners(AddReloadListenerEvent event) {
     }
 
+    static void onEntitySpawn(EntityJoinLevelEvent event){
+        if (ThreadLocalFlags.dropCarcass.get()){
+            if (event.getEntity() instanceof ItemEntity itemEntity){
+                if (itemEntity.getItem().is(SBTags.Items.BUTCHERY_SKIP_CARCASS)){
+                    event.setCanceled(true);
+                }
+            }
+        }
+    }
     static List<RegistryObject<? extends SoapableMobEffect>> BLOODY_EFFECTS = List.of(
             ButchercraftMobEffects.DIRTY,
             ButchercraftMobEffects.BLOODY,

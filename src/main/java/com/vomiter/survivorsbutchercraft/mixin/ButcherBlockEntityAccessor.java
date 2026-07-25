@@ -3,8 +3,6 @@ package com.vomiter.survivorsbutchercraft.mixin;
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
 import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlockEntity;
 import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockRecipe;
-import com.lance5057.butchercraft.workstations.hook.HookRecipe;
-import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;

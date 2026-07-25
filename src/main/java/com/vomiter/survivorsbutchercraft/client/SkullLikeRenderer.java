@@ -2,7 +2,6 @@ package com.vomiter.survivorsbutchercraft.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.vomiter.survivorsbutchercraft.common.blockentity.SkullLikeBlockEntity;
 import com.vomiter.survivorsbutchercraft.common.registry.SBBlockEntityTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -70,7 +69,8 @@ public class SkullLikeRenderer implements BlockEntityRenderer<BlockEntity> {
             pose.mulPose(Axis.YP.rotationDegrees(- degrees));
 
             // 旋轉完移回去，避免整個模型也被搬到中心
-            pose.translate(-0.5F, 0.0F, -0.5F);
+            // 提升小量的Y以避免底面與地面Z fighting
+            pose.translate(-0.5F, 0.01F, -0.5F);
         }
         else {
             pose.translate(0, 0.25, 0);

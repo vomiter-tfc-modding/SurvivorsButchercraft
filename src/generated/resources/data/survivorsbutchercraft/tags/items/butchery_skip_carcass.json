@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "firmalife:rennet",
+      "required": false
+    },
+    {
+      "id": "waterflasks:bladder",
+      "required": false
+    }
+  ]
+}

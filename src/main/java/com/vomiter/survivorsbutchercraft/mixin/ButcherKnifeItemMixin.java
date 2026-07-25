@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.vomiter.survivorsbutchercraft.Helpers;
+import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -34,7 +35,12 @@ public class ButcherKnifeItemMixin {
         ResourceLocation redirected = Helpers.id("butchercraft", "butcher_knife/" + mobId.getNamespace() + "/" + mobId.getPath());
         LootTable lootTable = player.getServer().getLootData().getLootTable(redirected);
         if(lootTable != LootTable.EMPTY){
-            original.call(instance, player, redirected, mob);
+            try{
+                ThreadLocalFlags.dropCarcass.set(true);
+                original.call(instance, player, redirected, mob);
+            } finally {
+                ThreadLocalFlags.dropCarcass.remove();
+            }
         }
     }
 

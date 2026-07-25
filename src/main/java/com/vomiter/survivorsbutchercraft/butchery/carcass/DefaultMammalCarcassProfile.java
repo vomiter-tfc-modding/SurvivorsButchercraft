@@ -4,8 +4,8 @@ import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
+import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
-import com.vomiter.survivorsbutchercraft.data.loot.DropSpec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -28,18 +28,18 @@ public abstract class DefaultMammalCarcassProfile implements ICarcassProfile {
     }
 
     @Override
-    public List<DropSpec> dropsFor(MeatHookStage stage) {
+    public List<ChanceResult> dropsFor(MeatHookStage stage) {
         if(carcass() == null) return List.of();
         return switch (stage) {
-            case SKIN -> List.of(DropSpec.of(new ItemStack(SBItems.HIDES.get(carcass()).get())));
+            case SKIN -> List.of(new ChanceResult(SBItems.HIDES.get(carcass()).get().getDefaultInstance()));
             case DISEMBOWEL -> List.of(
-                    DropSpec.of(new ItemStack(SBItems.HEADS.get(carcass()).get()))
+                    new ChanceResult(new ItemStack(SBItems.HEADS.get(carcass()).get()))
             );
             case BISECT -> List.of(
-                    DropSpec.of(new ItemStack(ButchercraftItems.HEART.get())),
-                    DropSpec.of(new ItemStack(ButchercraftItems.LIVER.get())),
-                    DropSpec.of(new ItemStack(ButchercraftItems.KIDNEY.get(), 2)),
-                    DropSpec.of(new ItemStack(ButchercraftItems.LUNG.get(), 2))
+                    new ChanceResult(new ItemStack(ButchercraftItems.HEART.get())),
+                    new ChanceResult(new ItemStack(ButchercraftItems.LIVER.get())),
+                    new ChanceResult(new ItemStack(ButchercraftItems.KIDNEY.get(), 2)),
+                    new ChanceResult(new ItemStack(ButchercraftItems.LUNG.get(), 2))
             );
             default ->
                     List.of();
@@ -47,16 +47,16 @@ public abstract class DefaultMammalCarcassProfile implements ICarcassProfile {
     }
 
     @Override
-    public List<DropSpec> dropsForSupport(MeatHookStage stage) {
+    public List<ChanceResult> dropsForSupport(MeatHookStage stage) {
         if(carcass() == null) return List.of();
         return switch (stage) {
             case BUTCHER -> List.of(
-                    DropSpec.of(MeatMap.get(getMeatType(), MeatProduct.RIB)).withCount(2, 4),
-                    DropSpec.of(MeatMap.get(getMeatType(), MeatProduct.ROAST)).withCount(1, 3)
+                    new ChanceResult(MeatMap.get(getMeatType(), MeatProduct.RIB), 4, 0.25f),
+                    new ChanceResult(MeatMap.get(getMeatType(), MeatProduct.ROAST), 4, 0.25f)
             );
             case BISECT -> List.of(
-                    DropSpec.of(new ItemStack(ButchercraftItems.STOMACH.get(), 1)),
-                    DropSpec.of(new ItemStack(ButchercraftItems.TRIPE.get(), 4))
+                    new ChanceResult(new ItemStack(ButchercraftItems.STOMACH.get(), 1)),
+                    new ChanceResult(new ItemStack(ButchercraftItems.TRIPE.get(), 4))
             );
             default ->
                     List.of();
@@ -64,20 +64,19 @@ public abstract class DefaultMammalCarcassProfile implements ICarcassProfile {
     }
 
     @Override
-    public List<DropSpec> dropsForTrivial(MeatHookStage stage) {
+    public List<ChanceResult> dropsForTrivial(MeatHookStage stage) {
         if(carcass() == null) return List.of();
         return switch (stage) {
             case SKIN -> List.of(
-                    DropSpec.of(ButchercraftItems.FAT.get()).withCount(4, 12),
-                    DropSpec.of(ButchercraftItems.LEATHER_SCRAP.get()).withCount(2, 4)
+                    new ChanceResult(ButchercraftItems.FAT.get(), 12, 0.5f)
             );
             case DISEMBOWEL -> List.of(
-                    DropSpec.of(ButchercraftItems.SINEW.get()).withCount(2, 6)
+                    new ChanceResult(ButchercraftItems.SINEW.get(), 6, 0.5f)
             );
             case BISECT -> List.of(
-                    DropSpec.of(ButchercraftItems.FAT.get()).withCount(4, 12),
-                    DropSpec.of(ButchercraftItems.SINEW.get()).withCount(4, 12),
-                    DropSpec.of(MeatMap.get(getMeatType(), MeatProduct.SCRAP)).withCount(6, 12)
+                    new ChanceResult(ButchercraftItems.FAT.get(), 12, 0.5f),
+                    new ChanceResult(ButchercraftItems.SINEW.get(), 12, 0.5f),
+                    new ChanceResult(MeatMap.get(getMeatType(), MeatProduct.SCRAP), 12, 0.75f)
             );
 
             default ->

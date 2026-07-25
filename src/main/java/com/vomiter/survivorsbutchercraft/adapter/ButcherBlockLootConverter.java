@@ -9,9 +9,14 @@ import com.vomiter.survivorsbutchercraft.common.recipe.CustomButcherBlockRecipe;
 import com.vomiter.survivorsbutchercraft.common.recipe.CustomMeatHookRecipe;
 import com.vomiter.survivorsbutchercraft.common.registry.SBFoodTraits;
 import com.vomiter.survivorsbutchercraft.compat.FarmersDelightCompat;
+import com.vomiter.survivorsbutchercraft.compat.FirmaLifeCompat;
 import com.vomiter.survivorsbutchercraft.compat.WaterFlaskCompat;
+import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
+import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
+import com.vomiter.survivorsbutchercraft.util.ToolTierGetter;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.dries007.tfc.common.capabilities.food.FoodCapability;
+import net.dries007.tfc.util.Metal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -28,17 +33,21 @@ public class ButcherBlockLootConverter {
         if (!(blockEntity instanceof BlockEntity be))return original.call(instance, params);
         if(be.getLevel() == null) return original.call(instance, params);
         var tool = Optional.ofNullable(params.getParamOrNull(LootContextParams.TOOL)).orElse(ItemStack.EMPTY);
+        var tier = ToolTierGetter.get(tool.getItem());
+        var fortuneMod = tier == null? 0: Math.round(tier.getLevel() / 2f);
+
         var random = be.getLevel().random;
         var originalList = original.call(instance, params);
+        originalList.removeIf(stack -> stack.is(SBTags.Items.BUTCHERY_SKIP_LOOT));
         blockEntity.sbtfcInterface$matchRecipe().ifPresent(recipe -> {
             if (recipe instanceof CustomButcherBlockRecipe custom){
-                int fortuneLevel = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
+                int fortuneLevel = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE) + fortuneMod;
                 custom.getResults(blockEntity.sbtfcInterface$getStage()).stream()
                         .map(chanceResult -> chanceResult.rollOutput(random, fortuneLevel))
                         .forEach(originalList::add);
             }
             if (recipe instanceof CustomMeatHookRecipe custom){
-                int fortuneLevel = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
+                int fortuneLevel = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE) + fortuneMod;
                 custom.getResults(blockEntity.sbtfcInterface$getStage()).stream()
                         .map(chanceResult -> chanceResult.rollOutput(random, fortuneLevel))
                         .forEach(originalList::add);
@@ -46,8 +55,9 @@ public class ButcherBlockLootConverter {
 
         });
 
-        if (be instanceof MeatHookBlockEntity hook){
+        if (be instanceof MeatHookBlockEntity hook && ThreadLocalFlags.dropLootForButchering.get()){
             if (ModList.get().isLoaded("waterflasks")) WaterFlaskCompat.addBladder(originalList);
+            if (ModList.get().isLoaded("firmalife")) FirmaLifeCompat.addRennet(originalList);
             if (ModList.get().isLoaded("farmersdelight")){
                 FarmersDelightCompat.addHam(originalList);
             }

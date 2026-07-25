@@ -10,8 +10,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
@@ -21,6 +21,28 @@ public class ChanceResult {
     public static final ChanceResult EMPTY;
     private final ItemStack stack;
     private final float chance;
+
+    public ChanceResult(Item stack) {
+        this.stack = stack.getDefaultInstance();
+        this.chance = 1;
+    }
+
+    public ChanceResult(Item stack, int count, float chance) {
+        this.stack = stack.getDefaultInstance().copyWithCount(count);
+        this.chance = chance;
+    }
+
+
+    public ChanceResult(Item stack, float chance) {
+        this.stack = stack.getDefaultInstance();
+        this.chance = chance;
+    }
+
+
+    public ChanceResult(ItemStack stack) {
+        this.stack = stack;
+        this.chance = 1;
+    }
 
     public ChanceResult(ItemStack stack, float chance) {
         this.stack = stack;

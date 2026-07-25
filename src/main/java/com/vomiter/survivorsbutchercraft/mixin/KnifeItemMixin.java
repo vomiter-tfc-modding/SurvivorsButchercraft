@@ -2,10 +2,7 @@ package com.vomiter.survivorsbutchercraft.mixin;
 
 import com.lance5057.butchercraft.items.KnifeItem;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
-import net.dries007.tfc.common.TFCTiers;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.Tiers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;

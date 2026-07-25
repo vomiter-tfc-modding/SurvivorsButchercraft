@@ -3,12 +3,8 @@ package com.vomiter.survivorsbutchercraft.adapter;
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
 import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlockEntity;
 import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockRecipe;
-import com.lance5057.butchercraft.workstations.hook.HookRecipe;
-import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.vomiter.survivorsbutchercraft.mixin.ButcherBlockEntityAccessor;
-import com.vomiter.survivorsbutchercraft.mixin.MeatHookBlockEntityAccessor;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Optional;
 

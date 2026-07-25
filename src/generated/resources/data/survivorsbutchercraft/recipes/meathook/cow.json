@@ -1,64 +1,99 @@
 {
-  "type": "butchercraft:meat_hook",
+  "type": "survivorsbutchercraft:custom_meat_hook",
   "carcass": {
     "item": "survivorsbutchercraft:carcass/cow"
   },
-  "group": "",
-  "jei": [
-    {
-      "item": "butchercraft:kidney"
-    },
-    {
-      "item": "butchercraft:tripe"
-    },
-    {
-      "item": "butchercraft:heart"
-    },
-    {
-      "item": "butchercraft:beef_ribs"
-    },
-    {
-      "item": "butchercraft:lung"
-    },
-    {
-      "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "survivorsbutchercraft:head/cow"
-    },
-    {
-      "item": "survivorsbutchercraft:hide/cow"
-    },
-    {
-      "item": "minecraft:bone"
-    },
-    {
-      "item": "butchercraft:sinew"
-    },
-    {
-      "item": "butchercraft:fat"
-    },
-    {
-      "item": "butchercraft:beef_scraps"
-    },
-    {
-      "item": "tfc:food/beef"
-    },
-    {
-      "item": "butchercraft:oxtail"
-    },
-    {
-      "item": "butchercraft:beef_roast"
-    },
-    {
-      "item": "butchercraft:leather_scrap"
-    },
-    {
-      "item": "butchercraft:liver"
-    },
-    {
-      "item": "butchercraft:stomach"
-    }
+  "jei": [],
+  "results": [
+    [
+      {
+        "item": "butchercraft:blood_fluid_bucket"
+      }
+    ],
+    [
+      {
+        "item": "butchercraft:blood_fluid_bucket"
+      }
+    ],
+    [
+      {
+        "item": "butchercraft:blood_fluid_bucket"
+      }
+    ],
+    [
+      {
+        "item": "survivorsbutchercraft:hide/cow"
+      },
+      {
+        "chance": 0.5,
+        "count": 12,
+        "item": "butchercraft:fat"
+      }
+    ],
+    [
+      {
+        "item": "survivorsbutchercraft:head/cow"
+      },
+      {
+        "item": "butchercraft:oxtail"
+      },
+      {
+        "chance": 0.5,
+        "count": 6,
+        "item": "butchercraft:sinew"
+      }
+    ],
+    [
+      {
+        "item": "butchercraft:heart"
+      },
+      {
+        "item": "butchercraft:liver"
+      },
+      {
+        "count": 2,
+        "item": "butchercraft:kidney"
+      },
+      {
+        "count": 2,
+        "item": "butchercraft:lung"
+      },
+      {
+        "count": 4,
+        "item": "butchercraft:stomach"
+      },
+      {
+        "count": 8,
+        "item": "butchercraft:tripe"
+      },
+      {
+        "chance": 0.5,
+        "count": 12,
+        "item": "butchercraft:fat"
+      },
+      {
+        "chance": 0.5,
+        "count": 12,
+        "item": "butchercraft:sinew"
+      },
+      {
+        "chance": 0.75,
+        "count": 12,
+        "item": "butchercraft:beef_scraps"
+      }
+    ],
+    [
+      {
+        "chance": 0.25,
+        "count": 4,
+        "item": "butchercraft:beef_ribs"
+      },
+      {
+        "chance": 0.25,
+        "count": 4,
+        "item": "butchercraft:beef_roast"
+      }
+    ]
   ],
   "tools": [
     {
@@ -319,7 +354,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/cow/skin",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -404,7 +439,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/cow/disembowel",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -489,7 +524,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/cow/bisect",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -574,7 +609,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/cow/butcher",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,

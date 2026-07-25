@@ -1,9 +1,7 @@
 package com.vomiter.survivorsbutchercraft.data;
 
 import com.google.gson.JsonObject;
-import net.dries007.tfc.common.recipes.ingredients.NotRottenIngredient;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.crafting.CraftingHelper;
 
 import java.util.stream.Stream;
 

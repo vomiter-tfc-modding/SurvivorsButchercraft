@@ -3,7 +3,6 @@ package com.vomiter.survivorsbutchercraft.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.lance5057.butchercraft.client.BlacklistedModel;
-import com.lance5057.butchercraft.data.builders.recipes.ButcherBlockRecipeBuilder;
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
 import com.vomiter.survivorsbutchercraft.common.registry.SBRecipes;
 import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;

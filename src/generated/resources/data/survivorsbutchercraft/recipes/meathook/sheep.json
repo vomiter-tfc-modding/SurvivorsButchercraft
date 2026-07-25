@@ -1,64 +1,85 @@
 {
-  "type": "butchercraft:meat_hook",
+  "type": "survivorsbutchercraft:custom_meat_hook",
   "carcass": {
     "item": "survivorsbutchercraft:carcass/sheep"
   },
-  "group": "",
-  "jei": [
-    {
-      "item": "butchercraft:kidney"
-    },
-    {
-      "item": "butchercraft:tripe"
-    },
-    {
-      "item": "butchercraft:heart"
-    },
-    {
-      "item": "survivorsbutchercraft:head_male/sheep"
-    },
-    {
-      "item": "survivorsbutchercraft:head/sheep"
-    },
-    {
-      "item": "survivorsbutchercraft:hide/sheep"
-    },
-    {
-      "item": "butchercraft:lung"
-    },
-    {
-      "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "butchercraft:lamb_scraps"
-    },
-    {
-      "item": "butchercraft:lamb_ribs"
-    },
-    {
-      "item": "butchercraft:lamb_roast"
-    },
-    {
-      "item": "minecraft:bone"
-    },
-    {
-      "item": "butchercraft:sinew"
-    },
-    {
-      "item": "butchercraft:fat"
-    },
-    {
-      "item": "tfc:food/mutton"
-    },
-    {
-      "item": "butchercraft:leather_scrap"
-    },
-    {
-      "item": "butchercraft:liver"
-    },
-    {
-      "item": "butchercraft:stomach"
-    }
+  "jei": [],
+  "results": [
+    [
+      {
+        "item": "butchercraft:blood_fluid_bucket"
+      }
+    ],
+    [
+      {
+        "item": "survivorsbutchercraft:hide/sheep"
+      },
+      {
+        "chance": 0.5,
+        "count": 12,
+        "item": "butchercraft:fat"
+      }
+    ],
+    [
+      {
+        "item": "survivorsbutchercraft:head/sheep"
+      },
+      {
+        "chance": 0.5,
+        "count": 6,
+        "item": "butchercraft:sinew"
+      }
+    ],
+    [
+      {
+        "item": "butchercraft:heart"
+      },
+      {
+        "item": "butchercraft:liver"
+      },
+      {
+        "count": 2,
+        "item": "butchercraft:kidney"
+      },
+      {
+        "count": 2,
+        "item": "butchercraft:lung"
+      },
+      {
+        "item": "butchercraft:stomach"
+      },
+      {
+        "count": 4,
+        "item": "butchercraft:tripe"
+      },
+      {
+        "chance": 0.5,
+        "count": 12,
+        "item": "butchercraft:fat"
+      },
+      {
+        "chance": 0.5,
+        "count": 12,
+        "item": "butchercraft:sinew"
+      },
+      {
+        "chance": 0.75,
+        "count": 12,
+        "item": "butchercraft:lamb_scraps"
+      }
+    ],
+    [
+      {
+        "chance": 0.25,
+        "count": 4,
+        "item": "butchercraft:lamb_ribs"
+      },
+      {
+        "chance": 0.25,
+        "count": 4,
+        "item": "butchercraft:lamb_roast"
+      }
+    ]
   ],
   "tools": [
     {
@@ -149,7 +170,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/sheep/skin",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -234,7 +255,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/sheep/disembowel",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -319,7 +340,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/sheep/bisect",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -404,7 +425,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "survivorsbutchercraft:meat_hook/sheep/butcher",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,

@@ -16,15 +16,17 @@
     "MeatGrinderMixin",
     "MeatHookBlockEntityAccessor",
     "MeatHookBlockEntityMixin",
-    "MeatHookRendererMixin",
     "MobEffectInstanceAccessor",
     "RecipeManagerMixin",
+    "client.MeatHookRendererMixin",
+    "compat.ButcherBlockRecipeCategoryMixin",
+    "compat.HookRecipeCategoryMixin",
     "effect.BloodTrailMixin",
     "effect.StinkyMixin"
   ],
   "client": [
-    "RenderUtilMixin",
-    "BakedModelRenderableMixin"
+    "client.BakedModelRenderableMixin",
+    "client.RenderUtilMixin"
   ],
   "injectors": {
     "defaultRequire": 1

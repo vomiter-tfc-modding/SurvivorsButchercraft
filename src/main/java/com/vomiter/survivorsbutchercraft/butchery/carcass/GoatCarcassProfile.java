@@ -1,8 +1,6 @@
 package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
-import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.MapColor;
 
 public final class GoatCarcassProfile extends DefaultMammalCarcassProfile {
