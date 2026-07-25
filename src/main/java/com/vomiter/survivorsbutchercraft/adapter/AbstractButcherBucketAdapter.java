@@ -37,6 +37,8 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
     }
 
     private boolean shouldReturnItem = false;
+    private boolean shouldDropOriginalLoot = true;
+
 
     boolean isShouldReturnItem() {
         return shouldReturnItem;
@@ -54,10 +56,10 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
 
     void progressRecipe(R recipe, Player player){
         if (this.isFinalStage(recipe)) {
-            dropLoot(getTool(recipe, getStage()), player);
+            if(shouldDropOriginalLoot) dropLoot(getTool(recipe, getStage()), player);
             finishRecipe();
         } else {
-            dropLoot(getTool(recipe, getStage()), player);
+            if(shouldDropOriginalLoot) dropLoot(getTool(recipe, getStage()), player);
             setStage(getStage() + 1);
         }
     }
@@ -88,23 +90,28 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
     }
 
     void handleEmptyBucket(Player p, ItemStack butcheringTool, CallbackInfoReturnable<InteractionResult> cir, R recipe){
-        if(butcheringTool.getItem() instanceof FluidContainerItem){
-            ItemStack containerItem;
-            setShouldReturnItem(false);
-            if(Helpers.getCapability(butcheringTool, Capabilities.FLUID_ITEM) == null){
-                containerItem = butcheringTool.split(1);
-                setShouldReturnItem(true);
+        try{
+            shouldDropOriginalLoot = false;
+            if(butcheringTool.getItem() instanceof FluidContainerItem){
+                ItemStack containerItem;
+                setShouldReturnItem(false);
+                if(Helpers.getCapability(butcheringTool, Capabilities.FLUID_ITEM) == null){
+                    containerItem = butcheringTool.split(1);
+                    setShouldReturnItem(true);
+                }
+                else containerItem = butcheringTool;
+                var blood = ButcherHelpers.createBloodTank(MIN_BUCKET_CAPACITY);
+                Optional.ofNullable(Helpers.getCapability(containerItem, Capabilities.FLUID_ITEM)).ifPresent(
+                        itemFluid -> ButcherHelpers.handleFluid(itemFluid, MIN_BUCKET_CAPACITY, p, blood, () -> {
+                            ButcherHelpers.drainBlood(p, containerItem, itemFluid, blood, (o, n) -> handleAfterFluidTransfer(o, n, p));
+                            ButcherHelpers.applyEffects(p);
+                            progressRecipe(recipe, p);
+                            updateInventory();
+                            cir.setReturnValue(InteractionResult.SUCCESS);
+                        }));
             }
-            else containerItem = butcheringTool;
-            var blood = ButcherHelpers.createBloodTank(MIN_BUCKET_CAPACITY);
-            Optional.ofNullable(Helpers.getCapability(containerItem, Capabilities.FLUID_ITEM)).ifPresent(
-                    itemFluid -> ButcherHelpers.handleFluid(itemFluid, MIN_BUCKET_CAPACITY, p, blood, () -> {
-                        ButcherHelpers.drainBlood(p, containerItem, itemFluid, blood, (o, n) -> handleAfterFluidTransfer(o, n, p));
-                        ButcherHelpers.applyEffects(p);
-                        progressRecipe(recipe, p);
-                        updateInventory();
-                        cir.setReturnValue(InteractionResult.SUCCESS);
-                    }));
+        } finally {
+            shouldDropOriginalLoot = true;
         }
     }
 

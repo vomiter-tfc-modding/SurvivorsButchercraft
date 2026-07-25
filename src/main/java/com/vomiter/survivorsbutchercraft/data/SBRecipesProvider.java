@@ -5,6 +5,8 @@ import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloat;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloatVector3;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
+import com.lance5057.butchercraft.data.builders.recipes.loottables.ButcherBlockLootTables;
+import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
@@ -254,16 +256,22 @@ public class SBRecipesProvider extends RecipeProvider {
                         Ingredient.of(Items.BUCKET),
                         1,
                         true,
+                        MeatHookLoottables.BLOOD_BUCKET,
                         standardModel(meatHookId(carcass.serializedName() + "/" + MeatHookStage.HOOK.pp)),
                         standardHookToolModel(Items.BUCKET)
-                ).resultStage(new ChanceResult(ButchercraftItems.BLOOD_FLUID_BUCKET.get()));
+                ).jei(Ingredient.of(ButchercraftItems.BLOOD_FLUID_BUCKET.get())).resultStage(ChanceResult.EMPTY);
             }
             for (MeatHookStage meatHookStage : MeatHookStage.values()) {
                 if(meatHookStage == MeatHookStage.HOOK) continue;
+                var loot = meatHookStage.equals(MeatHookStage.BUTCHER)?
+                        Helpers.id("tfc", "entities/" + carcass.serializedName()):
+                        ButcherBlockLootTables.EMPTY;
+
                 meatHookRecipeBuilder.tool(
                         carcass.toolFor(meatHookStage),
                         carcass.workCountFor(meatHookStage),
                         true,
+                        loot,
                         standardModel(meatHookId(carcass.serializedName() + "/" + meatHookStage.previousStep())),
                         standardHookToolModel(meatHookStage.iconicTool())
                 ).resultStage(

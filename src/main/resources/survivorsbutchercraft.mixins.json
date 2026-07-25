@@ -18,7 +18,6 @@
     "MeatHookBlockEntityMixin",
     "MobEffectInstanceAccessor",
     "RecipeManagerMixin",
-    "client.MeatHookRendererMixin",
     "compat.ButcherBlockRecipeCategoryMixin",
     "compat.HookRecipeCategoryMixin",
     "effect.BloodTrailMixin",
@@ -26,7 +25,8 @@
   ],
   "client": [
     "client.BakedModelRenderableMixin",
-    "client.RenderUtilMixin"
+    "client.RenderUtilMixin",
+    "client.MeatHookRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
