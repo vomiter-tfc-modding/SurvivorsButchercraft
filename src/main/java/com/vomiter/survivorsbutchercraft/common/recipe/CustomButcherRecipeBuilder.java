@@ -31,7 +31,7 @@ public class CustomButcherRecipeBuilder {
     private final NonNullList<Ingredient> dummyList =
             NonNullList.create();
 
-    private final NonNullList<NonNullList<ChanceResult>> chanceResults =
+    private final NonNullList<NonNullList<CompoundChanceResult>> chanceResults =
             NonNullList.create();
 
     public static CustomButcherRecipeBuilder builder() {
@@ -104,7 +104,7 @@ public class CustomButcherRecipeBuilder {
      * ]
      */
     public CustomButcherRecipeBuilder resultStage(
-            Collection<? extends ChanceResult> results
+            Collection<? extends CompoundChanceResult> results
     ) {
         Objects.requireNonNull(results, "Chance result stage cannot be null");
 
@@ -114,9 +114,9 @@ public class CustomButcherRecipeBuilder {
             );
         }
 
-        NonNullList<ChanceResult> stage = NonNullList.create();
+        NonNullList<CompoundChanceResult> stage = NonNullList.create();
 
-        for (ChanceResult result : results) {
+        for (CompoundChanceResult result : results) {
             stage.add(
                     Objects.requireNonNull(
                             result,
@@ -129,7 +129,7 @@ public class CustomButcherRecipeBuilder {
         return this;
     }
 
-    public CustomButcherRecipeBuilder resultStage(ChanceResult... results) {
+    public CustomButcherRecipeBuilder resultStage(CompoundChanceResult... results) {
         Objects.requireNonNull(results, "Chance results cannot be null");
         return resultStage(Arrays.asList(results));
     }
@@ -218,13 +218,13 @@ public class CustomButcherRecipeBuilder {
         return copy;
     }
 
-    private static NonNullList<NonNullList<ChanceResult>> copyChanceResults(
-            NonNullList<NonNullList<ChanceResult>> source
+    private static NonNullList<NonNullList<CompoundChanceResult>> copyChanceResults(
+            NonNullList<NonNullList<CompoundChanceResult>> source
     ) {
-        NonNullList<NonNullList<ChanceResult>> copy = NonNullList.create();
+        NonNullList<NonNullList<CompoundChanceResult>> copy = NonNullList.create();
 
-        for (NonNullList<ChanceResult> stage : source) {
-            NonNullList<ChanceResult> stageCopy = NonNullList.create();
+        for (NonNullList<CompoundChanceResult> stage : source) {
+            NonNullList<CompoundChanceResult> stageCopy = NonNullList.create();
             stageCopy.addAll(stage);
             copy.add(stageCopy);
         }
@@ -243,7 +243,7 @@ public class CustomButcherRecipeBuilder {
         private final Ingredient carcass;
         private final NonNullList<AnimatedRecipeItemUse> recipeToolsIn;
         private final NonNullList<Ingredient> dummyList;
-        private final NonNullList<NonNullList<ChanceResult>> chanceResults;
+        private final NonNullList<NonNullList<CompoundChanceResult>> chanceResults;
 
         protected AbstractResult(
                 ResourceLocation idIn,
@@ -251,7 +251,7 @@ public class CustomButcherRecipeBuilder {
                 Ingredient carcass,
                 NonNullList<AnimatedRecipeItemUse> recipeToolsIn,
                 NonNullList<Ingredient> dummyList,
-                NonNullList<NonNullList<ChanceResult>> chanceResults
+                NonNullList<NonNullList<CompoundChanceResult>> chanceResults
         ) {
             this.idIn = idIn;
             this.groupIn = groupIn;
@@ -287,10 +287,10 @@ public class CustomButcherRecipeBuilder {
 
             JsonArray resultsJson = new JsonArray();
 
-            for (NonNullList<ChanceResult> stage : chanceResults) {
+            for (NonNullList<CompoundChanceResult> stage : chanceResults) {
                 JsonArray stageJson = new JsonArray();
 
-                for (ChanceResult result : stage) {
+                for (CompoundChanceResult result : stage) {
                     stageJson.add(result.serialize());
                 }
 
@@ -323,7 +323,7 @@ public class CustomButcherRecipeBuilder {
                 Ingredient carcass,
                 NonNullList<AnimatedRecipeItemUse> recipeToolsIn,
                 NonNullList<Ingredient> dummyList,
-                NonNullList<NonNullList<ChanceResult>> chanceResults
+                NonNullList<NonNullList<CompoundChanceResult>> chanceResults
         ) {
             super(
                     idIn,
@@ -348,7 +348,7 @@ public class CustomButcherRecipeBuilder {
                 Ingredient carcass,
                 NonNullList<AnimatedRecipeItemUse> recipeToolsIn,
                 NonNullList<Ingredient> dummyList,
-                NonNullList<NonNullList<ChanceResult>> chanceResults
+                NonNullList<NonNullList<CompoundChanceResult>> chanceResults
         ) {
             super(
                     idIn,

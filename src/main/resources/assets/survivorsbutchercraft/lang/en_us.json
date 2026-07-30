@@ -8,5 +8,7 @@
   "tooltip.survivorsbutchercraft.alt_note1": "Using this tool may increase durability consumption",
   "tooltip.survivorsbutchercraft.alt_note2": "and reduce drop quality.",
   "fluid_type.butchercraft.blood_fluid": "Blood",
-  "foodtrait.survivorsbutchercraft.preserved": "Preserved"
+  "foodtrait.survivorsbutchercraft.preserved": "Preserved",
+
+  "config.jade.plugin_survivorsbutchercraft.meat_hook": "Meat Hook"
 }

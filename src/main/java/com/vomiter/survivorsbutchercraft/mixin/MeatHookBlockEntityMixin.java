@@ -9,8 +9,11 @@ import com.vomiter.survivorsbutchercraft.adapter.ButcherBlockLootConverter;
 import com.vomiter.survivorsbutchercraft.adapter.MeatHookBucketAdapter;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
+import com.vomiter.survivorsbutchercraft.common.block.AbstractSkullBlock;
+import com.vomiter.survivorsbutchercraft.common.registry.SBFoodTraits;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.dries007.tfc.common.capabilities.food.FoodCapability;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -66,12 +69,24 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
     @Shadow
     protected abstract Optional<HookRecipe> matchRecipe();
 
+    @Shadow
+    protected abstract void dropLoot(AnimatedRecipeItemUse recipeToolsIn, Player player);
+
+    @Shadow
+    public abstract void updateInventory();
+
     public MeatHookBlockEntityMixin(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
 
     @Inject(method = "butcher", at = @At("HEAD"), cancellable = true)
     private void sbtfc$acceptFluidHandler(Player p, ItemStack butcheringTool, CallbackInfoReturnable<InteractionResult> cir) {
+        if(AbstractSkullBlock.isPreservative(butcheringTool) && FoodCapability.hasTrait(getInsertedItem(), SBFoodTraits.PRESERVED)){
+            FoodCapability.applyTrait(getInsertedItem(), SBFoodTraits.PRESERVED);
+            butcheringTool.shrink(1);
+            updateInventory();
+            cir.setReturnValue(InteractionResult.SUCCESS);
+        }
         var adapter = new MeatHookBucketAdapter((MeatHookBlockEntity) (Object) this);
         adapter.acceptFluidHandler(p, butcheringTool, cir);
     }
@@ -127,4 +142,10 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
         var self = (IButcherBlock)this;
         return ButcherBlockLootConverter.sbtfc$convertLoot(self, instance, params, original);
     }
+
+    @Override
+    public void sbtfcInterface$dropLoot(AnimatedRecipeItemUse recipeToolsIn, Player player) {
+        dropLoot(recipeToolsIn, player);
+    }
+
 }

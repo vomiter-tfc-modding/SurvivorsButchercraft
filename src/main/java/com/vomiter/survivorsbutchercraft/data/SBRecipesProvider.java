@@ -1,5 +1,7 @@
 package com.vomiter.survivorsbutchercraft.data;
 
+import com.lance5057.butchercraft.Butchercraft;
+import com.lance5057.butchercraft.ButchercraftFluids;
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloat;
@@ -13,7 +15,7 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
-import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
+import com.vomiter.survivorsbutchercraft.common.recipe.CompoundChanceResult;
 import com.vomiter.survivorsbutchercraft.common.recipe.CustomButcherRecipeBuilder;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
@@ -32,6 +34,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
@@ -119,10 +123,10 @@ public class SBRecipesProvider extends RecipeProvider {
                         standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
                 )
                 .resultStage(
-                        new ChanceResult(skull.get().getDefaultInstance(), 1),
-                        new ChanceResult(ButchercraftItems.BRAIN.get().getDefaultInstance(), 1),
-                        new ChanceResult(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2), 1),
-                        new ChanceResult(ButchercraftItems.SINEW.get(), 4, 0.5f)
+                        new CompoundChanceResult(skull.get().getDefaultInstance(), 1),
+                        new CompoundChanceResult(ButchercraftItems.BRAIN.get().getDefaultInstance(), 1),
+                        new CompoundChanceResult(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2), 1),
+                        new CompoundChanceResult(ButchercraftItems.SINEW.get(), 4, 0.5f)
                 ).saveButcherBlock(consumer, Helpers.id("butcherblock/" + head.getId().getPath()));
 
         if (carcass.hasMaleHead()){
@@ -145,10 +149,10 @@ public class SBRecipesProvider extends RecipeProvider {
                             standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
                     )
                     .resultStage(
-                            new ChanceResult(skullMale.get().getDefaultInstance(), 1),
-                            new ChanceResult(ButchercraftItems.BRAIN.get().getDefaultInstance(), 1),
-                            new ChanceResult(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2), 1),
-                            new ChanceResult(ButchercraftItems.SINEW.get(), 4, 0.5f)
+                            new CompoundChanceResult(skullMale.get().getDefaultInstance(), 1),
+                            new CompoundChanceResult(ButchercraftItems.BRAIN.get().getDefaultInstance(), 1),
+                            new CompoundChanceResult(ButchercraftItems.EYEBALL.get().getDefaultInstance().copyWithCount(2), 1),
+                            new CompoundChanceResult(ButchercraftItems.SINEW.get(), 4, 0.5f)
                     ).saveButcherBlock(consumer, Helpers.id("butcherblock/" + headMale.getId().getPath()));
         }
     }
@@ -164,7 +168,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         true,
                         standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
                 )
-                .resultStage(new ChanceResult(ButchercraftItems.BLOOD_SAUSAGE.get(), 8, 1))
+                .resultStage(new CompoundChanceResult(ButchercraftItems.BLOOD_SAUSAGE.get(), 8, 1))
                 .saveButcherBlock(consumer, Helpers.id("butcherblock/blood_sausage"));
 
         CustomButcherRecipeBuilder.builder()
@@ -175,7 +179,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         true,
                         standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
                 )
-                .resultStage(new ChanceResult(ButchercraftItems.SAUSAGE.get(), 8, 1))
+                .resultStage(new CompoundChanceResult(ButchercraftItems.SAUSAGE.get(), 8, 1))
                 .saveButcherBlock(consumer, Helpers.id("butcherblock/sausage"));
 
 
@@ -201,7 +205,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         this.layFlatModel(ButchercraftItems.TRIPE.get()),
                         standardButcherBlockToolModel(Items.WATER_BUCKET)
                 )
-                .resultStage(ChanceResult.EMPTY)
+                .resultStage(CompoundChanceResult.EMPTY)
                 .tool(
                         Ingredient.of(SBTags.Items.SKINNING_TOOLS),
                         4,
@@ -209,7 +213,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         this.layFlatModel(ButchercraftItems.TRIPE.get()),
                         standardButcherBlockToolModel(ButchercraftItems.SKINNING_KNIFE.get())
                 )
-                .resultStage(ChanceResult.EMPTY)
+                .resultStage(CompoundChanceResult.EMPTY)
                 .tool(
                         Ingredient.of(TFCItems.POWDERS.get(Powder.SALT).get()),
                         4,
@@ -217,7 +221,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         this.layFlatModel(ButchercraftItems.TRIPE.get()),
                         standardButcherBlockToolModel(TFCItems.POWDERS.get(Powder.SALT).get())
                 )
-                .resultStage(new ChanceResult(ButchercraftItems.CASING.get().getDefaultInstance(), 1))
+                .resultStage(new CompoundChanceResult(ButchercraftItems.CASING.get().getDefaultInstance(), 1))
                 .saveButcherBlock(consumer, Helpers.id("butcherblock/casing"));
 
         for (MeatType meatType : MeatType.values()) {
@@ -229,7 +233,7 @@ public class SBRecipesProvider extends RecipeProvider {
                             this.layFlatModel(MeatMap.get(meatType, MeatProduct.ORDINARY)),
                             standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
                     )
-                    .resultStage(new ChanceResult(MeatMap.get(meatType, MeatProduct.CUBED), 2, 1))
+                    .resultStage(new CompoundChanceResult(MeatMap.get(meatType, MeatProduct.CUBED), 2, 1))
                     .saveButcherBlock(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/ordinary_to_cubed"));
             CustomButcherRecipeBuilder.builder().carcass(MeatMap.get(meatType, MeatProduct.ROAST))
                     .tool(
@@ -239,7 +243,7 @@ public class SBRecipesProvider extends RecipeProvider {
                             this.layFlatModel(MeatMap.get(meatType, MeatProduct.ROAST)),
                             standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
                     )
-                    .resultStage(new ChanceResult(MeatMap.get(meatType, MeatProduct.ORDINARY), 2, 1))
+                    .resultStage(new CompoundChanceResult(MeatMap.get(meatType, MeatProduct.ORDINARY), 2, 1))
                     .saveButcherBlock(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/roast_to_ordinary"));
 
         }
@@ -256,10 +260,9 @@ public class SBRecipesProvider extends RecipeProvider {
                         Ingredient.of(Items.BUCKET),
                         1,
                         true,
-                        MeatHookLoottables.BLOOD_BUCKET,
                         standardModel(meatHookId(carcass.serializedName() + "/" + MeatHookStage.HOOK.pp)),
                         standardHookToolModel(Items.BUCKET)
-                ).jei(Ingredient.of(ButchercraftItems.BLOOD_FLUID_BUCKET.get())).resultStage(ChanceResult.EMPTY);
+                ).resultStage(new CompoundChanceResult(new FluidStack(ButchercraftFluids.BLOOD_FLUID.get(), FluidType.BUCKET_VOLUME)));
             }
             for (MeatHookStage meatHookStage : MeatHookStage.values()) {
                 if(meatHookStage == MeatHookStage.HOOK) continue;

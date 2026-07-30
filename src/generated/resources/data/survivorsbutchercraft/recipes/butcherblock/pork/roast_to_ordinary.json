@@ -7,8 +7,9 @@
   "results": [
     [
       {
-        "count": 2,
-        "item": "tfc:food/pork"
+        "item": "tfc:food/pork",
+        "max": 2,
+        "min": 2
       }
     ]
   ],

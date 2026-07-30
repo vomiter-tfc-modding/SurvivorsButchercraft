@@ -21,6 +21,20 @@ import java.util.function.BiConsumer;
 
 public class ButcherHelpers {
 
+    public static void handleFluid(IFluidHandlerItem itemFluid, int mB ,Player p, FluidStack blood, Runnable execute){
+        if(ButcherHelpers.hasEnoughCapacity(itemFluid, mB)){
+            p.displayClientMessage(Component.literal("capacity not enough"), true);
+            //display some word
+        } else if(!itemFluid.isFluidValid(0, blood)) {
+            p.displayClientMessage(Component.literal("not valid item"), true);
+            //display some word
+        } else {
+            execute.run();
+        }
+
+    }
+
+
     public static void handleFluid(IFluidHandlerItem itemFluid, int mB ,Player p, FluidTank blood, Runnable execute){
         if(ButcherHelpers.hasEnoughCapacity(itemFluid, mB)){
             p.displayClientMessage(Component.literal("capacity not enough"), true);

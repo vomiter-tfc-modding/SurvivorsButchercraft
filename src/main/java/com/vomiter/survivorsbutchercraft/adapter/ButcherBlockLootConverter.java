@@ -4,9 +4,7 @@ import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
-import com.vomiter.survivorsbutchercraft.common.item.DecaySkullLikeItem;
-import com.vomiter.survivorsbutchercraft.common.recipe.CustomButcherBlockRecipe;
-import com.vomiter.survivorsbutchercraft.common.recipe.CustomMeatHookRecipe;
+import com.vomiter.survivorsbutchercraft.common.recipe.IButcherRecipe;
 import com.vomiter.survivorsbutchercraft.common.registry.SBFoodTraits;
 import com.vomiter.survivorsbutchercraft.compat.FarmersDelightCompat;
 import com.vomiter.survivorsbutchercraft.compat.FirmaLifeCompat;
@@ -16,7 +14,6 @@ import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import com.vomiter.survivorsbutchercraft.util.ToolTierGetter;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.dries007.tfc.common.capabilities.food.FoodCapability;
-import net.dries007.tfc.util.Metal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -40,19 +37,12 @@ public class ButcherBlockLootConverter {
         var originalList = original.call(instance, params);
         originalList.removeIf(stack -> stack.is(SBTags.Items.BUTCHERY_SKIP_LOOT));
         blockEntity.sbtfcInterface$matchRecipe().ifPresent(recipe -> {
-            if (recipe instanceof CustomButcherBlockRecipe custom){
+            if (recipe instanceof IButcherRecipe custom){
                 int fortuneLevel = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE) + fortuneMod;
                 custom.getResults(blockEntity.sbtfcInterface$getStage()).stream()
                         .map(chanceResult -> chanceResult.rollOutput(random, fortuneLevel))
                         .forEach(originalList::add);
             }
-            if (recipe instanceof CustomMeatHookRecipe custom){
-                int fortuneLevel = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE) + fortuneMod;
-                custom.getResults(blockEntity.sbtfcInterface$getStage()).stream()
-                        .map(chanceResult -> chanceResult.rollOutput(random, fortuneLevel))
-                        .forEach(originalList::add);
-            }
-
         });
 
         if (be instanceof MeatHookBlockEntity hook && ThreadLocalFlags.dropLootForButchering.get()){
@@ -64,10 +54,11 @@ public class ButcherBlockLootConverter {
         }
         var inserted = blockEntity.sbtfcInterface$getInserted();
 
-        if(inserted.getItem() instanceof DecaySkullLikeItem){
-            if(Optional.ofNullable(FoodCapability.get(inserted)).map(food -> food.hasTrait(SBFoodTraits.PRESERVED)).orElse(false)){
-                originalList.removeIf(item -> FoodCapability.get(item) != null);
-            }
+        if(Optional.ofNullable(FoodCapability.get(inserted))
+                .map(food -> food.hasTrait(SBFoodTraits.PRESERVED))
+                .orElse(false)
+        ) {
+            originalList.removeIf(item -> FoodCapability.get(item) != null);
         }
 
         var ideal = Optional.ofNullable(ToolAlternative.getIdealTool(blockEntity.sbtfcInterface$getCurTool())).orElse(Items.AIR);

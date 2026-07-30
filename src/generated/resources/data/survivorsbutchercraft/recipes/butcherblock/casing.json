@@ -7,19 +7,25 @@
   "results": [
     [
       {
-        "count": 0,
-        "item": "minecraft:air"
+        "chance": 0.0,
+        "item": "minecraft:air",
+        "max": 0,
+        "min": 0
       }
     ],
     [
       {
-        "count": 0,
-        "item": "minecraft:air"
+        "chance": 0.0,
+        "item": "minecraft:air",
+        "max": 0,
+        "min": 0
       }
     ],
     [
       {
-        "item": "butchercraft:casing"
+        "item": "butchercraft:casing",
+        "max": 1,
+        "min": 0
       }
     ]
   ],

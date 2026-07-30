@@ -11,8 +11,8 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
-public class CustomButcherBlockRecipe extends ButcherBlockRecipe {
-    private final NonNullList<NonNullList<ChanceResult>> chanceResults;
+public class CustomButcherBlockRecipe extends ButcherBlockRecipe implements IButcherRecipe{
+    private final NonNullList<NonNullList<CompoundChanceResult>> chanceResults;
 
     public CustomButcherBlockRecipe(
             ResourceLocation idIn,
@@ -20,14 +20,24 @@ public class CustomButcherBlockRecipe extends ButcherBlockRecipe {
             Ingredient carcassIn,
             NonNullList<AnimatedRecipeItemUse> recipeToolsIn,
             NonNullList<Ingredient> JEI,
-            NonNullList<NonNullList<ChanceResult>> chanceResults
+            NonNullList<NonNullList<CompoundChanceResult>> chanceResults
             ) {
         super(idIn, groupIn, carcassIn, recipeToolsIn, JEI);
         this.chanceResults = chanceResults;
     }
 
-    public NonNullList<ChanceResult> getResults(int stage){
+    public NonNullList<CompoundChanceResult> getResults(int stage){
         return chanceResults.get(stage);
+    }
+
+    @Override
+    public Ingredient getButcheringTool(int stage) {
+        return getRecipeToolsIn().get(stage).tool;
+    }
+
+    @Override
+    public AnimatedRecipeItemUse getButcheringToolStage(int stage) {
+        return getRecipeToolsIn().get(stage);
     }
 
     public RecipeSerializer<?> getSerializer() {
@@ -43,13 +53,13 @@ public class CustomButcherBlockRecipe extends ButcherBlockRecipe {
             pSerializedRecipe.getAsJsonArray("tools").forEach((jsonElement) -> recipeItemUses.add(AnimatedRecipeItemUse.read(jsonElement.getAsJsonObject())));
             Ingredient carcass = Ingredient.fromJson(pSerializedRecipe.get("carcass"));
             NonNullList<Ingredient> jei = itemsFromJson(pSerializedRecipe.getAsJsonArray("jei"));
-            NonNullList<NonNullList<ChanceResult>> chanceResults = NonNullList.create();
+            NonNullList<NonNullList<CompoundChanceResult>> chanceResults = NonNullList.create();
             pSerializedRecipe
                     .getAsJsonArray("results")
                     .forEach(
                             jsonElement -> {
-                                NonNullList<ChanceResult> results1 = NonNullList.create();
-                                jsonElement.getAsJsonArray().forEach(jsonElement1 -> results1.add(ChanceResult.deserialize(jsonElement1)));
+                                NonNullList<CompoundChanceResult> results1 = NonNullList.create();
+                                jsonElement.getAsJsonArray().forEach(jsonElement1 -> results1.add(CompoundChanceResult.deserialize(jsonElement1)));
                                 chanceResults.add(results1);
                             }
                     );
@@ -77,11 +87,11 @@ public class CustomButcherBlockRecipe extends ButcherBlockRecipe {
             NonNullList<Ingredient> jei = NonNullList.withSize(jeiSize, Ingredient.EMPTY);
             jei.replaceAll((ignored) -> Ingredient.fromNetwork(buffer));
             int resultSize = buffer.readVarInt();
-            NonNullList<NonNullList<ChanceResult>> chanceResults = NonNullList.create();
+            NonNullList<NonNullList<CompoundChanceResult>> chanceResults = NonNullList.create();
             for (int i = 0; i < resultSize; i++) {
                 int resultSize1 = buffer.readVarInt();
-                NonNullList<ChanceResult> chanceResults1 = NonNullList.withSize(resultSize1, ChanceResult.EMPTY);
-                chanceResults1.replaceAll(ignored -> ChanceResult.read(buffer));
+                NonNullList<CompoundChanceResult> chanceResults1 = NonNullList.withSize(resultSize1, CompoundChanceResult.EMPTY);
+                chanceResults1.replaceAll(ignored -> CompoundChanceResult.read(buffer));
                 chanceResults.add(chanceResults1);
             }
             return new CustomButcherBlockRecipe(recipeId, group, carcassIn, tools, jei, chanceResults);

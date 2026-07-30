@@ -1,6 +1,6 @@
 package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
-import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
+import com.vomiter.survivorsbutchercraft.common.recipe.CompoundChanceResult;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -44,15 +44,15 @@ public interface ICarcassProfile {
     }
 
     /** 每個 cut group 的掉落定義 */
-    default List<ChanceResult> dropsFor(MeatHookStage stage) {
+    default List<CompoundChanceResult> dropsFor(MeatHookStage stage) {
         return List.of();
     }
 
-    default List<ChanceResult> dropsForSupport(MeatHookStage stage) {
+    default List<CompoundChanceResult> dropsForSupport(MeatHookStage stage) {
         return List.of();
     }
 
-    default List<ChanceResult> dropsForTrivial(MeatHookStage stage) {
+    default List<CompoundChanceResult> dropsForTrivial(MeatHookStage stage) {
         return List.of();
     }
 

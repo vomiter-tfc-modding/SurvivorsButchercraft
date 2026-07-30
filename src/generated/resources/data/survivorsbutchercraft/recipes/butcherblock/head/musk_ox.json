@@ -7,19 +7,25 @@
   "results": [
     [
       {
-        "item": "survivorsbutchercraft:skull/musk_ox"
+        "item": "survivorsbutchercraft:skull/musk_ox",
+        "max": 1,
+        "min": 0
       },
       {
-        "item": "butchercraft:brain"
+        "item": "butchercraft:brain",
+        "max": 1,
+        "min": 0
       },
       {
-        "count": 2,
-        "item": "butchercraft:eyeball"
+        "item": "butchercraft:eyeball",
+        "max": 2,
+        "min": 0
       },
       {
         "chance": 0.5,
-        "count": 4,
-        "item": "butchercraft:sinew"
+        "item": "butchercraft:sinew",
+        "max": 4,
+        "min": 4
       }
     ]
   ],

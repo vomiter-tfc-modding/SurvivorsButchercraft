@@ -3,108 +3,119 @@
   "carcass": {
     "item": "survivorsbutchercraft:carcass/yak"
   },
-  "jei": [
-    {
-      "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "butchercraft:blood_fluid_bucket"
-    },
-    {
-      "item": "butchercraft:blood_fluid_bucket"
-    }
-  ],
+  "jei": [],
   "results": [
     [
       {
-        "count": 0,
-        "item": "minecraft:air"
+        "amount": 1000,
+        "fluid": "butchercraft:blood_fluid"
       }
     ],
     [
       {
-        "count": 0,
-        "item": "minecraft:air"
+        "amount": 1000,
+        "fluid": "butchercraft:blood_fluid"
       }
     ],
     [
       {
-        "count": 0,
-        "item": "minecraft:air"
+        "amount": 1000,
+        "fluid": "butchercraft:blood_fluid"
       }
     ],
     [
       {
-        "item": "survivorsbutchercraft:hide/yak"
+        "item": "survivorsbutchercraft:hide/yak",
+        "max": 1,
+        "min": 1
       },
       {
         "chance": 0.5,
-        "count": 12,
-        "item": "butchercraft:fat"
+        "item": "butchercraft:fat",
+        "max": 12,
+        "min": 12
       }
     ],
     [
       {
-        "item": "survivorsbutchercraft:head/yak"
+        "item": "survivorsbutchercraft:head/yak",
+        "max": 1,
+        "min": 1
       },
       {
-        "item": "butchercraft:oxtail"
+        "item": "butchercraft:oxtail",
+        "max": 1,
+        "min": 1
       },
       {
         "chance": 0.5,
-        "count": 6,
-        "item": "butchercraft:sinew"
+        "item": "butchercraft:sinew",
+        "max": 6,
+        "min": 6
       }
     ],
     [
       {
-        "item": "butchercraft:heart"
+        "item": "butchercraft:heart",
+        "max": 1,
+        "min": 1
       },
       {
-        "item": "butchercraft:liver"
+        "item": "butchercraft:liver",
+        "max": 1,
+        "min": 1
       },
       {
-        "count": 2,
-        "item": "butchercraft:kidney"
+        "item": "butchercraft:kidney",
+        "max": 2,
+        "min": 2
       },
       {
-        "count": 2,
-        "item": "butchercraft:lung"
+        "item": "butchercraft:lung",
+        "max": 2,
+        "min": 2
       },
       {
-        "count": 4,
-        "item": "butchercraft:stomach"
+        "item": "butchercraft:stomach",
+        "max": 4,
+        "min": 4
       },
       {
-        "count": 8,
-        "item": "butchercraft:tripe"
+        "item": "butchercraft:tripe",
+        "max": 8,
+        "min": 8
       },
       {
         "chance": 0.5,
-        "count": 12,
-        "item": "butchercraft:fat"
+        "item": "butchercraft:fat",
+        "max": 12,
+        "min": 12
       },
       {
         "chance": 0.5,
-        "count": 12,
-        "item": "butchercraft:sinew"
+        "item": "butchercraft:sinew",
+        "max": 12,
+        "min": 12
       },
       {
         "chance": 0.75,
-        "count": 12,
-        "item": "butchercraft:goat_scraps"
+        "item": "butchercraft:goat_scraps",
+        "max": 12,
+        "min": 12
       }
     ],
     [
       {
         "chance": 0.25,
-        "count": 4,
-        "item": "butchercraft:goat_ribs"
+        "item": "butchercraft:goat_ribs",
+        "max": 6,
+        "min": 2
       },
       {
         "chance": 0.25,
-        "count": 4,
-        "item": "butchercraft:goat_roast"
+        "item": "butchercraft:goat_roast",
+        "max": 6,
+        "min": 2
       }
     ]
   ],
@@ -112,7 +123,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -197,7 +208,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,
@@ -282,7 +293,7 @@
     {
       "count": 1,
       "damage": true,
-      "loot_table": "butchercraft:meat_hook/blood_bucket",
+      "loot_table": "butchercraft:empty",
       "models": [
         {
           "IsBlock": true,

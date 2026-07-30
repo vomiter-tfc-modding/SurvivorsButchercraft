@@ -7,8 +7,9 @@
   "results": [
     [
       {
-        "count": 8,
-        "item": "butchercraft:sausage"
+        "item": "butchercraft:sausage",
+        "max": 8,
+        "min": 8
       }
     ]
   ],

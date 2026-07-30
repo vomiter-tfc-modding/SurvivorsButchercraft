@@ -1,6 +1,6 @@
 package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
-import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
+import com.vomiter.survivorsbutchercraft.common.recipe.CompoundChanceResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.MapColor;
@@ -48,7 +48,7 @@ public enum Carcass implements ICarcassProfile {
 
     @Override public boolean hasHide() { return profile.hasHide(); }
     @Override public MapColor mapColor() { return profile.mapColor(); }
-    @Override public List<ChanceResult> dropsFor(MeatHookStage stage) { return profile.dropsFor(stage); }
-    @Override public List<ChanceResult> dropsForSupport(MeatHookStage stage) { return profile.dropsForSupport(stage); }
-    @Override public List<ChanceResult> dropsForTrivial(MeatHookStage stage) { return profile.dropsForTrivial(stage); }
+    @Override public List<CompoundChanceResult> dropsFor(MeatHookStage stage) { return profile.dropsFor(stage); }
+    @Override public List<CompoundChanceResult> dropsForSupport(MeatHookStage stage) { return profile.dropsForSupport(stage); }
+    @Override public List<CompoundChanceResult> dropsForTrivial(MeatHookStage stage) { return profile.dropsForTrivial(stage); }
 }

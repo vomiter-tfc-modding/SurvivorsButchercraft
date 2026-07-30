@@ -1,5 +1,6 @@
 package com.vomiter.survivorsbutchercraft.mixin;
 
+import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
 import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlockEntity;
 import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockRecipe;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -59,6 +60,9 @@ public abstract class ButcherBlockBlockEntityMixin extends BlockEntity implement
     @Shadow
     protected abstract Optional<ButcherBlockRecipe> matchRecipe();
 
+    @Shadow
+    protected abstract void dropLoot(AnimatedRecipeItemUse recipeToolsIn, Player player);
+
     public ButcherBlockBlockEntityMixin(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
@@ -97,5 +101,10 @@ public abstract class ButcherBlockBlockEntityMixin extends BlockEntity implement
     private ObjectArrayList<ItemStack> sbtfc$convertLoot(LootTable instance, LootParams params, Operation<ObjectArrayList<ItemStack>> original){
         var self = (IButcherBlock)this;
         return ButcherBlockLootConverter.sbtfc$convertLoot(self, instance, params, original);
+    }
+
+    @Override
+    public void sbtfcInterface$dropLoot(AnimatedRecipeItemUse recipeToolsIn, Player player) {
+        dropLoot(recipeToolsIn, player);
     }
 }

@@ -2,7 +2,7 @@ package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
-import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
+import com.vomiter.survivorsbutchercraft.common.recipe.CompoundChanceResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.MapColor;
 
@@ -29,7 +29,7 @@ public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
 
 
     @Override
-    public List<ChanceResult> dropsFor(MeatHookStage stage) {
+    public List<CompoundChanceResult> dropsFor(MeatHookStage stage) {
         switch (stage){
         }
 
@@ -37,17 +37,17 @@ public final class YakCarcassProfile extends DefaultMammalCarcassProfile {
     }
 
     @Override
-    public List<ChanceResult> dropsForSupport(MeatHookStage stage) {
+    public List<CompoundChanceResult> dropsForSupport(MeatHookStage stage) {
         switch (stage){
             case BISECT -> {
                 return List.of(
-                        new ChanceResult(new ItemStack(ButchercraftItems.STOMACH.get(), 4)),
-                        new ChanceResult(new ItemStack(ButchercraftItems.TRIPE.get(), 8))
+                        new CompoundChanceResult(new ItemStack(ButchercraftItems.STOMACH.get(), 4)),
+                        new CompoundChanceResult(new ItemStack(ButchercraftItems.TRIPE.get(), 8))
                 );
             }
             case DISEMBOWEL -> {
                 return List.of(
-                        new ChanceResult(ButchercraftItems.OXTAIL.get())
+                        new CompoundChanceResult(ButchercraftItems.OXTAIL.get())
                 );
             }
         }

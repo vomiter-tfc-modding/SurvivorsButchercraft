@@ -7,8 +7,9 @@
   "results": [
     [
       {
-        "count": 2,
-        "item": "butchercraft:cubed_goat"
+        "item": "butchercraft:cubed_goat",
+        "max": 2,
+        "min": 2
       }
     ]
   ],

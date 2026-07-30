@@ -11,6 +11,8 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:firmalife-453394:6817407")
 
     compileOnly fg.deobf("curse.maven:jade-324717:6855440")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
+
     compileOnly fg.deobf("curse.maven:tfc-tng-rosia-1327333:6890141")
 
     compileOnly fg.deobf("curse.maven:water-flasks-354353:7056478")

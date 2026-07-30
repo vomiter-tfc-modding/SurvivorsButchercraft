@@ -3,7 +3,7 @@ package com.vomiter.survivorsbutchercraft.mixin.compat;
 import com.lance5057.butchercraft.integration.jei.categories.MeatHookRecipeCategory;
 import com.lance5057.butchercraft.workstations.hook.HookRecipe;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.vomiter.survivorsbutchercraft.common.recipe.ChanceResult;
+import com.vomiter.survivorsbutchercraft.common.recipe.CompoundChanceResult;
 import com.vomiter.survivorsbutchercraft.common.recipe.CustomMeatHookRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -38,21 +38,35 @@ public class HookRecipeCategoryMixin {
         if(recipe instanceof CustomMeatHookRecipe custom){
             int stages = custom.getRecipeToolsIn().size();
             for (int i = 0; i < stages; i++) {
-                for(ChanceResult result : custom.getResults(i).stream().filter(chanceResult -> !chanceResult.getStack().isEmpty()).collect(Collectors.toSet())) {
-                    builder.addSlot(
+                for(CompoundChanceResult result : custom.getResults(i).stream().filter(chanceResult -> !chanceResult.isEmpty()).collect(Collectors.toSet())) {
+                    var slot = builder.addSlot(
                             RecipeIngredientRole.OUTPUT,
                             1 + placementW,
-                            73 + placementH + 18)
-                            .addItemStack(result.getStack())
-                            .addRichTooltipCallback((view, tooltip) -> {
-                                if(result.getChance() >= 1) return;
-                                tooltip.add(
-                                        Component.literal("chance: ")
-                                                .append(Component.literal(String.valueOf(result.getChance() * 100f)))
-                                                .append(Component.literal("%"))
-                                                .withStyle(ChatFormatting.GOLD));
-                            })
-                    ;
+                            73 + placementH + 18);
+
+                    if (!result.hasFluid()){
+
+                        slot.addItemStack(result.getStack().copyWithCount(result.getMinium()))
+                                .addRichTooltipCallback((view, tooltip) -> {
+                                    if(result.getChance() >= 1 || result.getMaximum() == result.getMinium()) return;
+                                    tooltip.add(Component.literal(
+                                            "count: "
+                                    ).append(
+                                            result.getMinium() + "-" + result.getMaximum()
+                                    ));
+                                    tooltip.add(
+                                            Component.literal("chance: ")
+                                                    .append(Component.literal(String.valueOf(result.getChance() * 100f)))
+                                                    .append(Component.literal("%"))
+                                                    .withStyle(ChatFormatting.GOLD));
+                                });
+                    }
+                    else {
+                        slot.addFluidStack(result.getFluid().getFluid(), result.getFluid().getAmount())
+                                .addRichTooltipCallback((view, tooltip) -> {
+                                    tooltip.add(Component.literal(result.getFluid().getAmount() + "mB"));
+                                });
+                    }
                     placementW += width;
                     ++c;
                     if (c > 7) {
