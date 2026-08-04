@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import vectorwing.farmersdelight.common.Configuration;
 
 public class CompoundChanceResult {
     public static final CompoundChanceResult EMPTY =
@@ -194,9 +193,7 @@ public class CompoundChanceResult {
 
         int outputAmount = maximum;
 
-        double fortuneBonus =
-                Configuration.CUTTING_BOARD_FORTUNE_BONUS.get()
-                        * (double) fortuneLevel;
+        double fortuneBonus = 0.1 * (double) fortuneLevel;
 
         double effectiveChance = Math.min(
                 1.0D,
