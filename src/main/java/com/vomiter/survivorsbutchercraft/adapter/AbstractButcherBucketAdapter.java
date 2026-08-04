@@ -1,17 +1,11 @@
 package com.vomiter.survivorsbutchercraft.adapter;
 
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
-import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.butchery.ButcherHelpers;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.common.recipe.CompoundChanceResult;
 import com.vomiter.survivorsbutchercraft.common.recipe.IButcherRecipe;
-import net.dries007.tfc.common.capabilities.Capabilities;
-import net.dries007.tfc.common.items.FluidContainerItem;
-import net.dries007.tfc.util.Helpers;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -20,7 +14,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
@@ -30,8 +23,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
 
     private final BlockEntity butcherBlock;
-
-    private final int MIN_BUCKET_CAPACITY = 1000;
 
     abstract int getStage();
     abstract void setStage(int i);
@@ -72,29 +63,6 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
     }
 
     abstract AnimatedRecipeItemUse getTool(R recipe, int stage);
-
-    void handleAfterFluidTransfer(ItemStack old, ItemStack newItem, Player p){
-        //only calc at server side
-        if(!(p.level() instanceof ServerLevel serverLevel)) return;
-        ItemStack itemInQuestion;
-        if(newItem.isEmpty()) itemInQuestion = old;
-        else itemInQuestion = newItem;
-        Optional.ofNullable(Helpers.getCapability(itemInQuestion, Capabilities.FLUID_ITEM)).ifPresent(
-                itemFluidAfter -> {
-                    //if it's full, drop the bucket
-                    if(ButcherHelpers.hasEnoughCapacity(itemFluidAfter, MIN_BUCKET_CAPACITY)){
-                        var center = butcherBlock.getBlockPos().getCenter().add(0, -2, 0);
-                        var itemEntity = new ItemEntity(serverLevel, center.x(), center.y(), center.z(), itemInQuestion.split(1), 0, 0, 0);
-                        serverLevel.addFreshEntity(itemEntity);
-                    }
-                    //if it's not full, but it's a split item, add the item back.
-                    else if(isShouldReturnItem()) {
-                        p.addItem(itemInQuestion);
-                        setShouldReturnItem(false);
-                    }
-                }
-        );
-    }
 
     boolean handleEmptyBucket(Player p, ItemStack butcheringTool, FluidStack fluidStack, R recipe){
         AtomicBoolean shouldTackOver = new AtomicBoolean(false);
