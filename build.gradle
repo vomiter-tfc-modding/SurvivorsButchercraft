@@ -52,11 +52,14 @@ dependencies {
     implementation    "io.github.llamalad7:mixinextras-forge:0.4.1"
     jarJar            "io.github.llamalad7:mixinextras-forge:[0.4.1,)"
 
+    compileOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
+    //runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
+
     implementation fg.deobf("curse.maven:terrafirmacraft-302973:6835820")
     implementation fg.deobf("curse.maven:patchouli-306770:4636277")
     implementation fg.deobf("curse.maven:survivors-abilities-1354890:8491392")
-    implementation fg.deobf("curse.maven:survivors-delight-1332913:8353151")
-    implementation fg.deobf("curse.maven:my-nethers-delight-1003673:8535855")
+    //implementation fg.deobf("curse.maven:survivors-delight-1332913:8353151")
+    //implementation fg.deobf("curse.maven:my-nethers-delight-1003673:8535855")
     implementation fg.deobf("curse.maven:butchercraft-265715:6058842")
 }
 

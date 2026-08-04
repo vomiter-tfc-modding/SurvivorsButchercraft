@@ -18,10 +18,6 @@ dependencies {
     compileOnly fg.deobf("curse.maven:water-flasks-354353:7056478")
     runtimeOnly fg.deobf("curse.maven:water-flasks-354353:7056478")
 
-
-    compileOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
-    runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
-
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar for Forge

@@ -8,7 +8,6 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.Raw2CookedMap;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
-import com.vomiter.survivorsdelight.data.tags.SDTags;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.core.HolderLookup;
@@ -17,6 +16,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -107,7 +107,7 @@ public class SBTagProviders {
             tag(SBTags.Items.PRESERVATIVE)
                     .add(TFCItems.GLUE.get())
                     .addOptional(FLItems.BEESWAX.getId())
-                    .addOptionalTag(SDTags.ItemTags.FOOD_MODEL_COATING);
+                    .addOptionalTag(net.minecraft.tags.ItemTags.create(ResourceLocation.fromNamespaceAndPath("surviborsdelight", "food_model_coating")));
 
             SBItems.HIDES.values().forEach(h ->
                     tag(SBTags.Items.BUTCHER_SCRAPABLE).add(h.get())

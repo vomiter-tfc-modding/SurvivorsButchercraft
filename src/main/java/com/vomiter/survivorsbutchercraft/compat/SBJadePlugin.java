@@ -3,16 +3,12 @@ package com.vomiter.survivorsbutchercraft.compat;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlock;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsdelight.common.food.block.SDDecayingBlockEntity;
-import com.vomiter.survivorsdelight.util.SDUtils;
 import net.dries007.tfc.common.capabilities.food.FoodCapability;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;
-import vectorwing.farmersdelight.common.block.FeastBlock;
-import vectorwing.farmersdelight.common.block.PieBlock;
 
 import java.util.ArrayList;
 import java.util.List;
