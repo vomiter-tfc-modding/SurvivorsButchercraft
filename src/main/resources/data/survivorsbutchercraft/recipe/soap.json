@@ -1,0 +1,22 @@
+{
+  "type":"tfc:pot",
+  "ingredients":
+  [
+    {"item":"butchercraft:lard"},
+    {"item":"butchercraft:lard"},
+    {"item": "tfc:powder/wood_ash"},
+    {"item": "tfc:powder/wood_ash"},
+    {"tag":  "minecraft:flowers"}
+  ],
+  "fluid_ingredient":
+  {
+    "ingredient":"minecraft:water","amount":100},
+  "duration":1000,
+  "temperature":300,
+  "item_output":[
+    {
+      "id":"butchercraft:soap",
+      "count": 1
+    }
+  ]
+}

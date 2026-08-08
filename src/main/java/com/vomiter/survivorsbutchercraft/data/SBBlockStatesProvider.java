@@ -1,5 +1,6 @@
 package com.vomiter.survivorsbutchercraft.data;
 
+import com.lance5057.butchercraft.Butchercraft;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlock;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
@@ -14,10 +15,11 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.Arrays;
 
@@ -36,7 +38,7 @@ public class SBBlockStatesProvider extends BlockStateProvider {
                     meatHook.get(),
                     "block/" + meatHook.getId().getPath(),
                     Helpers.id("tfc", "block/metal/smooth/" + metal.getSerializedName()),
-                    MeatHookBlock.CARCASS_HOOKED,
+                    MeatHookBlock.DUMMY,
                     MeatHookBlock.FACING,
                     MeatHookBlock.WATERLOGGED
             );
@@ -131,7 +133,7 @@ public class SBBlockStatesProvider extends BlockStateProvider {
             Block block,
             String modelName,
             ResourceLocation modelTexture,
-            BooleanProperty carcassHookedProperty,
+            IntegerProperty carcassHookedProperty,
             DirectionProperty facingProperty,
             BooleanProperty waterloggedProperty
     ) {
@@ -145,18 +147,31 @@ public class SBBlockStatesProvider extends BlockStateProvider {
                 .texture("0", modelTexture)
                 .texture("particle", modelTexture);
 
-        for (boolean carcassHooked : new boolean[]{false, true}) {
-            for (Direction facing : Direction.Plane.HORIZONTAL) {
-                for (boolean waterlogged : new boolean[]{false, true}) {
-                    builder.partialState()
-                            .with(carcassHookedProperty, carcassHooked)
-                            .with(facingProperty, facing)
-                            .with(waterloggedProperty, waterlogged)
-                            .modelForState()
-                            .modelFile(modelFile)
-                            .rotationY(getHorizontalRotation(facing))
-                            .addModel();
+        var dummyModelFile = new ModelFile.UncheckedModelFile(
+                Helpers.id(Butchercraft.MOD_ID, "block/dummy_hook")
+        );
+
+        for (int dummy : new int[]{0, 1, 2}) {
+            if(dummy == 0){
+                for (Direction facing : Direction.Plane.HORIZONTAL) {
+                    for (boolean waterlogged : new boolean[]{false, true}) {
+                        builder.partialState()
+                                .with(carcassHookedProperty, dummy)
+                                .with(facingProperty, facing)
+                                .with(waterloggedProperty, waterlogged)
+                                .modelForState()
+                                .modelFile(modelFile)
+                                .rotationY(getHorizontalRotation(facing))
+                                .addModel();
+                    }
                 }
+            } else {
+                builder.partialState()
+                        .with(carcassHookedProperty, dummy)
+                        .modelForState()
+                        .modelFile(dummyModelFile)
+                        .addModel();
+
             }
         }
     }

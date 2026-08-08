@@ -1,6 +1,8 @@
 package com.vomiter.survivorsbutchercraft.data;
 
+import com.google.gson.JsonElement;
 import com.lance5057.butchercraft.ButchercraftItems;
+import com.mojang.serialization.JsonOps;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatProduct;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatType;
@@ -10,12 +12,17 @@ import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
 import net.dries007.tfc.common.items.Food;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Locale;
 import java.util.stream.Stream;
 
 public class SBFoodData {
+    public static JsonElement ingredientToJsonElement(Ingredient ing){
+        return Ingredient.CODEC.encodeStart(JsonOps.INSTANCE, ing).getOrThrow();
+    }
+
+
     public static void saveFoodData(SDFoodDataProvider provider){
 
         provider.newBuilder("blood_mixture")
@@ -24,22 +31,27 @@ public class SBFoodData {
                 .save();
 
         provider.newBuilder("head")
-                .ingredient(Ingredient.of(Stream.concat(
-                        SBItems.HEADS.values().stream().map(RegistryObject::get),
-                        SBItems.HEADS_MALE.values().stream().map(RegistryObject::get)
-                        ).map(Item::getDefaultInstance)
-                ).toJson())
+                .ingredient(
+                        ingredientToJsonElement(
+                                Ingredient.of(Stream.concat(
+                                        SBItems.HEADS.values().stream().map(DeferredHolder::get),
+                                        SBItems.HEADS_MALE.values().stream().map(DeferredHolder::get)
+                                ).map(Item::getDefaultInstance)
+                        )
+                ))
                 .setDecay(1)
                 .save();
 
 
         provider.newBuilder("large_carcass")
-                .ingredient(Ingredient.of(SBTags.Items.LARGE_CARCASS).toJson())
+                .ingredient(
+                    Ingredient.of(SBTags.Items.LARGE_CARCASS)
+                )
                 .setDecay(8)
                 .save();
 
         provider.newBuilder("linked_sausage")
-                .ingredient(Ingredient.of(SBTags.Items.LINKED_SAUSAGE).toJson())
+                .ingredient(Ingredient.of(SBTags.Items.LINKED_SAUSAGE))
                 .setDecay(0.7)
                 .save();
 

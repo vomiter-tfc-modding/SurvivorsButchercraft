@@ -58,19 +58,18 @@ public final class CarcassRenderHelper {
             return base;
         }
 
-        ResourceLocation resolvedLocation = resolveLocation(base.rc, carcass);
-        List<Integer> resolvedBlacklist = resolveBlacklist(base.blacklist, carcass);
+        ResourceLocation resolvedLocation = resolveLocation(base.rc(), carcass);
 
         if (resolvedLocation == null) {
             return base;
         }
 
         if (!modelExists(resolvedLocation)) {
-            warnMissingOnce(resolvedLocation, base.rc);
-            return new BlacklistedModel(base.rc, resolvedBlacklist, base.isBlock, base.transform);
+            warnMissingOnce(resolvedLocation, base.rc());
+            return new BlacklistedModel(base.rc(), base.isBlock(), base.transform());
         }
 
-        return new BlacklistedModel(resolvedLocation, resolvedBlacklist, base.isBlock, base.transform);
+        return new BlacklistedModel(resolvedLocation, base.isBlock(), base.transform());
     }
 
     private static void appendConditionalParts(List<BlacklistedModel> out, List<BlacklistedModel> baseModels, ItemStack carcass) {
@@ -79,7 +78,7 @@ public final class CarcassRenderHelper {
         }
 
         BlacklistedModel anchor = baseModels.get(0);
-        if (anchor == null || anchor.rc == null) {
+        if (anchor == null || anchor.rc() == null) {
             return;
         }
 
@@ -91,14 +90,14 @@ public final class CarcassRenderHelper {
         if (male) {
             tryAddConditionalModel(
                     out,
-                    derivePartLocation(anchor.rc, "male_parts"),
+                    derivePartLocation(anchor.rc(), "male_parts"),
                     anchor
             );
         }
         else {
             tryAddConditionalModel(
                     out,
-                    derivePartLocation(anchor.rc, "female_parts"),
+                    derivePartLocation(anchor.rc(), "female_parts"),
                     anchor
             );
         }
@@ -110,15 +109,14 @@ public final class CarcassRenderHelper {
         }
 
         if (!modelExists(location)) {
-            warnMissingOnce(location, anchor.rc);
+            warnMissingOnce(location, anchor.rc());
             return;
         }
 
         out.add(new BlacklistedModel(
                 location,
-                new ArrayList<>(),
-                anchor.isBlock,
-                anchor.transform
+                anchor.isBlock(),
+                anchor.transform()
         ));
     }
 

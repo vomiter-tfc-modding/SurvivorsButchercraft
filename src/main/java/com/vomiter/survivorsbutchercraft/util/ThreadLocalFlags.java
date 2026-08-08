@@ -10,4 +10,5 @@ public class ThreadLocalFlags {
     public static ThreadLocal<ItemStack> carcass = ThreadLocal.withInitial(() -> ItemStack.EMPTY);
     public static ThreadLocal<ItemStack> carcassRendering = ThreadLocal.withInitial(() -> ItemStack.EMPTY);
     public static ThreadLocal<Tier> tierThreadLocal = ThreadLocal.withInitial(() -> TFCTiers.METAMORPHIC);
+    public static ThreadLocal<Boolean> blockEntityTypeSwitch = ThreadLocal.withInitial(() -> false);
 }

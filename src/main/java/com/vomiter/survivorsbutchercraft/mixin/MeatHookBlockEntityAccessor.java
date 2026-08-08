@@ -5,6 +5,7 @@ import com.lance5057.butchercraft.workstations.hook.HookRecipe;
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -17,14 +18,11 @@ public interface MeatHookBlockEntityAccessor {
     boolean sbtfc$isFinalStage(HookRecipe r);
 
     @Invoker("matchRecipe")
-    Optional<HookRecipe> sbtfc$matchRecipe();
+    Optional<RecipeHolder<HookRecipe>> sbtfc$matchRecipe();
 
     @Invoker("setupStage")
     void sbtfc$setupStage(HookRecipe recipe, int stage);
 
     @Invoker("dropLoot")
     void sbtfc$dropLoot(AnimatedRecipeItemUse tool, Player player);
-
-    @Accessor("curTool")
-    Ingredient sbtfc$getCurTool();
 }

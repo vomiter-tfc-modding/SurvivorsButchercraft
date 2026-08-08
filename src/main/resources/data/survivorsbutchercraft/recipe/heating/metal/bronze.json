@@ -1,0 +1,12 @@
+{
+  "type":"tfc:heating",
+  "ingredient":
+    {"tag": "survivorsbutchercraft:metal_item/bronze"},
+  "result_fluid":
+    {
+      "id":"tfc:metal/bronze",
+      "amount":100
+    },
+  "temperature":950,
+  "use_durability":true
+}

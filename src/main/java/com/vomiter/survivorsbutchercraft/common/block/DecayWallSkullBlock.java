@@ -1,10 +1,11 @@
 package com.vomiter.survivorsbutchercraft.common.block;
 
 import com.vomiter.survivorsbutchercraft.common.blockentity.DecaySkullLikeBlockEntity;
-import net.dries007.tfc.common.capabilities.food.FoodCapability;
+import net.dries007.tfc.common.component.food.FoodCapability;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -40,15 +41,15 @@ public class DecayWallSkullBlock extends WallSkullLikeBlock{
         return result;
     }
 
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (isPreservative(player.getItemInHand(hand)) && level.getBlockEntity(pos) instanceof DecaySkullLikeBlockEntity decay){
             Optional.ofNullable(FoodCapability.get(decay.getStack())).ifPresent(food -> {
                 if(decay.setPreserved() && !player.getAbilities().instabuild)
                     player.getItemInHand(hand).shrink(1);
             });
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
-        return super.use(state, level, pos, player, hand, hitResult);
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
 }

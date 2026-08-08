@@ -7,7 +7,6 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SetNbtFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
@@ -29,20 +28,6 @@ public record DropSpec(
 
     public static DropSpec of(Item item, int min, int max) {
         return of(item).withCount(min, max);
-    }
-
-    /** 可以「塞 ItemStack」：count + (optional) NBT */
-    public static DropSpec of(ItemStack stack) {
-        DropSpec spec = of(stack.getItem()).withCount(stack.getCount());
-
-        if (stack.hasTag()) {
-            CompoundTag tag = stack.getTag();
-            if (tag != null && !tag.isEmpty()) {
-                spec = spec.with(SetNbtFunction.setTag(tag.copy()));
-            }
-        }
-
-        return spec;
     }
 
     // ---- fluent modifiers ----

@@ -1,0 +1,10 @@
+{
+  "type":"tfc:scraping",
+  "ingredient":
+  {"item":"survivorsbutchercraft:hide/sheep"},
+  "result":{"id":"tfc:small_raw_hide","count":1},
+  "input_texture":"survivorsbutchercraft:block/hide/sheep",
+  "output_texture":"tfc:item/hide/small/raw",
+  "result_item":{
+    "id":"tfc:wool","count":3}
+}

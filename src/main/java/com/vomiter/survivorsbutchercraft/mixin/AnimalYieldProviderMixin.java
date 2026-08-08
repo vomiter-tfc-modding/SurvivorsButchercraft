@@ -6,12 +6,13 @@ import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.dries007.tfc.util.loot.AnimalYieldProvider;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -24,9 +25,9 @@ public class AnimalYieldProviderMixin {
             method = "getFloat",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/player/Player;getAttributeValue(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D")
+                    target = "Lnet/minecraft/world/entity/player/Player;getAttributeValue(Lnet/minecraft/core/Holder;)D")
     )
-    private double sbtfc$getAttack(Player instance, Attribute attribute, Operation<Double> original){
+    private double sbtfc$getAttack(Player instance, Holder<Attribute> attribute, Operation<Double> original){
         if(ThreadLocalFlags.dropLootForButchering.get() && !ThreadLocalFlags.carcass.get().isEmpty()) {
             return 100;
         }
@@ -47,7 +48,7 @@ public class AnimalYieldProviderMixin {
             var carcass = ThreadLocalFlags.carcass.get();
             AtomicReference<LivingEntity> result = new AtomicReference<>();
             Optional.ofNullable(CarcassDataHelper.getId(carcass))
-                    .flatMap(id -> Optional.ofNullable(ForgeRegistries.ENTITY_TYPES.getValue(id)))
+                    .flatMap(id -> Optional.of(BuiltInRegistries.ENTITY_TYPE.get(id)))
                     .ifPresent(type -> {
                         var entity = type.create(instance.getLevel());
                         if(entity instanceof TFCAnimalProperties props){

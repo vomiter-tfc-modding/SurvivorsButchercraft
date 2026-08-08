@@ -5,9 +5,8 @@ import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blockentities.ScrapingBlockEntity;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.capabilities.Capabilities;
 import net.dries007.tfc.common.recipes.ScrapingRecipe;
-import net.dries007.tfc.common.recipes.inventory.ItemStackInventory;
+import net.dries007.tfc.util.BlockItemPlacement;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.InteractionManager;
 import net.minecraft.core.BlockPos;
@@ -19,6 +18,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,17 +30,18 @@ import java.util.Optional;
 
 @Mixin(value = InteractionManager.class, remap = false)
 public class InteractionManagerMixin {
+
     @Shadow
-    public static void register(Ingredient item, boolean targetAir, InteractionManager.OnItemUseAction action) {
+    public static void registerBlock(Ingredient item, InteractionManager.OnItemUseAction action) {
         throw new UnsupportedOperationException("Implemented via mixin");
     }
 
     @Inject(method = "registerDefaultInteractions", at = @At("TAIL"))
     private static void sbtfc$registerButcherScrapable(CallbackInfo ci){
 
-        register(Ingredient.of(SBTags.Items.BUTCHER_SCRAPABLE), false, (stack, context) -> {
+        registerBlock(Ingredient.of(SBTags.Items.BUTCHER_SCRAPABLE), (stack, context) -> {
             Level level = context.getLevel();
-            ScrapingRecipe recipe = ScrapingRecipe.getRecipe(level, new ItemStackInventory(stack));
+            ScrapingRecipe recipe = ScrapingRecipe.getRecipe(stack);
             if (recipe != null && !Optional.ofNullable(context.getPlayer()).map(Player::isCrouching).orElse(false)) {
                 BlockPos pos = context.getClickedPos();
                 BlockPos abovePos = pos.above();
@@ -47,13 +49,13 @@ public class InteractionManagerMixin {
                 if (player != null && context.getClickedFace() == Direction.UP && Helpers.isBlock(level.getBlockState(pos), TFCTags.Blocks.SCRAPING_SURFACE) && level.getBlockState(abovePos).isAir()) {
                     BlockState state = TFCBlocks.SCRAPING.get().defaultBlockState();
                     level.setBlockAndUpdate(abovePos, state);
-                    level.getBlockEntity(abovePos, (BlockEntityType) TFCBlockEntities.SCRAPING.get()).map((entity) -> ((ScrapingBlockEntity)entity).getCapability(Capabilities.ITEM).map((cap) -> {
+                    return level.getBlockEntity(abovePos, (BlockEntityType<ScrapingBlockEntity>)TFCBlockEntities.SCRAPING.get()).map(entity -> {
                         ItemStack insertStack = stack.split(1);
-                        stack.setCount(stack.getCount() + cap.insertItem(0, insertStack, false).getCount());
-                        ((ScrapingBlockEntity) entity).updateDisplayCache();
+                        stack.setCount(stack.getCount() + ((ItemStackHandler)entity.getInventory()).insertItem(0, insertStack, false).getCount());
+                        entity.updateDisplayCache();
                         level.sendBlockUpdated(abovePos, state, state, 2);
-                        return InteractionResult.SUCCESS;
-                    }).orElse(InteractionResult.PASS));
+                        return InteractionResult.sidedSuccess(level.isClientSide);
+                    }).orElse(InteractionResult.PASS);
                 }
             }
 

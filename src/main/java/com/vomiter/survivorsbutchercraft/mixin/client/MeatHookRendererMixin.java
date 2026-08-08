@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mixin(value = MeatHookRenderer.class, remap = false)
@@ -50,8 +51,13 @@ public class MeatHookRendererMixin {
         AnimatedRecipeItemUse base = original.get();
 
         AnimatedRecipeItemUse wrapped = new AnimatedRecipeItemUse(
-                base,
-                CarcassRenderHelper.buildModels(base.model, carcass).toArray(BlacklistedModel[]::new)
+                base.uses(),
+                base.tool(),
+                base.count(),
+                base.damageTool(),
+                base.lootTable(),
+                base.effects(),
+                CarcassRenderHelper.buildModels(base.model(), carcass)
         );
         return Optional.of(wrapped);
     }

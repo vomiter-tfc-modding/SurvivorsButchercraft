@@ -1,9 +1,11 @@
 package com.vomiter.survivorsbutchercraft.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.vomiter.survivorsbutchercraft.common.blockentity.SkullLikeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -40,6 +42,11 @@ public class SkullLikeBlock extends AbstractSkullBlock {
     public SkullLikeBlock(Properties props) {
         super(props);
         registerDefaultState(this.stateDefinition.any().setValue(ROTATION, 0));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(SkullLikeBlock::new);
     }
 
     @Override

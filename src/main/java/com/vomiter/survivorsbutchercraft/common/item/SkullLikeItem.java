@@ -5,9 +5,9 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.extensions.IForgeItem;
+import net.neoforged.neoforge.common.extensions.IItemExtension;
 
-public class SkullLikeItem extends StandingAndWallBlockItem implements IForgeItem {
+public class SkullLikeItem extends StandingAndWallBlockItem implements IItemExtension {
     public SkullLikeItem(Block head, Block wallHead, Properties properties, Direction direction) {
         super(head, wallHead, properties, direction);
     }

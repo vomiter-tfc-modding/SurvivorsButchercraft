@@ -4,8 +4,8 @@ import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.data.PackOutput;
 import net.minecraft.server.packs.PackType;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class SBItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        for (Metal.Default metal : Metal.Default.values()) {
-            if (!metal.hasTools()) continue;
+        for (Metal metal : Metal.values()) {
+            if (!metal.allParts()) continue;
 
             List.of(
                     "butcher_knife",
@@ -26,7 +26,7 @@ public class SBItemModelProvider extends ItemModelProvider {
                     "gut_knife"
             ).forEach(s -> {
                 generatedItem("metal/" + s + "_head/" + metal.getSerializedName());
-                if(metal.equals(Metal.Default.WROUGHT_IRON)) return;
+                if(metal.equals(Metal.WROUGHT_IRON)) return;
                 handheldItem("metal/" + s + "/" + metal.getSerializedName());
             });
 

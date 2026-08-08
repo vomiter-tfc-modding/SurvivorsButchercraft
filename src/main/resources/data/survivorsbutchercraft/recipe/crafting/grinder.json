@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "tag": "minecraft:buttons"
+    },
+    "C": {
+      "item": "tfc:brass_mechanisms"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    }
+  },
+  "pattern": [
+    "BH",
+    "C "
+  ],
+  "result": {
+    "item": "butchercraft:grinder_block_item"
+  },
+  "show_notification": true
+}

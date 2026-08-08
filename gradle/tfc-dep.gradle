@@ -1,0 +1,6 @@
+dependencies {
+    implementation "curse.maven:terrafirmacraft-302973:8566530"
+    runtimeOnly "curse.maven:patchouli-306770:7730942"
+    implementation "curse.maven:survivors-abilities-1354890:8577849"
+    implementation "curse.maven:butchercraft-265715:7777338"
+}

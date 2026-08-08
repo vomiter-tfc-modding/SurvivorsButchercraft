@@ -3,10 +3,10 @@ package com.vomiter.survivorsbutchercraft.mixin.client;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
-import net.dries007.tfc.common.capabilities.food.FoodCapability;
-import net.dries007.tfc.common.capabilities.food.IFood;
+import net.dries007.tfc.common.component.food.FoodCapability;
+import net.dries007.tfc.common.component.food.IFood;
 import net.dries007.tfc.config.TFCConfig;
-import net.minecraftforge.client.model.renderable.BakedModelRenderable;
+import net.neoforged.neoforge.client.model.renderable.BakedModelRenderable;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,11 +25,8 @@ public class BakedModelRenderableMixin {
     }
 
     @WrapOperation(
-            method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;" +
-                    "Lnet/minecraft/client/renderer/MultiBufferSource;" +
-                    "Lnet/minecraftforge/client/model/renderable/ITextureRenderTypeLookup;" +
-                    "IIFLnet/minecraftforge/client/model/renderable/BakedModelRenderable$Context;)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/model/renderable/BakedModelRenderable$Context;tint()Lorg/joml/Vector4f;")
+            method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/neoforged/neoforge/client/model/renderable/ITextureRenderTypeLookup;IIFLnet/neoforged/neoforge/client/model/renderable/BakedModelRenderable$Context;)V",
+            at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/client/model/renderable/BakedModelRenderable$Context;tint()Lorg/joml/Vector4f;")
     )
     private Vector4f sbtfc$rottenTint(BakedModelRenderable.Context instance, Operation<Vector4f> original){
         var carcass = ThreadLocalFlags.carcassRendering.get();

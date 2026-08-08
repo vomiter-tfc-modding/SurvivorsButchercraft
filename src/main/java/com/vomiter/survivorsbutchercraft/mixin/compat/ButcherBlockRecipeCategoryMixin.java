@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Mixin(value = ButcherBlockRecipeCategory.class, remap = false)
 public class ButcherBlockRecipeCategoryMixin {
+    /*
     @Inject(method = "setRecipe(Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;" +
             "Lcom/lance5057/butchercraft/workstations/butcherblock/ButcherBlockRecipe;" +
             "Lmezz/jei/api/recipe/IFocusGroup;)V",
@@ -74,4 +75,6 @@ public class ButcherBlockRecipeCategoryMixin {
         }
 
     }
+
+     */
 }

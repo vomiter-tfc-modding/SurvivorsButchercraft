@@ -24,9 +24,10 @@ import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -34,66 +35,52 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class SBRecipesProvider extends RecipeProvider {
-    public SBRecipesProvider(PackOutput p_248933_) {
-        super(p_248933_);
+    public SBRecipesProvider(PackOutput p_248933_, CompletableFuture<HolderLookup.Provider> provider) {
+        super(p_248933_, provider);
     }
 
     BlacklistedModel standardModel(ResourceLocation rl) {
-        return new BlacklistedModel(rl, null, true,
-                new AnimationFloatTransform().setLocation(new AnimatedFloatVector3().setX(new AnimatedFloat(0))));
+        return new BlacklistedModel(rl, true, (new AnimationFloatTransform()).setLocation((new AnimatedFloatVector3()).setX(new AnimatedFloat(0.0F))));
     }
 
     BlacklistedModel standardHookToolModel(Item i) {
-        return new BlacklistedModel(i,
-                new AnimationFloatTransform().setScale(new AnimatedFloatVector3().setAll(new AnimatedFloat(0.5f)))
-                        .setRotation(new AnimatedFloatVector3().setZ(new AnimatedFloat(-45, 45, 0, 0.05f, true, true)))
-                        .setLocation(new AnimatedFloatVector3().setX(new AnimatedFloat(8, 0))
-                                .setY(new AnimatedFloat(24, 0)).setZ(new AnimatedFloat(12, 0))));
+        return new BlacklistedModel(i, (new AnimationFloatTransform()).setScale((new AnimatedFloatVector3()).setAll(new AnimatedFloat(0.5F))).setRotation((new AnimatedFloatVector3()).setZ(new AnimatedFloat(-45.0F, 45.0F, 0.0F, 0.05F, true, true))).setLocation((new AnimatedFloatVector3()).setX(new AnimatedFloat(8.0F, 0.0F)).setY(new AnimatedFloat(24.0F, 0.0F)).setZ(new AnimatedFloat(12.0F, 0.0F))));
     }
 
     BlacklistedModel hideModel(ResourceLocation rl) {
-        return new BlacklistedModel(rl, null, true,
-                new AnimationFloatTransform().setLocation(new AnimatedFloatVector3().setY(new AnimatedFloat(12, 0))));
+        return new BlacklistedModel(rl, true, (new AnimationFloatTransform()).setLocation((new AnimatedFloatVector3()).setY(new AnimatedFloat(12.0F, 0.0F))));
     }
 
     BlacklistedModel layFlatModel(Item rl) {
-        return new BlacklistedModel(rl, new AnimationFloatTransform()
-                .setLocation(
-                        new AnimatedFloatVector3(new AnimatedFloat(8), new AnimatedFloat(1f), new AnimatedFloat(8)))
-                .setRotation(new AnimatedFloatVector3().setX(new AnimatedFloat(-90)))
-                .setScale(new AnimatedFloatVector3(new AnimatedFloat(1), new AnimatedFloat(1), new AnimatedFloat(1))));
+        return new BlacklistedModel(rl, (new AnimationFloatTransform()).setLocation(new AnimatedFloatVector3(new AnimatedFloat(8.0F), new AnimatedFloat(1.0F), new AnimatedFloat(8.0F))).setRotation((new AnimatedFloatVector3()).setX(new AnimatedFloat(-90.0F))).setScale(new AnimatedFloatVector3(new AnimatedFloat(1.0F), new AnimatedFloat(1.0F), new AnimatedFloat(1.0F))));
     }
 
     BlacklistedModel standardButcherBlockModel(ResourceLocation rl) {
-        return new BlacklistedModel(rl, null, true,
-                new AnimationFloatTransform().setLocation(new AnimatedFloatVector3().setX(new AnimatedFloat(0))));
+        return new BlacklistedModel(rl, true, (new AnimationFloatTransform()).setLocation((new AnimatedFloatVector3()).setX(new AnimatedFloat(0.0F))));
     }
 
-    BlacklistedModel standardButcherBlockToolModel(Item i) {
-        return new BlacklistedModel(i,
-                new AnimationFloatTransform()
-                        .setRotation(new AnimatedFloatVector3().setZ(new AnimatedFloat(-45, 45, 0, 0.05f, true, true)))
-                        .setLocation(new AnimatedFloatVector3().setX(new AnimatedFloat(8, 0))
-                                .setY(new AnimatedFloat(8, 0)).setZ(new AnimatedFloat(8, 0)))
-                        .setScale(new AnimatedFloatVector3().setAll(new AnimatedFloat(0.5f))));
+    BlacklistedModel standardButcherBlockToolModel(Item i, float yOffset) {
+        return new BlacklistedModel(i, (new AnimationFloatTransform()).setRotation((new AnimatedFloatVector3()).setZ(new AnimatedFloat(-45.0F, 45.0F, 0.0F, 0.05F, true, true))).setLocation((new AnimatedFloatVector3()).setX(new AnimatedFloat(8.0F, 0.0F)).setY(new AnimatedFloat(10.0F + yOffset, 0.0F)).setZ(new AnimatedFloat(8.0F, 0.0F))).setScale((new AnimatedFloatVector3()).setAll(new AnimatedFloat(0.5F))));
     }
 
     static ResourceLocation meatHookId(String path){
         return Helpers.id("meathook/" + path);
     }
 
-    private void buildHeadRecipes(Carcass carcass, Consumer<FinishedRecipe> consumer){
+    private void buildHeadRecipes(Carcass carcass, RecipeOutput consumer){
         var head = SBItems.HEADS.get(carcass);
         var skull = SBItems.SKULLS.get(carcass);
         if (carcass.equals(Carcass.GOAT)){
@@ -120,7 +107,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         16,
                         true,
                         standardModel(ResourceLocation.fromNamespaceAndPath(head.getId().getNamespace(), "meathook/" + head.getId().getPath())),
-                        standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
+                        standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get(), 0)
                 )
                 .resultStage(
                         new CompoundChanceResult(skull.get().getDefaultInstance(), 1),
@@ -146,7 +133,7 @@ public class SBRecipesProvider extends RecipeProvider {
                             16,
                             true,
                             standardModel(ResourceLocation.fromNamespaceAndPath(headMale.getId().getNamespace(), "meathook/" + head.getId().getPath())),
-                            standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get())
+                            standardButcherBlockToolModel(ButchercraftItems.GUT_KNIFE.get(), 0)
                     )
                     .resultStage(
                             new CompoundChanceResult(skullMale.get().getDefaultInstance(), 1),
@@ -158,7 +145,7 @@ public class SBRecipesProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(@NotNull RecipeOutput consumer) {
 
         CustomButcherRecipeBuilder.builder()
                 .carcass(ButchercraftItems.BLOOD_SAUSAGE_LINKED.get())
@@ -166,7 +153,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         Ingredient.of(SBTags.Items.BUTCHERING_TOOLS),
                         8,
                         true,
-                        standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
+                        standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get(), 0)
                 )
                 .resultStage(new CompoundChanceResult(ButchercraftItems.BLOOD_SAUSAGE.get(), 8, 1))
                 .saveButcherBlock(consumer, Helpers.id("butcherblock/blood_sausage"));
@@ -177,14 +164,14 @@ public class SBRecipesProvider extends RecipeProvider {
                         Ingredient.of(SBTags.Items.BUTCHERING_TOOLS),
                         8,
                         true,
-                        standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
+                        standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get(), 0)
                 )
                 .resultStage(new CompoundChanceResult(ButchercraftItems.SAUSAGE.get(), 8, 1))
                 .saveButcherBlock(consumer, Helpers.id("butcherblock/sausage"));
 
 
-        for (Metal.Default metal : Metal.Default.values()) {
-            if(!metal.hasTools()) continue;
+        for (Metal metal : Metal.values()) {
+            if(!metal.allParts()) continue;
             ShapedRecipeBuilder
                     .shaped(RecipeCategory.MISC, SBItems.MEAT_HOOKS.get(metal).get())
                     .pattern("RR")
@@ -203,7 +190,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         1,
                         true,
                         this.layFlatModel(ButchercraftItems.TRIPE.get()),
-                        standardButcherBlockToolModel(Items.WATER_BUCKET)
+                        standardButcherBlockToolModel(Items.WATER_BUCKET, 0)
                 )
                 .resultStage(CompoundChanceResult.EMPTY)
                 .tool(
@@ -211,7 +198,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         4,
                         true,
                         this.layFlatModel(ButchercraftItems.TRIPE.get()),
-                        standardButcherBlockToolModel(ButchercraftItems.SKINNING_KNIFE.get())
+                        standardButcherBlockToolModel(ButchercraftItems.SKINNING_KNIFE.get(), 0)
                 )
                 .resultStage(CompoundChanceResult.EMPTY)
                 .tool(
@@ -219,7 +206,7 @@ public class SBRecipesProvider extends RecipeProvider {
                         4,
                         true,
                         this.layFlatModel(ButchercraftItems.TRIPE.get()),
-                        standardButcherBlockToolModel(TFCItems.POWDERS.get(Powder.SALT).get())
+                        standardButcherBlockToolModel(TFCItems.POWDERS.get(Powder.SALT).get(), 0)
                 )
                 .resultStage(new CompoundChanceResult(ButchercraftItems.CASING.get().getDefaultInstance(), 1))
                 .saveButcherBlock(consumer, Helpers.id("butcherblock/casing"));
@@ -231,7 +218,7 @@ public class SBRecipesProvider extends RecipeProvider {
                             1,
                             true,
                             this.layFlatModel(MeatMap.get(meatType, MeatProduct.ORDINARY)),
-                            standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
+                            standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get(), 0)
                     )
                     .resultStage(new CompoundChanceResult(MeatMap.get(meatType, MeatProduct.CUBED), 2, 1))
                     .saveButcherBlock(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/ordinary_to_cubed"));
@@ -241,7 +228,7 @@ public class SBRecipesProvider extends RecipeProvider {
                             1,
                             true,
                             this.layFlatModel(MeatMap.get(meatType, MeatProduct.ROAST)),
-                            standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get())
+                            standardButcherBlockToolModel(ButchercraftItems.BUTCHER_KNIFE.get(), 0)
                     )
                     .resultStage(new CompoundChanceResult(MeatMap.get(meatType, MeatProduct.ORDINARY), 2, 1))
                     .saveButcherBlock(consumer, Helpers.id("butcherblock/" + meatType.name().toLowerCase(Locale.ROOT) + "/roast_to_ordinary"));
@@ -262,13 +249,13 @@ public class SBRecipesProvider extends RecipeProvider {
                         true,
                         standardModel(meatHookId(carcass.serializedName() + "/" + MeatHookStage.HOOK.pp)),
                         standardHookToolModel(Items.BUCKET)
-                ).resultStage(new CompoundChanceResult(new FluidStack(ButchercraftFluids.BLOOD_FLUID.get(), FluidType.BUCKET_VOLUME)));
+                ).resultStage(new CompoundChanceResult(new FluidStack(ButchercraftFluids.BLOOD.FLUID.get(), FluidType.BUCKET_VOLUME)));
             }
             for (MeatHookStage meatHookStage : MeatHookStage.values()) {
                 if(meatHookStage == MeatHookStage.HOOK) continue;
                 var loot = meatHookStage.equals(MeatHookStage.BUTCHER)?
                         Helpers.id("tfc", "entities/" + carcass.serializedName()):
-                        ButcherBlockLootTables.EMPTY;
+                        ButcherBlockLootTables.EMPTY.location();
 
                 meatHookRecipeBuilder.tool(
                         carcass.toolFor(meatHookStage),
@@ -276,7 +263,8 @@ public class SBRecipesProvider extends RecipeProvider {
                         true,
                         loot,
                         standardModel(meatHookId(carcass.serializedName() + "/" + meatHookStage.previousStep())),
-                        standardHookToolModel(meatHookStage.iconicTool())
+                                standardHookToolModel(meatHookStage.iconicTool()
+                        )
                 ).resultStage(
                         Stream.concat(
                                 Stream.concat(

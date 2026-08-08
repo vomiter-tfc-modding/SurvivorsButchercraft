@@ -12,31 +12,33 @@ import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.dries007.tfc.common.entities.predator.Predator;
 import net.dries007.tfc.common.fluids.TFCFluids;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
 
 public final class SBForgeEvents {
 
     public static void init(){
-        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onAddReloadListeners);
-        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onLivingDrops);
-        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onPlayerTick);
-        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::agitatePredators);
-        MinecraftForge.EVENT_BUS.addListener(SBForgeEvents::onEntitySpawn);
+        NeoForge.EVENT_BUS.addListener(SBForgeEvents::onAddReloadListeners);
+        NeoForge.EVENT_BUS.addListener(SBForgeEvents::onLivingDrops);
+        NeoForge.EVENT_BUS.addListener(SBForgeEvents::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(SBForgeEvents::agitatePredators);
+        NeoForge.EVENT_BUS.addListener(SBForgeEvents::onEntitySpawn);
 
     }
 
@@ -52,19 +54,18 @@ public final class SBForgeEvents {
             }
         }
     }
-    static List<RegistryObject<? extends SoapableMobEffect>> BLOODY_EFFECTS = List.of(
+    static List<DeferredHolder<MobEffect, ? extends SoapableMobEffect>> BLOODY_EFFECTS = List.of(
             ButchercraftMobEffects.DIRTY,
             ButchercraftMobEffects.BLOODY,
             ButchercraftMobEffects.BLOODTRAIL,
             ButchercraftMobEffects.STINKY
     );
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event){
-        Player player = event.player;
+    public static void onPlayerTick(PlayerTickEvent.Post event){
+        Player player = event.getEntity();
         if(player.tickCount % 20 != 0) return;
         if(player.isInFluidType(TFCFluids.RIVER_WATER.get().getFluidType())){
             BLOODY_EFFECTS.forEach(registryObject -> {
-                var effect = registryObject.get();
-                var effectInst = player.getEffect(effect);
+                var effectInst = player.getEffect(registryObject);
                 if (effectInst instanceof MobEffectInstanceAccessor acc){
                     for (int i = 0; i < 40; i++) {
                         acc.sb$tickDownDuration();
@@ -78,7 +79,11 @@ public final class SBForgeEvents {
         if (!(event.getEntity() instanceof TFCAnimalProperties props)) {
             return;
         }
-        var id = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
+        if (!(event.getEntity() instanceof Animal animal)) {
+            return;
+        }
+
+        var id = BuiltInRegistries.ENTITY_TYPE.getKey(event.getEntity().getType());
         if(id == null) return;
 
         if (!(event.getSource().getEntity() instanceof Player player)) {
@@ -107,12 +112,12 @@ public final class SBForgeEvents {
         return false;
     }
 
-    public static void agitatePredators(LivingHurtEvent event) {
+    public static void agitatePredators(LivingDamageEvent.Post event) {
         Entity var2 = event.getSource().getDirectEntity();
         if (var2 instanceof Predator z) {
-            if (event.getEntity().hasEffect(ButchercraftMobEffects.BLOODY.get())) {
+            if (event.getEntity().hasEffect(ButchercraftMobEffects.BLOODY)) {
                 z.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 300, 0));
-                z.addEffect(new MobEffectInstance(SAEffects.AGITATION.get(), 20 * 60 * 20, 0));
+                z.addEffect(new MobEffectInstance(SAEffects.AGITATION, 20 * 60 * 20, 0));
             }
         }
     }

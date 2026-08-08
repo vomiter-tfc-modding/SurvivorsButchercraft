@@ -5,19 +5,19 @@ import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class FirmaLifeCompat {
     public static void addRennet(ObjectArrayList<ItemStack> list){
         if (list.stream().anyMatch(item -> item.is(ButchercraftItems.STOMACH.get()))){
-            EntityType<?> animal = ForgeRegistries.ENTITY_TYPES.getValue(CarcassDataHelper.getId(ThreadLocalFlags.carcass.get()));
+            EntityType<?> animal = BuiltInRegistries.ENTITY_TYPE.get(CarcassDataHelper.getId(ThreadLocalFlags.carcass.get()));
             if (animal == null) return;
-            var dropRennet = TagKey.create(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), ResourceLocation.fromNamespaceAndPath("firmalife", "drops_rennet"));
-            var drop3Rennet = TagKey.create(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), ResourceLocation.fromNamespaceAndPath("firmalife", "drops_three_rennet"));
+            var dropRennet = TagKey.create(BuiltInRegistries.ENTITY_TYPE.key(), ResourceLocation.fromNamespaceAndPath("firmalife", "drops_rennet"));
+            var drop3Rennet = TagKey.create(BuiltInRegistries.ENTITY_TYPE.key(), ResourceLocation.fromNamespaceAndPath("firmalife", "drops_three_rennet"));
             var count = 0;
             if (animal.is(drop3Rennet)) {
                 count += 6;

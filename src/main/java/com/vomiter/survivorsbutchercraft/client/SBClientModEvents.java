@@ -1,6 +1,7 @@
 package com.vomiter.survivorsbutchercraft.client;
 
-import net.minecraftforge.eventbus.api.IEventBus;
+
+import net.neoforged.bus.api.IEventBus;
 
 public class SBClientModEvents {
     public static void init(IEventBus modBus){

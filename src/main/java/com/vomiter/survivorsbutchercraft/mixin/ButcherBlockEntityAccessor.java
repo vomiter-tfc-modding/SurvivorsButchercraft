@@ -5,6 +5,7 @@ import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlockEnt
 import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockRecipe;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -17,7 +18,7 @@ public interface ButcherBlockEntityAccessor {
     boolean sbtfc$isFinalStage(ButcherBlockRecipe r);
 
     @Invoker("matchRecipe")
-    Optional<ButcherBlockRecipe> sbtfc$matchRecipe();
+    Optional<RecipeHolder<ButcherBlockRecipe>> sbtfc$matchRecipe();
 
     @Invoker("setupStage")
     void sbtfc$setupStage(ButcherBlockRecipe recipe, int stage);

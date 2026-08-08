@@ -2,8 +2,9 @@ package com.vomiter.survivorsbutchercraft.common.blockentity;
 
 import com.vomiter.survivorsbutchercraft.common.registry.SBBlockEntityTypes;
 import com.vomiter.survivorsbutchercraft.common.registry.SBFoodTraits;
-import net.dries007.tfc.common.capabilities.food.FoodCapability;
+import net.dries007.tfc.common.component.food.FoodCapability;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -31,19 +32,19 @@ public class DecaySkullLikeBlockEntity extends BlockEntity {
     public boolean setPreserved(){
         return Optional.ofNullable(FoodCapability.get(stack)).map(iFood -> {
             boolean hasPreserved = iFood.hasTrait(SBFoodTraits.PRESERVED);
-            FoodCapability.applyTrait(iFood, SBFoodTraits.PRESERVED);
+            FoodCapability.applyTrait(stack, SBFoodTraits.PRESERVED);
             return !hasPreserved;
         }).orElse(false);
     }
 
-    public void load(@NotNull CompoundTag nbt) {
-        super.load(nbt);
-        this.stack = ItemStack.of(nbt.getCompound("item"));
+    public void loadAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
+        super.loadAdditional(nbt, provider);
+        this.stack = ItemStack.parseOptional(provider, nbt.getCompound("item"));
     }
 
-    public void saveAdditional(@NotNull CompoundTag nbt) {
-        super.saveAdditional(nbt);
-        nbt.put("item", this.stack.save(new CompoundTag()));
+    public void saveAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
+        super.saveAdditional(nbt, provider);
+        nbt.put("item", this.stack.save(provider, new CompoundTag()));
     }
 
 }

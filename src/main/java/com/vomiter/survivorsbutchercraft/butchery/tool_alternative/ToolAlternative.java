@@ -6,11 +6,12 @@ import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class ToolAlternative {
     private static final Map<Item, Ingredient> TOOL_MAP = new HashMap<>();
@@ -40,12 +41,12 @@ public class ToolAlternative {
     }
 
     private static Ingredient toIngredient(
-            Map<Metal.Default, RegistryObject<Item>> items
+            Map<Metal, DeferredHolder<Item, ? extends Item>> items
     ) {
         return Ingredient.of(
                 items.values()
                         .stream()
-                        .map(RegistryObject::get)
+                        .map(Supplier::get)
                         .map(Item::getDefaultInstance)
         );
     }

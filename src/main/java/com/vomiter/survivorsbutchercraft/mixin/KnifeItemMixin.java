@@ -14,9 +14,7 @@ public abstract class KnifeItemMixin {
             method = "<init>",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/SwordItem;" +
-                            "<init>(Lnet/minecraft/world/item/Tier;" +
-                            "IFLnet/minecraft/world/item/Item$Properties;)V"
+                    target = "Lnet/minecraft/world/item/SwordItem;<init>(Lnet/minecraft/world/item/Tier;Lnet/minecraft/world/item/Item$Properties;Lnet/minecraft/world/item/component/Tool;)V"
             ),
             index = 0
     )

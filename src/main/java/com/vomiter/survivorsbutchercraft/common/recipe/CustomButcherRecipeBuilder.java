@@ -1,24 +1,19 @@
 package com.vomiter.survivorsbutchercraft.common.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
-import com.vomiter.survivorsbutchercraft.common.registry.SBRecipes;
 import com.vomiter.survivorsbutchercraft.data.loot.SBButcherBlockLootTables;
 import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class CustomButcherRecipeBuilder {
     private ResourceLocation idIn;
@@ -39,57 +34,117 @@ public class CustomButcherRecipeBuilder {
     }
 
     public CustomButcherRecipeBuilder id(ResourceLocation id) {
-        this.idIn = Objects.requireNonNull(id, "Recipe id cannot be null");
+        this.idIn = Objects.requireNonNull(
+                id,
+                "Recipe id cannot be null"
+        );
+
         return this;
     }
 
     public CustomButcherRecipeBuilder group(String group) {
-        this.groupIn = Objects.requireNonNull(group, "Recipe group cannot be null");
+        this.groupIn = Objects.requireNonNull(
+                group,
+                "Recipe group cannot be null"
+        );
+
         return this;
     }
 
     public CustomButcherRecipeBuilder carcass(Ingredient carcass) {
-        this.carcass = Objects.requireNonNull(carcass, "Carcass ingredient cannot be null");
-        return this;
-    }
-
-    public CustomButcherRecipeBuilder tool(AnimatedRecipeItemUse tool) {
-        this.recipeToolsIn.add(
-                Objects.requireNonNull(tool, "Recipe tool cannot be null")
+        this.carcass = Objects.requireNonNull(
+                carcass,
+                "Carcass ingredient cannot be null"
         );
+
         return this;
     }
 
-    public CustomButcherRecipeBuilder tool(Ingredient tool, int uses, boolean damage, ResourceLocation table, BlacklistedModel... model) {
-        this.tool(new AnimatedRecipeItemUse(uses, tool, 1, damage, table, model));
+    public CustomButcherRecipeBuilder carcass(@NotNull Item item) {
+        return carcass(Ingredient.of(item));
+    }
+
+    public CustomButcherRecipeBuilder tool(
+            AnimatedRecipeItemUse tool
+    ) {
+        this.recipeToolsIn.add(
+                Objects.requireNonNull(
+                        tool,
+                        "Recipe tool cannot be null"
+                )
+        );
+
         return this;
     }
 
-    public CustomButcherRecipeBuilder tool(Ingredient tool, int uses, boolean damage, BlacklistedModel... model) {
-        this.tool(new AnimatedRecipeItemUse(uses, tool, 1, damage, SBButcherBlockLootTables.EMPTY, model));
-        return this;
+    public CustomButcherRecipeBuilder tool(
+            Ingredient tool,
+            int uses,
+            boolean damage,
+            ResourceLocation table,
+            BlacklistedModel... models
+    ) {
+        return tool(
+                new AnimatedRecipeItemUse(
+                        uses,
+                        tool,
+                        1,
+                        damage,
+                        table,
+                        List.of(),
+                        List.of(models)
+                )
+        );
     }
 
+    public CustomButcherRecipeBuilder tool(
+            Ingredient tool,
+            int uses,
+            boolean damage,
+            BlacklistedModel... models
+    ) {
+        return tool(
+                tool,
+                uses,
+                damage,
+                SBButcherBlockLootTables.EMPTY,
+                models
+        );
+    }
 
     public CustomButcherRecipeBuilder tools(
             Collection<? extends AnimatedRecipeItemUse> tools
     ) {
-        Objects.requireNonNull(tools, "Recipe tools cannot be null");
+        Objects.requireNonNull(
+                tools,
+                "Recipe tools cannot be null"
+        );
+
         tools.forEach(this::tool);
         return this;
     }
 
-    public CustomButcherRecipeBuilder jei(Ingredient ingredient) {
+    public CustomButcherRecipeBuilder jei(
+            Ingredient ingredient
+    ) {
         this.dummyList.add(
-                Objects.requireNonNull(ingredient, "JEI ingredient cannot be null")
+                Objects.requireNonNull(
+                        ingredient,
+                        "JEI ingredient cannot be null"
+                )
         );
+
         return this;
     }
 
     public CustomButcherRecipeBuilder jei(
             Collection<? extends Ingredient> ingredients
     ) {
-        Objects.requireNonNull(ingredients, "JEI ingredients cannot be null");
+        Objects.requireNonNull(
+                ingredients,
+                "JEI ingredients cannot be null"
+        );
+
         ingredients.forEach(this::jei);
         return this;
     }
@@ -97,16 +152,20 @@ public class CustomButcherRecipeBuilder {
     /**
      * 新增一個 results 外層階段。
      *
-     * 產生：
+     * 對應：
+     *
      * "results": [
-     *   [ resultA, resultB ],
-     *   [ resultC ]
+     *   [resultA, resultB],
+     *   [resultC]
      * ]
      */
     public CustomButcherRecipeBuilder resultStage(
             Collection<? extends CompoundChanceResult> results
     ) {
-        Objects.requireNonNull(results, "Chance result stage cannot be null");
+        Objects.requireNonNull(
+                results,
+                "Chance result stage cannot be null"
+        );
 
         if (results.isEmpty()) {
             throw new IllegalArgumentException(
@@ -114,7 +173,8 @@ public class CustomButcherRecipeBuilder {
             );
         }
 
-        NonNullList<CompoundChanceResult> stage = NonNullList.create();
+        NonNullList<CompoundChanceResult> stage =
+                NonNullList.create();
 
         for (CompoundChanceResult result : results) {
             stage.add(
@@ -129,51 +189,63 @@ public class CustomButcherRecipeBuilder {
         return this;
     }
 
-    public CustomButcherRecipeBuilder resultStage(CompoundChanceResult... results) {
-        Objects.requireNonNull(results, "Chance results cannot be null");
+    public CustomButcherRecipeBuilder resultStage(
+            CompoundChanceResult... results
+    ) {
+        Objects.requireNonNull(
+                results,
+                "Chance results cannot be null"
+        );
+
         return resultStage(Arrays.asList(results));
     }
 
-    public void saveHook(Consumer<FinishedRecipe> output) {
+    public void saveButcherBlock(RecipeOutput output) {
         validate();
 
-        output.accept(new HookResult(
+        output.accept(
                 idIn,
-                groupIn,
-                carcass,
-                copyTools(recipeToolsIn),
-                copyIngredients(dummyList),
-                copyChanceResults(chanceResults)
-        ));
-    }
-
-    public void saveHook(
-            Consumer<FinishedRecipe> output,
-            ResourceLocation id
-    ) {
-        id(id);
-        saveHook(output);
-    }
-
-    public void saveButcherBlock(Consumer<FinishedRecipe> output) {
-        validate();
-
-        output.accept(new ButcherResult(
-                idIn,
-                groupIn,
-                carcass,
-                copyTools(recipeToolsIn),
-                copyIngredients(dummyList),
-                copyChanceResults(chanceResults)
-        ));
+                new CustomButcherBlockRecipe(
+                        groupIn,
+                        carcass,
+                        copyTools(recipeToolsIn),
+                        copyIngredients(dummyList),
+                        copyChanceResults(chanceResults)
+                ),
+                null
+        );
     }
 
     public void saveButcherBlock(
-            Consumer<FinishedRecipe> output,
+            RecipeOutput output,
             ResourceLocation id
     ) {
         id(id);
         saveButcherBlock(output);
+    }
+
+    public void saveHook(RecipeOutput output) {
+        validate();
+
+        output.accept(
+                idIn,
+                new CustomMeatHookRecipe(
+                        groupIn,
+                        carcass,
+                        copyTools(recipeToolsIn),
+                        copyIngredients(dummyList),
+                        copyChanceResults(chanceResults)
+                ),
+                null
+        );
+    }
+
+    public void saveHook(
+            RecipeOutput output,
+            ResourceLocation id
+    ) {
+        id(id);
+        saveHook(output);
     }
 
     private void validate() {
@@ -185,19 +257,37 @@ public class CustomButcherRecipeBuilder {
 
         if (carcass == Ingredient.EMPTY) {
             throw new IllegalStateException(
-                    "Custom butcher recipe " + idIn + " has no carcass"
+                    "Custom butcher recipe "
+                            + idIn
+                            + " has no carcass"
             );
         }
 
         if (recipeToolsIn.isEmpty()) {
             throw new IllegalStateException(
-                    "Custom butcher recipe " + idIn + " has no tools"
+                    "Custom butcher recipe "
+                            + idIn
+                            + " has no tools"
             );
         }
 
         if (chanceResults.isEmpty()) {
             throw new IllegalStateException(
-                    "Custom butcher recipe " + idIn + " has no result stages"
+                    "Custom butcher recipe "
+                            + idIn
+                            + " has no result stages"
+            );
+        }
+
+        if (recipeToolsIn.size() != chanceResults.size()) {
+            throw new IllegalStateException(
+                    "Custom butcher recipe "
+                            + idIn
+                            + " has "
+                            + recipeToolsIn.size()
+                            + " tool stages but "
+                            + chanceResults.size()
+                            + " result stages"
             );
         }
     }
@@ -205,7 +295,9 @@ public class CustomButcherRecipeBuilder {
     private static NonNullList<AnimatedRecipeItemUse> copyTools(
             NonNullList<AnimatedRecipeItemUse> source
     ) {
-        NonNullList<AnimatedRecipeItemUse> copy = NonNullList.create();
+        NonNullList<AnimatedRecipeItemUse> copy =
+                NonNullList.create();
+
         copy.addAll(source);
         return copy;
     }
@@ -213,156 +305,30 @@ public class CustomButcherRecipeBuilder {
     private static NonNullList<Ingredient> copyIngredients(
             NonNullList<Ingredient> source
     ) {
-        NonNullList<Ingredient> copy = NonNullList.create();
+        NonNullList<Ingredient> copy =
+                NonNullList.create();
+
         copy.addAll(source);
         return copy;
     }
 
-    private static NonNullList<NonNullList<CompoundChanceResult>> copyChanceResults(
+    private static NonNullList<NonNullList<CompoundChanceResult>>
+    copyChanceResults(
             NonNullList<NonNullList<CompoundChanceResult>> source
     ) {
-        NonNullList<NonNullList<CompoundChanceResult>> copy = NonNullList.create();
+        NonNullList<NonNullList<CompoundChanceResult>> copy =
+                NonNullList.create();
 
-        for (NonNullList<CompoundChanceResult> stage : source) {
-            NonNullList<CompoundChanceResult> stageCopy = NonNullList.create();
+        for (
+                NonNullList<CompoundChanceResult> stage : source
+        ) {
+            NonNullList<CompoundChanceResult> stageCopy =
+                    NonNullList.create();
+
             stageCopy.addAll(stage);
             copy.add(stageCopy);
         }
 
         return copy;
-    }
-
-    public CustomButcherRecipeBuilder carcass(@NotNull Item item) {
-        carcass(Ingredient.of(item));
-        return this;
-    }
-
-    public abstract static class AbstractResult implements FinishedRecipe {
-        private final ResourceLocation idIn;
-        private final String groupIn;
-        private final Ingredient carcass;
-        private final NonNullList<AnimatedRecipeItemUse> recipeToolsIn;
-        private final NonNullList<Ingredient> dummyList;
-        private final NonNullList<NonNullList<CompoundChanceResult>> chanceResults;
-
-        protected AbstractResult(
-                ResourceLocation idIn,
-                String groupIn,
-                Ingredient carcass,
-                NonNullList<AnimatedRecipeItemUse> recipeToolsIn,
-                NonNullList<Ingredient> dummyList,
-                NonNullList<NonNullList<CompoundChanceResult>> chanceResults
-        ) {
-            this.idIn = idIn;
-            this.groupIn = groupIn;
-            this.carcass = carcass;
-            this.recipeToolsIn = recipeToolsIn;
-            this.dummyList = dummyList;
-            this.chanceResults = chanceResults;
-        }
-
-        @Override
-        public void serializeRecipeData(JsonObject json) {
-            if (!groupIn.isEmpty()) {
-                json.addProperty("group", groupIn);
-            }
-
-            json.add("carcass", carcass.toJson());
-
-            JsonArray toolsJson = new JsonArray();
-
-            for (AnimatedRecipeItemUse tool : recipeToolsIn) {
-                toolsJson.add(AnimatedRecipeItemUse.addProperty(tool));
-            }
-
-            json.add("tools", toolsJson);
-
-            JsonArray jeiJson = new JsonArray();
-
-            for (Ingredient ingredient : dummyList) {
-                jeiJson.add(ingredient.toJson());
-            }
-
-            json.add("jei", jeiJson);
-
-            JsonArray resultsJson = new JsonArray();
-
-            for (NonNullList<CompoundChanceResult> stage : chanceResults) {
-                JsonArray stageJson = new JsonArray();
-
-                for (CompoundChanceResult result : stage) {
-                    stageJson.add(result.serialize());
-                }
-
-                resultsJson.add(stageJson);
-            }
-
-            json.add("results", resultsJson);
-        }
-
-        @Override
-        public ResourceLocation getId() {
-            return idIn;
-        }
-
-        @Override
-        public @Nullable JsonObject serializeAdvancement() {
-            return null;
-        }
-
-        @Override
-        public @Nullable ResourceLocation getAdvancementId() {
-            return null;
-        }
-    }
-
-    public static class HookResult extends AbstractResult {
-        protected HookResult(
-                ResourceLocation idIn,
-                String groupIn,
-                Ingredient carcass,
-                NonNullList<AnimatedRecipeItemUse> recipeToolsIn,
-                NonNullList<Ingredient> dummyList,
-                NonNullList<NonNullList<CompoundChanceResult>> chanceResults
-        ) {
-            super(
-                    idIn,
-                    groupIn,
-                    carcass,
-                    recipeToolsIn,
-                    dummyList,
-                    chanceResults
-            );
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return SBRecipes.CUSTOM_MEAT_HOOK_SERIALIZER.get();
-        }
-    }
-
-    public static class ButcherResult extends AbstractResult {
-        protected ButcherResult(
-                ResourceLocation idIn,
-                String groupIn,
-                Ingredient carcass,
-                NonNullList<AnimatedRecipeItemUse> recipeToolsIn,
-                NonNullList<Ingredient> dummyList,
-                NonNullList<NonNullList<CompoundChanceResult>> chanceResults
-        ) {
-            super(
-                    idIn,
-                    groupIn,
-                    carcass,
-                    recipeToolsIn,
-                    dummyList,
-                    chanceResults
-            );
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return SBRecipes.CUSTOM_BUTCHER_BLOCK_SERIALIZER.get();
-        }
     }
 }

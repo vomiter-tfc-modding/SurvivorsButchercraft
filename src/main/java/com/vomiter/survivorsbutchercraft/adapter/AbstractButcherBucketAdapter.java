@@ -1,26 +1,21 @@
 package com.vomiter.survivorsbutchercraft.adapter;
 
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
-import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.butchery.ButcherHelpers;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.common.recipe.CompoundChanceResult;
 import com.vomiter.survivorsbutchercraft.common.recipe.IButcherRecipe;
-import net.dries007.tfc.common.capabilities.Capabilities;
-import net.dries007.tfc.common.items.FluidContainerItem;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
@@ -61,15 +56,7 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
 
     abstract Optional<R> matchRecipe();
 
-    void progressRecipe(R recipe, Player player){
-        if (this.isFinalStage(recipe)) {
-            if(shouldDropOriginalLoot) dropLoot(getTool(recipe, getStage()), player);
-            finishRecipe();
-        } else {
-            if(shouldDropOriginalLoot) dropLoot(getTool(recipe, getStage()), player);
-            setStage(getStage() + 1);
-        }
-    }
+    abstract void progressRecipe(R recipe, Player player, boolean shouldDropOriginalLoot);
 
     abstract AnimatedRecipeItemUse getTool(R recipe, int stage);
 
@@ -79,7 +66,7 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
         ItemStack itemInQuestion;
         if(newItem.isEmpty()) itemInQuestion = old;
         else itemInQuestion = newItem;
-        Optional.ofNullable(Helpers.getCapability(itemInQuestion, Capabilities.FLUID_ITEM)).ifPresent(
+        Optional.ofNullable(itemInQuestion.getCapability(Capabilities.FluidHandler.ITEM)).ifPresent(
                 itemFluidAfter -> {
                     //if it's full, drop the bucket
                     if(ButcherHelpers.hasEnoughCapacity(itemFluidAfter, MIN_BUCKET_CAPACITY)){
@@ -112,12 +99,12 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
                 }
                 return shouldTackOver.get();
             }
-            else if(!butcheringTool.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent() && butcheringTool.copyWithCount(1).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()){
+            else if(Optional.ofNullable(butcheringTool.getCapability(Capabilities.FluidHandler.ITEM)).isEmpty() && Optional.ofNullable(butcheringTool.copyWithCount(1).getCapability(Capabilities.FluidHandler.ITEM)).isPresent()){
                 containerItem = butcheringTool.split(1);
                 setShouldReturnItem(true);
             }
             else containerItem = butcheringTool;
-            containerItem.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(
+            Optional.ofNullable(containerItem.getCapability(Capabilities.FluidHandler.ITEM)).ifPresent(
                     itemFluid -> ButcherHelpers.handleFluid(itemFluid, fluidStack.getAmount(), p, fluidStack, () -> {
                         itemFluid.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
                         ButcherHelpers.applyEffects(p);
@@ -133,24 +120,24 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
         }
     }
 
-    public void acceptFluidHandler(Player p, ItemStack butcheringTool, CallbackInfoReturnable<InteractionResult> cir){
+    public void acceptFluidHandler(Player p, ItemStack butcheringTool, CallbackInfoReturnable<ItemInteractionResult> cir){
         matchRecipe().ifPresent(recipe -> {
             if (recipe instanceof IButcherRecipe butcherRecipe){
                 var tool = butcherRecipe.getButcheringTool(getStage());
-                var delegate = Arrays.stream(tool.getItems()).filter(item -> item.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent())
+                var delegate = Arrays.stream(tool.getItems()).filter(item -> Optional.ofNullable(item.getCapability(Capabilities.FluidHandler.ITEM)).isPresent())
                         .findFirst()
                         .orElse(ItemStack.EMPTY);
                 boolean shouldTakeOver = false;
                 if(!delegate.isEmpty()){
-                    var delegateFluid = delegate.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
+                    var delegateFluid = Optional.ofNullable(delegate.getCapability(Capabilities.FluidHandler.ITEM))
                             .map(fluid -> fluid.getFluidInTank(0))
                             .orElse(FluidStack.EMPTY);
-                    if(butcheringTool.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
-                            .map(fluid -> fluid.getFluidInTank(0).isFluidEqual(delegateFluid)
+                    if(Optional.ofNullable(butcheringTool.getCapability(Capabilities.FluidHandler.ITEM))
+                            .map(fluid -> fluid.getFluidInTank(0).getFluid().isSame(delegateFluid.getFluid())
                                     && fluid.getFluidInTank(0).getAmount() >= delegateFluid.getAmount())
                             .orElse(false)
                     ){
-                        butcheringTool.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
+                        Optional.ofNullable(butcheringTool.getCapability(Capabilities.FluidHandler.ITEM))
                                 .ifPresent(fluid0 -> fluid0.drain(delegateFluid, IFluidHandler.FluidAction.EXECUTE));
                         shouldTakeOver = true;
                     }
@@ -161,19 +148,19 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
                         .findFirst()
                         .orElse(null);
                 if(fluidResult != null){
-                    var fluidStack = fluidResult.getFluid();
+                    FluidStack fluidStack = fluidResult.getFluid();
                     if(handleEmptyBucket(p, butcheringTool, fluidStack, recipe)){
                         shouldTakeOver = true;
                     };
                 }
 
                 if(shouldTakeOver){
-                    progressRecipe(recipe, p);
+                    progressRecipe(recipe, p, shouldDropOriginalLoot);
                     updateInventory();
                     if(butcherBlock instanceof IButcherBlock b){
                         b.sbtfcInterface$dropLoot(butcherRecipe.getButcheringToolStage(getStage()), p);
                     }
-                    cir.setReturnValue(InteractionResult.SUCCESS);
+                    cir.setReturnValue(ItemInteractionResult.SUCCESS);
                 }
             }
         });

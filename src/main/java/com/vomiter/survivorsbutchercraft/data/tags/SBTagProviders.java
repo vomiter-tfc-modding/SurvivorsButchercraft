@@ -8,7 +8,6 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.meat.MeatMap;
 import com.vomiter.survivorsbutchercraft.butchery.meat.Raw2CookedMap;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
-import com.vomiter.survivorsdelight.data.tags.SDTags;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.core.HolderLookup;
@@ -19,10 +18,10 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.labellum.mc.waterflasks.setup.Registration;
 
@@ -47,7 +46,7 @@ public class SBTagProviders {
     }
 
 
-    class BlockTags extends BlockTagsProvider{
+    class BlockTags extends BlockTagsProvider {
 
         public BlockTags() {
             super(output, lookupProvider, SurvivorsButchercraft.MODID, helper);
@@ -74,8 +73,8 @@ public class SBTagProviders {
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
 
-            for (Metal.Default metal : Metal.Default.values()) {
-                if(!metal.hasTools()) continue;
+            for (Metal metal : Metal.values()) {
+                if(!metal.allParts()) continue;
                 var metalTag = SBTags.Items.createTFC("metal_item/" + metal.getSerializedName());
                 var butcherMetalTag = SBTags.Items.create("metal_item/" + metal.getSerializedName());
 
@@ -107,7 +106,8 @@ public class SBTagProviders {
             tag(SBTags.Items.PRESERVATIVE)
                     .add(TFCItems.GLUE.get())
                     .addOptional(FLItems.BEESWAX.getId())
-                    .addOptionalTag(SDTags.ItemTags.FOOD_MODEL_COATING);
+                    .addOptionalTag(Helpers.id("survivorsdelight", "food_model_coating"))
+            ;
 
             SBItems.HIDES.values().forEach(h ->
                     tag(SBTags.Items.BUTCHER_SCRAPABLE).add(h.get())
@@ -148,7 +148,7 @@ public class SBTagProviders {
 
             tag(SBTags.Items.SKINNING_TOOLS)
                     .add(ButchercraftItems.SKINNING_KNIFE.get())
-                    .add(SBItems.SKINNING_KNIVES.values().stream().map(RegistryObject::get).toArray(Item[]::new))
+                    .add(SBItems.SKINNING_KNIVES.values().stream().map(DeferredHolder::get).toArray(Item[]::new))
                     .addOptionalTags(
                             SBTags.Items.createTFC("knives"),
                             SBTags.Items.createTFC("shears")
@@ -156,19 +156,19 @@ public class SBTagProviders {
 
             tag(SBTags.Items.BEHEADING_TOOLS)
                     .add(ButchercraftItems.BONE_SAW.get())
-                    .add(SBItems.BONESAWS.values().stream().map(RegistryObject::get).toArray(Item[]::new))
+                    .add(SBItems.BONESAWS.values().stream().map(DeferredHolder::get).toArray(Item[]::new))
                     .addOptionalTags(
                             SBTags.Items.createTFC("saws"),
                             SBTags.Items.createTFC("axes")
                     );
             tag(SBTags.Items.GUTTING_TOOLS)
                     .add(ButchercraftItems.GUT_KNIFE.get())
-                    .add(SBItems.GUT_KNIVES.values().stream().map(RegistryObject::get).toArray(Item[]::new))
+                    .add(SBItems.GUT_KNIVES.values().stream().map(DeferredHolder::get).toArray(Item[]::new))
                     .addOptionalTags(SBTags.Items.createTFC("knives"));
 
             tag(SBTags.Items.BUTCHERING_TOOLS)
                     .add(ButchercraftItems.BUTCHER_KNIFE.get())
-                    .add(SBItems.BUTCHER_KNIVES.values().stream().map(RegistryObject::get).toArray(Item[]::new))
+                    .add(SBItems.BUTCHER_KNIVES.values().stream().map(DeferredHolder::get).toArray(Item[]::new))
                     .addOptionalTags(
                             SBTags.Items.createTFC("knives"),
                             SBTags.Items.createTFC("axes")

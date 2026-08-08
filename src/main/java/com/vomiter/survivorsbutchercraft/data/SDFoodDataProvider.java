@@ -2,15 +2,18 @@ package com.vomiter.survivorsbutchercraft.data;
 
 import com.google.common.hash.HashCode;
 import com.google.gson.*;
+import com.mojang.serialization.JsonOps;
 import com.vomiter.survivorsbutchercraft.Helpers;
-import net.dries007.tfc.common.capabilities.food.FoodData;
+import net.dries007.tfc.common.component.food.FoodData;
+import net.dries007.tfc.common.component.food.Nutrient;
 import net.dries007.tfc.common.items.Food;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -43,6 +46,13 @@ public class SDFoodDataProvider implements DataProvider {
         this.name = name;
     }
 
+    public static FoodData readJson(JsonObject json) {
+        return FoodData.CODEC.parse(JsonOps.INSTANCE, json)
+                .resultOrPartial(msg -> {
+                    System.err.println("[FoodData] parse error: " + msg);
+                })
+                .orElse(FoodData.EMPTY);
+    }
 
     /** 使用單一 item 作為 ingredient（最常見情境） */
     public SDFoodDataProvider addStatic(String id, Item item,
@@ -67,9 +77,9 @@ public class SDFoodDataProvider implements DataProvider {
     private static final Gson PRETTY = new GsonBuilder()
             .setPrettyPrinting()
             .registerTypeAdapter(
-                Double.class, (JsonSerializer<Double>)
-                    (src, type, ctx) ->
-                        new JsonPrimitive(Math.round(src * 10.0) / 10.0)
+                    Double.class, (JsonSerializer<Double>)
+                            (src, type, ctx) ->
+                                    new JsonPrimitive(Math.round(src * 10.0) / 10.0)
             )
             .disableHtmlEscaping()
             .create();
@@ -117,13 +127,13 @@ public class SDFoodDataProvider implements DataProvider {
     }
 
     private Path outputPath(ResourceLocation id) {
-        // data/<modid>/tfc/food_items/<path>.json
+        // data/<modid>/tfc/food/<path>.json
         return packOutput.getOutputFolder()
-                .resolve("data/" + id.getNamespace() + "/tfc/food_items/" + id.getPath() + ".json");
+                .resolve("data/" + id.getNamespace() + "/tfc/food/" + id.getPath() + ".json");
     }
 
     private static JsonObject ingredientOf(Item item) {
-        ResourceLocation key = ForgeRegistries.ITEMS.getKey(item);
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item);
         if (key == null) throw new IllegalArgumentException("Unregistered item: " + item);
         JsonObject obj = new JsonObject();
         obj.addProperty("item", key.toString());
@@ -149,10 +159,10 @@ public class SDFoodDataProvider implements DataProvider {
 
     public FoodData readTfcFoodJson(String path) {
         final ResourceLocation rl = Helpers.id("tfc", path);
-        final String cpPath = "data/" + rl.getNamespace() + "/tfc/food_items/" + rl.getPath() + ".json";
+        final String cpPath = "data/" + rl.getNamespace() + "/tfc/food/" + rl.getPath() + ".json";
         InputStream in = getClass().getClassLoader().getResourceAsStream(cpPath);
         Reader r = new InputStreamReader(in, StandardCharsets.UTF_8);
-        return FoodData.read(JsonParser.parseReader(r).getAsJsonObject());
+        return readJson(JsonParser.parseReader(r).getAsJsonObject());
     }
 
     public Builder newBuilder(String id) { return new Builder(this, id); }
@@ -188,11 +198,11 @@ public class SDFoodDataProvider implements DataProvider {
             this.hunger = data.hunger();
             this.saturation = data.saturation();
             this.water = data.water();
-            this.grain = data.grain();
-            this.fruit = data.fruit();
-            this.vegetables = data.vegetables();
-            this.protein = data.protein();
-            this.dairy = data.dairy();
+            this.grain = data.nutrient(Nutrient.GRAIN);
+            this.fruit = data.nutrient(Nutrient.FRUIT);
+            this.vegetables = data.nutrient(Nutrient.VEGETABLES);
+            this.protein = data.nutrient(Nutrient.PROTEIN);
+            this.dairy = data.nutrient(Nutrient.DAIRY);
             this.decay = data.decayModifier();
             return this;
         }
@@ -206,11 +216,11 @@ public class SDFoodDataProvider implements DataProvider {
             this.hunger = Math.round(data.hunger() / (float) n);
             this.saturation = data.saturation() / n;
             this.water = data.water() / n;
-            this.grain = data.grain() / n;
-            this.fruit = data.fruit() / n;
-            this.vegetables = data.vegetables() / n;
-            this.protein = data.protein() / n;
-            this.dairy = data.dairy() / n;
+            this.grain = data.nutrient(Nutrient.GRAIN) / n;
+            this.fruit = data.nutrient(Nutrient.FRUIT) / n;
+            this.vegetables = data.nutrient(Nutrient.VEGETABLES) / n;
+            this.protein = data.nutrient(Nutrient.PROTEIN) / n;
+            this.dairy = data.nutrient(Nutrient.DAIRY) / n;
             this.decay = data.decayModifier();
             return this;
         }
@@ -225,11 +235,11 @@ public class SDFoodDataProvider implements DataProvider {
             this.hunger = data.hunger() * n;
             this.saturation = data.saturation() * n;
             this.water = data.water() * n;
-            this.grain = data.grain() * n;
-            this.fruit = data.fruit() * n;
-            this.vegetables = data.vegetables() * n;
-            this.protein = data.protein() * n;
-            this.dairy = data.dairy() * n;
+            this.grain = data.nutrient(Nutrient.GRAIN) * n;
+            this.fruit = data.nutrient(Nutrient.FRUIT) * n;
+            this.vegetables = data.nutrient(Nutrient.VEGETABLES) * n;
+            this.protein = data.nutrient(Nutrient.PROTEIN) * n;
+            this.dairy = data.nutrient(Nutrient.DAIRY) * n;
             this.decay = data.decayModifier();
             return this;
         }
@@ -263,6 +273,12 @@ public class SDFoodDataProvider implements DataProvider {
             this.ingredient = ingredientJson;
             return this;
         }
+
+        public Builder ingredient(Ingredient ingredient) {
+            this.ingredient = Ingredient.CODEC.encodeStart(JsonOps.INSTANCE, ingredient).getOrThrow();
+            return this;
+        }
+
 
         public Builder setHunger(int hunger) {
             this.hunger = hunger;
@@ -354,11 +370,12 @@ public class SDFoodDataProvider implements DataProvider {
             if ((double) factor < 0) throw new IllegalArgumentException("factor must be >= 0");
 
             // 1) 五大營養：乘以 factor 後相加
-            this.grain       += data.grain()       * (double) factor;
-            this.fruit       += data.fruit()       * (double) factor;
-            this.vegetables  += data.vegetables()  * (double) factor;
-            this.protein     += data.protein()     * (double) factor;
-            this.dairy       += data.dairy()       * (double) factor;
+
+            this.grain += data.nutrient(Nutrient.GRAIN) * factor;
+            this.fruit += data.nutrient(Nutrient.FRUIT) * factor;
+            this.vegetables += data.nutrient(Nutrient.VEGETABLES) * factor;
+            this.protein += data.nutrient(Nutrient.PROTEIN) * factor;
+            this.dairy += data.nutrient(Nutrient.DAIRY) * factor;
 
             // 2) 飽食與含水：直接相加（不乘以 factor）
             this.saturation  += data.saturation();

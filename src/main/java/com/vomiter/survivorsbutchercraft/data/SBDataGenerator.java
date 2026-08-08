@@ -1,13 +1,12 @@
 package com.vomiter.survivorsbutchercraft.data;
 
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
-import com.vomiter.survivorsbutchercraft.data.bbmodel.BbmodelExportProvider;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTagProviders;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,14 +17,13 @@ public class SBDataGenerator {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        generator.addProvider(true, new SBRecipesProvider(output));
+        generator.addProvider(true, new SBRecipesProvider(output, lookupProvider));
         generator.addProvider(true, new SBBlockStatesProvider(output, existingFileHelper));
-        generator.addProvider(true, new SBLootTableProvider(output));
+        generator.addProvider(true, new SBLootTableProvider(output, lookupProvider));
         new SBTagProviders(event);
         var foodProvider = new SDFoodDataProvider(output, SurvivorsButchercraft.MODID);
         SBFoodData.saveFoodData(foodProvider);
         generator.addProvider(true, foodProvider);
-        generator.addProvider(true, new BbmodelExportProvider(output));
         generator.addProvider(true, new SBLangProvider(output));
         generator.addProvider(true, new SBItemModelProvider(output, existingFileHelper));
     }

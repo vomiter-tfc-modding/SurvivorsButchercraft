@@ -1,0 +1,12 @@
+{
+  "type":"tfc:heating",
+  "ingredient":
+    {"tag": "survivorsbutchercraft:metal_item/black_steel"},
+  "result_fluid":
+    {
+      "id":"tfc:metal/black_steel",
+      "amount":100
+    },
+  "temperature":1485,
+  "use_durability":true
+}

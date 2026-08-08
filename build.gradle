@@ -1,14 +1,20 @@
 plugins {
-    id 'eclipse'
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.120'
     id 'idea'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'com.vomiter.neoforge-base'
     id 'com.vomiter.langmerge'
 }
 
-langMerge {
+vomiterNeoForge {
     modId = mod_id
 }
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
 
 version = mod_version
 group = mod_group_id
@@ -17,94 +23,37 @@ base {
     archivesName = mod_id
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+// Mojang ships Java 21 to end users in 1.21.1, so mods should target Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-//println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-
-minecraft {
-    mappings channel: mapping_channel, version: mapping_version
-    copyIdeResources = true
-}
-
-apply from: 'gradle/runs.gradle'
-apply from: 'gradle/mixin.gradle'
-apply from: 'gradle/publishing-local.gradle'
-
-repositories {
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-
-    maven { url "https://maven.blamejared.com" }
-}
+apply from: 'gradle/neo-forge-runs.gradle'
+apply from: 'gradle/tfc-dep.gradle'
 apply from: 'gradle/optional-dep.gradle'
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    annotationProcessor("org.spongepowered:mixin:${mixin_version}:processor")
+    implementation "curse.maven:farmers-delight-398521:8007613"
+    implementation "curse.maven:water-flasks-354353:8264081"
 
-    annotationProcessor "io.github.llamalad7:mixinextras-common:0.4.1"
-    compileOnly       "io.github.llamalad7:mixinextras-common:0.4.1"
-    implementation    "io.github.llamalad7:mixinextras-forge:0.4.1"
-    jarJar            "io.github.llamalad7:mixinextras-forge:[0.4.1,)"
-
-    implementation fg.deobf("curse.maven:terrafirmacraft-302973:6835820")
-    implementation fg.deobf("curse.maven:patchouli-306770:4636277")
-    implementation fg.deobf("curse.maven:survivors-abilities-1354890:8491392")
-    implementation fg.deobf("curse.maven:survivors-delight-1332913:8353151")
-    implementation fg.deobf("curse.maven:butchercraft-265715:6058842")
 }
 
-
-def modProps = [
-        minecraft_version      : minecraft_version,
-        minecraft_version_range: minecraft_version_range,
-        forge_version          : forge_version,
-        forge_version_range    : forge_version_range,
-        loader_version_range   : loader_version_range,
-        mod_id                 : mod_id,
-        mod_name               : mod_name,
-        mod_license            : mod_license,
-        mod_version            : mod_version,
-        mod_authors            : mod_authors,
-        mod_description        : mod_description,
-]
-
-tasks.named('processResources', ProcessResources).configure {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    inputs.properties(modProps)
-
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand modProps + [project: project]
+// Example configuration to allow publishing using the maven-publish plugin
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
     }
 }
 
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-                'Specification-Title'    : modProps.mod_id,
-                'Implementation-Title'   : project.name,
-                'Implementation-Version' : project.jar.archiveVersion,
-                'Implementation-Vendor'  : modProps.mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'MixinConfigs'           : "${modProps.mod_id}.mixins.json"
-        ])
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/generated/resources'
+        }
     }
-    finalizedBy 'reobfJar'
 }
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-}
-
-jarJar.enable()
-reobf {
-    create("jarJar")
-}
-tasks.named('jarJar').configure { finalizedBy 'reobfJarJar' }
-
-

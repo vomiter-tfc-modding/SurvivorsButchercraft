@@ -11,37 +11,37 @@ import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.items.ToolItem;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.*;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.EnumMap;
 import java.util.Map;
 
 public class SBItems {
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, SurvivorsButchercraft.MODID);
-    public static final Map<Carcass, RegistryObject<Item>> CARCASSES = new EnumMap<>(Carcass.class);
-    public static final Map<Carcass, RegistryObject<Item>> HIDES = new EnumMap<>(Carcass.class);
-    public static final Map<Carcass, RegistryObject<Item>> HEADS = new EnumMap<>(Carcass.class);
-    public static final Map<Carcass, RegistryObject<Item>> HEADS_MALE = new EnumMap<>(Carcass.class);
-    public static final Map<Carcass, RegistryObject<Item>> SKULLS = new EnumMap<>(Carcass.class);
-    public static final Map<Carcass, RegistryObject<Item>> SKULLS_MALE = new EnumMap<>(Carcass.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> BUTCHER_KNIVES = new EnumMap<>(Metal.Default.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> BUTCHER_KNIFE_HEADS = new EnumMap<>(Metal.Default.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> SKINNING_KNIVES = new EnumMap<>(Metal.Default.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> SKINNING_KNIFE_HEADS = new EnumMap<>(Metal.Default.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> BONESAWS = new EnumMap<>(Metal.Default.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> BONESAW_HEADS = new EnumMap<>(Metal.Default.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> GUT_KNIVES = new EnumMap<>(Metal.Default.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> GUT_KNIFE_HEADS = new EnumMap<>(Metal.Default.class);
-    public static final Map<Metal.Default, RegistryObject<Item>> MEAT_HOOKS = new EnumMap<>(Metal.Default.class);
+            DeferredRegister.create(BuiltInRegistries.ITEM, SurvivorsButchercraft.MODID);
+    public static final Map<Carcass, DeferredHolder<Item, ? extends Item>> CARCASSES = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, DeferredHolder<Item, ? extends Item>> HIDES = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, DeferredHolder<Item, ? extends Item>> HEADS = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, DeferredHolder<Item, ? extends Item>> HEADS_MALE = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, DeferredHolder<Item, ? extends Item>> SKULLS = new EnumMap<>(Carcass.class);
+    public static final Map<Carcass, DeferredHolder<Item, ? extends Item>> SKULLS_MALE = new EnumMap<>(Carcass.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> BUTCHER_KNIVES = new EnumMap<>(Metal.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> BUTCHER_KNIFE_HEADS = new EnumMap<>(Metal.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> SKINNING_KNIVES = new EnumMap<>(Metal.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> SKINNING_KNIFE_HEADS = new EnumMap<>(Metal.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> BONESAWS = new EnumMap<>(Metal.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> BONESAW_HEADS = new EnumMap<>(Metal.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> GUT_KNIVES = new EnumMap<>(Metal.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> GUT_KNIFE_HEADS = new EnumMap<>(Metal.class);
+    public static final Map<Metal, DeferredHolder<Item, ? extends Item>> MEAT_HOOKS = new EnumMap<>(Metal.class);
 
 
     static {
-        for (Metal.Default metal : Metal.Default.values()) {
-            if(!metal.hasTools()) continue;
+        for (Metal metal : Metal.values()) {
+            if(!metal.allParts()) continue;
             MEAT_HOOKS.put(
                     metal,
                     ITEMS.register(
@@ -53,7 +53,7 @@ public class SBItems {
                     () -> {
                         try{
                             ThreadLocalFlags.tierThreadLocal.set(metal.toolTier());
-                            return new Item(new Item.Properties().rarity(metal.getRarity()));
+                            return new Item(new Item.Properties().rarity(metal.rarity()));
                         } finally {
                             ThreadLocalFlags.tierThreadLocal.remove();
                         }
@@ -65,7 +65,7 @@ public class SBItems {
                         ThreadLocalFlags.tierThreadLocal.set(metal.toolTier());
                         return new  ButcherKnifeItem(
                                 new Item.Properties()
-                                        .rarity(metal.getRarity())
+                                        .rarity(metal.rarity())
                                         .durability(metal.toolTier().getUses())
                         );
                     }
@@ -75,13 +75,12 @@ public class SBItems {
             }));
 
             SKINNING_KNIFE_HEADS.put(metal, ITEMS.register("metal/skinning_knife_head/" + metal.getSerializedName(),
-                    () -> new Item(new Item.Properties().rarity(metal.getRarity()))));
+                    () -> new Item(new Item.Properties().rarity(metal.rarity()))));
             SKINNING_KNIVES.put(metal, ITEMS.register("metal/skinning_knife/" + metal.getSerializedName(),
                     () -> new SwordItem(
                             metal.toolTier(),
-                            0,0,
                             new Item.Properties()
-                                    .rarity(metal.getRarity())
+                                    .rarity(metal.rarity())
                                     .durability(metal.toolTier().getUses())
                     )));
 
@@ -91,7 +90,7 @@ public class SBItems {
                             "metal/bonesaw_head/" + metal.getSerializedName(),
                             () -> new Item(
                                     new Item.Properties()
-                                            .rarity(metal.getRarity())
+                                            .rarity(metal.rarity())
                             )
                     )
             );
@@ -103,11 +102,10 @@ public class SBItems {
                             () ->
                                     new AxeItem(
                                             metal.toolTier(),
-                                            ToolItem.calculateVanillaAttackDamage(0.5F, metal.toolTier()),
-                                            -3.0F,
-                                            Metal.ItemType.properties(metal))
+                                            (new Item.Properties()).rarity(metal.rarity())
+                                                    .attributes(ToolItem.productAttributes(metal.toolTier(), 0.5f, -3.0f))
                     )
-            );
+            ));
 
             GUT_KNIFE_HEADS.put(
                     metal,
@@ -115,7 +113,7 @@ public class SBItems {
                             "metal/gut_knife_head/" + metal.getSerializedName(),
                             () -> new Item(
                                     new Item.Properties()
-                                            .rarity(metal.getRarity())
+                                            .rarity(metal.rarity())
                             )
                     )
             );
@@ -125,10 +123,10 @@ public class SBItems {
                     ITEMS.register(
                             "metal/gut_knife/" + metal.getSerializedName(),
                             () -> new ToolItem(metal.toolTier(),
-                                    ToolItem.calculateVanillaAttackDamage(0.6F, metal.toolTier()),
-                                    -2.0F,
                                     TFCTags.Blocks.MINEABLE_WITH_KNIFE,
-                                    Metal.ItemType.properties(metal))
+                                    (new Item.Properties()).rarity(metal.rarity())
+                                            .attributes(ToolItem.productAttributes(metal.toolTier(), 0.6f, -2.0f))
+                            )
                     )
             );
         }

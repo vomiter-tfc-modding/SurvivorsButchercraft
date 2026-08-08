@@ -20,13 +20,15 @@
     "RecipeManagerMixin",
     "compat.ButcherBlockRecipeCategoryMixin",
     "compat.HookRecipeCategoryMixin",
+    "debug.MeatHookBlockDebugMixin",
+    "debug.MeatHookBlockEntityDebugMixin",
     "effect.BloodTrailMixin",
     "effect.StinkyMixin"
   ],
   "client": [
     "client.BakedModelRenderableMixin",
-    "client.RenderUtilMixin",
-    "client.MeatHookRendererMixin"
+    "client.MeatHookRendererMixin",
+    "client.RenderUtilMixin"
   ],
   "injectors": {
     "defaultRequire": 1

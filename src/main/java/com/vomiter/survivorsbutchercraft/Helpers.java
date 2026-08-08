@@ -22,7 +22,7 @@ public class Helpers {
         ItemStack remaining = stack.copy();
 
         for (ItemStack existing : list) {
-            if (!ItemStack.isSameItemSameTags(existing, remaining)) {
+            if (!ItemStack.isSameItemSameComponents(existing, remaining)) {
                 continue;
             }
 

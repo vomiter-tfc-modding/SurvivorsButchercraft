@@ -7,23 +7,8 @@ repositories{
 }
 
 dependencies {
-    compileOnly fg.deobf("curse.maven:firmalife-453394:6817407")
-    runtimeOnly fg.deobf("curse.maven:firmalife-453394:6817407")
-
-    compileOnly fg.deobf("curse.maven:jade-324717:6855440")
-    runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
-
-    compileOnly fg.deobf("curse.maven:tfc-tng-rosia-1327333:6890141")
-
-    compileOnly fg.deobf("curse.maven:water-flasks-354353:7056478")
-    runtimeOnly fg.deobf("curse.maven:water-flasks-354353:7056478")
-
-
-    compileOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
-    runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
-
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    // at runtime, use the full JEI jar for Forge
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    implementation "curse.maven:firmalife-453394:8364676"
+    implementation "curse.maven:jade-324717:7545219"
+    compileOnly "curse.maven:jei-238222:7420587"
+    runtimeOnly "curse.maven:jei-238222:7420587"
 }

@@ -16,16 +16,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.Optional;
 
 public class SBClientForgeEvents {
     public static void init(IEventBus bus){
-        MinecraftForge.EVENT_BUS.addListener(SBClientForgeEvents::onRenderGameOverlayPost);
+        NeoForge.EVENT_BUS.addListener(SBClientForgeEvents::onRenderGameOverlayPost);
     }
 
     private static void drawCenteredText(Minecraft minecraft, GuiGraphics graphics, Component text, int x, int y)
@@ -52,12 +52,11 @@ public class SBClientForgeEvents {
         return Ingredient.EMPTY;
     }
 
-    private static void renderButcherToolToolTip(Item idealItem, ItemStack mainHandItem, RenderGuiOverlayEvent.Post event){
-        var window = event.getWindow();
+    private static void renderButcherToolToolTip(Item idealItem, ItemStack mainHandItem, RenderGuiLayerEvent.Post event){
         final GuiGraphics stack = event.getGuiGraphics();
         final Minecraft minecraft = Minecraft.getInstance();
-        int x = window.getGuiScaledWidth() / 2 + 3;
-        int y = window.getGuiScaledHeight() / 2 + 8;
+        int x = stack.guiWidth() / 2 + 3;
+        int y = stack.guiHeight() / 2 + 8;
         int paddingX = 4;
         int paddingY = 3;
 
@@ -128,7 +127,7 @@ public class SBClientForgeEvents {
     }
 
 
-    private static void renderMeatHookToolTip(Player player, IButcherBlock meatHookBlockEntity, RenderGuiOverlayEvent.Post event){
+    private static void renderMeatHookToolTip(Player player, IButcherBlock meatHookBlockEntity, RenderGuiLayerEvent.Post event){
         var idealItem = Optional.ofNullable(ToolAlternative.getIdealTool(meatHookBlockEntity.sbtfcInterface$getCurTool())).orElse(Items.AIR);
         if (idealItem.getDefaultInstance().isEmpty()) return;
         if(idealItem instanceof BucketItem) return;
@@ -141,15 +140,14 @@ public class SBClientForgeEvents {
         renderButcherToolToolTip(idealItem, mainHandItem, event);
     }
 
-    public static void onRenderGameOverlayPost(RenderGuiOverlayEvent.Post event){
+    public static void onRenderGameOverlayPost(RenderGuiLayerEvent.Post event){
         final Minecraft minecraft = Minecraft.getInstance();
         final Player player = minecraft.player;
         if (player != null)
         {
             if (
-                    event.getOverlay() == VanillaGuiOverlay.CROSSHAIR.type()
-                            && minecraft.screen == null
-                            && (! player.isShiftKeyDown())
+                    minecraft.screen == null
+                    && (! player.isShiftKeyDown())
             ) {
                 final BlockPos targetedPos = ClientHelpers.getTargetedPos();
                 if(minecraft.level == null) return;

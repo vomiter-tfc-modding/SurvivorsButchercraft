@@ -7,8 +7,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Locale;
 
@@ -25,7 +25,7 @@ public class SBLangProvider extends LanguageProvider {
     }
 
     private void addBlocks() {
-        for (RegistryObject<Block> entry : SBBlocks.BLOCKS.getEntries()) {
+        for (DeferredHolder<Block, ? extends Block> entry : SBBlocks.BLOCKS.getEntries()) {
             Block block = entry.get();
             String path = entry.getId().getPath();
             add(block, toDisplayNameTFCLike(path));
@@ -33,7 +33,7 @@ public class SBLangProvider extends LanguageProvider {
     }
 
     private void addItems() {
-        for (RegistryObject<Item> entry : SBItems.ITEMS.getEntries()) {
+        for (DeferredHolder<Item, ? extends Item> entry : SBItems.ITEMS.getEntries()) {
             Item item = entry.get();
 
             // BlockItem 直接吃 block translation key。

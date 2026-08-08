@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Mixin(value = MeatHookRecipeCategory.class, remap = false)
 public class HookRecipeCategoryMixin {
+    /*
     @Inject(method = "setRecipe(Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Lcom/lance5057/butchercraft/workstations/hook/HookRecipe;Lmezz/jei/api/recipe/IFocusGroup;)V",
             at = @At("TAIL"),
     require = 0)
@@ -80,4 +81,6 @@ public class HookRecipeCategoryMixin {
         }
 
     }
+
+     */
 }

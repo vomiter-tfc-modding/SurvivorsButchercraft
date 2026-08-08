@@ -1,27 +1,129 @@
 package com.vomiter.survivorsbutchercraft.common.recipe;
 
-import com.google.gson.*;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.TagParser;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistries;
-import vectorwing.farmersdelight.common.Configuration;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class CompoundChanceResult {
     public static final CompoundChanceResult EMPTY =
-            new CompoundChanceResult(ItemStack.EMPTY, 0, 0, 0.0F);
+            new CompoundChanceResult(
+                    ItemStack.EMPTY,
+                    FluidStack.EMPTY,
+                    0,
+                    0,
+                    0.0F
+            );
 
-    private static final Gson GSON = new GsonBuilder()
-            .setPrettyPrinting()
-            .disableHtmlEscaping()
-            .create();
+    private static final Codec<CompoundChanceResult> ITEM_CODEC =
+            RecordCodecBuilder.create(instance -> instance.group(
+                    ItemStack.SINGLE_ITEM_CODEC
+                            .fieldOf("item")
+                            .forGetter(CompoundChanceResult::getStack),
+
+                    Codec.INT
+                            .optionalFieldOf("min", 1)
+                            .forGetter(CompoundChanceResult::getMinium),
+
+                    Codec.INT
+                            .optionalFieldOf("max", 1)
+                            .forGetter(CompoundChanceResult::getMaximum),
+
+                    Codec.FLOAT
+                            .optionalFieldOf("chance", 1.0F)
+                            .forGetter(CompoundChanceResult::getChance)
+            ).apply(instance, CompoundChanceResult::createItemResult));
+
+    private static final Codec<CompoundChanceResult> FLUID_CODEC =
+            FluidStack.CODEC
+                    .fieldOf("fluid")
+                    .xmap(
+                            CompoundChanceResult::new,
+                            CompoundChanceResult::getFluid
+                    )
+                    .codec();
+
+    /**
+     * JSON／datapack codec。
+     *
+     * 物品輸出格式：
+     * {
+     *   "item": {
+     *     "id": "minecraft:beef"
+     *   },
+     *   "min": 1,
+     *   "max": 4,
+     *   "chance": 0.5
+     * }
+     *
+     * 流體輸出格式：
+     * {
+     *   "fluid": {
+     *     "id": "minecraft:water",
+     *     "amount": 1000
+     *   }
+     * }
+     */
+    private static final Codec<CompoundChanceResult> EMPTY_CODEC =
+            Codec.BOOL
+                    .fieldOf("empty")
+                    .codec()
+                    .comapFlatMap(
+                            empty -> empty
+                                    ? DataResult.success(EMPTY)
+                                    : DataResult.error(
+                                    () -> "\"empty\" must be true"
+                            ),
+                            result -> true
+                    );
+
+    public static final Codec<CompoundChanceResult> CODEC =
+            Codec.either(
+                            ITEM_CODEC,
+                            Codec.either(
+                                    FLUID_CODEC,
+                                    EMPTY_CODEC
+                            )
+                    )
+                    .xmap(
+                            either -> either.map(
+                                    item -> item,
+                                    fluidOrEmpty -> fluidOrEmpty.map(
+                                            fluid -> fluid,
+                                            empty -> empty
+                                    )
+                            ),
+                            result -> {
+                                if (result.hasItem()) {
+                                    return Either.left(result);
+                                }
+
+                                if (result.hasFluid()) {
+                                    return Either.right(
+                                            Either.left(result)
+                                    );
+                                }
+
+                                return Either.right(
+                                        Either.right(result)
+                                );
+                            }
+                    )
+                    .validate(CompoundChanceResult::validate);
+
+    public static final StreamCodec<
+            RegistryFriendlyByteBuf,
+            CompoundChanceResult
+            > STREAM_CODEC = StreamCodec.of(
+            CompoundChanceResult::encode,
+            CompoundChanceResult::decode
+    );
 
     private final ItemStack stack;
     private final FluidStack fluid;
@@ -38,7 +140,11 @@ public class CompoundChanceResult {
         );
     }
 
-    public CompoundChanceResult(Item item, int count, float chance) {
+    public CompoundChanceResult(
+            Item item,
+            int count,
+            float chance
+    ) {
         this(
                 item.getDefaultInstance(),
                 count,
@@ -70,13 +176,10 @@ public class CompoundChanceResult {
         );
     }
 
-    /**
-     * 每一個可能輸出單位各自以 chance 骰一次。
-     *
-     * 例如 stack count 為 4、chance 為 0.5：
-     * 最終可能輸出 0～4 個。
-     */
-    public CompoundChanceResult(ItemStack stack, float chance) {
+    public CompoundChanceResult(
+            ItemStack stack,
+            float chance
+    ) {
         this(
                 stack,
                 0,
@@ -91,12 +194,14 @@ public class CompoundChanceResult {
             int maximum,
             float chance
     ) {
-        validateItemResult(minium, maximum, chance);
+        validateItemResult(
+                stack,
+                minium,
+                maximum,
+                chance
+        );
 
-        this.stack = stack.isEmpty()
-                ? ItemStack.EMPTY
-                : stack.copyWithCount(1);
-
+        this.stack = stack.copyWithCount(1);
         this.fluid = FluidStack.EMPTY;
         this.minium = minium;
         this.maximum = maximum;
@@ -111,38 +216,119 @@ public class CompoundChanceResult {
      */
     public CompoundChanceResult(FluidStack fluid) {
         if (fluid.isEmpty()) {
-            this.fluid = FluidStack.EMPTY;
-        } else {
-            this.fluid = fluid.copy();
+            throw new IllegalArgumentException(
+                    "Fluid result cannot be empty"
+            );
         }
 
         this.stack = ItemStack.EMPTY;
+        this.fluid = fluid.copy();
         this.minium = 0;
         this.maximum = 0;
         this.chance = 0.0F;
     }
 
-    private static void validateItemResult(
+    private CompoundChanceResult(
+            ItemStack stack,
+            FluidStack fluid,
             int minium,
             int maximum,
             float chance
     ) {
+        this.stack = stack;
+        this.fluid = fluid;
+        this.minium = minium;
+        this.maximum = maximum;
+        this.chance = chance;
+    }
+
+    private static CompoundChanceResult createItemResult(
+            ItemStack stack,
+            int minium,
+            int maximum,
+            float chance
+    ) {
+        return new CompoundChanceResult(
+                stack,
+                minium,
+                maximum,
+                chance
+        );
+    }
+
+    private static DataResult<CompoundChanceResult> validate(
+            CompoundChanceResult result
+    ) {
+        if (result.hasFluid()) {
+            if (result.fluid.getAmount() <= 0) {
+                return DataResult.error(
+                        () -> "Fluid amount must be greater than zero"
+                );
+            }
+
+            return DataResult.success(result);
+        }
+
+        if (result.minium < 0) {
+            return DataResult.error(
+                    () -> "Minimum output cannot be negative: "
+                            + result.minium
+            );
+        }
+
+        if (result.maximum < result.minium) {
+            return DataResult.error(
+                    () -> "Maximum output cannot be smaller than "
+                            + "minimum output: "
+                            + result.maximum
+                            + " < "
+                            + result.minium
+            );
+        }
+
+        if (result.chance < 0.0F || result.chance > 1.0F) {
+            return DataResult.error(
+                    () -> "Chance must be between 0 and 1: "
+                            + result.chance
+            );
+        }
+
+        return DataResult.success(result);
+    }
+
+    private static void validateItemResult(
+            ItemStack stack,
+            int minium,
+            int maximum,
+            float chance
+    ) {
+        if (stack.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Item result cannot be empty"
+            );
+        }
+
         if (minium < 0) {
             throw new IllegalArgumentException(
-                    "Minimum output cannot be negative: " + minium
+                    "Minimum output cannot be negative: "
+                            + minium
             );
         }
 
         if (maximum < minium) {
             throw new IllegalArgumentException(
-                    "Maximum output cannot be smaller than minimum output: "
-                            + maximum + " < " + minium
+                    "Maximum output cannot be smaller than "
+                            + "minimum output: "
+                            + maximum
+                            + " < "
+                            + minium
             );
         }
 
         if (chance < 0.0F || chance > 1.0F) {
             throw new IllegalArgumentException(
-                    "Chance must be between 0 and 1: " + chance
+                    "Chance must be between 0 and 1: "
+                            + chance
             );
         }
     }
@@ -195,15 +381,18 @@ public class CompoundChanceResult {
         int outputAmount = maximum;
 
         double fortuneBonus =
-                Configuration.CUTTING_BOARD_FORTUNE_BONUS.get()
-                        * (double) fortuneLevel;
+                0.1D * fortuneLevel;
 
         double effectiveChance = Math.min(
                 1.0D,
                 chance + fortuneBonus
         );
 
-        for (int roll = 0; roll < maximum - minium; ++roll) {
+        for (
+                int roll = 0;
+                roll < maximum - minium;
+                ++roll
+        ) {
             if (random.nextFloat() > effectiveChance) {
                 --outputAmount;
             }
@@ -213,267 +402,62 @@ public class CompoundChanceResult {
             return ItemStack.EMPTY;
         }
 
-        ItemStack output = stack.copy();
-        output.setCount(outputAmount);
-        return output;
+        return stack.copyWithCount(outputAmount);
     }
 
-    public JsonElement serialize() {
-        JsonObject json = new JsonObject();
-
-        if (hasFluid()) {
-            serializeFluid(json);
-        } else {
-            serializeItem(json);
-        }
-
-        return json;
-    }
-
-    private void serializeItem(JsonObject json) {
-        ResourceLocation itemId =
-                ForgeRegistries.ITEMS.getKey(stack.getItem());
-
-        if (itemId == null) {
-            throw new IllegalStateException(
-                    "Cannot serialize unregistered item: " + stack
-            );
-        }
-
-        json.addProperty("item", itemId.toString());
-        json.addProperty("max", maximum);
-        json.addProperty("min", minium);
-
-        if (stack.hasTag()) {
-            json.add(
-                    "nbt",
-                    JsonParser.parseString(stack.getTag().toString())
-            );
-        }
-
-        if (chance != 1.0F) {
-            json.addProperty("chance", chance);
-        }
-    }
-
-    private void serializeFluid(JsonObject json) {
-        ResourceLocation fluidId =
-                ForgeRegistries.FLUIDS.getKey(fluid.getFluid());
-
-        if (fluidId == null) {
-            throw new IllegalStateException(
-                    "Cannot serialize unregistered fluid: " + fluid
-            );
-        }
-
-        json.addProperty("fluid", fluidId.toString());
-        json.addProperty("amount", fluid.getAmount());
-
-        if (fluid.hasTag()) {
-            json.add(
-                    "nbt",
-                    JsonParser.parseString(fluid.getTag().toString())
-            );
-        }
-    }
-
-    public static CompoundChanceResult deserialize(JsonElement element) {
-        if (!element.isJsonObject()) {
-            throw new JsonSyntaxException(
-                    "Compound result must be a JSON object"
-            );
-        }
-
-        JsonObject json = element.getAsJsonObject();
-
-        boolean hasItem = json.has("item");
-        boolean hasFluid = json.has("fluid");
-
-        if (hasItem && hasFluid) {
-            throw new JsonSyntaxException(
-                    "Compound result cannot contain both 'item' and 'fluid'"
-            );
-        }
-
-        if (!hasItem && !hasFluid) {
-            throw new JsonSyntaxException(
-                    "Compound result must contain either 'item' or 'fluid'"
-            );
-        }
-
-        if (hasFluid) {
-            return deserializeFluid(json);
-        }
-
-        return deserializeItem(json);
-    }
-
-    private static CompoundChanceResult deserializeItem(
-            JsonObject json
+    private static void encode(
+            RegistryFriendlyByteBuf buffer,
+            CompoundChanceResult result
     ) {
-        String itemIdString =
-                GsonHelper.getAsString(json, "item");
+        buffer.writeBoolean(result.hasFluid());
 
-        ResourceLocation itemId =
-                ResourceLocation.tryParse(itemIdString);
-
-        if (itemId == null) {
-            throw new JsonSyntaxException(
-                    "Invalid item id: " + itemIdString
+        if (result.hasFluid()) {
+            FluidStack.STREAM_CODEC.encode(
+                    buffer,
+                    result.fluid
             );
+            return;
         }
-
-        if (!ForgeRegistries.ITEMS.containsKey(itemId)) {
-            throw new JsonSyntaxException(
-                    "Unknown item: " + itemId
+        buffer.writeBoolean(result.hasItem());
+        if (result.hasItem()){
+            ItemStack.STREAM_CODEC.encode(
+                    buffer,
+                    result.stack
             );
+            buffer.writeVarInt(result.minium);
+            buffer.writeVarInt(result.maximum);
+            buffer.writeFloat(result.chance);
         }
+    }
 
-        Item item = ForgeRegistries.ITEMS.getValue(itemId);
+    private static CompoundChanceResult decode(
+            RegistryFriendlyByteBuf buffer
+    ) {
+        boolean fluidResult = buffer.readBoolean();
 
-        if (item == null) {
-            throw new JsonSyntaxException(
-                    "Unknown item: " + itemId
-            );
+        if (fluidResult) {
+            FluidStack fluid =
+                    FluidStack.STREAM_CODEC.decode(buffer);
+
+            return new CompoundChanceResult(fluid);
         }
+        boolean itemResult = buffer.readBoolean();
+        if (itemResult){
+            ItemStack stack =
+                    ItemStack.STREAM_CODEC.decode(buffer);
 
-        int maximum = GsonHelper.getAsInt(
-                json,
-                "max",
-                1
-        );
+            int minium = buffer.readVarInt();
+            int maximum = buffer.readVarInt();
+            float chance = buffer.readFloat();
 
-        int minium = GsonHelper.getAsInt(
-                json,
-                "min",
-                1
-        );
-
-        float chance = GsonHelper.getAsFloat(
-                json,
-                "chance",
-                1.0F
-        );
-
-        ItemStack stack = new ItemStack(item);
-
-        if (json.has("nbt")) {
-            stack.setTag(parseNbt(json.get("nbt"), "item"));
-        }
-
-        try {
             return new CompoundChanceResult(
                     stack,
                     minium,
                     maximum,
                     chance
             );
-        } catch (IllegalArgumentException exception) {
-            throw new JsonSyntaxException(
-                    "Invalid item result: " + exception.getMessage(),
-                    exception
-            );
         }
-    }
+        return EMPTY;
 
-    private static CompoundChanceResult deserializeFluid(
-            JsonObject json
-    ) {
-        String fluidIdString =
-                GsonHelper.getAsString(json, "fluid");
-
-        ResourceLocation fluidId =
-                ResourceLocation.tryParse(fluidIdString);
-
-        if (fluidId == null) {
-            throw new JsonSyntaxException(
-                    "Invalid fluid id: " + fluidIdString
-            );
-        }
-
-        if (!ForgeRegistries.FLUIDS.containsKey(fluidId)) {
-            throw new JsonSyntaxException(
-                    "Unknown fluid: " + fluidId
-            );
-        }
-
-        var fluid = ForgeRegistries.FLUIDS.getValue(fluidId);
-
-        if (fluid == null) {
-            throw new JsonSyntaxException(
-                    "Unknown fluid: " + fluidId
-            );
-        }
-
-        int amount = GsonHelper.getAsInt(json, "amount");
-
-        if (amount <= 0) {
-            throw new JsonSyntaxException(
-                    "Fluid amount must be greater than zero: " + amount
-            );
-        }
-
-        FluidStack fluidStack = new FluidStack(fluid, amount);
-
-        if (json.has("nbt")) {
-            fluidStack.setTag(
-                    parseNbt(json.get("nbt"), "fluid")
-            );
-        }
-
-        return new CompoundChanceResult(fluidStack);
-    }
-
-    private static CompoundTag parseNbt(
-            JsonElement element,
-            String resultType
-    ) {
-        try {
-            String nbtString = element.isJsonObject()
-                    ? GSON.toJson(element)
-                    : GsonHelper.convertToString(element, "nbt");
-
-            return TagParser.parseTag(nbtString);
-        } catch (CommandSyntaxException exception) {
-            throw new JsonSyntaxException(
-                    "Invalid " + resultType + " result NBT",
-                    exception
-            );
-        }
-    }
-
-    public void write(FriendlyByteBuf buf) {
-        buf.writeBoolean(hasFluid());
-
-        if (hasFluid()) {
-            fluid.writeToPacket(buf);
-            return;
-        }
-
-        buf.writeItem(stack);
-        buf.writeVarInt(minium);
-        buf.writeVarInt(maximum);
-        buf.writeFloat(chance);
-    }
-
-    public static CompoundChanceResult read(FriendlyByteBuf buf) {
-        boolean isFluidResult = buf.readBoolean();
-
-        if (isFluidResult) {
-            FluidStack fluid = FluidStack.readFromPacket(buf);
-            return new CompoundChanceResult(fluid);
-        }
-
-        ItemStack stack = buf.readItem();
-        int minium = buf.readVarInt();
-        int maximum = buf.readVarInt();
-        float chance = buf.readFloat();
-
-        return new CompoundChanceResult(
-                stack,
-                minium,
-                maximum,
-                chance
-        );
     }
 }
