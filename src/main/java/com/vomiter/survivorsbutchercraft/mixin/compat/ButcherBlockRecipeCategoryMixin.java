@@ -49,7 +49,12 @@ public class ButcherBlockRecipeCategoryMixin {
 
                     if (!result.hasFluid()) slot.addItemStack(result.getStack())
                             .addRichTooltipCallback((view, tooltip) -> {
-                                if(result.getChance() >= 1) return;
+                                if(result.getChance() >= 1 || result.getMaximum() == result.getMinium()) return;
+                                tooltip.add(Component.literal(
+                                        "count: "
+                                ).append(
+                                        result.getMinium() + "-" + result.getMaximum()
+                                ));
                                 tooltip.add(
                                         Component.literal("chance: ")
                                                 .append(Component.literal(String.valueOf(result.getChance() * 100f)))

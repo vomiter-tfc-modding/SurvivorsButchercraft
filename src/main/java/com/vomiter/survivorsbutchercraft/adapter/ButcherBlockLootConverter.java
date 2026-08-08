@@ -2,14 +2,17 @@ package com.vomiter.survivorsbutchercraft.adapter;
 
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
 import com.vomiter.survivorsbutchercraft.common.recipe.IButcherRecipe;
 import com.vomiter.survivorsbutchercraft.common.registry.SBFoodTraits;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.compat.FarmersDelightCompat;
 import com.vomiter.survivorsbutchercraft.compat.FirmaLifeCompat;
 import com.vomiter.survivorsbutchercraft.compat.WaterFlaskCompat;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
+import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import com.vomiter.survivorsbutchercraft.util.ToolTierGetter;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -41,6 +44,18 @@ public class ButcherBlockLootConverter {
                 int fortuneLevel = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE) + fortuneMod;
                 custom.getResults(blockEntity.sbtfcInterface$getStage()).stream()
                         .map(chanceResult -> chanceResult.rollOutput(random, fortuneLevel))
+                        .map(item -> {
+                            Carcass carcass = Carcass.getCarcassFromItem(blockEntity.sbtfcInterface$getInserted().getItem());
+                            if(
+                                    carcass != null
+                                            && carcass.hasMaleHead()
+                                            && CarcassDataHelper.isMale(blockEntity.sbtfcInterface$getInserted())
+                                            && item.is(SBItems.HEADS.get(carcass).get())
+                            ){
+                                return SBItems.HEADS_MALE.get(carcass).get().getDefaultInstance();
+                            }
+                            return item;
+                        })
                         .forEach(originalList::add);
             }
         });
