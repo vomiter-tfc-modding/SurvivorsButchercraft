@@ -2,15 +2,17 @@ package com.vomiter.survivorsbutchercraft.adapter;
 
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
 import com.vomiter.survivorsbutchercraft.common.recipe.IButcherRecipe;
 import com.vomiter.survivorsbutchercraft.common.registry.SBFoodTraits;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.compat.FarmersDelightCompat;
 import com.vomiter.survivorsbutchercraft.compat.FirmaLifeCompat;
 import com.vomiter.survivorsbutchercraft.compat.WaterFlaskCompat;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
+import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import com.vomiter.survivorsbutchercraft.util.EnchantmentUtil;
 import com.vomiter.survivorsbutchercraft.util.ThreadLocalFlags;
 import com.vomiter.survivorsbutchercraft.util.ToolTierGetter;
@@ -45,12 +47,22 @@ public class ButcherBlockLootConverter {
         var originalList = original.call(instance, params);
         originalList.removeIf(stack -> stack.is(SBTags.Items.BUTCHERY_SKIP_LOOT));
         blockEntity.sbtfcInterface$getRecipe().ifPresent(recipe -> {
-            SurvivorsButchercraft.LOGGER.info("[SB LOGGER] STAGE = {}", blockEntity.sbtfcInterface$getStage());
             int fortuneLevel = tool.getEnchantmentLevel(EnchantmentUtil.get(Enchantments.FORTUNE)) + fortuneMod;
             recipe.value().getResults(blockEntity.sbtfcInterface$getStage()).stream()
                     .map(chanceResult -> chanceResult.rollOutput(random, fortuneLevel))
+                    .map(item -> {
+                        Carcass carcass = Carcass.getCarcassFromItem(blockEntity.sbtfcInterface$getInserted().getItem());
+                        if(
+                                carcass != null
+                                && carcass.hasMaleHead()
+                                && CarcassDataHelper.isMale(blockEntity.sbtfcInterface$getInserted())
+                                && item.is(SBItems.HEADS.get(carcass))
+                        ){
+                            return SBItems.HEADS_MALE.get(carcass).get().getDefaultInstance();
+                        }
+                        return item;
+                    })
                     .forEach(originalList::add);
-            SurvivorsButchercraft.LOGGER.info("[SB LOGGER] ITEMS = {}", originalList);
         });
 
         if (be instanceof MeatHookBlockEntity hook && ThreadLocalFlags.dropLootForButchering.get()){
