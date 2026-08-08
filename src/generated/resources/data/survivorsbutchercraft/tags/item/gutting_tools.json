@@ -11,7 +11,7 @@
     "survivorsbutchercraft:metal/gut_knife/blue_steel",
     "survivorsbutchercraft:metal/gut_knife/red_steel",
     {
-      "id": "#tfc:knives",
+      "id": "#c:tools/knife",
       "required": false
     }
   ]

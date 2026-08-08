@@ -9,10 +9,10 @@
   },
   "result_item": {
     "stack": {
-      "item": "butchercraft:cooked_rabbit_leg"
+      "id": "butchercraft:cooked_rabbit_leg"
     },
     "modifiers": [
-      "tfc:copy_food"
+      {"type": "tfc:copy_food"}
     ]
   },
   "temperature": 200

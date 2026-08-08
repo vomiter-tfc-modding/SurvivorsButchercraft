@@ -1,10 +1,10 @@
 {
   "type": "tfc:anvil",
-  "input": {
-    "tag": "forge:ingots/copper"
+  "ingredient": {
+    "tag": "c:ingots/copper"
   },
   "result": {
-    "item": "survivorsbutchercraft:metal/gut_knife_head/copper"
+    "id": "survivorsbutchercraft:metal/gut_knife_head/copper"
   },
   "tier": 1,
   "rules": [

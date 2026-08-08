@@ -1,0 +1,9 @@
+{
+  "ingredient":{
+    "fluid": "butchercraft:blood_fluid"
+  },
+  "water":10,
+  "protein":1.0,
+  "effects":[
+    {"effect":"minecraft:nausea","duration":100,"amplifier": 0,"chance":0.25}]
+}

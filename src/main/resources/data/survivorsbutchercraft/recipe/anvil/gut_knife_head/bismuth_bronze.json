@@ -1,10 +1,10 @@
 {
   "type": "tfc:anvil",
-  "input": {
-    "tag": "forge:ingots/bismuth_bronze"
+  "ingredient": {
+    "tag": "c:ingots/bismuth_bronze"
   },
   "result": {
-    "item": "survivorsbutchercraft:metal/gut_knife_head/bismuth_bronze"
+    "id": "survivorsbutchercraft:metal/gut_knife_head/bismuth_bronze"
   },
   "tier": 2,
   "rules": [

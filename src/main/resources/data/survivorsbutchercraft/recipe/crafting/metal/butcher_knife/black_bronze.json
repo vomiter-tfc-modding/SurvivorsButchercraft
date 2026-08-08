@@ -6,15 +6,14 @@
       "item":"survivorsbutchercraft:metal/butcher_knife_head/black_bronze"
     },
     "Y":{
-      "tag":"forge:rods/wooden"
+      "tag":"c:rods/wooden"
     }
   },
   "result":{
     "stack":{
-      "item":"survivorsbutchercraft:metal/butcher_knife/black_bronze"
+      "id":"survivorsbutchercraft:metal/butcher_knife/black_bronze"
     },
-    "modifiers":["tfc:copy_forging_bonus"]
-  },
+    "modifiers":[{"type":"tfc:copy_forging_bonus"}]  },
   "input_row":0,
   "input_column":0
 }

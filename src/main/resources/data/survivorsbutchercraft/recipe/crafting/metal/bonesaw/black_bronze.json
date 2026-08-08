@@ -9,15 +9,15 @@
       "item": "survivorsbutchercraft:metal/bonesaw_head/black_bronze"
     },
     "Y": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     }
   },
   "result": {
     "stack": {
-      "item": "survivorsbutchercraft:metal/bonesaw/black_bronze"
+      "id": "survivorsbutchercraft:metal/bonesaw/black_bronze"
     },
     "modifiers": [
-      "tfc:copy_forging_bonus"
+      {"type": "tfc:copy_forging_bonus"}
     ]
   },
   "input_row": 0,

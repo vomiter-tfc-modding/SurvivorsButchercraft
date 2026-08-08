@@ -2,7 +2,6 @@ package com.vomiter.survivorsbutchercraft.compat.jei;
 
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.lance5057.butchercraft.workstations.bases.recipes.AnimatedRecipeItemUse;
-import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockRecipe;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.common.recipe.CompoundChanceResult;
 import com.vomiter.survivorsbutchercraft.common.recipe.CustomButcherBlockRecipe;
@@ -19,7 +18,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
 public class CustomButcherBlockRecipeCategory implements IRecipeCategory<CustomButcherBlockRecipe> {

@@ -1,10 +1,10 @@
 {
   "type": "tfc:anvil",
-  "input": {
-    "tag": "forge:ingots/red_steel"
+  "ingredient": {
+    "tag": "c:ingots/red_steel"
   },
   "result": {
-    "item": "survivorsbutchercraft:metal/skinning_knife_head/red_steel"
+    "id": "survivorsbutchercraft:metal/skinning_knife_head/red_steel"
   },
   "tier": 6,
   "rules": [

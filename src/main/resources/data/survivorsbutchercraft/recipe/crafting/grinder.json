@@ -17,7 +17,7 @@
     "C "
   ],
   "result": {
-    "item": "butchercraft:grinder_block_item"
+    "id": "butchercraft:grinder_block_item"
   },
   "show_notification": true
 }

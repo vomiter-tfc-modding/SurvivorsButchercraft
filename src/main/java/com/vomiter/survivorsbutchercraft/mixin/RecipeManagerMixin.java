@@ -56,7 +56,7 @@ public abstract class RecipeManagerMixin {
             final Recipe<?> recipe = holder.value();
             final RecipeType<?> type = recipe.getType();
 
-            boolean block = SBRecipeFilter.shouldBlock(id);
+            boolean block = SBRecipeFilter.shouldBlock(id, recipe);
 
             if (!block) {
                 typeBuilder.put(type, holder);

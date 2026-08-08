@@ -1,10 +1,10 @@
 {
   "type": "tfc:anvil",
-  "input": {
-    "tag": "forge:ingots/black_bronze"
+  "ingredient": {
+    "tag": "c:ingots/black_bronze"
   },
   "result": {
-    "item": "survivorsbutchercraft:metal/gut_knife_head/black_bronze"
+    "id": "survivorsbutchercraft:metal/gut_knife_head/black_bronze"
   },
   "tier": 2,
   "rules": [

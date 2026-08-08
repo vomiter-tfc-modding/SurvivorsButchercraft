@@ -2,6 +2,7 @@ package com.vomiter.survivorsbutchercraft.adapter;
 
 import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.IButcherBlock;
 import com.vomiter.survivorsbutchercraft.butchery.tool_alternative.ToolAlternative;
 import com.vomiter.survivorsbutchercraft.common.recipe.IButcherRecipe;
@@ -29,21 +30,27 @@ import net.neoforged.fml.ModList;
 import java.util.Optional;
 
 public class ButcherBlockLootConverter {
-    public static<R extends Recipe<?> & IButcherRecipe> ObjectArrayList<ItemStack> sbtfc$convertLoot(IButcherBlock<R> blockEntity, LootTable instance, LootParams params, Operation<ObjectArrayList<ItemStack>> original){
+    public static<R extends Recipe<?> & IButcherRecipe> ObjectArrayList<ItemStack> sbtfc$convertLoot(
+            IButcherBlock<R> blockEntity,
+            LootTable instance,
+            LootParams params,
+            Operation<ObjectArrayList<ItemStack>> original
+    ){
         if (!(blockEntity instanceof BlockEntity be))return original.call(instance, params);
         if(be.getLevel() == null) return original.call(instance, params);
         var tool = Optional.ofNullable(params.getParamOrNull(LootContextParams.TOOL)).orElse(ItemStack.EMPTY);
         var tier = ToolTierGetter.get(tool.getItem());
         var fortuneMod = tier instanceof LevelTier levelTier ? Math.round(levelTier.level() / 2f): 0;
-
         var random = be.getLevel().random;
         var originalList = original.call(instance, params);
         originalList.removeIf(stack -> stack.is(SBTags.Items.BUTCHERY_SKIP_LOOT));
         blockEntity.sbtfcInterface$getRecipe().ifPresent(recipe -> {
+            SurvivorsButchercraft.LOGGER.info("[SB LOGGER] STAGE = {}", blockEntity.sbtfcInterface$getStage());
             int fortuneLevel = tool.getEnchantmentLevel(EnchantmentUtil.get(Enchantments.FORTUNE)) + fortuneMod;
             recipe.value().getResults(blockEntity.sbtfcInterface$getStage()).stream()
                     .map(chanceResult -> chanceResult.rollOutput(random, fortuneLevel))
                     .forEach(originalList::add);
+            SurvivorsButchercraft.LOGGER.info("[SB LOGGER] ITEMS = {}", originalList);
         });
 
         if (be instanceof MeatHookBlockEntity hook && ThreadLocalFlags.dropLootForButchering.get()){

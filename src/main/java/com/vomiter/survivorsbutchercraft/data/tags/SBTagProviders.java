@@ -24,7 +24,10 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.labellum.mc.waterflasks.setup.Registration;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
+import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class SBTagProviders {
@@ -75,18 +78,14 @@ public class SBTagProviders {
 
             for (Metal metal : Metal.values()) {
                 if(!metal.allParts()) continue;
-                var metalTag = SBTags.Items.createTFC("metal_item/" + metal.getSerializedName());
+                var metalTag = SBTags.Items.createTFC("tools/" + metal.getSerializedName());
                 var butcherMetalTag = SBTags.Items.create("metal_item/" + metal.getSerializedName());
 
                 tag(metalTag).add(
                         SBItems.BUTCHER_KNIVES.get(metal).get(),
-                        SBItems.BUTCHER_KNIFE_HEADS.get(metal).get(),
                         SBItems.SKINNING_KNIVES.get(metal).get(),
-                        SBItems.SKINNING_KNIFE_HEADS.get(metal).get(),
                         SBItems.BONESAWS.get(metal).get(),
-                        SBItems.BONESAW_HEADS.get(metal).get(),
                         SBItems.GUT_KNIVES.get(metal).get(),
-                        SBItems.GUT_KNIFE_HEADS.get(metal).get(),
                         SBItems.MEAT_HOOKS.get(metal).get()
                 );
 
@@ -132,46 +131,52 @@ public class SBTagProviders {
                         .add(carcass.carcassItem());
             }
 
+            tag(ItemTags.create(Helpers.id("c", "foods/raw_meats"))).addTag(SBTags.Items.BUTCHER_RAW_MEATS);
             tag(ItemTags.create(Helpers.id("tfc", "foods/raw_meats"))).addTag(SBTags.Items.BUTCHER_RAW_MEATS);
             tag(ItemTags.create(Helpers.id("tfc", "foods/meats"))).addTag(SBTags.Items.BUTCHER_RAW_MEATS);
             tag(ItemTags.create(Helpers.id("tfc", "foods"))).addTag(SBTags.Items.BUTCHER_RAW_MEATS);
 
             Raw2CookedMap.entries().values().forEach(item -> {
+                tag(ItemTags.create(Helpers.id("c", "foods/cooked_meats"))).add(item);
                 tag(ItemTags.create(Helpers.id("tfc", "foods/cooked_meats"))).add(item);
                 tag(ItemTags.create(Helpers.id("tfc", "foods/meats"))).add(item);
                 tag(ItemTags.create(Helpers.id("tfc", "foods"))).add(item);
             });
 
             tag(SBTags.Items.BUTCHERY_SKIP_LOOT)
-                    .addOptionalTag(SBTags.Items.createTFC("raw_hides"))
-                    .addOptionalTag(SBTags.Items.createTFC("sheepskin_hides"));
+                    .add(TFCItems.HIDES.values().stream()
+                            .map(Map::values)
+                            .flatMap(Collection::stream)
+                            .map(TFCItems.ItemId::asItem)
+                            .toArray(Item[]::new)
+                    );
 
             tag(SBTags.Items.SKINNING_TOOLS)
                     .add(ButchercraftItems.SKINNING_KNIFE.get())
                     .add(SBItems.SKINNING_KNIVES.values().stream().map(DeferredHolder::get).toArray(Item[]::new))
                     .addOptionalTags(
-                            SBTags.Items.createTFC("knives"),
-                            SBTags.Items.createTFC("shears")
+                            CommonTags.Items.TOOLS_KNIFE,
+                            SBTags.Items.createCommon("tools/shear")
                     );
 
             tag(SBTags.Items.BEHEADING_TOOLS)
                     .add(ButchercraftItems.BONE_SAW.get())
                     .add(SBItems.BONESAWS.values().stream().map(DeferredHolder::get).toArray(Item[]::new))
                     .addOptionalTags(
-                            SBTags.Items.createTFC("saws"),
-                            SBTags.Items.createTFC("axes")
+                            SBTags.Items.createTFC("tools/saw"),
+                            net.minecraft.tags.ItemTags.AXES
                     );
             tag(SBTags.Items.GUTTING_TOOLS)
                     .add(ButchercraftItems.GUT_KNIFE.get())
                     .add(SBItems.GUT_KNIVES.values().stream().map(DeferredHolder::get).toArray(Item[]::new))
-                    .addOptionalTags(SBTags.Items.createTFC("knives"));
+                    .addOptionalTags(CommonTags.Items.TOOLS_KNIFE);
 
             tag(SBTags.Items.BUTCHERING_TOOLS)
                     .add(ButchercraftItems.BUTCHER_KNIFE.get())
                     .add(SBItems.BUTCHER_KNIVES.values().stream().map(DeferredHolder::get).toArray(Item[]::new))
                     .addOptionalTags(
-                            SBTags.Items.createTFC("knives"),
-                            SBTags.Items.createTFC("axes")
+                            CommonTags.Items.TOOLS_KNIFE,
+                            net.minecraft.tags.ItemTags.AXES
                     );
             tag(SBTags.Items.TALLOW_INGREDIENT)
                     .add(TFCItems.BLUBBER.get())

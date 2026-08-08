@@ -9,10 +9,10 @@
   },
   "result_item": {
     "stack": {
-      "item": "butchercraft:cooked_ground_goat"
+      "id": "butchercraft:cooked_ground_goat"
     },
     "modifiers": [
-      "tfc:copy_food"
+      {"type": "tfc:copy_food"}
     ]
   },
   "temperature": 200

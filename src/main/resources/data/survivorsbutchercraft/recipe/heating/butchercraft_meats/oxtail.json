@@ -9,10 +9,10 @@
   },
   "result_item": {
     "stack": {
-      "item": "butchercraft:cooked_oxtail"
+      "id": "butchercraft:cooked_oxtail"
     },
     "modifiers": [
-      "tfc:copy_food"
+      {"type": "tfc:copy_food"}
     ]
   },
   "temperature": 200

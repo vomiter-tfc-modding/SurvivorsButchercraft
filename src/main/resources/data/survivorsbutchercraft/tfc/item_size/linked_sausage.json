@@ -1,1 +1,5 @@
-{"ingredient":{"tag":"survivorsbutchercraft:linked_sausages"},"size":"large","weight":"heavy"}
+{
+  "ingredient":
+    {"tag":"survivorsbutchercraft:linked_sausages"},
+  "size":"large","weight":"heavy"
+}

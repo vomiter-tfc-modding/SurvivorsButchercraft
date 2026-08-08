@@ -9,10 +9,10 @@
   },
   "result_item": {
     "stack": {
-      "item": "butchercraft:cooked_chicken_wing"
+      "id": "butchercraft:cooked_chicken_wing"
     },
     "modifiers": [
-      "tfc:copy_food"
+      {"type": "tfc:copy_food"}
     ]
   },
   "temperature": 200

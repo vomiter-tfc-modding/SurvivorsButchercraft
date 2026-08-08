@@ -9,10 +9,10 @@
   },
   "result_item": {
     "stack": {
-      "item": "butchercraft:cooked_beef_stewmeat"
+      "id": "butchercraft:cooked_beef_stewmeat"
     },
     "modifiers": [
-      "tfc:copy_food"
+      {"type": "tfc:copy_food"}
     ]
   },
   "temperature": 200

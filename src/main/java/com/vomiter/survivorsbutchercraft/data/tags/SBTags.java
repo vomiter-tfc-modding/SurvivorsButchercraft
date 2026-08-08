@@ -14,6 +14,10 @@ public class SBTags {
         static TagKey<Item> create(String path){
             return ItemTags.create(Helpers.id(path));
         }
+        static TagKey<Item> createCommon(String path){
+            return ItemTags.create(Helpers.id("c", path));
+        }
+
 
         public static TagKey<Item> SKINNING_TOOLS = create("skinning_tools");
         public static TagKey<Item> BEHEADING_TOOLS = create("beheading_tools");

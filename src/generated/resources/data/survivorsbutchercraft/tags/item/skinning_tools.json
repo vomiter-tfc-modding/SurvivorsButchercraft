@@ -11,11 +11,11 @@
     "survivorsbutchercraft:metal/skinning_knife/blue_steel",
     "survivorsbutchercraft:metal/skinning_knife/red_steel",
     {
-      "id": "#tfc:knives",
+      "id": "#c:tools/knife",
       "required": false
     },
     {
-      "id": "#tfc:shears",
+      "id": "#c:tools/shear",
       "required": false
     }
   ]

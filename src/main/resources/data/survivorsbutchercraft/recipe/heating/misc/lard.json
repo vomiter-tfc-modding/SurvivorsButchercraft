@@ -4,10 +4,8 @@
     "item": "butchercraft:fat"
   },
   "result_item": {
-    "stack": {
-      "id": "butchercraft:lard",
-      "count": 1
-    }
+    "id": "butchercraft:lard",
+    "count": 1
   },
   "temperature": 200
 }

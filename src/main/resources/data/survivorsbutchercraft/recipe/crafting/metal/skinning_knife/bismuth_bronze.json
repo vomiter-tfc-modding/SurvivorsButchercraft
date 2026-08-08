@@ -9,15 +9,15 @@
       "item": "survivorsbutchercraft:metal/skinning_knife_head/bismuth_bronze"
     },
     "Y": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     }
   },
   "result": {
     "stack": {
-      "item": "survivorsbutchercraft:metal/skinning_knife/bismuth_bronze"
+      "id": "survivorsbutchercraft:metal/skinning_knife/bismuth_bronze"
     },
-    "modifiers": [
-      "tfc:copy_forging_bonus"
+    "modifiers": [{"type": "tfc:copy_forging_bonus"}
+
     ]
   },
   "input_row": 0,

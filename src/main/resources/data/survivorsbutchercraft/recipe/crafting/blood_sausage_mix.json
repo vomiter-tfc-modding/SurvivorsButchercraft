@@ -5,37 +5,37 @@
     {
       "type":"tfc:not_rotten",
       "ingredient": {
-        "tag": "forge:ground_meat/raw"
+        "tag": "c:ground_meat/raw"
       }
     },
     {
       "type":"tfc:not_rotten",
       "ingredient": {
-        "tag": "forge:ground_meat/raw"
+        "tag": "c:ground_meat/raw"
       }
     },
     {
       "type":"tfc:not_rotten",
       "ingredient": {
-        "tag": "forge:ground_meat/raw"
+        "tag": "c:ground_meat/raw"
       }
     },
     {
       "type":"tfc:not_rotten",
       "ingredient": {
-        "tag": "forge:ground_meat/raw"
+        "tag": "c:ground_meat/raw"
       }
     },
     {
       "type":"tfc:not_rotten",
       "ingredient": {
-        "tag": "forge:ground_meat/raw"
+        "tag": "c:ground_meat/raw"
       }
     },
     {
       "type":"tfc:not_rotten",
       "ingredient": {
-        "tag": "forge:ground_meat/raw"
+        "tag": "c:ground_meat/raw"
       }
     },
     {
@@ -48,12 +48,12 @@
       }
     },
     {
-      "type":"tfc:fluid_item",
-      "fluid_ingredient":{"ingredient":"butchercraft:blood_fluid","amount":100}
+      "type":"tfc:fluid_content",
+      "fluid":{"fluid":"butchercraft:blood_fluid","amount":100}
     }
   ],
   "result": {
     "count": 8,
-    "item": "butchercraft:blood_sausage_mix"
+    "id": "butchercraft:blood_sausage_mix"
   }
 }

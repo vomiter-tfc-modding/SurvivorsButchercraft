@@ -157,9 +157,7 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
                 if(shouldTakeOver){
                     progressRecipe(recipe, p, shouldDropOriginalLoot);
                     updateInventory();
-                    if(butcherBlock instanceof IButcherBlock b){
-                        b.sbtfcInterface$dropLoot(butcherRecipe.getButcheringToolStage(getStage()), p);
-                    }
+                    setupStage(recipe, getStage());
                     cir.setReturnValue(ItemInteractionResult.SUCCESS);
                 }
             }

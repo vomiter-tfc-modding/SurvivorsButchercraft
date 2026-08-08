@@ -17,7 +17,7 @@
     "WBW"
   ],
   "result": {
-    "item": "butchercraft:boots"
+    "id": "butchercraft:boots"
   },
   "show_notification": true
 }

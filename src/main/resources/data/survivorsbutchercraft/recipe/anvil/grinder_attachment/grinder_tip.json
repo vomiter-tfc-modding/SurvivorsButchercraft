@@ -1,12 +1,12 @@
 {
   "type":"tfc:anvil",
-  "input":
+  "ingredient":
     {
-      "tag":"forge:sheets/wrought_iron"
+      "tag":"c:sheets/wrought_iron"
     },
   "result":
     {
-      "item":"butchercraft:grinder_tip",
+      "id":"butchercraft:grinder_tip",
       "count":1
     },
   "tier":3,

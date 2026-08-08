@@ -1,10 +1,10 @@
 {
   "type": "tfc:anvil",
-  "input": {
-    "tag": "forge:ingots/wrought_iron"
+  "ingredient": {
+    "tag": "c:ingots/wrought_iron"
   },
   "result": {
-    "item": "survivorsbutchercraft:metal/gut_knife_head/wrought_iron"
+    "id": "survivorsbutchercraft:metal/gut_knife_head/wrought_iron"
   },
   "tier": 3,
   "rules": [

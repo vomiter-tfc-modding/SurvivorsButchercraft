@@ -6,7 +6,7 @@
       "tag":"survivorsbutchercraft:tallow_ingredients"
     },
     "S": {
-      "tag": "forge:string"
+      "tag": "c:string"
     },
     "W": {
       "item": "tfc:burlap_cloth"
@@ -18,7 +18,7 @@
     "SFS"
   ],
   "result": {
-    "item": "butchercraft:apron"
+    "id": "butchercraft:apron"
   },
   "show_notification": true
 }

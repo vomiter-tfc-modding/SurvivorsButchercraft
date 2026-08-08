@@ -11,11 +11,11 @@
     "survivorsbutchercraft:metal/bonesaw/blue_steel",
     "survivorsbutchercraft:metal/bonesaw/red_steel",
     {
-      "id": "#tfc:saws",
+      "id": "#tfc:tools/saw",
       "required": false
     },
     {
-      "id": "#tfc:axes",
+      "id": "#minecraft:axes",
       "required": false
     }
   ]

@@ -135,6 +135,7 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
         original.call(instance, amount + extra, living, slot);
     }
 
+
     @WrapOperation(
             method = "dropLoot",
             at = @At(
@@ -146,9 +147,10 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
             )
     )
     private ObjectArrayList<ItemStack> sbtfc$convertLoot(LootTable instance, LootParams params, Operation<ObjectArrayList<ItemStack>> original){
-        var self = (IButcherBlock)this;
-        return ButcherBlockLootConverter.sbtfc$convertLoot(self, instance, params, original);
+        return ButcherBlockLootConverter.sbtfc$convertLoot(this, instance, params, original);
     }
+
+
 
     @Override
     public void sbtfcInterface$dropLoot(AnimatedRecipeItemUse recipeToolsIn, Player player) {
