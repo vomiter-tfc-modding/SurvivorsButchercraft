@@ -1,0 +1,126 @@
+{
+  "type": "survivorsbutchercraft:custom_butcher_block",
+  "carcass": {
+    "item": "survivorsbutchercraft:head/pig"
+  },
+  "jei": [],
+  "results": [
+    [
+      {
+        "item": {
+          "id": "survivorsbutchercraft:skull_male/pig"
+        },
+        "min": 0
+      },
+      {
+        "item": {
+          "id": "butchercraft:brain"
+        },
+        "min": 0
+      },
+      {
+        "item": {
+          "id": "butchercraft:eyeball"
+        },
+        "max": 2,
+        "min": 0
+      },
+      {
+        "chance": 0.5,
+        "item": {
+          "id": "butchercraft:sinew"
+        },
+        "max": 4,
+        "min": 4
+      }
+    ]
+  ],
+  "tools": [
+    {
+      "count": 1,
+      "damage": true,
+      "effects": [],
+      "loot_table": "butchercraft:empty",
+      "models": [
+        {
+          "IsBlock": true,
+          "animation": {
+            "location": {
+              "x": {
+                "speed": 1.0
+              }
+            },
+            "rotation": {},
+            "scale": {
+              "x": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 1.0,
+                "min": 1.0,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "survivorsbutchercraft:meathook/head/pig"
+        },
+        {
+          "animation": {
+            "location": {
+              "x": {
+                "max": 8.0,
+                "min": -8.0
+              },
+              "y": {
+                "max": 10.0,
+                "min": -10.0
+              },
+              "z": {
+                "max": 8.0,
+                "min": -8.0
+              }
+            },
+            "rotation": {
+              "z": {
+                "loop": true,
+                "max": 45.0,
+                "min": -45.0,
+                "pingpong": true,
+                "speed": 0.05
+              }
+            },
+            "scale": {
+              "x": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "y": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              },
+              "z": {
+                "max": 0.5,
+                "min": -0.5,
+                "speed": 1.0
+              }
+            }
+          },
+          "location": "butchercraft:gut_knife"
+        }
+      ],
+      "tool": {
+        "tag": "survivorsbutchercraft:gutting_tools"
+      },
+      "uses": 16
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tfc:metal/chain/bismuth_bronze"
+    },
+    "R": {
+      "item": "tfc:metal/rod/bismuth_bronze"
+    }
+  },
+  "pattern": [
+    "RR",
+    "CC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "survivorsbutchercraft:metal/meat_hook/bismuth_bronze"
+  }
+}

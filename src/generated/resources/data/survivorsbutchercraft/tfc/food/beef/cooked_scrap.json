@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "butchercraft:cooked_beef_scraps"
+  },
+  "hunger": 1,
+  "saturation": 0.7,
+  "water": 0.0,
+  "decay_modifier": 1.5,
+  "protein": 0.8
+}

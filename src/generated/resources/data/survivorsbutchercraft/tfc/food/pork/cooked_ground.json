@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "butchercraft:cooked_ground_pork"
+  },
+  "hunger": 1,
+  "saturation": 0.3,
+  "water": 0.0,
+  "decay_modifier": 1.5,
+  "protein": 0.4
+}
