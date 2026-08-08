@@ -14,6 +14,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -78,7 +79,21 @@ public class CustomButcherBlockRecipeCategory implements IRecipeCategory<CustomB
             var result = recipe.getResults(i);
             for (CompoundChanceResult compoundChanceResult : result) {
                 if (compoundChanceResult.hasItem()) builder.addSlot(RecipeIngredientRole.OUTPUT, 1 + placementW, 73 + placementH + 18)
-                        .addItemStack(compoundChanceResult.getStack());
+                        .addItemStack(compoundChanceResult.getStack().copyWithCount(compoundChanceResult.getMinium()))
+                        .addRichTooltipCallback((view, tooltip) -> {
+                            if(compoundChanceResult.getChance() >= 1 || compoundChanceResult.getMaximum() == compoundChanceResult.getMinium()) return;
+                            tooltip.add(Component.literal(
+                                    "count: "
+                            ).append(
+                                    compoundChanceResult.getMinium() + "-" + compoundChanceResult.getMaximum()
+                            ));
+                            tooltip.add(
+                                    Component.literal("chance: ")
+                                            .append(Component.literal(String.valueOf(compoundChanceResult.getChance() * 100f)))
+                                            .append(Component.literal("%"))
+                                            .withStyle(ChatFormatting.GOLD));
+                        });
+                ;
                 if (compoundChanceResult.hasFluid()) {
                     builder.addSlot(RecipeIngredientRole.OUTPUT, 1 + placementW, 73 + placementH + 18)
                             .addFluidStack(compoundChanceResult.getFluid().getFluid(), compoundChanceResult.getFluid().getAmount());
