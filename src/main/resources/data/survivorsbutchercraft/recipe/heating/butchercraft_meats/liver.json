@@ -2,17 +2,24 @@
   "__comment__": "Generated for SurvivorsButchercraft",
   "type": "tfc:heating",
   "ingredient": {
-    "type": "tfc:not_rotten",
-    "ingredient": {
-      "item": "butchercraft:liver"
-    }
+    "type": "tfc:and",
+    "children": [
+      {
+        "item": "butchercraft:liver"
+      },
+      {
+        "type": "tfc:not_rotten"
+      }
+    ]
   },
   "result_item": {
     "stack": {
       "id": "butchercraft:cooked_liver"
     },
     "modifiers": [
-      {"type": "tfc:copy_food"}
+      {
+        "type": "tfc:copy_food"
+      }
     ]
   },
   "temperature": 200
