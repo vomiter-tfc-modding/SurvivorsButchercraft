@@ -79,7 +79,7 @@ public class CustomButcherBlockRecipeCategory implements IRecipeCategory<CustomB
             var result = recipe.getResults(i);
             for (CompoundChanceResult compoundChanceResult : result) {
                 if (compoundChanceResult.hasItem()) builder.addSlot(RecipeIngredientRole.OUTPUT, 1 + placementW, 73 + placementH + 18)
-                        .addItemStack(compoundChanceResult.getStack().copyWithCount(compoundChanceResult.getMinium()))
+                        .addItemStack(compoundChanceResult.getStack().copyWithCount(Math.max(1, compoundChanceResult.getMinium())))
                         .addRichTooltipCallback((view, tooltip) -> {
                             if(compoundChanceResult.getChance() >= 1 || compoundChanceResult.getMaximum() == compoundChanceResult.getMinium()) return;
                             tooltip.add(Component.literal(
@@ -98,12 +98,14 @@ public class CustomButcherBlockRecipeCategory implements IRecipeCategory<CustomB
                     builder.addSlot(RecipeIngredientRole.OUTPUT, 1 + placementW, 73 + placementH + 18)
                             .addFluidStack(compoundChanceResult.getFluid().getFluid(), compoundChanceResult.getFluid().getAmount());
                 }
-                placementW += width;
-                ++c;
-                if (c > 7) {
-                    placementH += height;
-                    placementW = 0;
-                    c = 0;
+                if(!compoundChanceResult.isEmpty()){
+                    placementW += width;
+                    ++c;
+                    if (c > 7) {
+                        placementH += height;
+                        placementW = 0;
+                        c = 0;
+                    }
                 }
             }
         }
