@@ -1,6 +1,5 @@
 package com.vomiter.survivorsbutchercraft.data;
 
-import com.lance5057.butchercraft.Butchercraft;
 import com.lance5057.butchercraft.ButchercraftFluids;
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.lance5057.butchercraft.client.BlacklistedModel;
@@ -8,7 +7,6 @@ import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloa
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimatedFloatVector3;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
 import com.lance5057.butchercraft.data.builders.recipes.loottables.ButcherBlockLootTables;
-import com.lance5057.butchercraft.data.builders.recipes.loottables.MeatHookLoottables;
 import com.vomiter.survivorsbutchercraft.Helpers;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.MeatHookStage;
@@ -86,7 +84,7 @@ public class SBRecipesProvider extends RecipeProvider {
         if (carcass.equals(Carcass.GOAT)){
             CuttingBoardRecipeBuilder.cuttingRecipe(
                             Ingredient.of(skull.get()),
-                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
+                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "tools/hammer"))),
                             Items.BONE, 2
                     ).addResultWithChance(Items.BONE_MEAL,  0.25f, 4)
                     .addResult(TFCItems.GOAT_HORN.get(), 2)
@@ -95,7 +93,7 @@ public class SBRecipesProvider extends RecipeProvider {
         } else {
             CuttingBoardRecipeBuilder.cuttingRecipe(
                             Ingredient.of(skull.get()),
-                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
+                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "tools/hammer"))),
                             Items.BONE, 2
                     ).addResultWithChance(Items.BONE_MEAL,  0.25f, 4)
                     .save(consumer, Helpers.id("cutting/" + skull.getId().getPath()));
@@ -121,7 +119,7 @@ public class SBRecipesProvider extends RecipeProvider {
             var skullMale = SBItems.SKULLS_MALE.get(carcass);
             CuttingBoardRecipeBuilder.cuttingRecipe(
                             Ingredient.of(skullMale.get()),
-                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("tfc", "hammers"))),
+                            Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "tools/hammer"))),
                             Items.BONE, 2
                     ).addResultWithChance(Items.BONE_MEAL, 0.25f, 4)
                     .save(consumer, Helpers.id("cutting/" + skullMale.getId().getPath()));

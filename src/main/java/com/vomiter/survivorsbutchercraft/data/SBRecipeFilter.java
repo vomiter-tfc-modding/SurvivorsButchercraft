@@ -32,6 +32,7 @@ public class SBRecipeFilter {
 
     public static boolean shouldBlock(ResourceLocation id, Recipe<?> recipe){
         if(recipe.getType() == (ButchercraftRecipes.GRINDER.get())) return false;
+        if (id.getPath().equals("butcherblock")) return false;
         if(id.getNamespace().equals(Butchercraft.MOD_ID)) return true;
         return false;
         /*

@@ -7,14 +7,36 @@ import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.util.CarcassDataHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.renderable.BakedModelRenderable;
+import net.neoforged.neoforge.client.model.renderable.IRenderable;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class CarcassRenderHelper {
-    private static final Set<ResourceLocation> MISSING_MODEL_WARNED = new HashSet<>();
+    private static final Map<RenderKey, List<BlacklistedModel>> RESOLVED_MODELS =
+            new ConcurrentHashMap<>();
+
+    private static final Map<ResourceLocation, Boolean> MODEL_EXISTENCE =
+            new ConcurrentHashMap<>();
+
+    private static final Map<ResourceLocation, IRenderable<ModelData>> BLOCK_RENDERABLES =
+            new ConcurrentHashMap<>();
+
+    private static final Set<ResourceLocation> MISSING_MODEL_WARNED =
+            ConcurrentHashMap.newKeySet();
+
+    public static void clearCaches() {
+        RESOLVED_MODELS.clear();
+        MODEL_EXISTENCE.clear();
+        BLOCK_RENDERABLES.clear();
+        MISSING_MODEL_WARNED.clear();
+    }
 
     private CarcassRenderHelper() {
     }
@@ -23,12 +45,51 @@ public final class CarcassRenderHelper {
         return SBItems.CARCASSES.values().stream().anyMatch(o -> stack.is(o.get()));
     }
 
-    public static List<BlacklistedModel> buildModels(List<BlacklistedModel> baseModels, ItemStack carcass) {
-        List<BlacklistedModel> out = new ArrayList<>();
-
+    public static List<BlacklistedModel> buildModels(
+            List<BlacklistedModel> baseModels,
+            ItemStack carcass
+    ) {
         if (baseModels == null || baseModels.isEmpty()) {
-            return out;
+            return List.of();
         }
+
+        RenderKey key = RenderKey.of(baseModels, carcass);
+
+        return RESOLVED_MODELS.computeIfAbsent(
+                key,
+                ignored -> List.copyOf(buildModelsUncached(baseModels, carcass))
+        );
+    }
+
+    private record RenderKey(
+            List<BlacklistedModel> baseModels,
+            Item item,
+            boolean hasCarcassData,
+            boolean male,
+            boolean old
+    ) {
+        private static RenderKey of(
+                List<BlacklistedModel> baseModels,
+                ItemStack carcass
+        ) {
+            boolean hasData = !carcass.isEmpty()
+                    && CarcassDataHelper.hasData(carcass);
+
+            return new RenderKey(
+                    baseModels,
+                    carcass.getItem(),
+                    hasData,
+                    hasData && CarcassDataHelper.isMale(carcass),
+                    hasData && CarcassDataHelper.isOld(carcass)
+            );
+        }
+    }
+
+    private static List<BlacklistedModel> buildModelsUncached(
+            List<BlacklistedModel> baseModels,
+            ItemStack carcass
+    ) {
+        List<BlacklistedModel> out = new ArrayList<>();
 
         for (BlacklistedModel baseModel : baseModels) {
             out.add(resolveVariant(baseModel, carcass));
@@ -40,15 +101,14 @@ public final class CarcassRenderHelper {
 
         if (
                 carcass.is(SBItems.CARCASSES.get(Carcass.YAK).get())
-                || carcass.is(SBItems.CARCASSES.get(Carcass.MUSK_OX).get())
-        ){
+                        || carcass.is(SBItems.CARCASSES.get(Carcass.MUSK_OX).get())
+        ) {
             tryAddConditionalModel(
                     out,
                     Helpers.id("meathook/hook"),
                     baseModels.get(0)
             );
         }
-
 
         return out;
     }
@@ -154,16 +214,22 @@ public final class CarcassRenderHelper {
     }
 
     private static boolean modelExists(ResourceLocation modelLocation) {
+        return MODEL_EXISTENCE.computeIfAbsent(
+                modelLocation,
+                CarcassRenderHelper::queryModelExists
+        );
+    }
+
+    private static boolean queryModelExists(ResourceLocation modelLocation) {
         ResourceLocation fileLocation = Helpers.id(
                 modelLocation.getNamespace(),
                 "models/" + modelLocation.getPath() + ".json"
         );
 
-        Optional<Resource> resource = Minecraft.getInstance()
+        return Minecraft.getInstance()
                 .getResourceManager()
-                .getResource(fileLocation);
-
-        return resource.isPresent();
+                .getResource(fileLocation)
+                .isPresent();
     }
 
     private static void warnMissingOnce(ResourceLocation missingVariant, ResourceLocation fallbackBase) {
@@ -182,5 +248,14 @@ public final class CarcassRenderHelper {
             out.addAll(baseBlacklist);
         }
         return out;
+    }
+
+    public static IRenderable<ModelData> getBlockRenderable(ResourceLocation model) {
+        return BLOCK_RENDERABLES.computeIfAbsent(
+                model,
+                location -> BakedModelRenderable
+                        .of(ModelResourceLocation.standalone(location))
+                        .withModelDataContext()
+        );
     }
 }

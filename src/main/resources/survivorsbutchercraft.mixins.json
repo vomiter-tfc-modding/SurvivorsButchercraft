@@ -16,6 +16,7 @@
     "MeatGrinderMixin",
     "MeatHookBlockEntityAccessor",
     "MeatHookBlockEntityMixin",
+    "MeatHookBlockMixin",
     "MobEffectInstanceAccessor",
     "RecipeManagerMixin",
     "compat.ButcherBlockRecipeCategoryMixin",

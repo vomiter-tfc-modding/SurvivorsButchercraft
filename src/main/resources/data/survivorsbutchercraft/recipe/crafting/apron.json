@@ -6,7 +6,7 @@
       "tag":"survivorsbutchercraft:tallow_ingredients"
     },
     "S": {
-      "tag": "c:string"
+      "tag": "c:strings"
     },
     "W": {
       "item": "tfc:burlap_cloth"

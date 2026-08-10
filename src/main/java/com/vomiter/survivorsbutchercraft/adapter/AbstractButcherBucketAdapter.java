@@ -99,7 +99,7 @@ public abstract class AbstractButcherBucketAdapter<R extends Recipe<?>> {
                 }
                 return shouldTackOver.get();
             }
-            else if(Optional.ofNullable(butcheringTool.getCapability(Capabilities.FluidHandler.ITEM)).isEmpty() && Optional.ofNullable(butcheringTool.copyWithCount(1).getCapability(Capabilities.FluidHandler.ITEM)).isPresent()){
+            else if(butcheringTool.getCount()>1 && Optional.ofNullable(butcheringTool.copyWithCount(1).getCapability(Capabilities.FluidHandler.ITEM)).isPresent()){
                 containerItem = butcheringTool.split(1);
                 setShouldReturnItem(true);
             }

@@ -21,6 +21,8 @@ public class ButcherHeadAndHideBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        SBBlocks.MEAT_HOOKS.values().stream().forEach(hook -> dropSelf(hook.get()));
+
         for (Carcass carcass : Carcass.values()) {
             DeferredHolder<Block, ? extends Block> hide = SBBlocks.HIDE_CARPETS.get(carcass);
             if(hide != null){
@@ -57,6 +59,10 @@ public class ButcherHeadAndHideBlockLootTables extends BlockLootSubProvider {
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks() {
         Set<Block> blocks = new HashSet<>();
+
+        SBBlocks.MEAT_HOOKS.values().stream()
+                        .map(DeferredHolder::get)
+                                .forEach(blocks::add);
 
         SBBlocks.HIDE_CARPETS.values().stream()
                 .map(DeferredHolder::get)
