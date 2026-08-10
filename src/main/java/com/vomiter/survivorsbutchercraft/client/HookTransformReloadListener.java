@@ -18,7 +18,7 @@ import java.util.Map;
 public final class HookTransformReloadListener extends SimpleJsonResourceReloadListener {
     private static final com.google.gson.Gson GSON = new GsonBuilder().create();
 
-    private static volatile Map<ResourceLocation, TransformDef> CACHE;
+    private static volatile Map<ResourceLocation, TransformDef> CACHE = Map.of();
 
     public HookTransformReloadListener() {
         super(GSON, "hook_transforms"); // assets/<ns>/hook_transforms/*.json
@@ -38,6 +38,7 @@ public final class HookTransformReloadListener extends SimpleJsonResourceReloadL
                          @NotNull ResourceManager manager,
                          @NotNull ProfilerFiller profiler) {
 
+        CarcassRenderHelper.clearCaches();
         Map<ResourceLocation, TransformDef> next = new HashMap<>();
 
         for (var e : objects.entrySet()) {

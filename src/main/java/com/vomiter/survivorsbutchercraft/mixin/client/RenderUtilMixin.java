@@ -3,6 +3,8 @@ package com.vomiter.survivorsbutchercraft.mixin.client;
 import com.lance5057.butchercraft.client.BlacklistedModel;
 import com.lance5057.butchercraft.client.rendering.RenderUtil;
 import com.lance5057.butchercraft.client.rendering.animation.floats.AnimationFloatTransform;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.vomiter.survivorsbutchercraft.Helpers;
@@ -11,19 +13,17 @@ import com.vomiter.survivorsbutchercraft.client.HookTransformReloadListener;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.renderable.IRenderable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.List;
 
 @Mixin(value = RenderUtil.class, remap = false)
 public class RenderUtilMixin {
     @Unique
-    private static ResourceLocation sb$id(String namespace, String path){return new ResourceLocation(namespace, path);}
+    private static ResourceLocation sb$id(String namespace, String path){return ResourceLocation.fromNamespaceAndPath(namespace, path);}
     @Unique
     private static ResourceLocation sb$id(String path){return sb$id(SurvivorsButchercraft.MODID, path);}
 
@@ -35,45 +35,73 @@ public class RenderUtilMixin {
         poseStack.translate(def.tx(), def.ty(), def.tz());
     }
 
-    @Redirect(
-            method = "loadModel",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lcom/lance5057/butchercraft/client/rendering/RenderUtil;blockModel(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraftforge/client/model/renderable/IRenderable;Ljava/util/List;Lcom/lance5057/butchercraft/client/rendering/animation/floats/AnimationFloatTransform;F)V"
-            )
-    )
-    private static void redirect_blockModel(
+    @WrapOperation(method = "loadModel", at = @At(value = "INVOKE", target = "Lcom/lance5057/butchercraft/client/rendering/RenderUtil;blockModel(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraftforge/client/model/renderable/IRenderable;Ljava/util/List;Lcom/lance5057/butchercraft/client/rendering/animation/floats/AnimationFloatTransform;F)V"))
+    private static void sb$useCachedBlockModel(
             PoseStack poseStack,
             MultiBufferSource buffer,
             int packedLight,
             int packedOverlay,
-            IRenderable<ModelData> bm,
+            IRenderable renderable,
             List<Integer> blacklist,
             AnimationFloatTransform transform,
             float timer,
-            @Local(argsOnly = true, name = "arg4") BlacklistedModel model,
-            @Local(argsOnly = true, name = "arg5") float loadModelTimer
+            Operation<Void> original,
+            @Local(argsOnly = true) BlacklistedModel model
     ) {
-        HookTransformReloadListener.TransformDef def = HookTransformReloadListener.get(model.rc);
+        HookTransformReloadListener.TransformDef def =
+                HookTransformReloadListener.get(model.rc);
+
         if (def == null) {
-            if(model.rc.getPath().endsWith("_female_parts")) def = HookTransformReloadListener.get(
-                    Helpers.id(model.rc.getNamespace(), model.rc.getPath().replace("_female_parts", ""))
-            );
-            if(model.rc.getPath().endsWith("_male_parts")) def = HookTransformReloadListener.get(
-                    Helpers.id(model.rc.getNamespace(), model.rc.getPath().replace("_male_parts", ""))
-            );
+            if (model.rc.getPath().endsWith("_female_parts")) {
+                def = HookTransformReloadListener.get(
+                        Helpers.id(
+                                model.rc.getNamespace(),
+                                model.rc.getPath()
+                                        .replace("_female_parts", "")
+                        )
+                );
+            } else if (model.rc.getPath().endsWith("_male_parts")) {
+                def = HookTransformReloadListener.get(
+                        Helpers.id(
+                                model.rc.getNamespace(),
+                                model.rc.getPath()
+                                        .replace("_male_parts", "")
+                        )
+                );
+            }
         }
+
         if (def != null) {
             poseStack.pushPose();
             sb$applyCenteredScale(poseStack, def);
-            RenderUtil.blockModel(poseStack, buffer, packedLight, packedOverlay, bm, blacklist, transform, timer);
+
+            RenderUtil.blockModel(
+                    poseStack,
+                    buffer,
+                    packedLight,
+                    packedOverlay,
+                    renderable,
+                    blacklist,
+                    model.transform,
+                    timer
+            );
+
             poseStack.popPose();
         } else {
-            RenderUtil.blockModel(poseStack, buffer, packedLight, packedOverlay, bm, blacklist, transform, timer);
+            RenderUtil.blockModel(
+                    poseStack,
+                    buffer,
+                    packedLight,
+                    packedOverlay,
+                    renderable,
+                    blacklist,
+                    model.transform,
+                    timer
+            );
         }
     }
 
-    @Redirect(
+    @WrapOperation(
             method = "loadModel",
             at = @At(
                     value = "INVOKE",
@@ -89,7 +117,7 @@ public class RenderUtilMixin {
             List<Integer> blacklist,
             AnimationFloatTransform transform,
             float timer,
-
+            Operation<Void> original,
             @Local(argsOnly = true, name = "arg4") BlacklistedModel model,
             @Local(argsOnly = true, name = "arg5") float loadModelTimer
     ) {
@@ -100,7 +128,7 @@ public class RenderUtilMixin {
             RenderUtil.itemModel(poseStack, buffer, packedLight, packedOverlay, item, blacklist, transform, timer);
             poseStack.popPose();
         } else {
-            RenderUtil.itemModel(poseStack, buffer, packedLight, packedOverlay, item, blacklist, transform, timer);
+            original.call(poseStack, buffer, packedLight, packedOverlay, item, blacklist, transform, timer);
         }
     }
 

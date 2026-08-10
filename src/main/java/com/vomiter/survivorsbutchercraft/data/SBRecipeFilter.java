@@ -2,7 +2,7 @@ package com.vomiter.survivorsbutchercraft.data;
 
 import com.lance5057.butchercraft.Butchercraft;
 import com.lance5057.butchercraft.ButchercraftBlocks;
-import net.minecraft.core.RegistryAccess;
+import com.lance5057.butchercraft.ButchercraftRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
@@ -30,7 +30,9 @@ public class SBRecipeFilter {
 
     }
 
-    public static boolean shouldBlock(ResourceLocation id, Recipe<?> recipe, RegistryAccess access){
+    public static boolean shouldBlock(ResourceLocation id, Recipe<?> recipe){
+        if(recipe.getType() == (ButchercraftRecipes.GRINDER.get())) return false;
+        if (id.getPath().equals("butcherblock")) return false;
         if(id.getNamespace().equals(Butchercraft.MOD_ID)) return true;
         return false;
         /*

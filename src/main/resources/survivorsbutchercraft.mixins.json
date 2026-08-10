@@ -16,6 +16,7 @@
     "MeatGrinderMixin",
     "MeatHookBlockEntityAccessor",
     "MeatHookBlockEntityMixin",
+    "MeatHookBlockMixin",
     "MobEffectInstanceAccessor",
     "RecipeManagerMixin",
     "compat.ButcherBlockRecipeCategoryMixin",
@@ -25,8 +26,8 @@
   ],
   "client": [
     "client.BakedModelRenderableMixin",
-    "client.RenderUtilMixin",
-    "client.MeatHookRendererMixin"
+    "client.MeatHookRendererMixin",
+    "client.RenderUtilMixin"
   ],
   "injectors": {
     "defaultRequire": 1
