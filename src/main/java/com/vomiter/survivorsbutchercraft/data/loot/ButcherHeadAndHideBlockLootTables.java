@@ -1,11 +1,18 @@
 package com.vomiter.survivorsbutchercraft.data.loot;
 
+import com.lance5057.butchercraft.workstations.hook.MeatHookBlock;
 import com.vomiter.survivorsbutchercraft.butchery.carcass.Carcass;
 import com.vomiter.survivorsbutchercraft.common.registry.SBBlocks;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +28,16 @@ public class ButcherHeadAndHideBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        SBBlocks.MEAT_HOOKS.values().stream().forEach(hook -> dropSelf(hook.get()));
+        SBBlocks.MEAT_HOOKS.values().stream().forEach(hook -> {
+            add(
+                    hook.get(),
+                    LootTable.lootTable().withPool(
+                            applyExplosionCondition(hook.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(hook.get()))
+                                    .when(new LootItemBlockStatePropertyCondition.Builder(hook.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MeatHookBlock.DUMMY, 0)))
+                            )
+                    )
+            );
+        });
 
         for (Carcass carcass : Carcass.values()) {
             DeferredHolder<Block, ? extends Block> hide = SBBlocks.HIDE_CARPETS.get(carcass);

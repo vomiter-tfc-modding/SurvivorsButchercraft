@@ -159,10 +159,10 @@ public abstract class ButcherBlockBlockEntityMixin extends BlockEntity implement
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 boolean recipeWithInputExists = false;
                 if (level != null) {
-                    recipeWithInputExists = level.getRecipeManager().getAllRecipesFor(SBRecipes.CUSTOM_MEAT_HOOK.get())
+                    recipeWithInputExists = level.getRecipeManager().getAllRecipesFor(SBRecipes.CUSTOM_BUTCHER_BLOCK.get())
                             .stream().map(RecipeHolder::value)
                             .anyMatch((hookRecipe) -> hookRecipe.matches(
-                                    new HookRecipeContainer(stack),
+                                    new ButcherBlockContainer(stack),
                                     level
                             ));
                 }

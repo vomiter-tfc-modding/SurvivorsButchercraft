@@ -187,8 +187,6 @@ public class SBTagProviders {
             tag(SBTags.Items.BUTCHERY_SKIP_CARCASS)
                     .addOptional(FLItems.RENNET.getId())
                     .addOptional(Registration.BLADDER.getId());
-            
-            
         }
     }
 

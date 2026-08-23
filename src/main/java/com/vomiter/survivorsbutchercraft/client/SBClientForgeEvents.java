@@ -63,7 +63,7 @@ public class SBClientForgeEvents {
         if(getStageTool(idealItem).test(mainHandItem)){
             Component text = Component.translatable(
                     "tooltip.survivorsbutchercraft.ideal_tool",
-                    idealItem.getDefaultInstance().getHoverName()
+                    ToolAlternative.SB_TOOL_TO_BC_TOOL.get(idealItem).getDefaultInstance().getHoverName()
             );
             Component text2 = Component.translatable("tooltip.survivorsbutchercraft.alt_note1")
                     .withStyle(style -> style.withColor(ChatFormatting.GOLD));
@@ -97,7 +97,7 @@ public class SBClientForgeEvents {
         } else {
             Component text = Component.translatable(
                     "tooltip.survivorsbutchercraft.ideal_tool",
-                    idealItem.getDefaultInstance().getHoverName()
+                    ToolAlternative.SB_TOOL_TO_BC_TOOL.get(idealItem).getDefaultInstance().getHoverName()
             );
             Component text2 = Component.translatable(
                     "tooltip.survivorsbutchercraft.alt",

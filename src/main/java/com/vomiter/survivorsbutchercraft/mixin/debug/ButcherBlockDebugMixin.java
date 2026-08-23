@@ -1,10 +1,10 @@
 package com.vomiter.survivorsbutchercraft.mixin.debug;
 
-import com.lance5057.butchercraft.workstations.hook.MeatHookBlock;
-import com.lance5057.butchercraft.workstations.hook.MeatHookBlockEntity;
-import com.mojang.logging.LogUtils;
+import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlock;
+import com.lance5057.butchercraft.workstations.butcherblock.ButcherBlockBlockEntity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.InteractionHand;
@@ -22,8 +22,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(MeatHookBlock.class)
-public abstract class MeatHookBlockDebugMixin {
+@Mixin(ButcherBlockBlock.class)
+public abstract class ButcherBlockDebugMixin {
 
     @Unique
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -60,7 +60,7 @@ public abstract class MeatHookBlockDebugMixin {
                 world.isClientSide ? "CLIENT" : "SERVER",
                 blockPos,
                 state,
-                state.getValue(MeatHookBlock.DUMMY),
+                state.getValue(ButcherBlockBlock.DUMMY),
                 hand,
                 player.isCrouching(),
                 describeStack(heldMain),
@@ -72,12 +72,11 @@ public abstract class MeatHookBlockDebugMixin {
             method = "useItemOn",
             at = @At(
                     value = "INVOKE",
-                    target = "Lcom/lance5057/butchercraft/workstations/hook/MeatHookBlockEntity;isEmpty()Z"
+                    target = "Lcom/lance5057/butchercraft/workstations/butcherblock/ButcherBlockBlockEntity;isEmpty()Z"
             )
     )
     private boolean survivorsbutchercraft$debugIsEmpty(
-            MeatHookBlockEntity instance,
-            Operation<Boolean> original
+            ButcherBlockBlockEntity instance, Operation<Boolean> original
     ) {
         boolean result = original.call(instance);
 
@@ -94,11 +93,11 @@ public abstract class MeatHookBlockDebugMixin {
             method = "useItemOn",
             at = @At(
                     value = "INVOKE",
-                    target = "Lcom/lance5057/butchercraft/workstations/hook/MeatHookBlock;isEmptyBelow(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z"
+                    target = "Lcom/lance5057/butchercraft/workstations/butcherblock/ButcherBlockBlock;isEmptyAbove(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z"
             )
     )
     private boolean survivorsbutchercraft$debugIsEmptyBelow(
-            MeatHookBlock instance,
+            ButcherBlockBlock instance,
             Level level,
             BlockPos pos,
             Operation<Boolean> original
@@ -108,12 +107,12 @@ public abstract class MeatHookBlockDebugMixin {
         LOGGER.info(
                 """
                 [MeatHook Debug] isEmptyBelow = {}
-                  below(1) = {}
-                  below(2) = {}
+                  above(1) = {}
+                  above(2) = {}
                 """,
                 result,
-                level.getBlockState(pos.below()),
-                level.getBlockState(pos.below(2))
+                level.getBlockState(pos.above()),
+                level.getBlockState(pos.above(2))
         );
 
         return result;

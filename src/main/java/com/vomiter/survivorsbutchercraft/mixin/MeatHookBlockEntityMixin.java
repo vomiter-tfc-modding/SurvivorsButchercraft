@@ -29,6 +29,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,7 +59,7 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
     }
 
     public Ingredient sbtfcInterface$getCurTool(){
-        return matchRecipe().map(recipe -> recipe.value().tools().get(stage).tool()).orElse(Ingredient.EMPTY);
+        return matchRecipe().map(recipe -> recipe.value().tools().get(sbtfcInterface$getStage()).tool()).orElse(Ingredient.EMPTY);
     }
 
     public ItemStack sbtfcInterface$getInserted(){
@@ -92,10 +94,13 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
 
     @Inject(method = "butcher", at = @At("HEAD"), cancellable = true)
     private void sbtfc$acceptFluidHandler(Player p, ItemStack butcheringTool, CallbackInfoReturnable<ItemInteractionResult> cir) {
-        if(AbstractSkullBlock.isPreservative(butcheringTool) && FoodCapability.hasTrait(getInsertedItem(), SBFoodTraits.PRESERVED)){
+        if(AbstractSkullBlock.isPreservative(butcheringTool) && !FoodCapability.hasTrait(getInsertedItem(), SBFoodTraits.PRESERVED)){
             FoodCapability.applyTrait(getInsertedItem(), SBFoodTraits.PRESERVED);
             butcheringTool.shrink(1);
             updateInventory();
+            assert level != null;
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+
             cir.setReturnValue(ItemInteractionResult.SUCCESS);
         }
         var adapter = new MeatHookBucketAdapter((MeatHookBlockEntity) (Object) this);
@@ -147,7 +152,12 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
             )
     )
     private ObjectArrayList<ItemStack> sbtfc$convertLoot(LootTable instance, LootParams params, Operation<ObjectArrayList<ItemStack>> original){
-        return ButcherBlockLootConverter.sbtfc$convertLoot(this, instance, params, original);
+        try{
+            updateInventory();
+            return ButcherBlockLootConverter.sbtfc$convertLoot(this, instance, params, original);
+        } finally {
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_ALL);
+        }
     }
 
 
@@ -188,8 +198,10 @@ public abstract class MeatHookBlockEntityMixin extends BlockEntity implements IB
             }
 
             protected void onContentsChanged(int slot) {
-                updateInventory();
                 zeroProgress();
+                updateInventory();
+                assert level != null;
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
             }
 
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {

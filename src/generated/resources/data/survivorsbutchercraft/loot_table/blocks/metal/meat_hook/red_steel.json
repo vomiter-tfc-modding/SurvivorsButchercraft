@@ -5,6 +5,13 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
+          "block": "survivorsbutchercraft:metal/meat_hook/red_steel",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "dummy": "0"
+          }
+        },
+        {
           "condition": "minecraft:survives_explosion"
         }
       ],

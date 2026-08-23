@@ -7,7 +7,9 @@ import net.dries007.tfc.util.Metal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +24,9 @@ public class ToolAlternative {
     public static Item getIdealTool(Ingredient curTool){
         if(curTool == null) return null;
         for (Item item : TOOL_MAP.keySet()) {
-            if(curTool.test(item.getDefaultInstance())) return item;
+            if(
+                    DifferenceIngredient.of(curTool, Ingredient.of(CommonTags.Items.TOOLS_KNIFE))
+                    .test(item.getDefaultInstance())) return item;
         }
         return null;
     }
@@ -51,26 +55,37 @@ public class ToolAlternative {
         );
     }
 
+    public static Map<Item, Item> SB_TOOL_TO_BC_TOOL
+            = new HashMap<>();
 
     public static void setUp(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+
+            SB_TOOL_TO_BC_TOOL.put(SBItems.BUTCHER_KNIVES.get(Metal.WROUGHT_IRON).get(), ButchercraftItems.BUTCHER_KNIFE.get());
             TOOL_MAP.put(
-                    ButchercraftItems.BUTCHER_KNIFE.get(),
+                    SBItems.BUTCHER_KNIVES.get(Metal.WROUGHT_IRON).get(),
                     toIngredient(SBItems.BUTCHER_KNIVES)
             );
+
+            SB_TOOL_TO_BC_TOOL.put(SBItems.SKINNING_KNIVES.get(Metal.WROUGHT_IRON).get(), ButchercraftItems.SKINNING_KNIFE.get());
             TOOL_MAP.put(
-                    ButchercraftItems.SKINNING_KNIFE.get(),
+                    SBItems.SKINNING_KNIVES.get(Metal.WROUGHT_IRON).get(),
                     toIngredient(SBItems.SKINNING_KNIVES)
             );
+
+            SB_TOOL_TO_BC_TOOL.put(SBItems.BONESAWS.get(Metal.WROUGHT_IRON).get(), ButchercraftItems.BONE_SAW.get());
             TOOL_MAP.put(
-                    ButchercraftItems.BONE_SAW.get(),
+                    SBItems.BONESAWS.get(Metal.WROUGHT_IRON).get(),
                     toIngredient(SBItems.BONESAWS)
             );
+
+            SB_TOOL_TO_BC_TOOL.put(SBItems.GUT_KNIVES.get(Metal.WROUGHT_IRON).get(), ButchercraftItems.GUT_KNIFE.get());
             TOOL_MAP.put(
-                    ButchercraftItems.GUT_KNIFE.get(),
+                    SBItems.GUT_KNIVES.get(Metal.WROUGHT_IRON).get(),
                     toIngredient(SBItems.GUT_KNIVES)
             );
         });
     }
+
 
 }

@@ -2,7 +2,9 @@ package com.vomiter.survivorsbutchercraft.butchery.carcass;
 
 import com.lance5057.butchercraft.ButchercraftItems;
 import com.vomiter.survivorsbutchercraft.SurvivorsButchercraft;
+import com.vomiter.survivorsbutchercraft.common.registry.SBItems;
 import com.vomiter.survivorsbutchercraft.data.tags.SBTags;
+import net.dries007.tfc.util.Metal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -32,10 +34,10 @@ public enum MeatHookStage {
 
     public Item iconicTool(){
         return switch (this){
-            case SKIN -> ButchercraftItems.SKINNING_KNIFE.get();
-            case DISEMBOWEL -> ButchercraftItems.BONE_SAW.get();
-            case BISECT -> ButchercraftItems.GUT_KNIFE.get();
-            case BUTCHER -> ButchercraftItems.BUTCHER_KNIFE.get();
+            case SKIN -> SBItems.SKINNING_KNIVES.get(Metal.WROUGHT_IRON).get();
+            case DISEMBOWEL -> SBItems.BONESAWS.get(Metal.WROUGHT_IRON).get();
+            case BISECT -> SBItems.GUT_KNIVES.get(Metal.WROUGHT_IRON).get();
+            case BUTCHER -> SBItems.BUTCHER_KNIVES.get(Metal.WROUGHT_IRON).get();
             default -> Items.BARRIER;
         };
     }

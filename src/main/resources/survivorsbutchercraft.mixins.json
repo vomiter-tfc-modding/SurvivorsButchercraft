@@ -21,8 +21,6 @@
     "RecipeManagerMixin",
     "compat.ButcherBlockRecipeCategoryMixin",
     "compat.HookRecipeCategoryMixin",
-    "debug.MeatHookBlockDebugMixin",
-    "debug.MeatHookBlockEntityDebugMixin",
     "effect.BloodTrailMixin",
     "effect.StinkyMixin"
   ],
