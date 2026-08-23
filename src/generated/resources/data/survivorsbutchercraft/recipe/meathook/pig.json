@@ -289,7 +289,7 @@
               }
             }
           },
-          "location": "butchercraft:skinning_knife"
+          "location": "survivorsbutchercraft:metal/skinning_knife/wrought_iron"
         }
       ],
       "tool": {
@@ -375,7 +375,7 @@
               }
             }
           },
-          "location": "butchercraft:bone_saw"
+          "location": "survivorsbutchercraft:metal/bonesaw/wrought_iron"
         }
       ],
       "tool": {
@@ -461,7 +461,7 @@
               }
             }
           },
-          "location": "butchercraft:gut_knife"
+          "location": "survivorsbutchercraft:metal/gut_knife/wrought_iron"
         }
       ],
       "tool": {
@@ -547,7 +547,7 @@
               }
             }
           },
-          "location": "butchercraft:butcher_knife"
+          "location": "survivorsbutchercraft:metal/butcher_knife/wrought_iron"
         }
       ],
       "tool": {
