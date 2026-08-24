@@ -33,7 +33,7 @@ apply from: 'gradle/optional-dep.gradle'
 dependencies {
     implementation "curse.maven:farmers-delight-398521:8007613"
     implementation "curse.maven:water-flasks-354353:8264081"
-
+    implementation "curse.maven:survivors-delight-1332913:8568157"
 }
 
 // Example configuration to allow publishing using the maven-publish plugin

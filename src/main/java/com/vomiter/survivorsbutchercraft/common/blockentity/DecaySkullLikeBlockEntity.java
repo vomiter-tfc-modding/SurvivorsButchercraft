@@ -44,7 +44,7 @@ public class DecaySkullLikeBlockEntity extends BlockEntity {
 
     public void saveAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(nbt, provider);
-        nbt.put("item", this.stack.save(provider, new CompoundTag()));
+        if (!stack.isEmpty()) nbt.put("item", this.stack.save(provider, new CompoundTag()));
     }
 
 }
