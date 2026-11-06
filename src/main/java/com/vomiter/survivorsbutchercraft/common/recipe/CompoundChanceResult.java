@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.dries007.tfc.common.component.food.FoodCapability;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
@@ -202,6 +203,7 @@ public class CompoundChanceResult {
         );
 
         this.stack = stack.copyWithCount(1);
+        FoodCapability.setTransientNonDecaying(this.stack);
         this.fluid = FluidStack.EMPTY;
         this.minium = minium;
         this.maximum = maximum;
